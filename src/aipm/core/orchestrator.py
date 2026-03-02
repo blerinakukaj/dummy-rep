@@ -17,6 +17,7 @@ from aipm.agents.lead_pm_agent import LeadPMAgent
 from aipm.core.config import ensure_output_dirs, get_llm_client
 from aipm.core.loader import load_bundle, load_prompt, validate_bundle
 from aipm.core.policy import PolicyPack, load_policy
+from aipm.core.token_tracker import TokenTracker
 from aipm.schemas.config import RunConfig
 from aipm.schemas.context import ContextPacket
 from aipm.schemas.findings import AgentOutput, Finding
@@ -27,13 +28,18 @@ logger = logging.getLogger(__name__)
 class PipelineOrchestrator:
     """Main pipeline runner that executes all agents in sequence/parallel."""
 
-    def __init__(self, run_config: RunConfig) -> None:
+    def __init__(
+        self, run_config: RunConfig, token_tracker: TokenTracker | None = None,
+    ) -> None:
         self.run_config = run_config
         self.llm_client = get_llm_client(run_config.provider)
         self.policy_pack = load_policy(run_config.policy_path)
         self.run_dir = ensure_output_dirs(run_config)
+        self.token_tracker = token_tracker or TokenTracker()
         self.outputs: list[AgentOutput] = []
         self.errors: dict[str, str] = {}
+        self.artifact_paths: dict[str, str] = {}
+        self.recommendation: str = ""
 
         logger.info(
             "Orchestrator initialized — run_id=%s, provider=%s, model=%s",
@@ -77,15 +83,26 @@ class PipelineOrchestrator:
         # Step 5: Run RiskAgent
         step5_output = await self._run_risk_agent(context_packet)
 
-        # Step 6: Run LeadPMAgent (collects all findings)
-        step6_output = await self._run_lead_pm_agent(context_packet)
+        # Step 6: Run LeadPMAgent — dedup, rank, resolve, then generate artifacts
+        lead_pm_agent = await self._run_lead_pm_agent(context_packet)
 
-        # Step 7: Collect results and save manifest
+        # Step 7: Collect results, save token usage, and save manifest
         all_findings = self._collect_all_findings(self.outputs)
+
+        # Save token usage report
+        self.token_tracker.save_report(
+            self.run_config.output_dir,
+            self.run_config.run_id,
+            self.run_config.provider,
+            self.run_config.model,
+        )
+
         end_time = datetime.now(timezone.utc)
         duration_seconds = (end_time - start_time).total_seconds()
 
-        manifest = self._build_manifest(all_findings, duration_seconds, warnings)
+        manifest = self._build_manifest(
+            all_findings, duration_seconds, warnings, input_path,
+        )
         manifest_path = self._save_manifest(manifest)
 
         logger.info(
@@ -118,6 +135,7 @@ class PipelineOrchestrator:
                 run_config=self.run_config,
                 policy_pack=self.policy_pack,
                 context_packet=empty_context,
+                token_tracker=self.token_tracker,
                 raw_bundle=bundle,
             )
             output = await agent.analyze()
@@ -175,13 +193,34 @@ class PipelineOrchestrator:
         logger.info("Step 5: Running RiskAgent...")
         return await self._run_agent_safe("risk", RiskAgent, context_packet)
 
-    async def _run_lead_pm_agent(self, context_packet: ContextPacket) -> AgentOutput | None:
-        """Run the Lead PM Agent to synthesize all findings."""
+    async def _run_lead_pm_agent(self, context_packet: ContextPacket) -> LeadPMAgent | None:
+        """Run the Lead PM Agent to synthesize all findings, then generate artifacts."""
         logger.info("Step 6: Running LeadPMAgent...")
-        return await self._run_agent_safe(
-            "lead_pm", LeadPMAgent, context_packet,
-            all_agent_outputs=list(self.outputs),
-        )
+        try:
+            agent = LeadPMAgent(
+                llm_client=self.llm_client,
+                run_config=self.run_config,
+                policy_pack=self.policy_pack,
+                context_packet=context_packet,
+                token_tracker=self.token_tracker,
+                all_agent_outputs=list(self.outputs),
+            )
+            # Phase 1: analyze — dedup, rank, resolve conflicts
+            output = await agent.analyze()
+            self.outputs.append(output)
+            logger.info("LeadPMAgent analyze completed — %d findings", len(output.findings))
+
+            # Phase 2: generate all artifacts
+            self.artifact_paths = await agent.generate_all_artifacts()
+            self.recommendation = self.artifact_paths.pop("recommendation", "")
+            logger.info(
+                "LeadPMAgent artifacts generated: %s", list(self.artifact_paths.keys()),
+            )
+            return agent
+        except Exception as exc:
+            logger.error("LeadPMAgent failed: %s", exc)
+            self.errors["lead_pm"] = str(exc)
+            return None
 
     async def _run_agent_safe(
         self,
@@ -208,6 +247,7 @@ class PipelineOrchestrator:
                 run_config=self.run_config,
                 policy_pack=self.policy_pack,
                 context_packet=context_packet,
+                token_tracker=self.token_tracker,
                 **kwargs,
             )
             output = await agent.analyze()
@@ -222,22 +262,6 @@ class PipelineOrchestrator:
             logger.error("Agent %s failed: %s", agent_id, exc)
             self.errors[agent_id] = str(exc)
             return None
-
-    async def _run_placeholder_agent(self, agent_id: str, agent_name: str) -> AgentOutput | None:
-        """Run a placeholder agent that is not yet implemented.
-
-        Catches NotImplementedError gracefully and logs a skip message.
-
-        Args:
-            agent_id: Agent identifier.
-            agent_name: Human-readable agent name.
-
-        Returns:
-            None (placeholder agents always skip).
-        """
-        logger.warning("Agent %s (%s) not yet implemented, skipping.", agent_id, agent_name)
-        self.errors[agent_id] = "Not yet implemented"
-        return None
 
     def _collect_all_findings(self, outputs: list[AgentOutput]) -> list[Finding]:
         """Merge all findings from all agent outputs into a single list.
@@ -259,6 +283,7 @@ class PipelineOrchestrator:
         all_findings: list[Finding],
         duration_seconds: float,
         bundle_warnings: list[str],
+        input_path: str = "",
     ) -> dict:
         """Build the run manifest summarizing all produced artifacts."""
         findings_dir = self.run_dir / "findings"
@@ -274,14 +299,18 @@ class PipelineOrchestrator:
 
         return {
             "run_id": self.run_config.run_id,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "input_path": input_path,
             "provider": self.run_config.provider,
             "model": self.run_config.model,
-            "started_at": datetime.now(timezone.utc).isoformat(),
             "duration_seconds": round(duration_seconds, 2),
-            "agents_completed": [o.agent_id for o in self.outputs],
-            "agents_skipped": list(self.errors.keys()),
+            "agents_run": [o.agent_id for o in self.outputs],
+            "agents_failed": list(self.errors.keys()),
             "total_findings": len(all_findings),
             "findings_by_type": self._count_findings_by_type(all_findings),
+            "recommendation": self.recommendation,
+            "artifacts": self.artifact_paths,
+            "token_usage": self.token_tracker.get_summary(),
             "bundle_warnings": bundle_warnings,
             "output_files": {
                 "context_packet": context_path,
