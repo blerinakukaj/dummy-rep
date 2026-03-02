@@ -1,0 +1,52 @@
+{
+  "snapshot_date": "2025-11-04",
+  "snapshot_period": "7-day trailing average post v2.4.1 deploy",
+  "search_relevance_p50": 0.72,
+  "search_relevance_p50_previous": 0.85,
+  "search_relevance_delta_pct": -15.3,
+  "search_latency_p95_ms": 890,
+  "search_latency_p95_ms_previous": 420,
+  "search_latency_desktop_p95_ms": 210,
+  "queries_per_session": 3.2,
+  "queries_per_session_previous": 2.1,
+  "zero_result_rate": 0.18,
+  "zero_result_rate_previous": 0.06,
+  "search_ctr": 0.31,
+  "search_ctr_previous": 0.47,
+  "session_abandonment_after_search": 0.44,
+  "session_abandonment_after_search_previous": 0.28,
+  "autocomplete_click_to_zero_result_rate": 0.23,
+  "nps_search_sessions": 28,
+  "nps_search_sessions_previous": 42,
+  "missing_events": [
+    "image_search_query",
+    "voice_search_query",
+    "filter_applied"
+  ],
+  "baseline_coverage": 0.6,
+  "instrumented_query_types": ["text_search", "autocomplete_select"],
+  "uninstrumented_query_types": ["image_search", "voice_search", "filtered_search"],
+  "support_ticket_volume_7d": 123,
+  "support_ticket_volume_7d_previous": 41,
+  "ab_test_exp_881": {
+    "status": "completed_inconclusive",
+    "signed_in_relevance_delta": 0.02,
+    "anonymous_relevance_delta": -0.08,
+    "anonymous_traffic_share_estimated": 0.35,
+    "anonymous_traffic_share_actual": 0.40,
+    "conclusion": "Shipped to all traffic; anonymous segment underweighted in power analysis"
+  },
+  "image_search": {
+    "status": "launched_no_baseline",
+    "query_volume": null,
+    "zero_result_rate": null,
+    "ctr": null,
+    "note": "No analytics events instrumented; metrics unavailable"
+  },
+  "voice_search": {
+    "status": "launched_no_baseline",
+    "query_volume": null,
+    "zero_result_rate": null,
+    "note": "No analytics events instrumented; metrics unavailable"
+  }
+}

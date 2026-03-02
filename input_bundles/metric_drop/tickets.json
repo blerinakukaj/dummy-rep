@@ -1,0 +1,72 @@
+[
+  {
+    "id": "SEARCH-201",
+    "title": "Search relevance score dropped 15% after deploy v2.4.1",
+    "description": "Our p50 search relevance score fell from 0.85 to 0.72 immediately following the v2.4.1 release on 2025-10-28. The new ranking algorithm was intended to improve personalization but has had the opposite effect for the majority of queries. Rollback was considered but blocked by a dependent feature flag change. Requires root-cause analysis and remediation plan.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["bug", "search", "ranking", "regression"],
+    "created_at": "2025-10-29",
+    "source": "jira"
+  },
+  {
+    "id": "SEARCH-202",
+    "title": "Users reporting irrelevant search results",
+    "description": "Support volume has spiked 3x since v2.4.1 rolled out. Users are reporting that top results no longer match their intent — e.g., searching 'invoice template' returns blog posts instead of product pages. Qualitative pattern: navigational queries are most affected. Long-tail queries seem unaffected. NPS from search sessions dropped from 42 to 28 in the past 7 days.",
+    "status": "open",
+    "priority": "high",
+    "labels": ["bug", "search", "ux", "user-feedback"],
+    "created_at": "2025-10-30",
+    "source": "jira"
+  },
+  {
+    "id": "SEARCH-203",
+    "title": "Search latency increased on mobile web",
+    "description": "P95 search latency on mobile web has climbed to 890ms, up from a baseline of ~420ms pre-deploy. Desktop is unaffected at 210ms p95. Hypothesis: the new ranking model runs a heavier re-ranking step that is not cached for mobile sessions. No SLO breach yet but trending toward it. Requires profiling and either model optimization or mobile-specific caching.",
+    "status": "open",
+    "priority": "high",
+    "labels": ["performance", "mobile", "search", "latency"],
+    "created_at": "2025-10-31",
+    "source": "jira"
+  },
+  {
+    "id": "SEARCH-204",
+    "title": "Missing search analytics events for new query types",
+    "description": "The v2.4.1 release added support for image search and voice search, but no analytics events were instrumented for these new query types. Events 'image_search_query', 'voice_search_query', and 'filter_applied' are completely absent from our data pipeline. This means we have zero visibility into adoption, success rates, or failure modes for these surfaces. Baseline instrumentation must be added before any experimentation.",
+    "status": "open",
+    "priority": "high",
+    "labels": ["analytics", "instrumentation", "image-search", "voice-search"],
+    "created_at": "2025-11-01",
+    "source": "jira"
+  },
+  {
+    "id": "SEARCH-205",
+    "title": "A/B test for new ranking algorithm inconclusive",
+    "description": "The pre-launch A/B test (experiment ID: EXP-881) ran for 14 days with a 50/50 traffic split. Results were inconclusive: relevance improved +2% for signed-in users but degraded -8% for anonymous users. The test was not powered for the anonymous-user segment separately. Decision was made to ship anyway targeting the signed-in majority. Post-ship data suggests the anonymous segment is larger than estimated at ~40% of queries.",
+    "status": "open",
+    "priority": "medium",
+    "labels": ["experimentation", "ranking", "analytics", "ab-test"],
+    "created_at": "2025-11-02",
+    "source": "jira"
+  },
+  {
+    "id": "SEARCH-206",
+    "title": "Need baseline metrics for image search (just launched)",
+    "description": "Image search launched with v2.4.1 but we have no baseline metrics to measure against. We need to establish: query volume, zero-result rate, click-through rate on image results, and session continuation rate after an image search. Without a baseline we cannot run meaningful experiments or define success criteria for future improvements.",
+    "status": "open",
+    "priority": "medium",
+    "labels": ["image-search", "metrics", "baseline", "analytics"],
+    "created_at": "2025-11-03",
+    "source": "jira"
+  },
+  {
+    "id": "SEARCH-207",
+    "title": "Search autocomplete suggestions showing stale data",
+    "description": "Autocomplete suggestions are sourced from a cache refreshed every 24 hours. Since v2.4.1 the cache TTL was inadvertently extended to 7 days due to a config change in the deployment pipeline. Users are seeing suggestions for products that are out of stock or promotions that have ended. The stale data is compounding the relevance problem — users click an autocomplete suggestion and land on a zero-result page.",
+    "status": "open",
+    "priority": "medium",
+    "labels": ["bug", "autocomplete", "cache", "search"],
+    "created_at": "2025-11-04",
+    "source": "jira"
+  }
+]
