@@ -1,6 +1,5 @@
 """Base agent abstract class — all AIPM agents inherit from this."""
 
-import asyncio
 import json
 import logging
 from abc import ABC, abstractmethod
@@ -8,14 +7,11 @@ from pathlib import Path
 from typing import Optional
 
 from aipm.core.policy import PolicyPack
+from aipm.core.resilience import AgentError, retry_with_backoff
 from aipm.core.token_tracker import TokenTracker
 from aipm.schemas.config import RunConfig
 from aipm.schemas.context import ContextPacket
 from aipm.schemas.findings import AgentOutput
-
-# Maximum retries for LLM calls
-MAX_RETRIES = 3
-BASE_DELAY = 1.0
 
 
 class BaseAgent(ABC):
@@ -66,6 +62,8 @@ class BaseAgent(ABC):
         """Call the LLM with retry logic and return the response content.
 
         Automatically dispatches to the correct provider API format.
+        Uses ``@retry_with_backoff`` for transient error handling and
+        wraps unexpected failures in ``AgentError``.
 
         Args:
             system_prompt: The system-level instruction for the LLM.
@@ -77,33 +75,29 @@ class BaseAgent(ABC):
             The LLM response content as a string.
 
         Raises:
-            RuntimeError: If all retries are exhausted.
+            AgentError: If the call fails after all retries or an
+                        unexpected error occurs.
         """
-        last_error: Optional[Exception] = None
+        try:
+            return await self._call_llm_with_retry(system_prompt, user_prompt, response_format)
+        except Exception as exc:
+            raise AgentError(
+                agent_id=self.agent_id,
+                message=f"LLM call failed: {exc}",
+                recoverable=True,
+            ) from exc
 
-        for attempt in range(1, MAX_RETRIES + 1):
-            try:
-                if self._provider == "openai":
-                    result = await self._call_openai(system_prompt, user_prompt, response_format)
-                else:
-                    result = await self._call_anthropic(system_prompt, user_prompt, response_format)
-
-                self.logger.debug("LLM call succeeded on attempt %d", attempt)
-                return result
-
-            except Exception as exc:
-                last_error = exc
-                if attempt < MAX_RETRIES:
-                    delay = BASE_DELAY * (2 ** (attempt - 1))
-                    self.logger.warning(
-                        "LLM call failed (attempt %d/%d): %s — retrying in %.1fs",
-                        attempt, MAX_RETRIES, exc, delay,
-                    )
-                    await asyncio.sleep(delay)
-                else:
-                    self.logger.error("LLM call failed after %d attempts: %s", MAX_RETRIES, exc)
-
-        raise RuntimeError(f"LLM call failed after {MAX_RETRIES} retries: {last_error}")
+    @retry_with_backoff(max_retries=3, base_delay=1.0, max_delay=30.0)
+    async def _call_llm_with_retry(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        response_format: Optional[dict] = None,
+    ) -> str:
+        """Inner LLM call wrapped by the retry decorator."""
+        if self._provider == "openai":
+            return await self._call_openai(system_prompt, user_prompt, response_format)
+        return await self._call_anthropic(system_prompt, user_prompt, response_format)
 
     async def _call_openai(
         self,
