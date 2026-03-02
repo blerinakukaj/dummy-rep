@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Optional
 
 from aipm.core.policy import PolicyPack
+from aipm.core.token_tracker import TokenTracker
 from aipm.schemas.config import RunConfig
 from aipm.schemas.context import ContextPacket
 from aipm.schemas.findings import AgentOutput
@@ -29,11 +30,13 @@ class BaseAgent(ABC):
         run_config: RunConfig,
         policy_pack: PolicyPack,
         context_packet: ContextPacket,
+        token_tracker: Optional[TokenTracker] = None,
     ) -> None:
         self.llm_client = llm_client
         self.run_config = run_config
         self.policy_pack = policy_pack
         self.context_packet = context_packet
+        self.token_tracker = token_tracker
         self.logger = logging.getLogger(f"aipm.agents.{self.agent_id}")
 
         # Detect provider from client type
@@ -128,6 +131,8 @@ class BaseAgent(ABC):
                 "Token usage — prompt: %d, completion: %d, total: %d",
                 usage.prompt_tokens, usage.completion_tokens, usage.total_tokens,
             )
+            if self.token_tracker:
+                self.token_tracker.record(self.agent_id, usage.prompt_tokens, usage.completion_tokens)
 
         return response.choices[0].message.content
 
@@ -158,6 +163,8 @@ class BaseAgent(ABC):
                 "Token usage — input: %d, output: %d",
                 usage.input_tokens, usage.output_tokens,
             )
+            if self.token_tracker:
+                self.token_tracker.record(self.agent_id, usage.input_tokens, usage.output_tokens)
 
         return response.content[0].text
 
