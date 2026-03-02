@@ -10,6 +10,7 @@ from aipm.agents.competitive_agent import CompetitiveAgent
 from aipm.agents.customer_agent import CustomerInsightsAgent
 from aipm.agents.intake_agent import IntakeAgent
 from aipm.agents.metrics_agent import MetricsAgent
+from aipm.agents.requirements_agent import RequirementsAgent
 from aipm.core.config import ensure_output_dirs, get_llm_client
 from aipm.core.loader import load_bundle, load_prompt, validate_bundle
 from aipm.core.policy import PolicyPack, load_policy
@@ -152,7 +153,7 @@ class PipelineOrchestrator:
         logger.info("Step 4: Running Requirements, Feasibility in parallel...")
 
         tasks = [
-            self._run_placeholder_agent("requirements", "Requirements Agent"),
+            self._run_agent_safe("requirements", RequirementsAgent, context_packet),
             self._run_placeholder_agent("feasibility", "Feasibility Agent"),
         ]
 
