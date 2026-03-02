@@ -1,0 +1,16 @@
+{
+  "checkout_conversion": 0.68,
+  "cart_abandonment": 0.32,
+  "payment_failure_rate": 0.04,
+  "avg_checkout_time_seconds": 45,
+  "mobile_crash_rate": 0.02,
+  "checkout_api_p95_latency_ms": 1200,
+  "double_charge_incidents_last_30d": 12,
+  "support_tickets_checkout_last_30d": 89,
+  "mobile_checkout_share": 0.61,
+  "returning_customer_rate": 0.44,
+  "coupon_usage_rate": 0.23,
+  "avg_cart_value_usd": 67.50,
+  "enterprise_order_share": 0.18,
+  "nps_checkout_experience": 24
+}

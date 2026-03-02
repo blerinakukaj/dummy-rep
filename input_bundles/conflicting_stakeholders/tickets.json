@@ -1,0 +1,82 @@
+[
+  {
+    "id": "GROW-101",
+    "title": "Add one-click purchase",
+    "description": "Implement a one-click purchase flow for returning customers with saved payment methods. Growth team estimates this could lift checkout conversion by 12-15%. Requires storing tokenized payment credentials and skipping the review step for eligible users.",
+    "status": "proposed",
+    "priority": "high",
+    "labels": ["growth", "checkout", "conversion"],
+    "created_at": "2026-02-10T09:00:00Z",
+    "source": "jira"
+  },
+  {
+    "id": "GROW-102",
+    "title": "Implement social proof badges",
+    "description": "Display real-time purchase activity badges during checkout (e.g., '23 people bought this in the last hour'). A/B tests on landing pages showed a 7% lift in click-through when social proof was present. Growth PM wants this rolled out to checkout flow.",
+    "status": "proposed",
+    "priority": "medium",
+    "labels": ["growth", "checkout", "social-proof"],
+    "created_at": "2026-02-11T14:30:00Z",
+    "source": "jira"
+  },
+  {
+    "id": "GROW-103",
+    "title": "Auto-apply best coupon",
+    "description": "Automatically detect and apply the best available coupon or discount code at checkout instead of requiring users to manually enter codes. Growth team believes this reduces friction and could decrease cart abandonment by 5-8%.",
+    "status": "proposed",
+    "priority": "high",
+    "labels": ["growth", "checkout", "discounts"],
+    "created_at": "2026-02-12T10:00:00Z",
+    "source": "jira"
+  },
+  {
+    "id": "PLAT-201",
+    "title": "Reduce checkout API latency",
+    "description": "Current checkout API p95 latency is 1,200ms which exceeds our 500ms SLO. Platform team needs to optimize the payment validation pipeline, add caching for tax calculations, and reduce round-trips to the payment processor. This is blocking further feature work.",
+    "status": "in-progress",
+    "priority": "critical",
+    "labels": ["platform", "performance", "checkout"],
+    "created_at": "2026-01-28T08:00:00Z",
+    "source": "jira"
+  },
+  {
+    "id": "PLAT-202",
+    "title": "Fix payment retry reliability",
+    "description": "Payment retries are failing silently in 3.8% of cases due to idempotency key collisions and race conditions in the retry queue. Some users are being double-charged. Platform team considers this a P0 reliability issue that must be fixed before any new checkout features ship.",
+    "status": "in-progress",
+    "priority": "critical",
+    "labels": ["platform", "reliability", "payments", "bug"],
+    "created_at": "2026-01-25T11:00:00Z",
+    "source": "jira"
+  },
+  {
+    "id": "PLAT-203",
+    "title": "Migrate to new payment gateway",
+    "description": "Current payment gateway contract expires Q3 2026. Migration to StripeConnect is planned to reduce transaction fees by 0.3% and improve international payment support. This is a 6-8 week effort that will freeze feature development on the checkout flow during migration.",
+    "status": "backlog",
+    "priority": "high",
+    "labels": ["platform", "payments", "migration"],
+    "created_at": "2026-02-01T09:00:00Z",
+    "source": "jira"
+  },
+  {
+    "id": "CUST-301",
+    "title": "Checkout crashed on mobile",
+    "description": "Multiple users reporting that the checkout page crashes on iOS Safari and Android Chrome when switching between payment methods. Crash rate is 2% on mobile. Users lose their cart contents and have to start over. Support has received 47 tickets about this in the last 2 weeks.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["bug", "mobile", "checkout", "customer-complaint"],
+    "created_at": "2026-02-15T16:00:00Z",
+    "source": "jira"
+  },
+  {
+    "id": "CUST-302",
+    "title": "Payment failed but got charged",
+    "description": "12 customers reported being charged for orders that showed as 'payment failed' in the UI. Investigation shows the payment processor confirmed the charge but our system didn't receive the webhook callback due to a timeout. Refunds were issued manually but this erodes user trust.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["bug", "payments", "customer-complaint", "trust"],
+    "created_at": "2026-02-18T10:30:00Z",
+    "source": "jira"
+  }
+]
