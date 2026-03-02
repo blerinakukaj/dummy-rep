@@ -1,0 +1,62 @@
+[
+  {
+    "id": "COLLAB-301",
+    "title": "Competitor launched real-time co-editing — we need parity",
+    "description": "Competitor X (Notion-adjacent) launched live co-editing on 2025-10-15 with a heavy marketing push directly targeting our enterprise segment. Sales has fielded 14 inbound inquiries in two weeks asking when CollabDocs will support simultaneous editing. Without parity we risk losing competitive positioning in the enterprise document space. This ticket tracks the initiative to deliver real-time co-editing at feature parity or better.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["strategic", "competitive", "collaboration", "initiative"],
+    "created_at": "2025-10-20",
+    "source": "jira"
+  },
+  {
+    "id": "COLLAB-302",
+    "title": "Enterprise customers asking for simultaneous editing",
+    "description": "Three enterprise accounts (Acme Corp, Vertex Partners, NordicBank) have submitted formal feature requests for simultaneous multi-user editing. All three cited a competitor's recent launch as the trigger. Combined ARR at risk: $420K. Customer Success has escalated to Product with a 60-day window before formal churn conversations begin. Each customer has 50–200 active users who collaborate on shared documents daily.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["enterprise", "feature-request", "churn-risk", "collaboration"],
+    "created_at": "2025-10-22",
+    "source": "jira"
+  },
+  {
+    "id": "COLLAB-303",
+    "title": "Current document locking causes user frustration",
+    "description": "CollabDocs currently implements pessimistic locking: when a user opens a document for editing, it is locked to that user and others are placed in read-only mode. Support receives ~40 tickets per week from users who are blocked because a colleague has a document open. Common pattern: document left open in a background tab by a user who is not actively editing. Users are manually pinging colleagues on Slack to 'close the doc.' This is the most-cited UX complaint in our quarterly NPS survey.",
+    "status": "open",
+    "priority": "high",
+    "labels": ["ux", "bug", "locking", "collaboration"],
+    "created_at": "2025-10-10",
+    "source": "jira"
+  },
+  {
+    "id": "COLLAB-304",
+    "title": "Need presence indicators (who's viewing/editing)",
+    "description": "Users have no visibility into who else is currently viewing or editing a document. This causes duplicate work (two people editing the same section simultaneously then manually merging) and communication overhead. Requested feature: real-time presence avatars in the document header showing active viewers and editors, with cursor position indicators per user. This is a prerequisite for real-time co-editing and has standalone value for read-only collaboration workflows.",
+    "status": "open",
+    "priority": "high",
+    "labels": ["feature", "presence", "ux", "collaboration"],
+    "created_at": "2025-10-18",
+    "source": "jira"
+  },
+  {
+    "id": "COLLAB-305",
+    "title": "Conflict resolution for concurrent edits",
+    "description": "When two users edit the same document (currently only possible via a race condition before the lock is acquired), the last-write-wins behavior causes silent data loss. One user's changes are overwritten without notification. As we move toward real-time co-editing, a formal conflict resolution strategy is required. Engineering has evaluated two approaches: Operational Transformation (OT) as used by Google Docs and CRDTs (Conflict-free Replicated Data Types) used by competitors. Each has different tradeoffs for our document model.",
+    "status": "open",
+    "priority": "high",
+    "labels": ["feature", "conflict-resolution", "crdt", "ot", "architecture"],
+    "created_at": "2025-10-23",
+    "source": "jira"
+  },
+  {
+    "id": "COLLAB-306",
+    "title": "Mobile editing support for collaboration",
+    "description": "Mobile accounts for 22% of our DAU but the mobile editing experience lags significantly behind desktop. The current document locking model on mobile causes even more frustration because lock release requires manually closing the document (no background tab concept on mobile). As we build real-time collaboration, mobile must be a first-class client from day one — not a follow-up. This requires WebSocket support on iOS and Android apps, presence indicator rendering at small screen sizes, and a touch-friendly conflict UI.",
+    "status": "open",
+    "priority": "medium",
+    "labels": ["mobile", "collaboration", "ios", "android", "ux"],
+    "created_at": "2025-10-25",
+    "source": "jira"
+  }
+]
