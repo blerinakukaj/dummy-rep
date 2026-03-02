@@ -10,8 +10,11 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 
+from typing import Optional
+
 from aipm.agents.base import BaseAgent
 from aipm.core.policy import PolicyPack
+from aipm.core.token_tracker import TokenTracker
 from aipm.schemas.config import RunConfig
 from aipm.schemas.context import ContextPacket, DocumentItem, RiskHotspot, TicketItem
 from aipm.schemas.findings import AgentOutput, EvidenceItem, Finding
@@ -43,8 +46,9 @@ class IntakeAgent(BaseAgent):
         policy_pack: PolicyPack,
         context_packet: ContextPacket,
         raw_bundle: dict,
+        token_tracker: Optional[TokenTracker] = None,
     ) -> None:
-        super().__init__(llm_client, run_config, policy_pack, context_packet)
+        super().__init__(llm_client, run_config, policy_pack, context_packet, token_tracker)
         self.raw_bundle = raw_bundle
 
     async def analyze(self) -> AgentOutput:

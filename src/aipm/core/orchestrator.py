@@ -69,6 +69,7 @@ class PipelineOrchestrator:
             run_id=self.run_config.run_id,
             product_name=bundle.get("product_name", ""),
             product_description=bundle.get("description", ""),
+            raw_input_type=bundle.get("input_type", "bundle"),
         )
 
         # Step 2: Run IntakeAgent → get ContextPacket
