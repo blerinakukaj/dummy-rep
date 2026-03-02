@@ -1,7 +1,7 @@
-"""Agent H — Lead PM Agent (Part 1: Collection, Dedup, Ranking, Conflict Resolution).
+"""Agent H — Lead PM Agent (Collection, Dedup, Ranking, Conflict Resolution & Artifacts).
 
 Synthesizes all upstream agent findings into a consolidated, prioritized,
-conflict-resolved set of product recommendations.
+conflict-resolved set of product recommendations, then generates all pipeline artifacts.
 """
 
 import json
@@ -12,11 +12,13 @@ from pathlib import Path
 from typing import Optional
 
 from aipm.agents.base import BaseAgent
+from aipm.core.backlog_generator import BacklogGenerator
+from aipm.core.policy import PolicyPack
+from aipm.core.template_engine import load_template, render_template
 from aipm.core.token_tracker import TokenTracker
 from aipm.schemas.config import RunConfig
 from aipm.schemas.context import ContextPacket
 from aipm.schemas.findings import AgentOutput, EvidenceItem, Finding
-from aipm.core.policy import PolicyPack
 
 logger = logging.getLogger(__name__)
 
@@ -440,3 +442,325 @@ class LeadPMAgent(BaseAgent):
         path = results_dir / "lead_pm_intermediate.json"
         path.write_text(json.dumps(intermediate, indent=2, default=str), encoding="utf-8")
         self.logger.info("Saved intermediate results to %s", path)
+
+    # ── Artifact Generation (Part 2) ──
+
+    def _artifacts_dir(self) -> Path:
+        """Return the artifacts directory, creating it if needed."""
+        d = Path(self.run_config.output_dir) / self.run_config.run_id / "artifacts"
+        d.mkdir(parents=True, exist_ok=True)
+        return d
+
+    def _gate_result(self) -> dict:
+        """Load the risk gate result if available."""
+        gate_path = (
+            Path(self.run_config.output_dir)
+            / self.run_config.run_id
+            / "findings"
+            / "risk_gate_result.json"
+        )
+        if gate_path.exists():
+            return json.loads(gate_path.read_text(encoding="utf-8"))
+        return {"passed": True, "blockers": [], "warnings": []}
+
+    def _findings_by_agent(self, agent_id: str) -> list[Finding]:
+        """Return findings from a specific agent."""
+        for output in self.all_agent_outputs:
+            if output.agent_id == agent_id:
+                return list(output.findings)
+        return []
+
+    async def generate_recommendation(self) -> str:
+        """Determine the overall product recommendation based on risk gate and findings.
+
+        Returns one of: proceed, proceed_with_mitigations, validate_first, do_not_pursue.
+        """
+        gate = self._gate_result()
+        speculative_count = sum(1 for f in self.consolidated_findings if f.confidence == "speculative")
+        total = len(self.consolidated_findings) or 1
+        speculative_ratio = speculative_count / total
+
+        if gate.get("blockers"):
+            # Check if blockers are all addressable
+            if len(gate["blockers"]) >= 3:
+                return "do_not_pursue"
+            return "proceed_with_mitigations"
+
+        if speculative_ratio > 0.5:
+            return "validate_first"
+
+        if gate.get("warnings"):
+            return "proceed_with_mitigations"
+
+        return "proceed"
+
+    async def generate_prd(self) -> str:
+        """Generate a PRD using the template and LLM, save to artifacts/prd.md."""
+        recommendation = await self.generate_recommendation()
+        packet = self.context_packet
+
+        # Build finding summaries for the LLM
+        finding_text = "\n".join(
+            f"- [{f.id}] ({f.type}, {f.impact}): {f.title} — {f.description[:300]}"
+            for f in self.consolidated_findings
+        )
+
+        system = (
+            "You are a senior product manager writing a PRD. For each section below, "
+            "provide clear, specific content based on the findings provided. "
+            "Reference finding IDs (e.g. [customer-001]) as evidence. "
+            "Return a JSON object with keys matching the PRD sections: "
+            "overview, goals, user_segments, in_scope, out_of_scope, "
+            "functional_requirements, non_functional_requirements, acceptance_criteria, "
+            "design_ux, technical_considerations, risks_mitigations, rollout_plan, "
+            "open_questions, evidence_references. Each value should be a markdown string. "
+            "Return ONLY valid JSON."
+        )
+        user = (
+            f"Product: {packet.product_name}\n{packet.product_description}\n\n"
+            f"Recommendation: {recommendation}\n\n"
+            f"Prioritized Findings:\n{finding_text}\n\n"
+            f"Conflicts resolved: {len(self.conflicts)}\n"
+            f"Policy principles: {', '.join(self.policy_pack.product_principles)}\n"
+            f"Non-goals: {', '.join(self.policy_pack.non_goals)}"
+        )
+
+        response = await self.call_llm(system, user, response_format={"type": "json_object"})
+        sections = self._parse_json_field(response, "", {})
+        # If _parse_json_field returned a list (default), parse as full dict instead
+        try:
+            sections = json.loads(response) if not isinstance(sections, dict) else sections
+        except json.JSONDecodeError:
+            sections = {}
+
+        from datetime import datetime, timezone
+        template = load_template("prd_template.md")
+        context = {
+            "product_name": packet.product_name,
+            "run_id": self.run_config.run_id,
+            "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+            "recommendation": recommendation,
+            **sections,
+        }
+        prd_content = render_template(template, context)
+
+        path = self._artifacts_dir() / "prd.md"
+        path.write_text(prd_content, encoding="utf-8")
+        self.logger.info("Saved PRD to %s", path)
+        return str(path)
+
+    async def generate_roadmap(self) -> dict:
+        """Build roadmap.json from feasibility findings, save to artifacts/roadmap.json."""
+        feasibility = self._findings_by_agent("feasibility")
+        requirements = self._findings_by_agent("requirements")
+
+        # Build themes from epics
+        themes: list[dict] = []
+        seen_epics: set[str] = set()
+        for f in requirements:
+            epic_id = (f.metadata or {}).get("epic_id", "")
+            if epic_id and epic_id not in seen_epics:
+                seen_epics.add(epic_id)
+                themes.append({
+                    "id": epic_id,
+                    "title": (f.metadata or {}).get("epic_title", f.title),
+                    "description": f.description[:200],
+                    "findings": [f.id],
+                })
+            elif epic_id and epic_id in seen_epics:
+                for t in themes:
+                    if t["id"] == epic_id:
+                        t["findings"].append(f.id)
+
+        # Build milestones from phases
+        phase_items: dict[str, list[dict]] = {"MVP": [], "V1": [], "V2": []}
+        for f in feasibility + requirements:
+            phase = (f.metadata or {}).get("phase", "V1")
+            if phase in phase_items:
+                phase_items[phase].append({
+                    "finding_id": f.id,
+                    "title": f.title,
+                    "complexity": (f.metadata or {}).get("complexity", "medium"),
+                    "dependencies": (f.metadata or {}).get("dependencies", []),
+                })
+
+        milestones = []
+        phase_targets = {"MVP": "Week 4-6", "V1": "Week 8-12", "V2": "Week 14-20"}
+        for phase in ["MVP", "V1", "V2"]:
+            items = phase_items.get(phase, [])
+            if items:
+                all_deps = []
+                for item in items:
+                    all_deps.extend(item.get("dependencies", []))
+                milestones.append({
+                    "phase": phase,
+                    "name": f"{phase} Release",
+                    "items": items,
+                    "dependencies": list(set(all_deps)),
+                    "target": phase_targets[phase],
+                })
+
+        roadmap = {"themes": themes, "milestones": milestones}
+
+        path = self._artifacts_dir() / "roadmap.json"
+        path.write_text(json.dumps(roadmap, indent=2, default=str), encoding="utf-8")
+        self.logger.info("Saved roadmap to %s", path)
+        return roadmap
+
+    async def generate_experiment_plan(self) -> str:
+        """Generate experiment plan from metrics findings, save to artifacts/experiment_plan.md."""
+        metrics_findings = self._findings_by_agent("metrics")
+        packet = self.context_packet
+        policy = self.policy_pack
+
+        finding_text = "\n".join(
+            f"- [{f.id}] ({f.type}, {f.impact}): {f.title} — {f.description[:300]}"
+            for f in metrics_findings
+        )
+
+        system = (
+            "You are a data scientist designing an experiment plan. Based on the metrics "
+            "findings, produce content for each section of the experiment plan. "
+            "Return a JSON object with keys: hypothesis, success_metrics, guardrail_metrics, "
+            "experiment_design, sample_size_duration, segmentation, rollback_criteria, "
+            "data_collection, analysis_plan. Each value is a markdown string. "
+            "Return ONLY valid JSON."
+        )
+        user = (
+            f"Product: {packet.product_name}\n{packet.product_description}\n\n"
+            f"Metrics Findings:\n{finding_text}\n\n"
+            f"Policy guardrails:\n"
+            f"- Require guardrail metrics: {policy.experimentation.require_guardrail_metrics}\n"
+            f"- Min sample size: {policy.experimentation.min_sample_size}\n"
+            f"- Max experiment duration: {policy.experimentation.max_experiment_duration_days} days\n"
+            f"- Success criteria required: {policy.experimentation.success_criteria_required}"
+        )
+
+        response = await self.call_llm(system, user, response_format={"type": "json_object"})
+        try:
+            sections = json.loads(response)
+        except json.JSONDecodeError:
+            sections = {}
+
+        from datetime import datetime, timezone
+        template = load_template("experiment_plan_template.md")
+        context = {
+            "product_name": packet.product_name,
+            "run_id": self.run_config.run_id,
+            "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+            **sections,
+        }
+        content = render_template(template, context)
+
+        path = self._artifacts_dir() / "experiment_plan.md"
+        path.write_text(content, encoding="utf-8")
+        self.logger.info("Saved experiment plan to %s", path)
+        return str(path)
+
+    async def generate_decision_log(self) -> str:
+        """Generate decision log from dedup, conflict, and gate decisions."""
+        from datetime import datetime, timezone
+        packet = self.context_packet
+        date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+        decisions: list[dict] = []
+        idx = 1
+
+        # Dedup decisions
+        for entry in self.dedup_log:
+            decisions.append({
+                "num": idx,
+                "decision": f"Deduplicated: kept {entry['kept']}, removed {', '.join(entry['removed'])}",
+                "rationale": entry.get("reason", "Duplicate findings"),
+                "alternatives": "Keep all duplicates separately",
+                "confidence": "validated",
+                "status": "Decided",
+                "date": date_str,
+            })
+            idx += 1
+
+        # Conflict resolutions
+        for conflict in self.conflicts:
+            decisions.append({
+                "num": idx,
+                "decision": conflict.get("resolution", "N/A"),
+                "rationale": conflict.get("reasoning", conflict.get("description", "")),
+                "alternatives": f"Prioritize {conflict.get('finding_a', '?')} over {conflict.get('finding_b', '?')} or vice versa",
+                "confidence": "directional",
+                "status": "Decided",
+                "date": date_str,
+            })
+            idx += 1
+
+        # Risk gate decisions
+        gate = self._gate_result()
+        for blocker in gate.get("blockers", []):
+            decisions.append({
+                "num": idx,
+                "decision": f"Pipeline blocked: {blocker}",
+                "rationale": "Policy-driven risk gate rule",
+                "alternatives": "Override gate (not recommended)",
+                "confidence": "validated",
+                "status": "Blocked",
+                "date": date_str,
+            })
+            idx += 1
+
+        # Build template rows
+        rows = "\n".join(
+            f"| {d['num']} | {d['decision']} | {d['rationale']} | {d['alternatives']} | {d['confidence']} | {d['status']} | {d['date']} |"
+            for d in decisions
+        )
+
+        details = "\n\n".join(
+            f"### Decision {d['num']}\n\n**Decision:** {d['decision']}\n\n"
+            f"**Rationale:** {d['rationale']}\n\n"
+            f"**Alternatives Considered:** {d['alternatives']}\n\n"
+            f"**Confidence:** {d['confidence']} | **Status:** {d['status']}"
+            for d in decisions
+        )
+
+        template = load_template("decision_log_template.md")
+        context = {
+            "product_name": packet.product_name,
+            "run_id": self.run_config.run_id,
+            "date": date_str,
+            "decision_rows": rows,
+            "decision_details": details,
+        }
+        content = render_template(template, context)
+
+        path = self._artifacts_dir() / "decision_log.md"
+        path.write_text(content, encoding="utf-8")
+        self.logger.info("Saved decision log to %s", path)
+        return str(path)
+
+    async def generate_backlog(self) -> str:
+        """Generate backlog.csv using BacklogGenerator."""
+        requirements = self._findings_by_agent("requirements")
+        feasibility = self._findings_by_agent("feasibility")
+
+        generator = BacklogGenerator()
+        csv_content = generator.generate(requirements, feasibility)
+
+        path = self._artifacts_dir() / "backlog.csv"
+        generator.save_csv(csv_content, str(path))
+        self.logger.info("Saved backlog to %s", path)
+        return str(path)
+
+    async def generate_all_artifacts(self) -> dict[str, str]:
+        """Run all artifact generation methods. Return dict of artifact paths."""
+        paths: dict[str, str] = {}
+
+        recommendation = await self.generate_recommendation()
+        paths["recommendation"] = recommendation
+
+        paths["prd"] = await self.generate_prd()
+        paths["roadmap"] = str((self._artifacts_dir() / "roadmap.json"))
+        await self.generate_roadmap()
+        paths["experiment_plan"] = await self.generate_experiment_plan()
+        paths["decision_log"] = await self.generate_decision_log()
+        paths["backlog"] = await self.generate_backlog()
+
+        self.logger.info("Generated %d artifacts: %s", len(paths), list(paths.keys()))
+        return paths
