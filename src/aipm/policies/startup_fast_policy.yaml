@@ -1,0 +1,39 @@
+# AIPM Startup Fast Policy Pack
+# Optimized for speed-to-market for early-stage products.
+# Critical risks still block; tolerates more high risks and smaller experiments.
+
+product_principles:
+  - "Ship iteratively — MVP first, then layer complexity"
+  - "User value over feature count"
+  - "Move fast and measure everything"
+  - "Accessibility basics required; full WCAG compliance in V2"
+
+non_goals:
+  - "Full enterprise compliance in V1"
+  - "Custom workflow automation before product-market fit"
+  - "Support for legacy browsers (IE11)"
+  - "Real-time sync across all platforms in MVP"
+
+data_handling:
+  require_collection_justification: true
+  require_consent_mechanism: true
+  retention_limit_days: 90
+  minimize_pii: true
+  require_explicit_consent: false
+
+experimentation:
+  require_guardrail_metrics: true
+  min_sample_size: 200
+  max_experiment_duration_days: 30
+  success_criteria_required: true
+
+accessibility:
+  wcag_level: "A"
+  require_screen_reader_support: false
+  require_keyboard_navigation: true
+
+risk_gating:
+  block_on_critical_privacy: true
+  block_on_critical_security: true
+  require_legal_review_for_pii: false
+  max_unmitigated_high_risks: 5

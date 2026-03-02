@@ -1,0 +1,45 @@
+# AIPM Enterprise Policy Pack
+# Full enterprise compliance: SOC 2, data residency, strict privacy, and
+# shortened experiment cycles to limit exposure windows.
+
+product_principles:
+  - "Compliance is non-negotiable — SOC 2 and data residency by default"
+  - "Privacy by design — data minimization at every layer"
+  - "Explicit user consent before any data collection"
+  - "Audit trails for all data-touching operations"
+  - "Accessibility is a requirement, not an afterthought"
+  - "Evidence-driven decisions over opinion"
+
+non_goals:
+  - "Bulk data collection without clear justification"
+  - "Third-party data sharing without DPA in place"
+  - "Cross-region data transfer without residency sign-off"
+  - "Behavioral profiling without opt-in"
+  - "Support for legacy browsers (IE11)"
+
+data_handling:
+  require_collection_justification: true
+  require_consent_mechanism: true
+  retention_limit_days: 30
+  minimize_pii: true
+  require_explicit_consent: true
+  require_data_residency_check: true
+
+experimentation:
+  require_guardrail_metrics: true
+  min_sample_size: 1000
+  max_experiment_duration_days: 14
+  success_criteria_required: true
+
+accessibility:
+  wcag_level: "AA"
+  require_screen_reader_support: true
+  require_keyboard_navigation: true
+
+risk_gating:
+  block_on_critical_privacy: true
+  block_on_critical_security: true
+  require_legal_review_for_pii: true
+  max_unmitigated_high_risks: 0
+  require_soc2_compliance: true
+  require_data_residency_check: true

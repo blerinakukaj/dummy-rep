@@ -1,0 +1,40 @@
+# AIPM Strict Privacy Policy Pack
+# High-compliance variant for products handling sensitive personal data.
+# Zero tolerance for unmitigated high risks; legal review mandatory for any PII.
+
+product_principles:
+  - "Privacy by design — data minimization at every layer"
+  - "Explicit user consent before any data collection"
+  - "Legal review is a gate, not a checkbox"
+  - "Accessibility is a requirement, not an afterthought"
+  - "Audit trails for all data-touching operations"
+
+non_goals:
+  - "Bulk data collection without clear justification"
+  - "Third-party data sharing in V1"
+  - "Behavioral profiling without opt-in"
+  - "Support for legacy browsers (IE11)"
+
+data_handling:
+  require_collection_justification: true
+  require_consent_mechanism: true
+  retention_limit_days: 30
+  minimize_pii: true
+  require_explicit_consent: true
+
+experimentation:
+  require_guardrail_metrics: true
+  min_sample_size: 1000
+  max_experiment_duration_days: 30
+  success_criteria_required: true
+
+accessibility:
+  wcag_level: "AA"
+  require_screen_reader_support: true
+  require_keyboard_navigation: true
+
+risk_gating:
+  block_on_critical_privacy: true
+  block_on_critical_security: true
+  require_legal_review_for_pii: true
+  max_unmitigated_high_risks: 0
