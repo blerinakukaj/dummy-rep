@@ -1,0 +1,7 @@
+{
+  "dau": 45000,
+  "notification_ctr": 0.12,
+  "unsubscribe_rate": 0.08,
+  "avg_notifications_per_user": 23,
+  "p95_delivery_latency_ms": 340
+}

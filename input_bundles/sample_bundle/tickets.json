@@ -1,0 +1,52 @@
+[
+  {
+    "id": "NOTIFY-101",
+    "title": "Add notification priority levels (urgent, normal, low)",
+    "description": "Users need a way to distinguish between critical alerts and routine updates. Currently all notifications appear with the same weight, causing important messages to be missed in the noise. Propose a three-tier priority system that visually differentiates urgency.",
+    "status": "open",
+    "priority": "high",
+    "labels": ["feature", "ux", "ml"],
+    "created_at": "2025-09-12",
+    "source": "jira"
+  },
+  {
+    "id": "NOTIFY-102",
+    "title": "Notifications not delivered on Android 14 devices",
+    "description": "Several users on Android 14 report that push notifications silently fail. Logcat shows the FCM token is refreshed but the delivery callback never fires. Affects approximately 8% of our Android user base. Workaround: users must manually re-enable notification permissions after OS update.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["bug", "android", "push"],
+    "created_at": "2025-10-03",
+    "source": "jira"
+  },
+  {
+    "id": "NOTIFY-103",
+    "title": "Implement ML-based notification batching",
+    "description": "Instead of sending notifications individually, batch low-priority notifications into a digest delivered at optimal times based on user engagement patterns. The ML model should learn per-user preferences for delivery timing and grouping thresholds.",
+    "status": "open",
+    "priority": "medium",
+    "labels": ["feature", "ml", "engagement"],
+    "created_at": "2025-10-18",
+    "source": "jira"
+  },
+  {
+    "id": "NOTIFY-104",
+    "title": "Add user preference page for notification categories",
+    "description": "Users should be able to opt in/out of specific notification categories (marketing, product updates, social, transactional) from a settings page. This requires a new preferences API endpoint and a React settings component. Should respect existing global mute settings.",
+    "status": "in_progress",
+    "priority": "high",
+    "labels": ["feature", "ux", "settings"],
+    "created_at": "2025-11-01",
+    "source": "jira"
+  },
+  {
+    "id": "NOTIFY-105",
+    "title": "Reduce notification delivery latency from p95 340ms to under 200ms",
+    "description": "Performance monitoring shows p95 notification delivery latency at 340ms, well above our 200ms SLO. Root cause appears to be synchronous database writes in the delivery pipeline. Proposed fix: move to async writes with a write-behind cache and switch to batch inserts for analytics events.",
+    "status": "open",
+    "priority": "high",
+    "labels": ["improvement", "performance", "backend"],
+    "created_at": "2025-11-15",
+    "source": "jira"
+  }
+]
