@@ -1,0 +1,62 @@
+[
+  {
+    "id": "PROF-101",
+    "title": "Build user behavior tracking pipeline",
+    "description": "Implement a data ingestion pipeline that captures browsing history, click patterns, scroll depth, and time-on-page metrics for each authenticated user. Events should be streamed to our data lake in near real-time. The pipeline must handle at minimum 50k events/second at peak. Store raw events with full user identifiers for profile enrichment downstream.",
+    "status": "proposed",
+    "priority": "high",
+    "labels": ["data-pipeline", "tracking", "pii"],
+    "created_at": "2026-01-10T09:00:00Z",
+    "source": "jira"
+  },
+  {
+    "id": "PROF-102",
+    "title": "Implement ML recommendation engine",
+    "description": "Build a recommendation engine that uses accumulated user profile data (browsing history, content preferences, engagement signals) to serve personalized content suggestions. The model should incorporate collaborative filtering and content-based approaches. Training data will include full user interaction histories linked by user_id. Target: 20% improvement in content CTR within 60 days.",
+    "status": "proposed",
+    "priority": "high",
+    "labels": ["ml", "recommendations", "personalization"],
+    "created_at": "2026-01-12T14:30:00Z",
+    "source": "jira"
+  },
+  {
+    "id": "PROF-103",
+    "title": "Create user preference dashboard",
+    "description": "Build a user-facing dashboard that displays what behavioral data we have collected about them. Users should see their inferred interests, content categories, and engagement patterns. Include toggles to opt out of specific tracking categories. This is a transparency initiative requested by the product ethics board.",
+    "status": "proposed",
+    "priority": "medium",
+    "labels": ["transparency", "user-facing", "privacy"],
+    "created_at": "2026-01-15T11:00:00Z",
+    "source": "jira"
+  },
+  {
+    "id": "PROF-104",
+    "title": "Add cross-device tracking",
+    "description": "Link user activity across mobile app and web browser sessions using deterministic matching (logged-in user_id) and probabilistic matching (device fingerprinting, IP correlation). This enables a unified user profile regardless of which device they use. Requires a cross-device identity graph stored in our profile database.",
+    "status": "proposed",
+    "priority": "medium",
+    "labels": ["cross-device", "identity", "tracking", "pii"],
+    "created_at": "2026-01-18T10:15:00Z",
+    "source": "jira"
+  },
+  {
+    "id": "PROF-105",
+    "title": "Implement data export for advertisers",
+    "description": "Create an API and batch export system that shares anonymized user profile segments with advertising partners. Partners receive cohort-level data (e.g., 'users interested in fitness aged 25-34') rather than individual profiles. However, the anonymization pipeline needs validation — legal has flagged that with enough cohort intersections, individual re-identification may be possible.",
+    "status": "proposed",
+    "priority": "high",
+    "labels": ["advertising", "data-sharing", "monetization", "pii"],
+    "created_at": "2026-01-20T16:00:00Z",
+    "source": "jira"
+  },
+  {
+    "id": "PROF-106",
+    "title": "GDPR compliance audit request",
+    "description": "Legal team has flagged that the PersonaLens profiling system requires a full GDPR compliance audit before launch. Key concerns: (1) lawful basis for processing behavioral data, (2) adequacy of consent mechanisms for cross-device tracking, (3) data retention policies for raw behavioral events, (4) right to erasure implementation across the ML pipeline, (5) data protection impact assessment (DPIA) has not been completed. This is a blocker for EU market launch.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["legal", "gdpr", "compliance", "blocker"],
+    "created_at": "2026-01-22T08:45:00Z",
+    "source": "jira"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "engagement_score": 6.2,
+  "content_ctr": 0.15,
+  "user_retention_30d": 0.45,
+  "privacy_opt_out_rate": 0.22,
+  "data_deletion_requests_monthly": 340,
+  "dau": 85000,
+  "personalization_lift_estimate": 0.20,
+  "avg_session_duration_minutes": 8.4,
+  "content_discovery_rate": 0.31,
+  "ad_revenue_per_user_monthly": 2.15,
+  "consent_banner_acceptance_rate": 0.58,
+  "privacy_settings_visit_rate": 0.06,
+  "support_tickets_privacy_related_monthly": 87,
+  "eu_user_percentage": 0.34
+}
