@@ -13,6 +13,7 @@ from aipm.agents.metrics_agent import MetricsAgent
 from aipm.agents.requirements_agent import RequirementsAgent
 from aipm.agents.feasibility_agent import FeasibilityAgent
 from aipm.agents.risk_agent import RiskAgent
+from aipm.agents.lead_pm_agent import LeadPMAgent
 from aipm.core.config import ensure_output_dirs, get_llm_client
 from aipm.core.loader import load_bundle, load_prompt, validate_bundle
 from aipm.core.policy import PolicyPack, load_policy
@@ -177,7 +178,10 @@ class PipelineOrchestrator:
     async def _run_lead_pm_agent(self, context_packet: ContextPacket) -> AgentOutput | None:
         """Run the Lead PM Agent to synthesize all findings."""
         logger.info("Step 6: Running LeadPMAgent...")
-        return await self._run_placeholder_agent("lead_pm", "Lead PM Agent")
+        return await self._run_agent_safe(
+            "lead_pm", LeadPMAgent, context_packet,
+            all_agent_outputs=list(self.outputs),
+        )
 
     async def _run_agent_safe(
         self,
