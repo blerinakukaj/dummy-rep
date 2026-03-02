@@ -9,6 +9,7 @@ from pathlib import Path
 from aipm.agents.competitive_agent import CompetitiveAgent
 from aipm.agents.customer_agent import CustomerInsightsAgent
 from aipm.agents.intake_agent import IntakeAgent
+from aipm.agents.metrics_agent import MetricsAgent
 from aipm.core.config import ensure_output_dirs, get_llm_client
 from aipm.core.loader import load_bundle, load_prompt, validate_bundle
 from aipm.core.policy import PolicyPack, load_policy
@@ -133,7 +134,7 @@ class PipelineOrchestrator:
         tasks = [
             self._run_agent_safe("customer", CustomerInsightsAgent, context_packet),
             self._run_agent_safe("competitive", CompetitiveAgent, context_packet),
-            self._run_placeholder_agent("metrics", "Metrics Agent"),
+            self._run_agent_safe("metrics", MetricsAgent, context_packet),
         ]
 
         results = await asyncio.gather(*tasks, return_exceptions=True)
