@@ -1,0 +1,39 @@
+# AIPM Default Policy Pack
+# This policy governs how the pipeline evaluates risks, gates decisions,
+# and enforces standards across all agents.
+
+product_principles:
+  - "User value over feature count"
+  - "Data-minimal by default"
+  - "Ship iteratively — MVP first, then layer complexity"
+  - "Accessibility is a requirement, not an afterthought"
+  - "Evidence-driven decisions over opinion"
+
+non_goals:
+  - "Full redesign of existing auth flow"
+  - "Custom enterprise workflows in V1"
+  - "Support for legacy browsers (IE11)"
+  - "Real-time sync across all platforms in MVP"
+
+data_handling:
+  require_collection_justification: true
+  require_consent_mechanism: true
+  retention_limit_days: 90
+  minimize_pii: true
+
+experimentation:
+  require_guardrail_metrics: true
+  min_sample_size: 1000
+  max_experiment_duration_days: 30
+  success_criteria_required: true
+
+accessibility:
+  wcag_level: "AA"
+  require_screen_reader_support: true
+  require_keyboard_navigation: true
+
+risk_gating:
+  block_on_critical_privacy: true
+  block_on_critical_security: true
+  require_legal_review_for_pii: true
+  max_unmitigated_high_risks: 2
