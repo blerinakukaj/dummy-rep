@@ -1,0 +1,28 @@
+# Secrets — never bake API keys into the image
+.env
+.env.*
+
+# Version control
+.git
+.gitignore
+
+# Python byte-code and caches
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+.ruff_cache
+.mypy_cache
+
+# Local virtual environments
+.venv
+venv
+
+# Pipeline output — mounted as a volume at runtime
+output/
+
+# Build artefacts
+dist/
+build/
+*.egg-info/

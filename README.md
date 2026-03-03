@@ -80,6 +80,146 @@ uvicorn aipm.api:app --reload --port 8000
 pytest tests/ -v
 ```
 
+---
+
+## Docker Setup
+
+### Prerequisites
+- [Docker](https://docs.docker.com/get-docker/) 24+
+- [Docker Compose](https://docs.docker.com/compose/) v2
+
+### 1. Configure environment variables
+
+```bash
+cp .env.example .env
+# Edit .env and fill in your API key(s)
+```
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `OPENAI_API_KEY` | OpenAI API key (for GPT-4o) | If using OpenAI provider |
+| `ANTHROPIC_API_KEY` | Anthropic API key (for Claude) | If using Anthropic provider |
+
+### 2. Build and start the API server
+
+```bash
+docker compose up --build
+```
+
+The API will be available at `http://localhost:8000`.
+Docker Compose polls `GET /api/v1/health` every 30 s to verify the container is healthy.
+
+### 3. Run the CLI inside the container
+
+```bash
+# Run pipeline from a bundle directory
+docker run --rm \
+  --env-file .env \
+  -v "$(pwd)/input_bundles:/app/input_bundles" \
+  -v "$(pwd)/output:/app/output" \
+  aipm-api aipm run /app/input_bundles/sample_bundle/
+
+# Run pipeline from a text prompt
+docker run --rm \
+  --env-file .env \
+  -v "$(pwd)/output:/app/output" \
+  aipm-api aipm prompt "Build a smart notification prioritisation system"
+
+# Run with Anthropic instead of OpenAI
+docker run --rm \
+  --env-file .env \
+  -v "$(pwd)/input_bundles:/app/input_bundles" \
+  -v "$(pwd)/output:/app/output" \
+  aipm-api aipm run /app/input_bundles/sample_bundle/ \
+    --provider anthropic --model claude-sonnet-4-20250514
+```
+
+---
+
+## CLI Usage
+
+```bash
+# Run from a bundle directory
+aipm run input_bundles/sample_bundle/
+
+# Run from a text prompt
+aipm prompt "Build a notification prioritisation system using ML"
+
+# Select provider and model explicitly
+aipm run input_bundles/sample_bundle/ --provider anthropic --model claude-sonnet-4-20250514
+
+# Custom output directory
+aipm run input_bundles/sample_bundle/ --output-dir /tmp/my_run
+
+# Custom risk policy
+aipm run input_bundles/sample_bundle/ --policy src/aipm/policies/strict_policy.yaml
+
+# Validate a completed run's outputs
+aipm validate output/<run-id>/
+
+# Verbose / debug logging
+aipm run input_bundles/sample_bundle/ --verbose
+```
+
+---
+
+## API Usage
+
+Start the server locally:
+
+```bash
+uvicorn aipm.api:app --reload --port 8000
+# or via Docker Compose:
+docker compose up
+```
+
+### Health check
+
+```bash
+curl http://localhost:8000/api/v1/health
+```
+
+```json
+{"status": "ok", "version": "1.0.0"}
+```
+
+### Submit a pipeline run
+
+```bash
+curl -X POST http://localhost:8000/api/v1/run \
+  -H "Content-Type: application/json" \
+  -d '{
+    "input_path": "input_bundles/sample_bundle/",
+    "provider": "openai",
+    "model": "gpt-4o"
+  }'
+```
+
+```json
+{"run_id": "run-20241201-abc123", "status": "running", "message": "Pipeline started"}
+```
+
+### Poll run status
+
+```bash
+curl http://localhost:8000/api/v1/run/run-20241201-abc123/status
+```
+
+### Retrieve generated artifacts
+
+```bash
+# List artifact paths
+curl http://localhost:8000/api/v1/run/run-20241201-abc123/artifacts
+
+# Download a specific artifact (e.g. PRD)
+curl http://localhost:8000/api/v1/run/run-20241201-abc123/artifacts/prd
+
+# Full run manifest (token usage, timings, agent results)
+curl http://localhost:8000/api/v1/run/run-20241201-abc123/manifest
+```
+
+---
+
 ## Team
 
 | Intern | Role |
