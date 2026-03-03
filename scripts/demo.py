@@ -215,7 +215,7 @@ def print_run_summary(manifest: dict) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Demo scenarios
+# Demo scenarios (1-10: one per input bundle, 11: policy comparison, 12: showcase)
 # ---------------------------------------------------------------------------
 async def demo_1(provider: str, model: str) -> dict:
     """Demo 1: Privacy risk scenario — expected: 'validate_first' due to PII risks."""
@@ -228,7 +228,7 @@ async def demo_1(provider: str, model: str) -> dict:
         policy="src/aipm/policies/default_policy.yaml",
         provider=provider,
         model=model,
-        output_dir="output/demo_1_privacy_risk",
+        output_dir="output/demo_01_privacy_risk",
     )
     print_run_summary(result)
     show_key_artifacts(result)
@@ -245,7 +245,7 @@ async def demo_2(provider: str, model: str) -> dict:
         "input_bundles/metric_drop/",
         provider=provider,
         model=model,
-        output_dir="output/demo_2_metric_drop",
+        output_dir="output/demo_02_metric_drop",
     )
     print_run_summary(result)
     show_experiment_plan_preview(result)
@@ -262,16 +262,135 @@ async def demo_3(provider: str, model: str) -> dict:
         "input_bundles/competitive_parity/",
         provider=provider,
         model=model,
-        output_dir="output/demo_3_competitive_parity",
+        output_dir="output/demo_03_competitive_parity",
     )
     print_run_summary(result)
     show_roadmap_preview(result)
     return result
 
 
-async def demo_4(provider: str, model: str) -> dict | None:
-    """Demo 4: Policy configurability — same input, different policy, different outcome."""
-    print_section("Demo 4: Policy Configurability")
+async def demo_4(provider: str, model: str) -> dict:
+    """Demo 4: Conflicting stakeholders — decision log with conflict resolution."""
+    print_section("Demo 4: Conflicting Stakeholders Scenario")
+    print("Running pipeline on conflicting_stakeholders bundle...")
+    print("Expected: decision log showing stakeholder conflict resolution\n")
+
+    result = await run_pipeline(
+        "input_bundles/conflicting_stakeholders/",
+        provider=provider,
+        model=model,
+        output_dir="output/demo_04_conflicting_stakeholders",
+    )
+    print_run_summary(result)
+    show_key_artifacts(result)
+    return result
+
+
+async def demo_5(provider: str, model: str) -> dict:
+    """Demo 5: Sample bundle — baseline end-to-end run."""
+    print_section("Demo 5: Sample Bundle (Baseline)")
+    print("Running pipeline on sample_bundle...")
+    print("Expected: full artifact set from a standard input\n")
+
+    result = await run_pipeline(
+        "input_bundles/sample_bundle/",
+        provider=provider,
+        model=model,
+        output_dir="output/demo_05_sample_bundle",
+    )
+    print_run_summary(result)
+    show_all_artifacts(result)
+    return result
+
+
+async def demo_6(provider: str, model: str) -> dict:
+    """Demo 6: Accessibility gap — risk findings around a11y compliance."""
+    print_section("Demo 6: Accessibility Gap Scenario")
+    print("Running pipeline on a11y_gap bundle...")
+    print("Expected: risk findings highlighting accessibility gaps\n")
+
+    result = await run_pipeline(
+        "input_bundles/a11y_gap/",
+        provider=provider,
+        model=model,
+        output_dir="output/demo_06_a11y_gap",
+    )
+    print_run_summary(result)
+    show_key_artifacts(result)
+    return result
+
+
+async def demo_7(provider: str, model: str) -> dict:
+    """Demo 7: Enterprise complexity — large-scale requirements and phased roadmap."""
+    print_section("Demo 7: Enterprise Complexity Scenario")
+    print("Running pipeline on enterprise_complexity bundle...")
+    print("Expected: complex roadmap with many milestones and dependencies\n")
+
+    result = await run_pipeline(
+        "input_bundles/enterprise_complexity/",
+        provider=provider,
+        model=model,
+        output_dir="output/demo_07_enterprise_complexity",
+    )
+    print_run_summary(result)
+    show_roadmap_preview(result)
+    return result
+
+
+async def demo_8(provider: str, model: str) -> dict:
+    """Demo 8: Performance regression — incident-driven analysis."""
+    print_section("Demo 8: Performance Regression Scenario")
+    print("Running pipeline on perf_regression bundle...")
+    print("Expected: findings focused on latency, reliability, and rollback\n")
+
+    result = await run_pipeline(
+        "input_bundles/perf_regression/",
+        provider=provider,
+        model=model,
+        output_dir="output/demo_08_perf_regression",
+    )
+    print_run_summary(result)
+    show_experiment_plan_preview(result)
+    return result
+
+
+async def demo_9(provider: str, model: str) -> dict:
+    """Demo 9: Pricing change — competitive and customer impact analysis."""
+    print_section("Demo 9: Pricing Change Scenario")
+    print("Running pipeline on pricing_change bundle...")
+    print("Expected: competitive findings and customer churn risk assessment\n")
+
+    result = await run_pipeline(
+        "input_bundles/pricing_change/",
+        provider=provider,
+        model=model,
+        output_dir="output/demo_09_pricing_change",
+    )
+    print_run_summary(result)
+    show_backlog_preview(result)
+    return result
+
+
+async def demo_10(provider: str, model: str) -> dict:
+    """Demo 10: Tech dependency — feasibility and dependency risk analysis."""
+    print_section("Demo 10: Tech Dependency Scenario")
+    print("Running pipeline on tech_dependency bundle...")
+    print("Expected: feasibility concerns and dependency risk flags\n")
+
+    result = await run_pipeline(
+        "input_bundles/tech_dependency/",
+        provider=provider,
+        model=model,
+        output_dir="output/demo_10_tech_dependency",
+    )
+    print_run_summary(result)
+    show_key_artifacts(result)
+    return result
+
+
+async def demo_11(provider: str, model: str) -> dict | None:
+    """Demo 11: Policy configurability — same input, different policy, different outcome."""
+    print_section("Demo 11: Policy Configurability")
     print("Running privacy_risk bundle with TWO different policies...\n")
 
     print(f"  {CYAN}Run A:{RESET} default_policy.yaml")
@@ -280,7 +399,7 @@ async def demo_4(provider: str, model: str) -> dict | None:
         policy="src/aipm/policies/default_policy.yaml",
         provider=provider,
         model=model,
-        output_dir="output/demo_4a_default_policy",
+        output_dir="output/demo_11a_default_policy",
     )
     result_a["_demo_policy"] = "default_policy.yaml"
     print_run_summary(result_a)
@@ -291,7 +410,7 @@ async def demo_4(provider: str, model: str) -> dict | None:
         policy="src/aipm/policies/startup_fast_policy.yaml",
         provider=provider,
         model=model,
-        output_dir="output/demo_4b_startup_policy",
+        output_dir="output/demo_11b_startup_policy",
     )
     result_b["_demo_policy"] = "startup_fast_policy.yaml"
     print_run_summary(result_b)
@@ -302,9 +421,9 @@ async def demo_4(provider: str, model: str) -> dict | None:
     return result_a
 
 
-async def demo_5(result: dict | None, provider: str, model: str) -> None:
-    """Demo 5: Artifact showcase — display all generated artifacts from a run."""
-    print_section("Demo 5: Artifact Showcase")
+async def demo_12(result: dict | None, provider: str, model: str) -> None:
+    """Demo 12: Artifact showcase — display all generated artifacts from a run."""
+    print_section("Demo 12: Artifact Showcase")
 
     if result is None:
         print("Running sample_bundle to generate artifacts for showcase...\n")
@@ -312,7 +431,7 @@ async def demo_5(result: dict | None, provider: str, model: str) -> None:
             "input_bundles/sample_bundle/",
             provider=provider,
             model=model,
-            output_dir="output/demo_5_showcase",
+            output_dir="output/demo_12_showcase",
         )
 
     print("Full artifact breakdown:\n")
@@ -332,21 +451,29 @@ async def run_demo(
     print(f"Provider: {provider} | Model: {model}")
     print(f"Working directory: {Path.cwd()}")
 
-    demos = {
+    # Demos 1-10: one per input bundle
+    bundle_demos = {
         1: demo_1,
         2: demo_2,
         3: demo_3,
+        4: demo_4,
+        5: demo_5,
+        6: demo_6,
+        7: demo_7,
+        8: demo_8,
+        9: demo_9,
+        10: demo_10,
     }
 
     if demo_number is not None:
-        if demo_number in demos:
-            await demos[demo_number](provider, model)
-        elif demo_number == 4:
-            await demo_4(provider, model)
-        elif demo_number == 5:
-            await demo_5(None, provider, model)
+        if demo_number in bundle_demos:
+            await bundle_demos[demo_number](provider, model)
+        elif demo_number == 11:
+            await demo_11(provider, model)
+        elif demo_number == 12:
+            await demo_12(None, provider, model)
         else:
-            print(f"{RED}Invalid demo number: {demo_number}. Choose 1-5.{RESET}")
+            print(f"{RED}Invalid demo number: {demo_number}. Choose 1-12.{RESET}")
         return
 
     # Run all demos sequentially
@@ -354,10 +481,17 @@ async def run_demo(
     await demo_2(provider, model)
     await demo_3(provider, model)
     await demo_4(provider, model)
-    await demo_5(result1, provider, model)
+    await demo_5(provider, model)
+    await demo_6(provider, model)
+    await demo_7(provider, model)
+    await demo_8(provider, model)
+    await demo_9(provider, model)
+    await demo_10(provider, model)
+    await demo_11(provider, model)
+    await demo_12(result1, provider, model)
 
     print_banner("Demo Complete!")
-    print("All five scenarios executed successfully.")
+    print("All twelve scenarios executed successfully.")
     print("Check the output/ directory for generated artifacts.\n")
 
 
@@ -367,18 +501,27 @@ def main() -> None:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=textwrap.dedent("""\
             examples:
-              python scripts/demo.py                          # Run all demos
+              python scripts/demo.py                          # Run all 12 demos
               python scripts/demo.py --demo 1                 # Privacy risk only
-              python scripts/demo.py --demo 4                 # Policy comparison
+              python scripts/demo.py --demo 11                # Policy comparison
+              python scripts/demo.py --demo 12                # Artifact showcase
               python scripts/demo.py --model gpt-4o-mini      # Use a different model
+
+            demos:
+              1  privacy_risk             6  a11y_gap
+              2  metric_drop              7  enterprise_complexity
+              3  competitive_parity       8  perf_regression
+              4  conflicting_stakeholders 9  pricing_change
+              5  sample_bundle            10 tech_dependency
+              11 policy comparison        12 artifact showcase
         """),
     )
     parser.add_argument(
         "--demo",
         type=int,
         default=None,
-        choices=[1, 2, 3, 4, 5],
-        help="Run a specific demo (1-5). Omit to run all.",
+        choices=list(range(1, 13)),
+        help="Run a specific demo (1-12). Omit to run all.",
     )
     parser.add_argument(
         "--provider",
