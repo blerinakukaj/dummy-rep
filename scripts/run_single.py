@@ -9,7 +9,6 @@ Usage:
 
 import argparse
 import asyncio
-import json
 import os
 import sys
 import textwrap
@@ -162,35 +161,51 @@ def main() -> None:
     )
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument(
-        "input_path", nargs="?", default=None,
+        "input_path",
+        nargs="?",
+        default=None,
         help="Path to input bundle directory or prompt file",
     )
     group.add_argument(
-        "--prompt", type=str, default=None,
+        "--prompt",
+        type=str,
+        default=None,
         help="Run from a plain-text product idea instead of a bundle",
     )
     parser.add_argument(
-        "--provider", type=str, default="openai",
+        "--provider",
+        type=str,
+        default="openai",
         help="LLM provider: openai or anthropic (default: openai)",
     )
     parser.add_argument(
-        "--model", type=str, default="gpt-4o",
+        "--model",
+        type=str,
+        default="gpt-4o",
         help="Model name (default: gpt-4o)",
     )
     parser.add_argument(
-        "--policy", type=str, default="src/aipm/policies/default_policy.yaml",
+        "--policy",
+        type=str,
+        default="src/aipm/policies/default_policy.yaml",
         help="Path to policy YAML file",
     )
     parser.add_argument(
-        "--output-dir", type=str, default="output",
+        "--output-dir",
+        type=str,
+        default="output",
         help="Output directory (default: output)",
     )
     parser.add_argument(
-        "--temperature", type=float, default=0.2,
+        "--temperature",
+        type=float,
+        default=0.2,
         help="LLM temperature (default: 0.2)",
     )
     parser.add_argument(
-        "-v", "--verbose", action="store_true",
+        "-v",
+        "--verbose",
+        action="store_true",
         help="Enable debug logging",
     )
     args = parser.parse_args()
@@ -200,15 +215,17 @@ def main() -> None:
 
     input_path = args.prompt if args.prompt else args.input_path
 
-    asyncio.run(run_single(
-        input_path=input_path,
-        provider=args.provider,
-        model=args.model,
-        policy=args.policy,
-        output_dir=args.output_dir,
-        temperature=args.temperature,
-        verbose=args.verbose,
-    ))
+    asyncio.run(
+        run_single(
+            input_path=input_path,
+            provider=args.provider,
+            model=args.model,
+            policy=args.policy,
+            output_dir=args.output_dir,
+            temperature=args.temperature,
+            verbose=args.verbose,
+        )
+    )
 
 
 if __name__ == "__main__":

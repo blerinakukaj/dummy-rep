@@ -36,7 +36,9 @@ class TokenTracker:
 
         logger.debug(
             "Recorded tokens for %s: prompt=%d, completion=%d",
-            agent_id, prompt_tokens, completion_tokens,
+            agent_id,
+            prompt_tokens,
+            completion_tokens,
         )
 
     def get_summary(self) -> dict:

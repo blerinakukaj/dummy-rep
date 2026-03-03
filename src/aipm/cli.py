@@ -3,7 +3,6 @@
 import asyncio
 import json
 import logging
-import sys
 from pathlib import Path
 
 import typer
@@ -44,9 +43,7 @@ def run(
     provider: str = typer.Option("openai", help="LLM provider: openai or anthropic"),
     model: str = typer.Option("gpt-4o", help="Model to use"),
     temperature: float = typer.Option(0.2, help="LLM temperature"),
-    policy: str = typer.Option(
-        "src/aipm/policies/default_policy.yaml", help="Policy YAML path"
-    ),
+    policy: str = typer.Option("src/aipm/policies/default_policy.yaml", help="Policy YAML path"),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Enable debug logging"),
 ) -> None:
     """Run the full AIPM pipeline on an input bundle."""
@@ -146,9 +143,7 @@ def validate(
             for w in warnings:
                 console.print(f"    - {w}")
         else:
-            console.print(
-                f"  [green]✓ {json_file.name}: {len(agent_output.findings)} findings, valid[/green]"
-            )
+            console.print(f"  [green]✓ {json_file.name}: {len(agent_output.findings)} findings, valid[/green]")
 
     # Cross-agent consistency
     if all_findings:
@@ -168,10 +163,7 @@ def validate(
         if consistency["potential_duplicates"]:
             console.print("\n[yellow]Potential Duplicates:[/yellow]")
             for dup in consistency["potential_duplicates"]:
-                console.print(
-                    f"  - {dup['finding_a']} ↔ {dup['finding_b']} "
-                    f"(similarity: {dup['similarity']:.1%})"
-                )
+                console.print(f"  - {dup['finding_a']} ↔ {dup['finding_b']} (similarity: {dup['similarity']:.1%})")
 
         # Evidence index
         evidence_index = generate_evidence_index(all_findings)
@@ -195,9 +187,7 @@ def prompt(
     output_dir: str = typer.Option("output", help="Output directory"),
     provider: str = typer.Option("openai", help="LLM provider: openai or anthropic"),
     model: str = typer.Option("gpt-4o", help="Model to use"),
-    policy: str = typer.Option(
-        "src/aipm/policies/default_policy.yaml", help="Policy YAML path"
-    ),
+    policy: str = typer.Option("src/aipm/policies/default_policy.yaml", help="Policy YAML path"),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Enable debug logging"),
 ) -> None:
     """Run AIPM from a simple text prompt instead of a bundle."""

@@ -139,8 +139,12 @@ class RiskAgent(BaseAgent):
         sections: list[str] = []
 
         agent_files = [
-            "intake.json", "customer.json", "competitive.json",
-            "metrics.json", "requirements.json", "feasibility.json",
+            "intake.json",
+            "customer.json",
+            "competitive.json",
+            "metrics.json",
+            "requirements.json",
+            "feasibility.json",
         ]
 
         for agent_file in agent_files:
@@ -165,10 +169,7 @@ class RiskAgent(BaseAgent):
                     impact = f.get("impact", "?")
                     confidence = f.get("confidence", "?")
                     tags = f.get("tags", [])
-                    metadata = f.get("metadata", {})
-                    evidence_refs = [
-                        ev.get("source_id", "?") for ev in f.get("evidence", [])
-                    ]
+                    evidence_refs = [ev.get("source_id", "?") for ev in f.get("evidence", [])]
 
                     sections.append(
                         f"- [{fid}] ({ftype}, impact={impact}, confidence={confidence}): "
@@ -285,12 +286,14 @@ class RiskAgent(BaseAgent):
                 # Parse evidence items
                 evidence = []
                 for ev in raw.get("evidence", []):
-                    evidence.append(EvidenceItem(
-                        source_id=ev.get("source_id", "UNKNOWN"),
-                        source_type=ev.get("source_type", "doc"),
-                        excerpt=ev.get("excerpt", ""),
-                        url=ev.get("url"),
-                    ))
+                    evidence.append(
+                        EvidenceItem(
+                            source_id=ev.get("source_id", "UNKNOWN"),
+                            source_type=ev.get("source_type", "doc"),
+                            excerpt=ev.get("excerpt", ""),
+                            url=ev.get("url"),
+                        )
+                    )
                 raw["evidence"] = evidence
 
                 finding = Finding.model_validate(raw)

@@ -8,10 +8,10 @@ class ColoredFormatter(logging.Formatter):
     """Console formatter that adds ANSI color codes based on log level."""
 
     COLORS = {
-        logging.DEBUG: "\033[90m",     # grey
-        logging.INFO: "\033[34m",      # blue
-        logging.WARNING: "\033[33m",   # yellow
-        logging.ERROR: "\033[31m",     # red
+        logging.DEBUG: "\033[90m",  # grey
+        logging.INFO: "\033[34m",  # blue
+        logging.WARNING: "\033[33m",  # yellow
+        logging.ERROR: "\033[31m",  # red
         logging.CRITICAL: "\033[1;31m",  # bold red
     }
     RESET = "\033[0m"

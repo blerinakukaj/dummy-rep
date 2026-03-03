@@ -5,8 +5,6 @@ import io
 import os
 import tempfile
 
-import pytest
-
 from aipm.core.backlog_generator import BacklogGenerator
 from aipm.schemas.findings import EvidenceItem, Finding
 
@@ -95,18 +93,46 @@ class TestBacklogGenerator:
     def test_generate_sorts_by_phase_priority_complexity(self) -> None:
         """Rows are sorted by phase → priority → complexity."""
         findings = [
-            _make_finding(id="req-001", metadata={
-                "epic_id": "E1", "story_id": "S1", "priority": "P2", "phase": "V1", "complexity": "simple",
-            }),
-            _make_finding(id="req-002", metadata={
-                "epic_id": "E2", "story_id": "S2", "priority": "P0", "phase": "MVP", "complexity": "medium",
-            }),
-            _make_finding(id="req-003", metadata={
-                "epic_id": "E3", "story_id": "S3", "priority": "P0", "phase": "MVP", "complexity": "simple",
-            }),
-            _make_finding(id="req-004", metadata={
-                "epic_id": "E4", "story_id": "S4", "priority": "P1", "phase": "V2", "complexity": "epic",
-            }),
+            _make_finding(
+                id="req-001",
+                metadata={
+                    "epic_id": "E1",
+                    "story_id": "S1",
+                    "priority": "P2",
+                    "phase": "V1",
+                    "complexity": "simple",
+                },
+            ),
+            _make_finding(
+                id="req-002",
+                metadata={
+                    "epic_id": "E2",
+                    "story_id": "S2",
+                    "priority": "P0",
+                    "phase": "MVP",
+                    "complexity": "medium",
+                },
+            ),
+            _make_finding(
+                id="req-003",
+                metadata={
+                    "epic_id": "E3",
+                    "story_id": "S3",
+                    "priority": "P0",
+                    "phase": "MVP",
+                    "complexity": "simple",
+                },
+            ),
+            _make_finding(
+                id="req-004",
+                metadata={
+                    "epic_id": "E4",
+                    "story_id": "S4",
+                    "priority": "P1",
+                    "phase": "V2",
+                    "complexity": "epic",
+                },
+            ),
         ]
         csv_content = self.gen.generate(findings, [])
         reader = csv.DictReader(io.StringIO(csv_content))
@@ -130,10 +156,15 @@ class TestBacklogGenerator:
 
     def test_generate_acceptance_criteria_list_joined(self) -> None:
         """List acceptance criteria are joined with semicolons."""
-        req = _make_finding(metadata={
-            "epic_id": "E1", "story_id": "S1", "priority": "P0", "phase": "MVP",
-            "acceptance_criteria": ["GIVEN A WHEN B THEN C", "GIVEN D WHEN E THEN F"],
-        })
+        req = _make_finding(
+            metadata={
+                "epic_id": "E1",
+                "story_id": "S1",
+                "priority": "P0",
+                "phase": "MVP",
+                "acceptance_criteria": ["GIVEN A WHEN B THEN C", "GIVEN D WHEN E THEN F"],
+            }
+        )
         csv_content = self.gen.generate([req], [])
         reader = csv.DictReader(io.StringIO(csv_content))
         rows = list(reader)
@@ -174,15 +205,33 @@ class TestGetStats:
 
     def test_get_stats_counts(self) -> None:
         findings = [
-            _make_finding(id="req-001", metadata={
-                "epic_id": "E1", "story_id": "S1", "priority": "P0", "phase": "MVP",
-            }),
-            _make_finding(id="req-002", metadata={
-                "epic_id": "E1", "story_id": "S2", "priority": "P1", "phase": "MVP",
-            }),
-            _make_finding(id="req-003", metadata={
-                "epic_id": "E2", "story_id": "S3", "priority": "P0", "phase": "V1",
-            }),
+            _make_finding(
+                id="req-001",
+                metadata={
+                    "epic_id": "E1",
+                    "story_id": "S1",
+                    "priority": "P0",
+                    "phase": "MVP",
+                },
+            ),
+            _make_finding(
+                id="req-002",
+                metadata={
+                    "epic_id": "E1",
+                    "story_id": "S2",
+                    "priority": "P1",
+                    "phase": "MVP",
+                },
+            ),
+            _make_finding(
+                id="req-003",
+                metadata={
+                    "epic_id": "E2",
+                    "story_id": "S3",
+                    "priority": "P0",
+                    "phase": "V1",
+                },
+            ),
         ]
         csv_content = self.gen.generate(findings, [])
         stats = self.gen.get_stats(csv_content)

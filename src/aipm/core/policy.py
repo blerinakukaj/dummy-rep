@@ -84,7 +84,7 @@ def load_policy(path: str) -> PolicyPack:
     if not policy_path.exists():
         raise FileNotFoundError(f"Policy file not found: {path}")
 
-    with open(policy_path, "r", encoding="utf-8") as f:
+    with open(policy_path, encoding="utf-8") as f:
         raw = yaml.safe_load(f)
 
     policy = PolicyPack.model_validate(raw)

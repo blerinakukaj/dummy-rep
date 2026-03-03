@@ -7,7 +7,7 @@ LLM once to produce a fully-structured experiment plan document.
 import json
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from aipm.core.policy import PolicyPack
 from aipm.core.template_engine import load_template, render_template
@@ -76,33 +76,25 @@ class ExperimentPlanGenerator:
     def _extract_north_star(self) -> list[Finding]:
         """Return findings tagged as north-star or with type 'metric'."""
         return [
-            f for f in self.metrics_findings
-            if "north-star" in f.tags or "north_star" in f.tags or f.type == "metric"
+            f for f in self.metrics_findings if "north-star" in f.tags or "north_star" in f.tags or f.type == "metric"
         ]
 
     def _extract_input_metrics(self) -> list[Finding]:
         """Return input / driver metric findings."""
         return [
-            f for f in self.metrics_findings
-            if "input-metric" in f.tags
-            or "input_metric" in f.tags
-            or "leading" in f.tags
+            f
+            for f in self.metrics_findings
+            if "input-metric" in f.tags or "input_metric" in f.tags or "leading" in f.tags
         ]
 
     def _extract_guardrail_findings(self) -> list[Finding]:
         """Return findings explicitly tagged as guardrail metrics."""
-        return [
-            f for f in self.metrics_findings
-            if "guardrail" in f.tags or "guardrail-metric" in f.tags
-        ]
+        return [f for f in self.metrics_findings if "guardrail" in f.tags or "guardrail-metric" in f.tags]
 
     def _extract_experiment_risks(self) -> list[Finding]:
         """Return risk findings that are relevant to experimentation."""
         experiment_tags = {"experiment", "ab-test", "ab_test", "bias", "sample", "data"}
-        return [
-            f for f in self.risk_findings
-            if experiment_tags & {t.lower() for t in f.tags}
-        ]
+        return [f for f in self.risk_findings if experiment_tags & {t.lower() for t in f.tags}]
 
     # ------------------------------------------------------------------
     # Formatting helpers
@@ -248,7 +240,7 @@ class ExperimentPlanGenerator:
         context = {
             "product_name": self.product_name or self.run_config.run_id,
             "run_id": self.run_config.run_id,
-            "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+            "date": datetime.now(UTC).strftime("%Y-%m-%d"),
             "hypothesis": sections.get("hypothesis", ""),
             "success_metrics": sections.get("success_metrics", ""),
             "guardrail_metrics": sections.get("guardrail_metrics", ""),
@@ -277,6 +269,7 @@ class ExperimentPlanGenerator:
             output_path: Full file path to write to.
         """
         from pathlib import Path
+
         Path(output_path).parent.mkdir(parents=True, exist_ok=True)
         Path(output_path).write_text(content, encoding="utf-8")
         logger.info("Experiment plan saved to %s", output_path)

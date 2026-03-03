@@ -3,7 +3,6 @@
 import json
 import logging
 import re
-from typing import Optional
 
 from aipm.schemas.context import ContextPacket
 from aipm.schemas.findings import EvidenceItem, Finding
@@ -66,10 +65,8 @@ SYSTEM_PROMPTS: dict[str, str] = {
         "5. Produce findings of type 'insight' or 'gap' summarizing the data landscape.\n\n"
         "For each finding, link back to the exact source_id of the ticket or document that "
         "supports it. Classify confidence based on how many corroborating sources exist. "
-        "Flag anything ambiguous as 'speculative' and note assumptions explicitly.\n\n"
-        + _JSON_SCHEMA
+        "Flag anything ambiguous as 'speculative' and note assumptions explicitly.\n\n" + _JSON_SCHEMA
     ),
-
     "customer": (
         "You are an expert UX researcher and customer insights analyst with deep experience "
         "in Jobs-to-Be-Done (JTBD) frameworks, persona synthesis, and voice-of-customer analysis. "
@@ -84,10 +81,8 @@ SYSTEM_PROMPTS: dict[str, str] = {
         "Produce findings of type 'insight' with metadata including segment, jtbd, and theme. "
         "Every finding must reference specific source_ids from the provided tickets and documents. "
         "Use 'validated' confidence only when 3+ sources agree; 'directional' for 1-2 strong "
-        "signals; 'speculative' for inferred needs requiring validation.\n\n"
-        + _JSON_SCHEMA
+        "signals; 'speculative' for inferred needs requiring validation.\n\n" + _JSON_SCHEMA
     ),
-
     "competitive": (
         "You are an expert market analyst and competitive intelligence specialist. Your role "
         "is to evaluate the competitive landscape around the product and identify strategic "
@@ -102,10 +97,8 @@ SYSTEM_PROMPTS: dict[str, str] = {
         "Produce findings of type 'insight', 'gap', or 'recommendation'. Each finding must "
         "reference the source_ids of documents, tickets, or competitor briefs that informed it. "
         "Distinguish between validated market data and speculative inferences. Include competitor "
-        "names and specific feature comparisons in metadata where applicable.\n\n"
-        + _JSON_SCHEMA
+        "names and specific feature comparisons in metadata where applicable.\n\n" + _JSON_SCHEMA
     ),
-
     "metrics": (
         "You are an expert data and analytics strategist specializing in product metric "
         "framework design, KPI definition, and data-driven decision-making. Your role is to "
@@ -120,10 +113,8 @@ SYSTEM_PROMPTS: dict[str, str] = {
         "Produce findings of type 'metric', 'recommendation', or 'gap'. Include metric "
         "definitions, units, targets, and data sources in metadata. Reference source_ids from "
         "metrics snapshots, tickets, and docs that informed each recommendation. Mark metrics "
-        "with existing baselines as 'validated' and newly proposed ones as 'directional'.\n\n"
-        + _JSON_SCHEMA
+        "with existing baselines as 'validated' and newly proposed ones as 'directional'.\n\n" + _JSON_SCHEMA
     ),
-
     "requirements": (
         "You are an expert product manager specializing in requirements engineering, user "
         "story writing, and acceptance criteria definition. Your role is to transform customer "
@@ -139,10 +130,8 @@ SYSTEM_PROMPTS: dict[str, str] = {
         "Produce findings of type 'requirement' with metadata including requirement_type, "
         "acceptance_criteria, priority, complexity, phase, epic_id, and story_id. Every "
         "requirement must trace back to at least one upstream finding via source_ids. "
-        "Use 'validated' for requirements directly supported by customer data.\n\n"
-        + _JSON_SCHEMA
+        "Use 'validated' for requirements directly supported by customer data.\n\n" + _JSON_SCHEMA
     ),
-
     "feasibility": (
         "You are an expert solutions architect and technical lead specializing in feasibility "
         "assessment, effort estimation, and delivery planning. Your role is to evaluate the "
@@ -158,10 +147,8 @@ SYSTEM_PROMPTS: dict[str, str] = {
         "Produce findings of type 'dependency', 'risk', or 'recommendation'. Include "
         "complexity, phase, dependencies list, and blocking status in metadata. Reference "
         "upstream requirement IDs as source_ids. Mark assessments based on known systems as "
-        "'validated' and new-technology estimates as 'directional' or 'speculative'.\n\n"
-        + _JSON_SCHEMA
+        "'validated' and new-technology estimates as 'directional' or 'speculative'.\n\n" + _JSON_SCHEMA
     ),
-
     "risk": (
         "You are an expert security engineer, privacy officer, and compliance auditor. Your "
         "role is to scan all upstream product findings for risks across privacy, security, "
@@ -178,10 +165,8 @@ SYSTEM_PROMPTS: dict[str, str] = {
         "mitigation recommendation, and whether it constitutes a pipeline blocker. Produce "
         "findings of type 'risk' with metadata including category, is_blocker, mitigation, "
         "and policy_rule. Reference upstream finding IDs as source_ids. Tag each finding with "
-        "its risk category for gate evaluation.\n\n"
-        + _JSON_SCHEMA
+        "its risk category for gate evaluation.\n\n" + _JSON_SCHEMA
     ),
-
     "lead_pm": (
         "You are an expert VP of Product and strategic advisor with extensive experience in "
         "product synthesis, prioritization, and executive communication. Your role is to "
@@ -197,8 +182,7 @@ SYSTEM_PROMPTS: dict[str, str] = {
         "Produce findings of type 'recommendation' or 'insight'. Each must trace back to "
         "specific upstream finding IDs via source_ids, creating a complete evidence chain. "
         "Use 'validated' confidence only for recommendations backed by multiple agent "
-        "analyses. Include priority, effort, and expected impact in metadata.\n\n"
-        + _JSON_SCHEMA
+        "analyses. Include priority, effort, and expected impact in metadata.\n\n" + _JSON_SCHEMA
     ),
 }
 
@@ -209,7 +193,7 @@ SYSTEM_PROMPTS: dict[str, str] = {
 def build_user_prompt(
     agent_id: str,
     context_packet: ContextPacket,
-    previous_findings: Optional[list[Finding]] = None,
+    previous_findings: list[Finding] | None = None,
 ) -> str:
     """Construct the user message with context data relevant to the given agent.
 
@@ -235,8 +219,7 @@ def build_user_prompt(
             sections.append("\n## Tickets")
             for t in context_packet.tickets:
                 sections.append(
-                    f"- [{t.id}] ({t.source}, {t.status}, priority={t.priority}): "
-                    f"{t.title}\n  {t.description}"
+                    f"- [{t.id}] ({t.source}, {t.status}, priority={t.priority}): {t.title}\n  {t.description}"
                 )
         if context_packet.documents:
             sections.append("\n## Documents")
@@ -253,7 +236,9 @@ def build_user_prompt(
         if context_packet.documents:
             sections.append("\n## Documents")
             for d in context_packet.documents:
-                relevant_types = ("note", "interview", "competitor_brief") if agent_id == "competitive" else ("note", "interview")
+                relevant_types = (
+                    ("note", "interview", "competitor_brief") if agent_id == "competitive" else ("note", "interview")
+                )
                 if d.doc_type in relevant_types or True:  # include all but prioritize relevant
                     preview = d.content[:800] + "..." if len(d.content) > 800 else d.content
                     sections.append(f"- [{d.id}] ({d.doc_type}): {d.title}\n  {preview}")
@@ -284,8 +269,7 @@ def build_user_prompt(
             evidence_refs = [ev.source_id for ev in f.evidence] if f.evidence else []
             sections.append(
                 f"- [{f.id}] ({f.type}, impact={f.impact}, confidence={f.confidence}): "
-                f"{f.title}\n  {f.description}"
-                + (f"\n  Evidence: {', '.join(evidence_refs)}" if evidence_refs else "")
+                f"{f.title}\n  {f.description}" + (f"\n  Evidence: {', '.join(evidence_refs)}" if evidence_refs else "")
             )
 
     # Risk hotspots for risk agent
@@ -348,12 +332,14 @@ def parse_llm_findings(response: str, agent_id: str) -> list[Finding]:
             # Parse evidence items
             evidence = []
             for ev in raw.get("evidence", []):
-                evidence.append(EvidenceItem(
-                    source_id=ev.get("source_id", "UNKNOWN"),
-                    source_type=ev.get("source_type", "doc"),
-                    excerpt=ev.get("excerpt", ""),
-                    url=ev.get("url"),
-                ))
+                evidence.append(
+                    EvidenceItem(
+                        source_id=ev.get("source_id", "UNKNOWN"),
+                        source_type=ev.get("source_type", "doc"),
+                        excerpt=ev.get("excerpt", ""),
+                        url=ev.get("url"),
+                    )
+                )
             raw["evidence"] = evidence
 
             finding = Finding.model_validate(raw)

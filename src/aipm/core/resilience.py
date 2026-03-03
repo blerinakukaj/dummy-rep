@@ -11,7 +11,6 @@ import json
 import logging
 import random
 import re
-from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -19,6 +18,7 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 # Exception hierarchy
 # ---------------------------------------------------------------------------
+
 
 class AgentError(Exception):
     """Raised when an agent encounters an error during execution.
@@ -52,14 +52,13 @@ class PipelineError(Exception):
     ) -> None:
         self.failed_agents = failed_agents
         self.successful_agents = successful_agents
-        super().__init__(
-            f"{message} — failed: {failed_agents}, succeeded: {successful_agents}"
-        )
+        super().__init__(f"{message} — failed: {failed_agents}, succeeded: {successful_agents}")
 
 
 # ---------------------------------------------------------------------------
 # Retry decorator
 # ---------------------------------------------------------------------------
+
 
 def _is_retryable(exc: Exception) -> bool:
     """Return ``True`` if the exception is a transient/rate-limit error
@@ -119,7 +118,9 @@ def retry_with_backoff(
                     if not _is_retryable(exc):
                         logger.error(
                             "Non-retryable error on attempt %d/%d: %s",
-                            attempt, max_retries, exc,
+                            attempt,
+                            max_retries,
+                            exc,
                         )
                         raise
 
@@ -129,26 +130,30 @@ def retry_with_backoff(
                         total_delay = delay + jitter
                         logger.warning(
                             "Retryable error on attempt %d/%d: %s — retrying in %.1fs",
-                            attempt, max_retries, exc, total_delay,
+                            attempt,
+                            max_retries,
+                            exc,
+                            total_delay,
                         )
                         await asyncio.sleep(total_delay)
                     else:
                         logger.error(
                             "All %d retry attempts exhausted: %s",
-                            max_retries, exc,
+                            max_retries,
+                            exc,
                         )
 
-            raise RuntimeError(
-                f"LLM call failed after {max_retries} retries: {last_error}"
-            )
+            raise RuntimeError(f"LLM call failed after {max_retries} retries: {last_error}")
 
         return wrapper
+
     return decorator
 
 
 # ---------------------------------------------------------------------------
 # Safe JSON parsing
 # ---------------------------------------------------------------------------
+
 
 def safe_json_parse(text: str) -> dict:
     """Parse a JSON string with multiple fallback strategies.
@@ -200,9 +205,7 @@ def safe_json_parse(text: str) -> dict:
 
     # All strategies failed
     preview = text[:200].replace("\n", " ")
-    raise ValueError(
-        f"Could not parse JSON from LLM response (first 200 chars): {preview}"
-    )
+    raise ValueError(f"Could not parse JSON from LLM response (first 200 chars): {preview}")
 
 
 def validate_llm_response(

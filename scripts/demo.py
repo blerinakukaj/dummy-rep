@@ -371,15 +371,22 @@ def main() -> None:
         """),
     )
     parser.add_argument(
-        "--demo", type=int, default=None, choices=[1, 2, 3, 4, 5],
+        "--demo",
+        type=int,
+        default=None,
+        choices=[1, 2, 3, 4, 5],
         help="Run a specific demo (1-5). Omit to run all.",
     )
     parser.add_argument(
-        "--provider", type=str, default="openai",
+        "--provider",
+        type=str,
+        default="openai",
         help="LLM provider: openai or anthropic (default: openai)",
     )
     parser.add_argument(
-        "--model", type=str, default="gpt-4o",
+        "--model",
+        type=str,
+        default="gpt-4o",
         help="Model name (default: gpt-4o)",
     )
     args = parser.parse_args()
@@ -387,11 +394,13 @@ def main() -> None:
     # Change to project root so relative paths work
     os.chdir(PROJECT_ROOT)
 
-    asyncio.run(run_demo(
-        provider=args.provider,
-        model=args.model,
-        demo_number=args.demo,
-    ))
+    asyncio.run(
+        run_demo(
+            provider=args.provider,
+            model=args.model,
+            demo_number=args.demo,
+        )
+    )
 
 
 if __name__ == "__main__":

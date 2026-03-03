@@ -6,11 +6,7 @@ tags risk hotspots, and builds the ContextPacket consumed by all downstream agen
 
 import json
 import logging
-import re
-from datetime import datetime, timezone
 from pathlib import Path
-
-from typing import Optional
 
 from aipm.agents.base import BaseAgent
 from aipm.core.policy import PolicyPack
@@ -46,7 +42,7 @@ class IntakeAgent(BaseAgent):
         policy_pack: PolicyPack,
         context_packet: ContextPacket,
         raw_bundle: dict,
-        token_tracker: Optional[TokenTracker] = None,
+        token_tracker: TokenTracker | None = None,
     ) -> None:
         super().__init__(llm_client, run_config, policy_pack, context_packet, token_tracker)
         self.raw_bundle = raw_bundle
@@ -69,36 +65,40 @@ class IntakeAgent(BaseAgent):
         missing_info = self._detect_missing_info()
         for gap in missing_info:
             finding_counter += 1
-            findings.append(Finding(
-                id=f"intake-{finding_counter:03d}",
-                agent_id=self.agent_id,
-                type="gap",
-                title=f"Missing data: {gap}",
-                description=f"The input bundle is missing: {gap}. This may reduce the quality of downstream agent analysis.",
-                impact="medium",
-                confidence="validated",
-                tags=["data_quality"],
-            ))
+            findings.append(
+                Finding(
+                    id=f"intake-{finding_counter:03d}",
+                    agent_id=self.agent_id,
+                    type="gap",
+                    title=f"Missing data: {gap}",
+                    description=f"The input bundle is missing: {gap}. This may reduce the quality of downstream agent analysis.",
+                    impact="medium",
+                    confidence="validated",
+                    tags=["data_quality"],
+                )
+            )
 
         # Step 5: Tag risk hotspots
         documents = self._normalize_documents()
         risk_hotspots = self._tag_risk_hotspots(tickets, documents)
         for hotspot in risk_hotspots:
             finding_counter += 1
-            findings.append(Finding(
-                id=f"intake-{finding_counter:03d}",
-                agent_id=self.agent_id,
-                type="risk",
-                title=f"Risk hotspot detected: {hotspot.category}",
-                description=hotspot.description,
-                impact=hotspot.severity,
-                confidence="directional",
-                evidence=[
-                    EvidenceItem(source_id=sid, source_type="ticket", excerpt="Keyword match")
-                    for sid in hotspot.source_ids
-                ],
-                tags=[hotspot.category],
-            ))
+            findings.append(
+                Finding(
+                    id=f"intake-{finding_counter:03d}",
+                    agent_id=self.agent_id,
+                    type="risk",
+                    title=f"Risk hotspot detected: {hotspot.category}",
+                    description=hotspot.description,
+                    impact=hotspot.severity,
+                    confidence="directional",
+                    evidence=[
+                        EvidenceItem(source_id=sid, source_type="ticket", excerpt="Keyword match")
+                        for sid in hotspot.source_ids
+                    ],
+                    tags=[hotspot.category],
+                )
+            )
 
         # Step 6: Build ContextPacket
         packet = ContextPacket(
@@ -176,15 +176,13 @@ class IntakeAgent(BaseAgent):
         if len(tickets) <= 1:
             return tickets, [], []
 
-        ticket_summaries = "\n".join(
-            f"- [{t.id}] {t.title}: {t.description[:120]}" for t in tickets
-        )
+        ticket_summaries = "\n".join(f"- [{t.id}] {t.title}: {t.description[:120]}" for t in tickets)
 
         system_prompt = (
             "You are a data quality analyst. Identify duplicate or near-duplicate tickets from the list below. "
             "Two tickets are duplicates if they describe the same issue or request, even with different wording.\n\n"
-            "Return a JSON object: {\"duplicates\": [[\"ID_A\", \"ID_B\", \"reason\"], ...], \"unique_count\": <int>}\n"
-            "If no duplicates are found, return: {\"duplicates\": [], \"unique_count\": <total>}\n"
+            'Return a JSON object: {"duplicates": [["ID_A", "ID_B", "reason"], ...], "unique_count": <int>}\n'
+            'If no duplicates are found, return: {"duplicates": [], "unique_count": <total>}\n'
             "Return ONLY valid JSON."
         )
 
@@ -206,20 +204,22 @@ class IntakeAgent(BaseAgent):
                 ids_to_remove.add(id_b)
                 dedup_log.append(f"Removed {id_b} (duplicate of {id_a}): {reason}")
                 counter += 1
-                findings.append(Finding(
-                    id=f"intake-{counter:03d}",
-                    agent_id=self.agent_id,
-                    type="insight",
-                    title=f"Duplicate ticket detected: {id_b}",
-                    description=f"{id_b} is a duplicate of {id_a}. Reason: {reason}",
-                    impact="low",
-                    confidence="directional",
-                    evidence=[
-                        EvidenceItem(source_id=id_a, source_type="ticket", excerpt="Original ticket"),
-                        EvidenceItem(source_id=id_b, source_type="ticket", excerpt="Duplicate ticket"),
-                    ],
-                    tags=["data_quality", "dedup"],
-                ))
+                findings.append(
+                    Finding(
+                        id=f"intake-{counter:03d}",
+                        agent_id=self.agent_id,
+                        type="insight",
+                        title=f"Duplicate ticket detected: {id_b}",
+                        description=f"{id_b} is a duplicate of {id_a}. Reason: {reason}",
+                        impact="low",
+                        confidence="directional",
+                        evidence=[
+                            EvidenceItem(source_id=id_a, source_type="ticket", excerpt="Original ticket"),
+                            EvidenceItem(source_id=id_b, source_type="ticket", excerpt="Duplicate ticket"),
+                        ],
+                        tags=["data_quality", "dedup"],
+                    )
+                )
 
         filtered_tickets = [t for t in tickets if t.id not in ids_to_remove]
         if dedup_log:
@@ -231,7 +231,6 @@ class IntakeAgent(BaseAgent):
         """Check the raw bundle for missing or incomplete data."""
         missing: list[str] = []
         docs = self.raw_bundle.get("documents", [])
-        doc_types = {d.get("doc_type") or d.get("filename", "") for d in docs}
         doc_content = " ".join(d.get("content", "") + d.get("filename", "") for d in docs).lower()
 
         if not self.raw_bundle.get("tickets"):
@@ -271,9 +270,7 @@ class IntakeAgent(BaseAgent):
             documents.append(doc)
         return documents
 
-    def _tag_risk_hotspots(
-        self, tickets: list[TicketItem], documents: list[DocumentItem]
-    ) -> list[RiskHotspot]:
+    def _tag_risk_hotspots(self, tickets: list[TicketItem], documents: list[DocumentItem]) -> list[RiskHotspot]:
         """Scan tickets and documents for risk keywords and tag hotspots."""
         hotspots: list[RiskHotspot] = []
         category_sources: dict[str, set[str]] = {cat: set() for cat in RISK_KEYWORDS}
@@ -300,12 +297,14 @@ class IntakeAgent(BaseAgent):
         for category, source_ids in category_sources.items():
             if source_ids:
                 severity = "high" if len(source_ids) >= 3 else "medium" if len(source_ids) >= 2 else "low"
-                hotspots.append(RiskHotspot(
-                    category=category,
-                    description=f"Detected {category} risk keywords in {len(source_ids)} source(s): {', '.join(sorted(source_ids))}",
-                    severity=severity,
-                    source_ids=sorted(source_ids),
-                ))
+                hotspots.append(
+                    RiskHotspot(
+                        category=category,
+                        description=f"Detected {category} risk keywords in {len(source_ids)} source(s): {', '.join(sorted(source_ids))}",
+                        severity=severity,
+                        source_ids=sorted(source_ids),
+                    )
+                )
                 self.logger.info("Risk hotspot: %s (%s) — %d sources", category, severity, len(source_ids))
 
         return hotspots
@@ -325,8 +324,7 @@ class IntakeAgent(BaseAgent):
             f"Documents: {len(packet.documents)} items\n"
             f"Risk hotspots: {', '.join(h.category for h in packet.risk_hotspots) or 'none'}\n"
             f"Missing info: {', '.join(packet.missing_info) or 'none'}\n\n"
-            f"Ticket titles:\n"
-            + "\n".join(f"- [{t.id}] {t.title}" for t in packet.tickets)
+            f"Ticket titles:\n" + "\n".join(f"- [{t.id}] {t.title}" for t in packet.tickets)
         )
 
         try:

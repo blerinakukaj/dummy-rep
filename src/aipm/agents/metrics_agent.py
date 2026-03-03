@@ -134,18 +134,29 @@ class MetricsAgent(BaseAgent):
 
         # Extract metric-related tickets
         metric_keywords = [
-            "metric", "kpi", "analytics", "tracking", "event", "funnel",
-            "conversion", "retention", "churn", "engagement", "dau", "mau",
-            "north star", "baseline", "dashboard", "instrumentation",
+            "metric",
+            "kpi",
+            "analytics",
+            "tracking",
+            "event",
+            "funnel",
+            "conversion",
+            "retention",
+            "churn",
+            "engagement",
+            "dau",
+            "mau",
+            "north star",
+            "baseline",
+            "dashboard",
+            "instrumentation",
         ]
         metric_tickets: list[str] = []
         for ticket in packet.tickets:
             text = f"{ticket.title} {ticket.description}".lower()
             if any(kw in text for kw in metric_keywords):
                 priority = f" [Priority: {ticket.priority}]" if ticket.priority else ""
-                metric_tickets.append(
-                    f"- [{ticket.id}]{priority}: {ticket.title}\n  {ticket.description}"
-                )
+                metric_tickets.append(f"- [{ticket.id}]{priority}: {ticket.title}\n  {ticket.description}")
 
         if metric_tickets:
             sections.append("## Tickets with Metrics / Analytics Mentions")
@@ -208,12 +219,14 @@ class MetricsAgent(BaseAgent):
                 # Parse evidence items
                 evidence = []
                 for ev in raw.get("evidence", []):
-                    evidence.append(EvidenceItem(
-                        source_id=ev.get("source_id", "UNKNOWN"),
-                        source_type=ev.get("source_type", "metric"),
-                        excerpt=ev.get("excerpt", ""),
-                        url=ev.get("url"),
-                    ))
+                    evidence.append(
+                        EvidenceItem(
+                            source_id=ev.get("source_id", "UNKNOWN"),
+                            source_type=ev.get("source_type", "metric"),
+                            excerpt=ev.get("excerpt", ""),
+                            url=ev.get("url"),
+                        )
+                    )
                 raw["evidence"] = evidence
 
                 finding = Finding.model_validate(raw)

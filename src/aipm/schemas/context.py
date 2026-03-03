@@ -1,7 +1,7 @@
 """Product Context Packet schema — produced by Agent A, consumed by all agents."""
 
-from datetime import datetime, timezone
-from typing import Literal, Optional
+from datetime import UTC, datetime
+from typing import Literal
 
 from pydantic import BaseModel, Field
 
@@ -13,9 +13,9 @@ class TicketItem(BaseModel):
     title: str = Field(..., description="Ticket title")
     description: str = Field(..., description="Ticket description or body")
     status: str = Field(..., description="Current status, e.g. 'open', 'in_progress', 'closed'")
-    priority: Optional[str] = Field(default=None, description="Priority level, e.g. 'high', 'medium', 'low'")
+    priority: str | None = Field(default=None, description="Priority level, e.g. 'high', 'medium', 'low'")
     labels: list[str] = Field(default_factory=list, description="Tags or labels attached to the ticket")
-    created_at: Optional[str] = Field(default=None, description="Creation date as ISO string")
+    created_at: str | None = Field(default=None, description="Creation date as ISO string")
     source: Literal["jira", "ado", "manual"] = Field(..., description="Origin system of the ticket")
 
     model_config = {
@@ -94,18 +94,14 @@ class ContextPacket(BaseModel):
     product_description: str = Field(..., description="Brief description of the product or feature request")
     tickets: list[TicketItem] = Field(default_factory=list, description="Normalized tickets from the input bundle")
     documents: list[DocumentItem] = Field(default_factory=list, description="Supporting documents from the bundle")
-    risk_hotspots: list[RiskHotspot] = Field(
-        default_factory=list, description="Risk areas detected during intake"
-    )
+    risk_hotspots: list[RiskHotspot] = Field(default_factory=list, description="Risk areas detected during intake")
     missing_info: list[str] = Field(
         default_factory=list, description="Information gaps detected, e.g. 'No customer notes provided'"
     )
-    dedup_log: list[str] = Field(
-        default_factory=list, description="Log of deduplication actions taken during intake"
-    )
+    dedup_log: list[str] = Field(default_factory=list, description="Log of deduplication actions taken during intake")
     raw_input_type: Literal["prompt", "bundle"] = Field(..., description="Whether input was a text prompt or a bundle")
     created_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
+        default_factory=lambda: datetime.now(UTC),
         description="Timestamp when the context packet was created",
     )
 

@@ -8,8 +8,8 @@ import json
 import logging
 import re
 from collections import defaultdict
+from datetime import UTC
 from pathlib import Path
-from typing import Optional
 
 from aipm.agents.base import BaseAgent
 from aipm.core.backlog_generator import BacklogGenerator
@@ -110,7 +110,7 @@ class LeadPMAgent(BaseAgent):
         policy_pack: PolicyPack,
         context_packet: ContextPacket,
         all_agent_outputs: list[AgentOutput],
-        token_tracker: Optional[TokenTracker] = None,
+        token_tracker: TokenTracker | None = None,
     ) -> None:
         super().__init__(llm_client, run_config, policy_pack, context_packet, token_tracker)
         self.all_agent_outputs = all_agent_outputs
@@ -127,13 +127,15 @@ class LeadPMAgent(BaseAgent):
         # Phase 1 — Collect & Merge
         all_findings = self._collect_all_findings()
         self.evidence_index = self._build_evidence_index(all_findings)
-        self.logger.info("Phase 1: Collected %d findings, %d evidence sources",
-                         len(all_findings), len(self.evidence_index))
+        self.logger.info(
+            "Phase 1: Collected %d findings, %d evidence sources", len(all_findings), len(self.evidence_index)
+        )
 
         # Phase 2 — Deduplicate
         deduped = await self._deduplicate(all_findings)
-        self.logger.info("Phase 2: %d findings after dedup (removed %d)",
-                         len(deduped), len(all_findings) - len(deduped))
+        self.logger.info(
+            "Phase 2: %d findings after dedup (removed %d)", len(deduped), len(all_findings) - len(deduped)
+        )
 
         # Phase 3 — Rank & Prioritize
         self.ranked_findings = await self._rank_findings(deduped)
@@ -230,12 +232,14 @@ class LeadPMAgent(BaseAgent):
                         existing_source_ids.add(ev.source_id)
                 remove_ids.add(dup_id)
 
-            self.dedup_log.append({
-                "cluster": valid_ids,
-                "kept": keeper_id,
-                "removed": [fid for fid in sorted_ids[1:]],
-                "reason": reason,
-            })
+            self.dedup_log.append(
+                {
+                    "cluster": valid_ids,
+                    "kept": keeper_id,
+                    "removed": [fid for fid in sorted_ids[1:]],
+                    "reason": reason,
+                }
+            )
 
         return [f for f in findings if f.id not in remove_ids]
 
@@ -248,9 +252,7 @@ class LeadPMAgent(BaseAgent):
 
         finding_summaries = []
         for f in findings:
-            finding_summaries.append(
-                f"- [{f.id}] ({f.type}, impact={f.impact}): {f.title} — {f.description[:200]}"
-            )
+            finding_summaries.append(f"- [{f.id}] ({f.type}, impact={f.impact}): {f.title} — {f.description[:200]}")
         user_prompt = "Score each finding:\n\n" + "\n".join(finding_summaries)
 
         response = await self.call_llm(RANKING_SYSTEM, user_prompt, response_format={"type": "json_object"})
@@ -273,15 +275,17 @@ class LeadPMAgent(BaseAgent):
                 denominator = 0.01
             priority_score = (user_impact * 0.35 + business_value * 0.30) / denominator
 
-            ranked.append({
-                "finding_id": f.id,
-                "title": f.title,
-                "user_impact": user_impact,
-                "business_value": business_value,
-                "effort": effort,
-                "risk": risk,
-                "priority_score": round(priority_score, 3),
-            })
+            ranked.append(
+                {
+                    "finding_id": f.id,
+                    "title": f.title,
+                    "user_impact": user_impact,
+                    "business_value": business_value,
+                    "effort": effort,
+                    "risk": risk,
+                    "priority_score": round(priority_score, 3),
+                }
+            )
 
         ranked.sort(key=lambda r: r["priority_score"], reverse=True)
         return ranked
@@ -296,8 +300,7 @@ class LeadPMAgent(BaseAgent):
         finding_summaries = []
         for f in findings:
             finding_summaries.append(
-                f"- [{f.id}] ({f.type}, {f.agent_id}, impact={f.impact}): "
-                f"{f.title} — {f.description[:200]}"
+                f"- [{f.id}] ({f.type}, {f.agent_id}, impact={f.impact}): {f.title} — {f.description[:200]}"
             )
 
         policy_context = (
@@ -338,82 +341,97 @@ class LeadPMAgent(BaseAgent):
         findings: list[Finding] = []
 
         # Finding 1: Consolidation summary
-        findings.append(Finding(
-            id="lead_pm-001",
-            agent_id=self.agent_id,
-            type="insight",
-            title="Pipeline Consolidation Summary",
-            description=(
-                f"Consolidated {len(original)} findings from "
-                f"{len(self.all_agent_outputs)} agents into {len(deduped)} "
-                f"unique findings. Removed {len(original) - len(deduped)} duplicates. "
-                f"Identified {len(self.conflicts)} cross-agent conflicts."
-            ),
-            impact="high",
-            confidence="validated",
-            evidence=[EvidenceItem(
-                source_id=o.agent_id,
-                source_type="doc",
-                excerpt=f"{o.agent_name}: {len(o.findings)} findings",
-            ) for o in self.all_agent_outputs],
-            tags=["consolidation", "meta"],
-            metadata={
-                "original_count": len(original),
-                "deduped_count": len(deduped),
-                "duplicates_removed": len(original) - len(deduped),
-                "conflicts_resolved": len(self.conflicts),
-                "evidence_sources": len(self.evidence_index),
-            },
-        ))
+        findings.append(
+            Finding(
+                id="lead_pm-001",
+                agent_id=self.agent_id,
+                type="insight",
+                title="Pipeline Consolidation Summary",
+                description=(
+                    f"Consolidated {len(original)} findings from "
+                    f"{len(self.all_agent_outputs)} agents into {len(deduped)} "
+                    f"unique findings. Removed {len(original) - len(deduped)} duplicates. "
+                    f"Identified {len(self.conflicts)} cross-agent conflicts."
+                ),
+                impact="high",
+                confidence="validated",
+                evidence=[
+                    EvidenceItem(
+                        source_id=o.agent_id,
+                        source_type="doc",
+                        excerpt=f"{o.agent_name}: {len(o.findings)} findings",
+                    )
+                    for o in self.all_agent_outputs
+                ],
+                tags=["consolidation", "meta"],
+                metadata={
+                    "original_count": len(original),
+                    "deduped_count": len(deduped),
+                    "duplicates_removed": len(original) - len(deduped),
+                    "conflicts_resolved": len(self.conflicts),
+                    "evidence_sources": len(self.evidence_index),
+                },
+            )
+        )
 
         # Finding 2: Top priorities
         if self.ranked_findings:
             top_5 = self.ranked_findings[:5]
-            findings.append(Finding(
-                id="lead_pm-002",
-                agent_id=self.agent_id,
-                type="recommendation",
-                title="Top Priority Findings",
-                description=(
-                    "Highest priority items based on weighted scoring "
-                    "(user_impact×0.35 + business_value×0.30) / (effort×0.20 + risk×0.15): "
-                    + "; ".join(f"{r['title']} (score={r['priority_score']})" for r in top_5)
-                ),
-                impact="critical",
-                confidence="directional",
-                evidence=[EvidenceItem(
-                    source_id=r["finding_id"],
-                    source_type="doc",
-                    excerpt=f"Priority score: {r['priority_score']}",
-                ) for r in top_5],
-                tags=["prioritization", "meta"],
-                metadata={"top_priorities": top_5},
-            ))
+            findings.append(
+                Finding(
+                    id="lead_pm-002",
+                    agent_id=self.agent_id,
+                    type="recommendation",
+                    title="Top Priority Findings",
+                    description=(
+                        "Highest priority items based on weighted scoring "
+                        "(user_impact×0.35 + business_value×0.30) / (effort×0.20 + risk×0.15): "
+                        + "; ".join(f"{r['title']} (score={r['priority_score']})" for r in top_5)
+                    ),
+                    impact="critical",
+                    confidence="directional",
+                    evidence=[
+                        EvidenceItem(
+                            source_id=r["finding_id"],
+                            source_type="doc",
+                            excerpt=f"Priority score: {r['priority_score']}",
+                        )
+                        for r in top_5
+                    ],
+                    tags=["prioritization", "meta"],
+                    metadata={"top_priorities": top_5},
+                )
+            )
 
         # Finding 3: Conflict report
         if self.conflicts:
-            findings.append(Finding(
-                id="lead_pm-003",
-                agent_id=self.agent_id,
-                type="insight",
-                title="Cross-Agent Conflict Resolution Report",
-                description=(
-                    f"Resolved {len(self.conflicts)} conflicts between agent findings. "
-                    + "; ".join(
-                        f"{c.get('finding_a', '?')} vs {c.get('finding_b', '?')}: {c.get('description', '')}"
-                        for c in self.conflicts[:3]
-                    )
-                ),
-                impact="high",
-                confidence="directional",
-                evidence=[EvidenceItem(
-                    source_id=c.get("finding_a", "unknown"),
-                    source_type="doc",
-                    excerpt=c.get("description", ""),
-                ) for c in self.conflicts],
-                tags=["conflicts", "meta"],
-                metadata={"conflicts": self.conflicts},
-            ))
+            findings.append(
+                Finding(
+                    id="lead_pm-003",
+                    agent_id=self.agent_id,
+                    type="insight",
+                    title="Cross-Agent Conflict Resolution Report",
+                    description=(
+                        f"Resolved {len(self.conflicts)} conflicts between agent findings. "
+                        + "; ".join(
+                            f"{c.get('finding_a', '?')} vs {c.get('finding_b', '?')}: {c.get('description', '')}"
+                            for c in self.conflicts[:3]
+                        )
+                    ),
+                    impact="high",
+                    confidence="directional",
+                    evidence=[
+                        EvidenceItem(
+                            source_id=c.get("finding_a", "unknown"),
+                            source_type="doc",
+                            excerpt=c.get("description", ""),
+                        )
+                        for c in self.conflicts
+                    ],
+                    tags=["conflicts", "meta"],
+                    metadata={"conflicts": self.conflicts},
+                )
+            )
 
         return findings
 
@@ -453,12 +471,7 @@ class LeadPMAgent(BaseAgent):
 
     def _gate_result(self) -> dict:
         """Load the risk gate result if available."""
-        gate_path = (
-            Path(self.run_config.output_dir)
-            / self.run_config.run_id
-            / "findings"
-            / "risk_gate_result.json"
-        )
+        gate_path = Path(self.run_config.output_dir) / self.run_config.run_id / "findings" / "risk_gate_result.json"
         if gate_path.exists():
             return json.loads(gate_path.read_text(encoding="utf-8"))
         return {"passed": True, "blockers": [], "warnings": []}
@@ -501,8 +514,7 @@ class LeadPMAgent(BaseAgent):
 
         # Build finding summaries for the LLM
         finding_text = "\n".join(
-            f"- [{f.id}] ({f.type}, {f.impact}): {f.title} — {f.description[:300]}"
-            for f in self.consolidated_findings
+            f"- [{f.id}] ({f.type}, {f.impact}): {f.title} — {f.description[:300]}" for f in self.consolidated_findings
         )
 
         system = (
@@ -533,12 +545,13 @@ class LeadPMAgent(BaseAgent):
         except json.JSONDecodeError:
             sections = {}
 
-        from datetime import datetime, timezone
+        from datetime import datetime
+
         template = load_template("prd_template.md")
         context = {
             "product_name": packet.product_name,
             "run_id": self.run_config.run_id,
-            "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+            "date": datetime.now(UTC).strftime("%Y-%m-%d"),
             "recommendation": recommendation,
             **sections,
         }
@@ -561,12 +574,14 @@ class LeadPMAgent(BaseAgent):
             epic_id = (f.metadata or {}).get("epic_id", "")
             if epic_id and epic_id not in seen_epics:
                 seen_epics.add(epic_id)
-                themes.append({
-                    "id": epic_id,
-                    "title": (f.metadata or {}).get("epic_title", f.title),
-                    "description": f.description[:200],
-                    "findings": [f.id],
-                })
+                themes.append(
+                    {
+                        "id": epic_id,
+                        "title": (f.metadata or {}).get("epic_title", f.title),
+                        "description": f.description[:200],
+                        "findings": [f.id],
+                    }
+                )
             elif epic_id and epic_id in seen_epics:
                 for t in themes:
                     if t["id"] == epic_id:
@@ -577,12 +592,14 @@ class LeadPMAgent(BaseAgent):
         for f in feasibility + requirements:
             phase = (f.metadata or {}).get("phase", "V1")
             if phase in phase_items:
-                phase_items[phase].append({
-                    "finding_id": f.id,
-                    "title": f.title,
-                    "complexity": (f.metadata or {}).get("complexity", "medium"),
-                    "dependencies": (f.metadata or {}).get("dependencies", []),
-                })
+                phase_items[phase].append(
+                    {
+                        "finding_id": f.id,
+                        "title": f.title,
+                        "complexity": (f.metadata or {}).get("complexity", "medium"),
+                        "dependencies": (f.metadata or {}).get("dependencies", []),
+                    }
+                )
 
         milestones = []
         phase_targets = {"MVP": "Week 4-6", "V1": "Week 8-12", "V2": "Week 14-20"}
@@ -592,13 +609,15 @@ class LeadPMAgent(BaseAgent):
                 all_deps = []
                 for item in items:
                     all_deps.extend(item.get("dependencies", []))
-                milestones.append({
-                    "phase": phase,
-                    "name": f"{phase} Release",
-                    "items": items,
-                    "dependencies": list(set(all_deps)),
-                    "target": phase_targets[phase],
-                })
+                milestones.append(
+                    {
+                        "phase": phase,
+                        "name": f"{phase} Release",
+                        "items": items,
+                        "dependencies": list(set(all_deps)),
+                        "target": phase_targets[phase],
+                    }
+                )
 
         roadmap = {"themes": themes, "milestones": milestones}
 
@@ -614,8 +633,7 @@ class LeadPMAgent(BaseAgent):
         policy = self.policy_pack
 
         finding_text = "\n".join(
-            f"- [{f.id}] ({f.type}, {f.impact}): {f.title} — {f.description[:300]}"
-            for f in metrics_findings
+            f"- [{f.id}] ({f.type}, {f.impact}): {f.title} — {f.description[:300]}" for f in metrics_findings
         )
 
         system = (
@@ -642,12 +660,13 @@ class LeadPMAgent(BaseAgent):
         except json.JSONDecodeError:
             sections = {}
 
-        from datetime import datetime, timezone
+        from datetime import datetime
+
         template = load_template("experiment_plan_template.md")
         context = {
             "product_name": packet.product_name,
             "run_id": self.run_config.run_id,
-            "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+            "date": datetime.now(UTC).strftime("%Y-%m-%d"),
             **sections,
         }
         content = render_template(template, context)
@@ -659,51 +678,58 @@ class LeadPMAgent(BaseAgent):
 
     async def generate_decision_log(self) -> str:
         """Generate decision log from dedup, conflict, and gate decisions."""
-        from datetime import datetime, timezone
+        from datetime import datetime
+
         packet = self.context_packet
-        date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        date_str = datetime.now(UTC).strftime("%Y-%m-%d")
 
         decisions: list[dict] = []
         idx = 1
 
         # Dedup decisions
         for entry in self.dedup_log:
-            decisions.append({
-                "num": idx,
-                "decision": f"Deduplicated: kept {entry['kept']}, removed {', '.join(entry['removed'])}",
-                "rationale": entry.get("reason", "Duplicate findings"),
-                "alternatives": "Keep all duplicates separately",
-                "confidence": "validated",
-                "status": "Decided",
-                "date": date_str,
-            })
+            decisions.append(
+                {
+                    "num": idx,
+                    "decision": f"Deduplicated: kept {entry['kept']}, removed {', '.join(entry['removed'])}",
+                    "rationale": entry.get("reason", "Duplicate findings"),
+                    "alternatives": "Keep all duplicates separately",
+                    "confidence": "validated",
+                    "status": "Decided",
+                    "date": date_str,
+                }
+            )
             idx += 1
 
         # Conflict resolutions
         for conflict in self.conflicts:
-            decisions.append({
-                "num": idx,
-                "decision": conflict.get("resolution", "N/A"),
-                "rationale": conflict.get("reasoning", conflict.get("description", "")),
-                "alternatives": f"Prioritize {conflict.get('finding_a', '?')} over {conflict.get('finding_b', '?')} or vice versa",
-                "confidence": "directional",
-                "status": "Decided",
-                "date": date_str,
-            })
+            decisions.append(
+                {
+                    "num": idx,
+                    "decision": conflict.get("resolution", "N/A"),
+                    "rationale": conflict.get("reasoning", conflict.get("description", "")),
+                    "alternatives": f"Prioritize {conflict.get('finding_a', '?')} over {conflict.get('finding_b', '?')} or vice versa",
+                    "confidence": "directional",
+                    "status": "Decided",
+                    "date": date_str,
+                }
+            )
             idx += 1
 
         # Risk gate decisions
         gate = self._gate_result()
         for blocker in gate.get("blockers", []):
-            decisions.append({
-                "num": idx,
-                "decision": f"Pipeline blocked: {blocker}",
-                "rationale": "Policy-driven risk gate rule",
-                "alternatives": "Override gate (not recommended)",
-                "confidence": "validated",
-                "status": "Blocked",
-                "date": date_str,
-            })
+            decisions.append(
+                {
+                    "num": idx,
+                    "decision": f"Pipeline blocked: {blocker}",
+                    "rationale": "Policy-driven risk gate rule",
+                    "alternatives": "Override gate (not recommended)",
+                    "confidence": "validated",
+                    "status": "Blocked",
+                    "date": date_str,
+                }
+            )
             idx += 1
 
         # Build template rows
@@ -756,7 +782,7 @@ class LeadPMAgent(BaseAgent):
         paths["recommendation"] = recommendation
 
         paths["prd"] = await self.generate_prd()
-        paths["roadmap"] = str((self._artifacts_dir() / "roadmap.json"))
+        paths["roadmap"] = str(self._artifacts_dir() / "roadmap.json")
         await self.generate_roadmap()
         paths["experiment_plan"] = await self.generate_experiment_plan()
         paths["decision_log"] = await self.generate_decision_log()

@@ -63,6 +63,7 @@ def render_template(template: str, context: dict) -> str:
 
     # Warn about any remaining un-replaced placeholders
     import re
+
     remaining = re.findall(r"\{(\w+)\}", rendered)
     if remaining:
         unique = sorted(set(remaining))

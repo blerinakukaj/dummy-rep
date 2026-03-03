@@ -17,27 +17,27 @@ from aipm.schemas.findings import Finding
 # ------------------------------------------------------------------
 
 _ANSI: dict[str, str] = {
-    "red":    "\033[91m",
-    "green":  "\033[92m",
+    "red": "\033[91m",
+    "green": "\033[92m",
     "yellow": "\033[93m",
-    "blue":   "\033[94m",
-    "cyan":   "\033[96m",
-    "bold":   "\033[1m",
-    "reset":  "\033[0m",
+    "blue": "\033[94m",
+    "cyan": "\033[96m",
+    "bold": "\033[1m",
+    "reset": "\033[0m",
 }
 
-_IMPACT_RANK:  dict[str, int] = {"critical": 0, "high": 1, "medium": 2, "low": 3}
+_IMPACT_RANK: dict[str, int] = {"critical": 0, "high": 1, "medium": 2, "low": 3}
 _IMPACT_COLOR: dict[str, str] = {"critical": "red", "high": "yellow", "medium": "cyan", "low": ""}
 _IMPACT_BADGE: dict[str, str] = {
     "critical": "[CRIT]",
-    "high":     "[HIGH]",
-    "medium":   "[MED] ",
-    "low":      "[LOW] ",
+    "high": "[HIGH]",
+    "medium": "[MED] ",
+    "low": "[LOW] ",
 }
 
 # Cost estimation — USD per 1 M tokens
 _PRICING: dict[str, dict[str, float]] = {
-    "gpt-4o":        {"input": 2.50, "output": 10.00},
+    "gpt-4o": {"input": 2.50, "output": 10.00},
     "claude-sonnet": {"input": 3.00, "output": 15.00},
 }
 
@@ -68,7 +68,7 @@ _BOX_W = 38  # inner content width (chars between "║ " and " ║")
 
 def _row(text: str, width: int = _BOX_W) -> str:
     if len(text) > width:
-        text = text[:width - 1] + "…"
+        text = text[: width - 1] + "…"
     return f"║ {text:<{width}} ║"
 
 
@@ -88,13 +88,14 @@ def _bot(width: int = _BOX_W) -> str:
 # Cost helper (internal)
 # ------------------------------------------------------------------
 
+
 def _estimate_cost(manifest: dict) -> float:
     """Estimate USD cost from manifest token_usage and model fields."""
-    usage      = (manifest.get("token_usage") or {}).get("total", {})
-    prompt     = usage.get("prompt_tokens",     0)
+    usage = (manifest.get("token_usage") or {}).get("total", {})
+    prompt = usage.get("prompt_tokens", 0)
     completion = usage.get("completion_tokens", 0)
 
-    model    = manifest.get("model",    "")
+    model = manifest.get("model", "")
     provider = manifest.get("provider", "")
 
     if "claude" in model.lower() or provider == "anthropic":
@@ -103,8 +104,7 @@ def _estimate_cost(manifest: dict) -> float:
         rates = _PRICING.get(model, _PRICING["gpt-4o"])
 
     return round(
-        (prompt     / 1_000_000) * rates["input"]
-        + (completion / 1_000_000) * rates["output"],
+        (prompt / 1_000_000) * rates["input"] + (completion / 1_000_000) * rates["output"],
         4,
     )
 
@@ -114,11 +114,11 @@ def _estimate_cost(manifest: dict) -> float:
 # ------------------------------------------------------------------
 
 _EXPECTED_ARTIFACTS = [
-    ("prd",             "prd.md"),
-    ("roadmap",         "roadmap.json"),
+    ("prd", "prd.md"),
+    ("roadmap", "roadmap.json"),
     ("experiment_plan", "experiment_plan.md"),
-    ("decision_log",    "decision_log.md"),
-    ("backlog",         "backlog.csv"),
+    ("decision_log", "decision_log.md"),
+    ("backlog", "backlog.csv"),
 ]
 
 
@@ -134,22 +134,22 @@ def format_cli_summary(manifest: dict) -> str:
     Returns:
         Multi-line string with Unicode box-drawing characters.
     """
-    run_id   = manifest.get("run_id",   "—")
-    product  = manifest.get("product_name", "—")
-    rec      = str(manifest.get("recommendation", "—")).upper()
+    run_id = manifest.get("run_id", "—")
+    product = manifest.get("product_name", "—")
+    rec = str(manifest.get("recommendation", "—")).upper()
 
-    agents_run    = manifest.get("agents_run",    [])
+    agents_run = manifest.get("agents_run", [])
     agents_failed = manifest.get("agents_failed", [])
-    total_agents  = len(agents_run) + len(agents_failed)
+    total_agents = len(agents_run) + len(agents_failed)
 
-    total_findings   = manifest.get("total_findings", 0)
+    total_findings = manifest.get("total_findings", 0)
     findings_by_type = manifest.get("findings_by_type", {})
-    risk_count       = findings_by_type.get("risk", 0)
+    risk_count = findings_by_type.get("risk", 0)
 
-    usage        = (manifest.get("token_usage") or {}).get("total", {})
+    usage = (manifest.get("token_usage") or {}).get("total", {})
     total_tokens = usage.get("total_tokens", 0)
-    est_cost     = _estimate_cost(manifest)
-    duration     = manifest.get("duration_seconds", 0)
+    est_cost = _estimate_cost(manifest)
+    duration = manifest.get("duration_seconds", 0)
 
     artifacts = manifest.get("artifacts", {})
 
@@ -171,9 +171,9 @@ def format_cli_summary(manifest: dict) -> str:
     ]
 
     for key, display_name in _EXPECTED_ARTIFACTS:
-        path   = artifacts.get(key, "")
+        path = artifacts.get(key, "")
         exists = bool(path) and Path(path).exists()
-        mark   = "✓" if exists else "✗"
+        mark = "✓" if exists else "✗"
         lines.append(_row(f"  {mark} {display_name}"))
 
     lines.append(_bot())
@@ -182,9 +182,7 @@ def format_cli_summary(manifest: dict) -> str:
     errors = manifest.get("errors", {})
     if errors:
         lines.append("")
-        lines.append(
-            colorize(f"  ⚠  Agents with errors: {', '.join(errors.keys())}", "yellow")
-        )
+        lines.append(colorize(f"  ⚠  Agents with errors: {', '.join(errors.keys())}", "yellow"))
 
     for w in manifest.get("bundle_warnings", []):
         lines.append(colorize(f"  ⚠  {w}", "yellow"))
@@ -197,11 +195,11 @@ def format_cli_summary(manifest: dict) -> str:
 # ------------------------------------------------------------------
 
 _FINDINGS_COLS: list[tuple[str, int]] = [
-    ("ID",          20),
-    ("Type",        14),
-    ("Impact",       9),
-    ("Confidence",  12),
-    ("Title",       40),
+    ("ID", 20),
+    ("Type", 14),
+    ("Impact", 9),
+    ("Confidence", 12),
+    ("Title", 40),
 ]
 
 
@@ -224,7 +222,7 @@ def format_findings_table(findings: list[Finding]) -> str:
     )
 
     # Header
-    header  = "  ".join(f"{col:<{w}}" for col, w in _FINDINGS_COLS)
+    header = "  ".join(f"{col:<{w}}" for col, w in _FINDINGS_COLS)
     divider = "  ".join("─" * w for _, w in _FINDINGS_COLS)
 
     lines = [
@@ -243,7 +241,7 @@ def format_findings_table(findings: list[Finding]) -> str:
             f"{f.confidence:<12}",
             f"{title:<40}",
         ]
-        line  = "  ".join(cells)
+        line = "  ".join(cells)
         color = _IMPACT_COLOR.get(f.impact)
         lines.append(colorize(line, color) if color else line)
 
@@ -254,6 +252,7 @@ def format_findings_table(findings: list[Finding]) -> str:
 # ------------------------------------------------------------------
 # 3. Risk report
 # ------------------------------------------------------------------
+
 
 def format_risk_report(risk_findings: list[Finding], gate_result: dict) -> str:
     """Formatted risk assessment with pass/fail gate indicator.
@@ -267,15 +266,11 @@ def format_risk_report(risk_findings: list[Finding], gate_result: dict) -> str:
     Returns:
         Multi-line formatted risk report string.
     """
-    passed   = gate_result.get("passed",   True)
+    passed = gate_result.get("passed", True)
     blockers = gate_result.get("blockers", [])
     warnings = gate_result.get("warnings", [])
 
-    gate_label = (
-        colorize("✓ GATE PASSED", "green")
-        if passed
-        else colorize("✗ GATE FAILED", "red")
-    )
+    gate_label = colorize("✓ GATE PASSED", "green") if passed else colorize("✗ GATE FAILED", "red")
 
     lines = [
         "━" * 60,

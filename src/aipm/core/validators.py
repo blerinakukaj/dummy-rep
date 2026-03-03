@@ -63,9 +63,7 @@ def validate_agent_output(output: AgentOutput, context_packet: ContextPacket | N
         if valid_source_ids is not None:
             for ev in finding.evidence:
                 if ev.source_id not in valid_source_ids:
-                    warnings.append(
-                        f"Finding '{finding.id}': evidence references unknown source_id '{ev.source_id}'"
-                    )
+                    warnings.append(f"Finding '{finding.id}': evidence references unknown source_id '{ev.source_id}'")
 
     if warnings:
         logger.warning("Agent output '%s' has %d validation warnings", output.agent_id, len(warnings))
@@ -151,13 +149,15 @@ def validate_findings_consistency(all_findings: list[Finding]) -> dict:
                 continue  # skip same-agent comparisons
             similarity = SequenceMatcher(None, finding.title.lower(), prev_title.lower()).ratio()
             if similarity >= DUPLICATE_SIMILARITY_THRESHOLD:
-                duplicates.append({
-                    "finding_a": prev_id,
-                    "finding_b": finding.id,
-                    "title_a": prev_title,
-                    "title_b": finding.title,
-                    "similarity": round(similarity, 3),
-                })
+                duplicates.append(
+                    {
+                        "finding_a": prev_id,
+                        "finding_b": finding.id,
+                        "title_a": prev_title,
+                        "title_b": finding.title,
+                        "similarity": round(similarity, 3),
+                    }
+                )
         seen.append((finding.id, finding.agent_id, finding.title))
 
     result = {

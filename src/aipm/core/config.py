@@ -1,8 +1,10 @@
 """Configuration loader — environment, LLM clients, run config, and output directories."""
 
+from __future__ import annotations
+
 import logging
 from pathlib import Path
-from typing import Union
+from typing import Any
 
 from dotenv import load_dotenv
 
@@ -29,7 +31,7 @@ def load_env() -> None:
     logger.debug("Loaded environment variables from .env")
 
 
-def get_llm_client(provider: str) -> Union["openai.OpenAI", "anthropic.Anthropic"]:
+def get_llm_client(provider: str) -> Any:
     """Return an initialized LLM client for the given provider.
 
     Args:
@@ -49,7 +51,7 @@ def get_llm_client(provider: str) -> Union["openai.OpenAI", "anthropic.Anthropic
 
         api_key = os.environ.get("OPENAI_API_KEY")
         if not api_key:
-            raise EnvironmentError("OPENAI_API_KEY is not set. Add it to your .env file.")
+            raise OSError("OPENAI_API_KEY is not set. Add it to your .env file.")
         logger.info("Initializing OpenAI client")
         return openai.OpenAI(api_key=api_key)
 
@@ -58,7 +60,7 @@ def get_llm_client(provider: str) -> Union["openai.OpenAI", "anthropic.Anthropic
 
         api_key = os.environ.get("ANTHROPIC_API_KEY")
         if not api_key:
-            raise EnvironmentError("ANTHROPIC_API_KEY is not set. Add it to your .env file.")
+            raise OSError("ANTHROPIC_API_KEY is not set. Add it to your .env file.")
         logger.info("Initializing Anthropic client")
         return anthropic.Anthropic(api_key=api_key)
 

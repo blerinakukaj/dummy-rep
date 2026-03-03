@@ -1,11 +1,12 @@
 """Shared pytest fixtures for AIPM tests."""
 
-import pytest
 from pathlib import Path
 
-from aipm.schemas.context import TicketItem, DocumentItem, RiskHotspot, ContextPacket
-from aipm.schemas.findings import EvidenceItem, Finding, AgentOutput
+import pytest
+
 from aipm.schemas.config import RunConfig
+from aipm.schemas.context import DocumentItem, TicketItem
+from aipm.schemas.findings import Finding
 
 
 @pytest.fixture
@@ -36,6 +37,7 @@ def output_dir(tmp_path: Path) -> Path:
 @pytest.fixture
 def make_ticket():
     """Factory fixture for creating TicketItem instances."""
+
     def _make(
         id: str = "TICKET-001",
         title: str = "Sample ticket",
@@ -54,12 +56,14 @@ def make_ticket():
             labels=labels or [],
             source=source,
         )
+
     return _make
 
 
 @pytest.fixture
 def make_document():
     """Factory fixture for creating DocumentItem instances."""
+
     def _make(
         id: str = "DOC-001",
         title: str = "sample_doc.md",
@@ -74,12 +78,14 @@ def make_document():
             doc_type=doc_type,
             tags=tags or [],
         )
+
     return _make
 
 
 @pytest.fixture
 def make_finding():
     """Factory fixture for creating Finding instances."""
+
     def _make(
         id: str = "test-001",
         agent_id: str = "test",
@@ -100,14 +106,17 @@ def make_finding():
             confidence=confidence,
             **kwargs,
         )
+
     return _make
 
 
 @pytest.fixture
 def make_run_config():
     """Factory fixture for creating RunConfig instances."""
+
     def _make(**overrides) -> RunConfig:
         defaults = {"input_path": "input_bundles/sample_bundle"}
         defaults.update(overrides)
         return RunConfig(**defaults)
+
     return _make

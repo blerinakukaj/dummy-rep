@@ -6,14 +6,14 @@ metadata — with no LLM call required.
 """
 
 import logging
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from aipm.core.policy import PolicyPack
 from aipm.core.template_engine import load_template, render_template
 
 logger = logging.getLogger(__name__)
 
-_TODAY = lambda: datetime.now(timezone.utc).strftime("%Y-%m-%d")  # noqa: E731
+_TODAY = lambda: datetime.now(UTC).strftime("%Y-%m-%d")  # noqa: E731
 
 
 class DecisionLogGenerator:
@@ -216,37 +216,37 @@ class DecisionLogGenerator:
         for d in self.dedup_decisions:
             for assumption in d.get("assumptions", []):
                 conf = d.get("confidence", "speculative")
-                assumptions.append({
-                    "source": d.get("kept_id", "dedup"),
-                    "assumption": assumption,
-                    "confidence": conf,
-                    "needs_validation": conf in ("speculative", "directional"),
-                })
+                assumptions.append(
+                    {
+                        "source": d.get("kept_id", "dedup"),
+                        "assumption": assumption,
+                        "confidence": conf,
+                        "needs_validation": conf in ("speculative", "directional"),
+                    }
+                )
 
         for c in self.conflict_resolutions:
             for assumption in c.get("assumptions", []):
                 conf = c.get("confidence", "speculative")
-                assumptions.append({
-                    "source": c.get("id", "conflict"),
-                    "assumption": assumption,
-                    "confidence": conf,
-                    "needs_validation": True,
-                })
+                assumptions.append(
+                    {
+                        "source": c.get("id", "conflict"),
+                        "assumption": assumption,
+                        "confidence": conf,
+                        "needs_validation": True,
+                    }
+                )
 
         if not assumptions:
             lines.append("_No explicit assumptions were recorded in the decision data._")
-            lines.append(
-                "Review individual finding `assumptions` fields in the full findings output.\n"
-            )
+            lines.append("Review individual finding `assumptions` fields in the full findings output.\n")
             return "\n".join(lines)
 
         lines.append("| Source | Assumption | Confidence | Needs Validation? |")
         lines.append("|--------|------------|------------|------------------|")
         for a in assumptions:
             needs = "Yes" if a["needs_validation"] else "No"
-            lines.append(
-                f"| {a['source']} | {a['assumption']} | {a['confidence']} | {needs} |"
-            )
+            lines.append(f"| {a['source']} | {a['assumption']} | {a['confidence']} | {needs} |")
         lines.append("")
         return "\n".join(lines)
 
@@ -278,13 +278,15 @@ class DecisionLogGenerator:
         rid = run_id or self.run_id
 
         decision_rows = self._build_decision_rows()
-        decision_details = "\n\n".join([
-            self._section_dedup(),
-            self._section_conflicts(),
-            self._section_risk_gate(),
-            self._section_prioritization(),
-            self._section_assumptions(),
-        ])
+        decision_details = "\n\n".join(
+            [
+                self._section_dedup(),
+                self._section_conflicts(),
+                self._section_risk_gate(),
+                self._section_prioritization(),
+                self._section_assumptions(),
+            ]
+        )
 
         template = load_template("decision_log_template.md")
         context = {
@@ -312,6 +314,7 @@ class DecisionLogGenerator:
             output_path: Full file path to write to.
         """
         from pathlib import Path
+
         Path(output_path).parent.mkdir(parents=True, exist_ok=True)
         Path(output_path).write_text(content, encoding="utf-8")
         logger.info("Decision log saved to %s", output_path)

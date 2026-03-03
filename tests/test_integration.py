@@ -5,11 +5,9 @@ OpenAI-compatible client that returns canned JSON responses, so no
 real API key is needed.
 """
 
-import asyncio
 import json
-import types
 from pathlib import Path
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 import pytest
 
@@ -17,7 +15,6 @@ from aipm.core.orchestrator import PipelineOrchestrator
 from aipm.core.policy import PolicyPack
 from aipm.core.token_tracker import TokenTracker
 from aipm.schemas.config import RunConfig
-
 
 # ── Mock OpenAI response objects ───────────────────────────────────────
 
@@ -55,27 +52,27 @@ class _ChatCompletion:
 
 # ── Canned LLM responses keyed by prompt keyword ──────────────────────
 
-_FINDINGS_TEMPLATE = json.dumps({
-    "findings": [
-        {
-            "id": "{agent}-001",
-            "agent_id": "{agent}",
-            "type": "insight",
-            "title": "Mock {label} finding",
-            "description": "Automatically generated mock finding for integration test.",
-            "impact": "medium",
-            "confidence": "directional",
-            "assumptions": ["test assumption"],
-            "evidence": [
-                {"source_id": "TICKET-1", "source_type": "ticket", "excerpt": "test excerpt"}
-            ],
-            "recommendations": ["test recommendation"],
-            "tags": ["mock"],
-            "metadata": {},
-        }
-    ],
-    "summary": "Mock {label} summary.",
-})
+_FINDINGS_TEMPLATE = json.dumps(
+    {
+        "findings": [
+            {
+                "id": "{agent}-001",
+                "agent_id": "{agent}",
+                "type": "insight",
+                "title": "Mock {label} finding",
+                "description": "Automatically generated mock finding for integration test.",
+                "impact": "medium",
+                "confidence": "directional",
+                "assumptions": ["test assumption"],
+                "evidence": [{"source_id": "TICKET-1", "source_type": "ticket", "excerpt": "test excerpt"}],
+                "recommendations": ["test recommendation"],
+                "tags": ["mock"],
+                "metadata": {},
+            }
+        ],
+        "summary": "Mock {label} summary.",
+    }
+)
 
 
 def _findings_for(agent_id: str, label: str) -> str:
@@ -83,66 +80,75 @@ def _findings_for(agent_id: str, label: str) -> str:
 
 
 # Risk agent must output findings with risk type and category metadata.
-_RISK_FINDINGS = json.dumps({
-    "findings": [
-        {
-            "id": "risk-001",
-            "agent_id": "risk",
-            "type": "risk",
-            "title": "Mock privacy risk",
-            "description": "Integration test privacy risk.",
-            "impact": "high",
-            "confidence": "directional",
-            "assumptions": [],
-            "evidence": [
-                {"source_id": "customer-001", "source_type": "doc", "excerpt": "data collection concern"}
-            ],
-            "recommendations": ["Add consent mechanism"],
-            "tags": ["privacy"],
-            "metadata": {"category": "privacy", "is_blocker": False, "mitigation": "Add consent", "policy_rule": "require_consent_mechanism"},
-        }
-    ],
-    "summary": "One privacy risk identified.",
-})
+_RISK_FINDINGS = json.dumps(
+    {
+        "findings": [
+            {
+                "id": "risk-001",
+                "agent_id": "risk",
+                "type": "risk",
+                "title": "Mock privacy risk",
+                "description": "Integration test privacy risk.",
+                "impact": "high",
+                "confidence": "directional",
+                "assumptions": [],
+                "evidence": [{"source_id": "customer-001", "source_type": "doc", "excerpt": "data collection concern"}],
+                "recommendations": ["Add consent mechanism"],
+                "tags": ["privacy"],
+                "metadata": {
+                    "category": "privacy",
+                    "is_blocker": False,
+                    "mitigation": "Add consent",
+                    "policy_rule": "require_consent_mechanism",
+                },
+            }
+        ],
+        "summary": "One privacy risk identified.",
+    }
+)
 
 # LeadPM phase responses
 _DEDUP_RESPONSE = json.dumps({"clusters": []})
-_RANKING_RESPONSE_TEMPLATE = json.dumps({
-    "scores": [
-        {"finding_id": "PLACEHOLDER", "user_impact": 8, "business_value": 7, "effort": 4, "risk": 3}
-    ],
-})
+_RANKING_RESPONSE_TEMPLATE = json.dumps(
+    {
+        "scores": [{"finding_id": "PLACEHOLDER", "user_impact": 8, "business_value": 7, "effort": 4, "risk": 3}],
+    }
+)
 _CONFLICT_RESPONSE = json.dumps({"conflicts": []})
 
 # PRD and experiment plan JSON responses
-_PRD_RESPONSE = json.dumps({
-    "overview": "Mock overview.",
-    "goals": "Mock goals.",
-    "user_segments": "Mock user segments.",
-    "in_scope": "Mock in scope.",
-    "out_of_scope": "Mock out of scope.",
-    "functional_requirements": "Mock functional reqs.",
-    "non_functional_requirements": "Mock NFRs.",
-    "acceptance_criteria": "Mock acceptance criteria.",
-    "design_ux": "Mock design.",
-    "technical_considerations": "Mock tech.",
-    "risks_mitigations": "Mock risks.",
-    "rollout_plan": "Mock rollout.",
-    "open_questions": "Mock questions.",
-    "evidence_references": "Mock refs.",
-})
+_PRD_RESPONSE = json.dumps(
+    {
+        "overview": "Mock overview.",
+        "goals": "Mock goals.",
+        "user_segments": "Mock user segments.",
+        "in_scope": "Mock in scope.",
+        "out_of_scope": "Mock out of scope.",
+        "functional_requirements": "Mock functional reqs.",
+        "non_functional_requirements": "Mock NFRs.",
+        "acceptance_criteria": "Mock acceptance criteria.",
+        "design_ux": "Mock design.",
+        "technical_considerations": "Mock tech.",
+        "risks_mitigations": "Mock risks.",
+        "rollout_plan": "Mock rollout.",
+        "open_questions": "Mock questions.",
+        "evidence_references": "Mock refs.",
+    }
+)
 
-_EXPERIMENT_PLAN_RESPONSE = json.dumps({
-    "hypothesis": "Mock hypothesis.",
-    "success_metrics": "Mock success metrics.",
-    "guardrail_metrics": "Mock guardrails.",
-    "experiment_design": "Mock design.",
-    "sample_size_duration": "Mock sample.",
-    "segmentation": "Mock segmentation.",
-    "rollback_criteria": "Mock rollback.",
-    "data_collection": "Mock collection.",
-    "analysis_plan": "Mock analysis.",
-})
+_EXPERIMENT_PLAN_RESPONSE = json.dumps(
+    {
+        "hypothesis": "Mock hypothesis.",
+        "success_metrics": "Mock success metrics.",
+        "guardrail_metrics": "Mock guardrails.",
+        "experiment_design": "Mock design.",
+        "sample_size_duration": "Mock sample.",
+        "segmentation": "Mock segmentation.",
+        "rollback_criteria": "Mock rollback.",
+        "data_collection": "Mock collection.",
+        "analysis_plan": "Mock analysis.",
+    }
+)
 
 # Intake dedup and summary responses
 _INTAKE_DEDUP = json.dumps({"duplicates": [], "unique_count": 3})
@@ -238,9 +244,30 @@ def _make_bundle_on_disk(bundle_dir: Path) -> None:
     (bundle_dir / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
 
     tickets = [
-        {"id": "TICKET-1", "title": "Login flow redesign", "description": "Users report friction in login.", "status": "open", "priority": "high", "labels": ["auth", "ux"]},
-        {"id": "TICKET-2", "title": "Dashboard load time", "description": "Dashboard takes 5s to load.", "status": "open", "priority": "medium", "labels": ["performance"]},
-        {"id": "TICKET-3", "title": "Add SSO support", "description": "Enterprise customers need SSO.", "status": "backlog", "priority": "high", "labels": ["auth", "enterprise"]},
+        {
+            "id": "TICKET-1",
+            "title": "Login flow redesign",
+            "description": "Users report friction in login.",
+            "status": "open",
+            "priority": "high",
+            "labels": ["auth", "ux"],
+        },
+        {
+            "id": "TICKET-2",
+            "title": "Dashboard load time",
+            "description": "Dashboard takes 5s to load.",
+            "status": "open",
+            "priority": "medium",
+            "labels": ["performance"],
+        },
+        {
+            "id": "TICKET-3",
+            "title": "Add SSO support",
+            "description": "Enterprise customers need SSO.",
+            "status": "backlog",
+            "priority": "high",
+            "labels": ["auth", "enterprise"],
+        },
     ]
     (bundle_dir / "tickets.json").write_text(json.dumps(tickets), encoding="utf-8")
 
@@ -320,7 +347,16 @@ class TestFullPipelineExecution:
             orch = PipelineOrchestrator(config)
             manifest = await orch.run(str(bundle_dir))
 
-        expected_agents = {"intake", "customer", "competitive", "metrics", "requirements", "feasibility", "risk", "lead_pm"}
+        expected_agents = {
+            "intake",
+            "customer",
+            "competitive",
+            "metrics",
+            "requirements",
+            "feasibility",
+            "risk",
+            "lead_pm",
+        }
         assert expected_agents == set(manifest["agents_run"])
 
     async def test_findings_are_collected(self, tmp_path: Path, bundle_dir: Path, mock_client: MockOpenAIClient):
@@ -345,7 +381,7 @@ class TestFullPipelineExecution:
             patch("aipm.core.orchestrator.load_policy", return_value=PolicyPack()),
         ):
             orch = PipelineOrchestrator(config)
-            manifest = await orch.run(str(bundle_dir))
+            await orch.run(str(bundle_dir))
 
         run_dir = Path(config.output_dir) / config.run_id
         assert (run_dir / "run_manifest.json").exists()
@@ -409,15 +445,16 @@ class TestAgentFailureHandling:
     """Verify the pipeline degrades gracefully when an agent blows up."""
 
     async def test_pipeline_continues_after_agent_error(
-        self, tmp_path: Path, bundle_dir: Path, mock_client: MockOpenAIClient,
+        self,
+        tmp_path: Path,
+        bundle_dir: Path,
+        mock_client: MockOpenAIClient,
     ):
         """If one specialist agent raises, the pipeline should still finish."""
         config = _build_run_config(tmp_path, str(bundle_dir))
 
         # Make the customer agent's analyze() raise
         original_completions_create = mock_client.chat.completions.create
-
-        call_count = {"n": 0}
 
         def _raise_on_customer(*, model, messages, **kw):
             text = " ".join(m.get("content", "") for m in messages).lower()
@@ -440,7 +477,10 @@ class TestAgentFailureHandling:
         assert manifest["run_id"] == config.run_id
 
     async def test_error_details_recorded(
-        self, tmp_path: Path, bundle_dir: Path, mock_client: MockOpenAIClient,
+        self,
+        tmp_path: Path,
+        bundle_dir: Path,
+        mock_client: MockOpenAIClient,
     ):
         """Failed agent error message should appear in the manifest."""
         config = _build_run_config(tmp_path, str(bundle_dir))
@@ -466,7 +506,10 @@ class TestAgentFailureHandling:
         assert "Simulated metrics failure" in manifest["errors"]["metrics"]
 
     async def test_other_agents_still_produce_findings(
-        self, tmp_path: Path, bundle_dir: Path, mock_client: MockOpenAIClient,
+        self,
+        tmp_path: Path,
+        bundle_dir: Path,
+        mock_client: MockOpenAIClient,
     ):
         """Even with a failure, other agents should still contribute findings."""
         config = _build_run_config(tmp_path, str(bundle_dir))

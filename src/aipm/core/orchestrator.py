@@ -3,20 +3,20 @@
 import asyncio
 import json
 import logging
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from aipm.agents.competitive_agent import CompetitiveAgent
 from aipm.agents.customer_agent import CustomerInsightsAgent
+from aipm.agents.feasibility_agent import FeasibilityAgent
 from aipm.agents.intake_agent import IntakeAgent
+from aipm.agents.lead_pm_agent import LeadPMAgent
 from aipm.agents.metrics_agent import MetricsAgent
 from aipm.agents.requirements_agent import RequirementsAgent
-from aipm.agents.feasibility_agent import FeasibilityAgent
 from aipm.agents.risk_agent import RiskAgent
-from aipm.agents.lead_pm_agent import LeadPMAgent
 from aipm.core.config import ensure_output_dirs, get_llm_client
 from aipm.core.loader import load_bundle, load_prompt, validate_bundle
-from aipm.core.policy import PolicyPack, load_policy
+from aipm.core.policy import load_policy
 from aipm.core.token_tracker import TokenTracker
 from aipm.schemas.config import RunConfig
 from aipm.schemas.context import ContextPacket
@@ -29,7 +29,9 @@ class PipelineOrchestrator:
     """Main pipeline runner that executes all agents in sequence/parallel."""
 
     def __init__(
-        self, run_config: RunConfig, token_tracker: TokenTracker | None = None,
+        self,
+        run_config: RunConfig,
+        token_tracker: TokenTracker | None = None,
     ) -> None:
         self.run_config = run_config
         self.llm_client = get_llm_client(run_config.provider)
@@ -43,7 +45,9 @@ class PipelineOrchestrator:
 
         logger.info(
             "Orchestrator initialized — run_id=%s, provider=%s, model=%s",
-            run_config.run_id, run_config.provider, run_config.model,
+            run_config.run_id,
+            run_config.provider,
+            run_config.model,
         )
 
     async def run(self, input_path: str) -> dict:
@@ -55,7 +59,7 @@ class PipelineOrchestrator:
         Returns:
             Dict with run_id, output file paths, errors, and summary.
         """
-        start_time = datetime.now(timezone.utc)
+        start_time = datetime.now(UTC)
         logger.info("Pipeline started — run_id=%s", self.run_config.run_id)
 
         # Step 1: Load input bundle or prompt
@@ -76,16 +80,16 @@ class PipelineOrchestrator:
         context_packet = await self._run_intake(bundle, empty_context)
 
         # Step 3: Run parallel — CustomerInsights, Competitive, Metrics
-        step3_outputs = await self._run_parallel_step3(context_packet)
+        await self._run_parallel_step3(context_packet)
 
         # Step 4: Run parallel — Requirements, Feasibility (depend on Step 3)
-        step4_outputs = await self._run_parallel_step4(context_packet)
+        await self._run_parallel_step4(context_packet)
 
         # Step 5: Run RiskAgent
-        step5_output = await self._run_risk_agent(context_packet)
+        await self._run_risk_agent(context_packet)
 
         # Step 6: Run LeadPMAgent — dedup, rank, resolve, then generate artifacts
-        lead_pm_agent = await self._run_lead_pm_agent(context_packet)
+        await self._run_lead_pm_agent(context_packet)
 
         # Step 7: Collect results, save token usage, and save manifest
         all_findings = self._collect_all_findings(self.outputs)
@@ -98,17 +102,23 @@ class PipelineOrchestrator:
             self.run_config.model,
         )
 
-        end_time = datetime.now(timezone.utc)
+        end_time = datetime.now(UTC)
         duration_seconds = (end_time - start_time).total_seconds()
 
         manifest = self._build_manifest(
-            all_findings, duration_seconds, warnings, input_path,
+            all_findings,
+            duration_seconds,
+            warnings,
+            input_path,
         )
-        manifest_path = self._save_manifest(manifest)
+        self._save_manifest(manifest)
 
         logger.info(
             "Pipeline completed — %d agents ran, %d findings, %d errors, %.1fs",
-            len(self.outputs), len(all_findings), len(self.errors), duration_seconds,
+            len(self.outputs),
+            len(all_findings),
+            len(self.errors),
+            duration_seconds,
         )
 
         return manifest
@@ -215,7 +225,8 @@ class PipelineOrchestrator:
             self.artifact_paths = await agent.generate_all_artifacts()
             self.recommendation = self.artifact_paths.pop("recommendation", "")
             logger.info(
-                "LeadPMAgent artifacts generated: %s", list(self.artifact_paths.keys()),
+                "LeadPMAgent artifacts generated: %s",
+                list(self.artifact_paths.keys()),
             )
             return agent
         except Exception as exc:
@@ -300,7 +311,7 @@ class PipelineOrchestrator:
 
         return {
             "run_id": self.run_config.run_id,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "input_path": input_path,
             "provider": self.run_config.provider,
             "model": self.run_config.model,

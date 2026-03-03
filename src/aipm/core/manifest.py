@@ -2,9 +2,8 @@
 
 import json
 import logging
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Optional
 
 from aipm.core.token_tracker import TokenTracker
 from aipm.schemas.config import RunConfig
@@ -17,7 +16,7 @@ class RunManifest:
 
     def __init__(self, run_config: RunConfig) -> None:
         self.run_config = run_config
-        self.started_at = datetime.now(timezone.utc)
+        self.started_at = datetime.now(UTC)
         self.agents: list[dict] = []
         self.artifacts: dict[str, str] = {}
         self.recommendation: dict[str, str] = {"decision": "", "reasoning": ""}
@@ -29,7 +28,7 @@ class RunManifest:
         status: str,
         output_path: str,
         duration_seconds: float,
-        error: Optional[str] = None,
+        error: str | None = None,
     ) -> None:
         """Track an agent's execution result.
 
@@ -40,13 +39,15 @@ class RunManifest:
             duration_seconds: How long the agent took to run.
             error: Error message if the agent failed.
         """
-        self.agents.append({
-            "agent_id": agent_id,
-            "status": status,
-            "output_path": output_path,
-            "duration_seconds": round(duration_seconds, 2),
-            "error": error,
-        })
+        self.agents.append(
+            {
+                "agent_id": agent_id,
+                "status": status,
+                "output_path": output_path,
+                "duration_seconds": round(duration_seconds, 2),
+                "error": error,
+            }
+        )
 
     def record_artifact(self, artifact_name: str, artifact_path: str) -> None:
         """Track a generated artifact.
@@ -75,7 +76,7 @@ class RunManifest:
         Returns:
             Complete manifest dictionary.
         """
-        end_time = datetime.now(timezone.utc)
+        end_time = datetime.now(UTC)
         total_duration = (end_time - self.started_at).total_seconds()
 
         self._finalized = {
@@ -90,7 +91,8 @@ class RunManifest:
             "recommendation": self.recommendation,
             "token_usage": token_tracker.get_summary(),
             "estimated_cost": token_tracker.estimate_cost(
-                self.run_config.provider, self.run_config.model,
+                self.run_config.provider,
+                self.run_config.model,
             ),
             "total_duration_seconds": round(total_duration, 2),
         }
@@ -153,16 +155,18 @@ class RunManifest:
 
         token_usage = data.get("token_usage", {}).get("total", {})
         cost = data.get("estimated_cost", 0)
-        lines.extend([
-            "",
-            "  Token Usage:",
-            f"    Prompt:     {token_usage.get('prompt_tokens', 0):,}",
-            f"    Completion: {token_usage.get('completion_tokens', 0):,}",
-            f"    Total:      {token_usage.get('total_tokens', 0):,}",
-            f"    Est. Cost:  ${cost:.4f}",
-            "",
-            "=" * 60,
-            "",
-        ])
+        lines.extend(
+            [
+                "",
+                "  Token Usage:",
+                f"    Prompt:     {token_usage.get('prompt_tokens', 0):,}",
+                f"    Completion: {token_usage.get('completion_tokens', 0):,}",
+                f"    Total:      {token_usage.get('total_tokens', 0):,}",
+                f"    Est. Cost:  ${cost:.4f}",
+                "",
+                "=" * 60,
+                "",
+            ]
+        )
 
         return "\n".join(lines)

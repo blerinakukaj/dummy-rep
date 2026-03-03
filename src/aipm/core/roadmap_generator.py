@@ -86,13 +86,9 @@ class RoadmapGenerator:
 
         # Build context sections for the LLM
         phase_info = self._extract_phase_info(feasibility_findings)
-        grouped_requirements = self._group_requirements_by_phase(
-            requirement_findings, feasibility_findings
-        )
+        grouped_requirements = self._group_requirements_by_phase(requirement_findings, feasibility_findings)
 
-        user_prompt = self._build_prompt(
-            phase_info, grouped_requirements, feasibility_findings, requirement_findings
-        )
+        user_prompt = self._build_prompt(phase_info, grouped_requirements, feasibility_findings, requirement_findings)
 
         response = await self._call_llm(ROADMAP_SYSTEM, user_prompt)
         roadmap = self._parse_response(response)
@@ -129,8 +125,7 @@ class RoadmapGenerator:
             blocking = f.metadata.get("blocking", False)
             deps = f.metadata.get("dependencies", [])
             lines.append(
-                f"- [{f.id}] {f.title} | phase={phase}, complexity={complexity}, "
-                f"blocking={blocking}, deps={deps}"
+                f"- [{f.id}] {f.title} | phase={phase}, complexity={complexity}, blocking={blocking}, deps={deps}"
             )
         return "\n".join(lines) if lines else "(No feasibility findings available)"
 
@@ -155,10 +150,7 @@ class RoadmapGenerator:
 
         groups: dict[str, list[str]] = {"mvp": [], "v1": [], "v2": [], "unassigned": []}
         for f in requirement_findings:
-            phase = (
-                f.metadata.get("phase", "").lower()
-                or feasibility_phase_map.get(f.id, "").lower()
-            )
+            phase = f.metadata.get("phase", "").lower() or feasibility_phase_map.get(f.id, "").lower()
             if phase in ("mvp", "v1", "v2"):
                 groups[phase].append(f.id)
             else:

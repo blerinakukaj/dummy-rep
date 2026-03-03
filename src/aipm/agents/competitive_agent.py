@@ -15,9 +15,22 @@ logger = logging.getLogger(__name__)
 
 # Keywords that signal competitive mentions in tickets
 COMPETITIVE_KEYWORDS = [
-    "competitor", "competing", "alternative", "switching to", "moved to",
-    "compared to", "vs ", "versus", "beats", "better than", "worse than",
-    "market leader", "market share", "benchmark", "parity", "feature gap",
+    "competitor",
+    "competing",
+    "alternative",
+    "switching to",
+    "moved to",
+    "compared to",
+    "vs ",
+    "versus",
+    "beats",
+    "better than",
+    "worse than",
+    "market leader",
+    "market share",
+    "benchmark",
+    "parity",
+    "feature gap",
 ]
 
 SYSTEM_PROMPT = """\
@@ -122,9 +135,7 @@ class CompetitiveAgent(BaseAgent):
             text = f"{ticket.title} {ticket.description}".lower()
             if any(kw in text for kw in COMPETITIVE_KEYWORDS):
                 priority = f" [Priority: {ticket.priority}]" if ticket.priority else ""
-                competitive_tickets.append(
-                    f"- [{ticket.id}]{priority}: {ticket.title}\n  {ticket.description}"
-                )
+                competitive_tickets.append(f"- [{ticket.id}]{priority}: {ticket.title}\n  {ticket.description}")
 
         if competitive_tickets:
             sections.append("## Tickets with Competitive Mentions")
@@ -181,12 +192,14 @@ class CompetitiveAgent(BaseAgent):
                 # Parse evidence items
                 evidence = []
                 for ev in raw.get("evidence", []):
-                    evidence.append(EvidenceItem(
-                        source_id=ev.get("source_id", "UNKNOWN"),
-                        source_type=ev.get("source_type", "doc"),
-                        excerpt=ev.get("excerpt", ""),
-                        url=ev.get("url"),
-                    ))
+                    evidence.append(
+                        EvidenceItem(
+                            source_id=ev.get("source_id", "UNKNOWN"),
+                            source_type=ev.get("source_type", "doc"),
+                            excerpt=ev.get("excerpt", ""),
+                            url=ev.get("url"),
+                        )
+                    )
                 raw["evidence"] = evidence
 
                 finding = Finding.model_validate(raw)

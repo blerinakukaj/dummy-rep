@@ -1,7 +1,7 @@
 """Comprehensive unit tests for all Pydantic schemas."""
 
 import json
-from datetime import datetime, timezone
+from datetime import datetime
 
 import pytest
 from pydantic import ValidationError
@@ -14,7 +14,6 @@ from aipm.schemas.context import (
     TicketItem,
 )
 from aipm.schemas.findings import AgentOutput, EvidenceItem, Finding
-
 
 # ---------------------------------------------------------------------------
 # Fixtures

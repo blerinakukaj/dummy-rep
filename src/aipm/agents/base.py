@@ -1,10 +1,8 @@
 """Base agent abstract class — all AIPM agents inherit from this."""
 
-import json
 import logging
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Optional
 
 from aipm.core.policy import PolicyPack
 from aipm.core.resilience import AgentError, retry_with_backoff
@@ -26,7 +24,7 @@ class BaseAgent(ABC):
         run_config: RunConfig,
         policy_pack: PolicyPack,
         context_packet: ContextPacket,
-        token_tracker: Optional[TokenTracker] = None,
+        token_tracker: TokenTracker | None = None,
     ) -> None:
         self.llm_client = llm_client
         self.run_config = run_config
@@ -57,7 +55,7 @@ class BaseAgent(ABC):
         self,
         system_prompt: str,
         user_prompt: str,
-        response_format: Optional[dict] = None,
+        response_format: dict | None = None,
     ) -> str:
         """Call the LLM with retry logic and return the response content.
 
@@ -92,7 +90,7 @@ class BaseAgent(ABC):
         self,
         system_prompt: str,
         user_prompt: str,
-        response_format: Optional[dict] = None,
+        response_format: dict | None = None,
     ) -> str:
         """Inner LLM call wrapped by the retry decorator."""
         if self._provider == "openai":
@@ -103,7 +101,7 @@ class BaseAgent(ABC):
         self,
         system_prompt: str,
         user_prompt: str,
-        response_format: Optional[dict],
+        response_format: dict | None,
     ) -> str:
         """Dispatch an LLM call via the OpenAI SDK."""
         kwargs: dict = {
@@ -123,7 +121,9 @@ class BaseAgent(ABC):
         if usage:
             self.logger.info(
                 "Token usage — prompt: %d, completion: %d, total: %d",
-                usage.prompt_tokens, usage.completion_tokens, usage.total_tokens,
+                usage.prompt_tokens,
+                usage.completion_tokens,
+                usage.total_tokens,
             )
             if self.token_tracker:
                 self.token_tracker.record(self.agent_id, usage.prompt_tokens, usage.completion_tokens)
@@ -134,12 +134,14 @@ class BaseAgent(ABC):
         self,
         system_prompt: str,
         user_prompt: str,
-        response_format: Optional[dict],
+        response_format: dict | None,
     ) -> str:
         """Dispatch an LLM call via the Anthropic SDK."""
         effective_system = system_prompt
         if response_format:
-            effective_system += "\n\nIMPORTANT: Respond with valid JSON only. No markdown, no explanation outside the JSON."
+            effective_system += (
+                "\n\nIMPORTANT: Respond with valid JSON only. No markdown, no explanation outside the JSON."
+            )
 
         response = self.llm_client.messages.create(
             model=self.run_config.model,
@@ -155,7 +157,8 @@ class BaseAgent(ABC):
         if usage:
             self.logger.info(
                 "Token usage — input: %d, output: %d",
-                usage.input_tokens, usage.output_tokens,
+                usage.input_tokens,
+                usage.output_tokens,
             )
             if self.token_tracker:
                 self.token_tracker.record(self.agent_id, usage.input_tokens, usage.output_tokens)
@@ -189,7 +192,7 @@ class BaseAgent(ABC):
         Injected into agent prompts so the LLM returns structured findings
         matching the Finding schema.
         """
-        return '''You MUST return a JSON object with this exact structure:
+        return """You MUST return a JSON object with this exact structure:
 {
   "findings": [
     {
@@ -220,4 +223,4 @@ Rules:
 - Every finding MUST reference at least one evidence source_id from the provided data.
 - Classify confidence as: "validated" (multiple corroborating sources), "directional" (single strong source), "speculative" (inferred, needs validation).
 - Use sequential IDs starting from 001.
-- Return ONLY valid JSON. No markdown code fences, no extra text.'''
+- Return ONLY valid JSON. No markdown code fences, no extra text."""

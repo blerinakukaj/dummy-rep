@@ -152,9 +152,7 @@ class FeasibilityAgent(BaseAgent):
                     desc = f.get("description", "")
                     impact = f.get("impact", "?")
                     metadata = f.get("metadata", {})
-                    evidence_refs = [
-                        ev.get("source_id", "?") for ev in f.get("evidence", [])
-                    ]
+                    evidence_refs = [ev.get("source_id", "?") for ev in f.get("evidence", [])]
 
                     meta_str = ""
                     if metadata:
@@ -259,12 +257,14 @@ class FeasibilityAgent(BaseAgent):
                 # Parse evidence items
                 evidence = []
                 for ev in raw.get("evidence", []):
-                    evidence.append(EvidenceItem(
-                        source_id=ev.get("source_id", "UNKNOWN"),
-                        source_type=ev.get("source_type", "doc"),
-                        excerpt=ev.get("excerpt", ""),
-                        url=ev.get("url"),
-                    ))
+                    evidence.append(
+                        EvidenceItem(
+                            source_id=ev.get("source_id", "UNKNOWN"),
+                            source_type=ev.get("source_type", "doc"),
+                            excerpt=ev.get("excerpt", ""),
+                            url=ev.get("url"),
+                        )
+                    )
                 raw["evidence"] = evidence
 
                 finding = Finding.model_validate(raw)

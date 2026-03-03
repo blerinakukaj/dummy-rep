@@ -1,7 +1,7 @@
 """Shared findings schema used by ALL agents in the AIPM pipeline."""
 
-from datetime import datetime, timezone
-from typing import Any, Literal, Optional
+from datetime import UTC, datetime
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
@@ -14,7 +14,7 @@ class EvidenceItem(BaseModel):
         ..., description="Type of the source material"
     )
     excerpt: str = Field(..., description="Relevant excerpt from the source")
-    url: Optional[str] = Field(default=None, description="Optional URL to the source")
+    url: str | None = Field(default=None, description="Optional URL to the source")
 
     model_config = {
         "json_schema_extra": {
@@ -40,9 +40,7 @@ class Finding(BaseModel):
     )
     title: str = Field(..., description="Short descriptive title")
     description: str = Field(..., description="Detailed explanation of the finding")
-    impact: Literal["critical", "high", "medium", "low"] = Field(
-        ..., description="Expected impact level"
-    )
+    impact: Literal["critical", "high", "medium", "low"] = Field(..., description="Expected impact level")
     confidence: Literal["validated", "directional", "speculative"] = Field(
         ..., description="Confidence level based on evidence strength"
     )
@@ -91,7 +89,7 @@ class AgentOutput(BaseModel):
     agent_name: str = Field(..., description="Human-readable name of the agent")
     run_id: str = Field(..., description="ID of the pipeline run")
     timestamp: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
+        default_factory=lambda: datetime.now(UTC),
         description="When this output was generated",
     )
     findings: list[Finding] = Field(default_factory=list, description="List of structured findings")

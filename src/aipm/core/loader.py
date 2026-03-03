@@ -165,7 +165,9 @@ def validate_bundle(bundle: dict) -> list[str]:
         doc_types = {d.get("doc_type") for d in documents}
 
         if "note" not in doc_types and "interview" not in doc_types:
-            warnings.append("No customer notes or interview documents — Customer Insights Agent will have limited input")
+            warnings.append(
+                "No customer notes or interview documents — Customer Insights Agent will have limited input"
+            )
 
         if "metrics_snapshot" not in doc_types:
             warnings.append("No metrics snapshot — Metrics Agent will have limited input")

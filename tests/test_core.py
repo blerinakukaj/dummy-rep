@@ -6,7 +6,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from aipm.core.config import ensure_output_dirs, get_llm_client, load_run_config, MODELS
+from aipm.core.config import MODELS, ensure_output_dirs, get_llm_client, load_run_config
 from aipm.core.loader import load_bundle, load_prompt, validate_bundle
 from aipm.core.policy import PolicyPack, evaluate_risk_gate, load_policy
 from aipm.core.validators import (
@@ -18,7 +18,6 @@ from aipm.core.validators import (
 from aipm.schemas.config import RunConfig
 from aipm.schemas.context import ContextPacket, DocumentItem, TicketItem
 from aipm.schemas.findings import AgentOutput, EvidenceItem, Finding
-
 
 # ===================================================================
 # Config Tests

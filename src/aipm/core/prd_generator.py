@@ -6,7 +6,7 @@ a complete, evidence-traced Product Requirements Document.
 
 import json
 import logging
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from aipm.core.policy import PolicyPack
 from aipm.core.template_engine import load_template, render_template
@@ -61,10 +61,7 @@ class PRDGenerator:
             return f"{label}: (no findings available)"
         lines = [f"{label}:"]
         for f in findings:
-            lines.append(
-                f"  - [{f.id}] ({f.type}, {f.impact}, {f.confidence}): "
-                f"{f.title} — {f.description[:400]}"
-            )
+            lines.append(f"  - [{f.id}] ({f.type}, {f.impact}, {f.confidence}): {f.title} — {f.description[:400]}")
             if f.recommendations:
                 lines.append(f"    Recommendations: {'; '.join(f.recommendations[:3])}")
         return "\n".join(lines)
@@ -86,36 +83,16 @@ class PRDGenerator:
         rollout_findings = [f for f in feasibility if (f.metadata or {}).get("phase")]
 
         return {
-            "overview": self._format_findings(
-                intake + competitive, "Product Context & Competitive Landscape"
-            ),
-            "goals": self._format_findings(
-                metrics, "Metrics & Success Criteria (North Star, Input Metrics)"
-            ),
-            "users": self._format_findings(
-                customer, "User Segments & Jobs-to-be-Done"
-            ),
-            "scope": self._format_findings(
-                func_reqs, "In-Scope Requirements"
-            ),
-            "requirements_func": self._format_findings(
-                func_reqs, "Functional Requirements"
-            ),
-            "requirements_nonfunc": self._format_findings(
-                nonfunc_reqs, "Non-Functional Requirements"
-            ),
-            "design": self._format_findings(
-                design_findings or requirements[:3], "Design & UX Considerations"
-            ),
-            "tech": self._format_findings(
-                feasibility, "Technical Feasibility & Considerations"
-            ),
-            "risks": self._format_findings(
-                risk, "Risks & Mitigations"
-            ),
-            "rollout": self._format_findings(
-                rollout_findings or feasibility, "Rollout & Phasing"
-            ),
+            "overview": self._format_findings(intake + competitive, "Product Context & Competitive Landscape"),
+            "goals": self._format_findings(metrics, "Metrics & Success Criteria (North Star, Input Metrics)"),
+            "users": self._format_findings(customer, "User Segments & Jobs-to-be-Done"),
+            "scope": self._format_findings(func_reqs, "In-Scope Requirements"),
+            "requirements_func": self._format_findings(func_reqs, "Functional Requirements"),
+            "requirements_nonfunc": self._format_findings(nonfunc_reqs, "Non-Functional Requirements"),
+            "design": self._format_findings(design_findings or requirements[:3], "Design & UX Considerations"),
+            "tech": self._format_findings(feasibility, "Technical Feasibility & Considerations"),
+            "risks": self._format_findings(risk, "Risks & Mitigations"),
+            "rollout": self._format_findings(rollout_findings or feasibility, "Rollout & Phasing"),
         }
 
     async def generate(self, recommendation: str = "proceed") -> str:
@@ -162,6 +139,7 @@ class PRDGenerator:
         except json.JSONDecodeError:
             # Try extracting JSON from markdown fences
             import re
+
             match = re.search(r"```(?:json)?\s*\n?(.*?)\n?```", response, re.DOTALL)
             if match:
                 try:
@@ -179,7 +157,7 @@ class PRDGenerator:
         context = {
             "product_name": packet.product_name,
             "run_id": self.run_config.run_id,
-            "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+            "date": datetime.now(UTC).strftime("%Y-%m-%d"),
             "recommendation": recommendation,
             **prd_sections,
         }

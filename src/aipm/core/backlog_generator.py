@@ -12,8 +12,17 @@ PRIORITY_ORDER = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
 COMPLEXITY_ORDER = {"simple": 0, "medium": 1, "complex": 2, "epic": 3}
 
 COLUMNS = [
-    "epic_id", "epic_title", "story_id", "story_title", "description",
-    "acceptance_criteria", "priority", "complexity", "phase", "labels", "dependencies",
+    "epic_id",
+    "epic_title",
+    "story_id",
+    "story_title",
+    "description",
+    "acceptance_criteria",
+    "priority",
+    "complexity",
+    "phase",
+    "labels",
+    "dependencies",
 ]
 
 
@@ -62,26 +71,30 @@ class BacklogGenerator:
 
             dep_str = ", ".join(dependencies) if isinstance(dependencies, list) else str(dependencies)
 
-            rows.append({
-                "epic_id": epic_id,
-                "epic_title": meta.get("epic_title", finding.title if epic_id and not story_id else ""),
-                "story_id": story_id,
-                "story_title": meta.get("story_title", finding.title),
-                "description": finding.description,
-                "acceptance_criteria": acceptance,
-                "priority": meta.get("priority", "P2"),
-                "complexity": complexity,
-                "phase": phase,
-                "labels": ", ".join(finding.tags) if finding.tags else "",
-                "dependencies": dep_str,
-            })
+            rows.append(
+                {
+                    "epic_id": epic_id,
+                    "epic_title": meta.get("epic_title", finding.title if epic_id and not story_id else ""),
+                    "story_id": story_id,
+                    "story_title": meta.get("story_title", finding.title),
+                    "description": finding.description,
+                    "acceptance_criteria": acceptance,
+                    "priority": meta.get("priority", "P2"),
+                    "complexity": complexity,
+                    "phase": phase,
+                    "labels": ", ".join(finding.tags) if finding.tags else "",
+                    "dependencies": dep_str,
+                }
+            )
 
         # Sort: phase (MVP first) → priority (P0 first) → complexity (simple first)
-        rows.sort(key=lambda r: (
-            PHASE_ORDER.get(r["phase"], 99),
-            PRIORITY_ORDER.get(r["priority"], 99),
-            COMPLEXITY_ORDER.get(r["complexity"], 99),
-        ))
+        rows.sort(
+            key=lambda r: (
+                PHASE_ORDER.get(r["phase"], 99),
+                PRIORITY_ORDER.get(r["priority"], 99),
+                COMPLEXITY_ORDER.get(r["complexity"], 99),
+            )
+        )
 
         return self._rows_to_csv(rows)
 

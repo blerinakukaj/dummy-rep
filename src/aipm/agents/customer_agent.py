@@ -52,8 +52,6 @@ class CustomerInsightsAgent(BaseAgent):
 
     async def analyze(self) -> AgentOutput:
         """Analyze customer-facing data and produce insight findings."""
-        packet = self.context_packet
-
         # Gather customer-facing data
         customer_data = self._gather_customer_data()
 
@@ -104,9 +102,7 @@ class CustomerInsightsAgent(BaseAgent):
             for t in packet.tickets:
                 priority = f" [Priority: {t.priority}]" if t.priority else ""
                 labels = f" Labels: {', '.join(t.labels)}" if t.labels else ""
-                sections.append(
-                    f"- [{t.id}]{priority}{labels}: {t.title}\n  {t.description}"
-                )
+                sections.append(f"- [{t.id}]{priority}{labels}: {t.title}\n  {t.description}")
 
         # Customer notes, interviews, and NPS docs
         customer_doc_types = {"note", "interview"}
@@ -154,6 +150,7 @@ class CustomerInsightsAgent(BaseAgent):
         except json.JSONDecodeError as exc:
             # Try extracting JSON from markdown fences
             import re
+
             match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", response, re.DOTALL)
             if match:
                 try:
@@ -178,12 +175,14 @@ class CustomerInsightsAgent(BaseAgent):
                 # Parse evidence items
                 evidence = []
                 for ev in raw.get("evidence", []):
-                    evidence.append(EvidenceItem(
-                        source_id=ev.get("source_id", "UNKNOWN"),
-                        source_type=ev.get("source_type", "doc"),
-                        excerpt=ev.get("excerpt", ""),
-                        url=ev.get("url"),
-                    ))
+                    evidence.append(
+                        EvidenceItem(
+                            source_id=ev.get("source_id", "UNKNOWN"),
+                            source_type=ev.get("source_type", "doc"),
+                            excerpt=ev.get("excerpt", ""),
+                            url=ev.get("url"),
+                        )
+                    )
                 raw["evidence"] = evidence
 
                 finding = Finding.model_validate(raw)
