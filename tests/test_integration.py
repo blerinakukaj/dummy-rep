@@ -203,7 +203,7 @@ def _route_response(messages: list[dict], **_kwargs: object) -> str:
 class _Completions:
     """Mimics ``openai.resources.chat.Completions``."""
 
-    def create(self, *, model: str, messages: list[dict], **kwargs: object) -> _ChatCompletion:
+    async def create(self, *, model: str, messages: list[dict], **kwargs: object) -> _ChatCompletion:
         content = _route_response(messages, **kwargs)
         return _ChatCompletion(content)
 
@@ -456,11 +456,11 @@ class TestAgentFailureHandling:
         # Make the customer agent's analyze() raise
         original_completions_create = mock_client.chat.completions.create
 
-        def _raise_on_customer(*, model, messages, **kw):
+        async def _raise_on_customer(*, model, messages, **kw):
             text = " ".join(m.get("content", "") for m in messages).lower()
             if "customer insight" in text or "customer-facing" in text:
                 raise RuntimeError("Simulated customer agent LLM failure")
-            return original_completions_create(model=model, messages=messages, **kw)
+            return await original_completions_create(model=model, messages=messages, **kw)
 
         mock_client.chat.completions.create = _raise_on_customer
 
@@ -487,11 +487,11 @@ class TestAgentFailureHandling:
 
         original_create = mock_client.chat.completions.create
 
-        def _raise_on_metrics(*, model, messages, **kw):
+        async def _raise_on_metrics(*, model, messages, **kw):
             text = " ".join(m.get("content", "") for m in messages).lower()
             if "north star" in text or ("metrics" in text and "findings" not in text):
                 raise RuntimeError("Simulated metrics failure")
-            return original_create(model=model, messages=messages, **kw)
+            return await original_create(model=model, messages=messages, **kw)
 
         mock_client.chat.completions.create = _raise_on_metrics
 
@@ -516,11 +516,11 @@ class TestAgentFailureHandling:
 
         original_create = mock_client.chat.completions.create
 
-        def _raise_on_competitive(*, model, messages, **kw):
+        async def _raise_on_competitive(*, model, messages, **kw):
             text = " ".join(m.get("content", "") for m in messages).lower()
             if "competitor" in text and "contradictions" not in text and "prd" not in text:
                 raise RuntimeError("Simulated competitive failure")
-            return original_create(model=model, messages=messages, **kw)
+            return await original_create(model=model, messages=messages, **kw)
 
         mock_client.chat.completions.create = _raise_on_competitive
 
@@ -580,7 +580,7 @@ class TestMockClientContract:
         assert "openai" in type(mock_client).__module__
 
     async def test_response_has_choices_and_usage(self, mock_client: MockOpenAIClient):
-        resp = mock_client.chat.completions.create(
+        resp = await mock_client.chat.completions.create(
             model="gpt-4o",
             messages=[{"role": "user", "content": "hello"}],
         )

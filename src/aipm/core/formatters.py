@@ -96,7 +96,6 @@ def _estimate_cost(manifest: dict) -> float:
     completion = usage.get("completion_tokens", 0)
 
     model = manifest.get("model", "")
-    provider = manifest.get("provider", "")
 
     if model in _PRICING:
         rates = _PRICING[model]

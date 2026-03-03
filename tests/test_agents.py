@@ -52,7 +52,7 @@ def _make_openai_mock(content):
     """Return a mock OpenAI client whose chat.completions.create() returns *content* or raises it."""
 
     class _Completions:
-        def create(self, **kwargs):
+        async def create(self, **kwargs):
             if isinstance(content, Exception):
                 raise content
             return _Completion(content)
@@ -77,7 +77,7 @@ def _make_routing_mock(response_map: dict[str, str], default: str | None = None)
     _default = default or json.dumps({"findings": [], "summary": "fallback"})
 
     class _Completions:
-        def create(self, **kwargs):
+        async def create(self, **kwargs):
             messages = kwargs.get("messages", [])
             combined = " ".join(m.get("content", "") for m in messages).lower()
             for keyword, response in response_map.items():

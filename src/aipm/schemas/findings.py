@@ -61,7 +61,10 @@ class Finding(BaseModel):
                     "agent_id": "customer",
                     "type": "insight",
                     "title": "Notification fatigue is the top user pain point",
-                    "description": "Multiple customer interviews and support tickets indicate users are overwhelmed by notification volume, leading to muting and eventual disengagement.",
+                    "description": (
+                        "Multiple customer interviews and support tickets indicate users are "
+                        "overwhelmed by notification volume, leading to muting and eventual disengagement."
+                    ),
                     "impact": "high",
                     "confidence": "validated",
                     "assumptions": ["Users who mute notifications are less likely to return"],

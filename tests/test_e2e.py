@@ -67,7 +67,10 @@ _CUSTOMER_FINDINGS = json.dumps(
                 "agent_id": "customer",
                 "type": "insight",
                 "title": "Notification fatigue is the #1 user complaint",
-                "description": "65% of surveyed SmartNotify users disabled push notifications within 30 days of install.",
+                "description": (
+                    "65% of surveyed SmartNotify users disabled push "
+                    "notifications within 30 days of install."
+                ),
                 "impact": "critical",
                 "confidence": "validated",
                 "assumptions": ["Survey sample is representative"],
@@ -121,7 +124,10 @@ _CUSTOMER_FINDINGS = json.dumps(
                 "metadata": {},
             },
         ],
-        "summary": "Customer research reveals critical notification fatigue and strong demand for intelligent controls.",
+        "summary": (
+            "Customer research reveals critical notification fatigue "
+            "and strong demand for intelligent controls."
+        ),
     }
 )
 
@@ -329,7 +335,10 @@ _FEASIBILITY_FINDINGS = json.dumps(
                 "agent_id": "feasibility",
                 "type": "constraint",
                 "title": "Edge inference requires ONNX model export pipeline",
-                "description": "Running the ML model on-device requires a model-export and OTA update distribution system.",
+                "description": (
+                    "Running the ML model on-device requires a model-export "
+                    "and OTA update distribution system."
+                ),
                 "impact": "high",
                 "confidence": "directional",
                 "assumptions": ["ONNX runtime available on Android API 26+"],
@@ -343,7 +352,10 @@ _FEASIBILITY_FINDINGS = json.dumps(
                 "agent_id": "feasibility",
                 "type": "insight",
                 "title": "Settings screen can reuse existing preference framework",
-                "description": "Android PreferenceFragment covers category toggle and quiet-hours UI with minimal custom code.",
+                "description": (
+                    "Android PreferenceFragment covers category toggle and "
+                    "quiet-hours UI with minimal custom code."
+                ),
                 "impact": "low",
                 "confidence": "validated",
                 "assumptions": [],
@@ -379,7 +391,10 @@ _RISK_FINDINGS = json.dumps(
                 "agent_id": "risk",
                 "type": "risk",
                 "title": "Behavioral data collection requires explicit GDPR consent",
-                "description": "Collecting notification interaction data for ML training constitutes behavioral profiling under GDPR.",
+                "description": (
+                    "Collecting notification interaction data for ML training "
+                    "constitutes behavioral profiling under GDPR."
+                ),
                 "impact": "high",
                 "confidence": "validated",
                 "assumptions": [],
@@ -393,7 +408,10 @@ _RISK_FINDINGS = json.dumps(
                 "agent_id": "risk",
                 "type": "risk",
                 "title": "ML model bias could suppress minority-language notifications",
-                "description": "Training data skewed toward majority language may cause unfair suppression for minority users.",
+                "description": (
+                    "Training data skewed toward majority language may cause "
+                    "unfair suppression for minority users."
+                ),
                 "impact": "high",
                 "confidence": "speculative",
                 "assumptions": ["Training corpus lacks language diversity data"],
@@ -447,7 +465,10 @@ _CRITICAL_RISK_FINDINGS = json.dumps(
                 "agent_id": "risk",
                 "type": "risk",
                 "title": "Unencrypted notification content in on-device cache",
-                "description": "Notification payloads cached to disk in plaintext; readable by any app with storage permission.",
+                "description": (
+                    "Notification payloads cached to disk in plaintext; "
+                    "readable by any app with storage permission."
+                ),
                 "impact": "critical",
                 "confidence": "validated",
                 "assumptions": [],
@@ -544,7 +565,7 @@ def _route_response(messages: list[dict], *, use_critical_risks: bool = False) -
         return _EXPERIMENT_PLAN_RESPONSE
 
     # Risk agent
-    if "privacy risks" in text or "risk assessment" in text or "security risks" in text:
+    if "compliance auditor" in text or "privacy risks" in text or "risk assessment" in text:
         return _CRITICAL_RISK_FINDINGS if use_critical_risks else _RISK_FINDINGS
 
     # Specialist agents
@@ -572,7 +593,7 @@ class _Completions:
     def __init__(self, use_critical_risks: bool = False) -> None:
         self._use_critical_risks = use_critical_risks
 
-    def create(self, *, model: str, messages: list[dict], **kwargs: object) -> _ChatCompletion:
+    async def create(self, *, model: str, messages: list[dict], **kwargs: object) -> _ChatCompletion:
         content = _route_response(messages, use_critical_risks=self._use_critical_risks)
         return _ChatCompletion(content)
 
@@ -669,9 +690,9 @@ async def test_e2e_sample_bundle(tmp_path: Path, mock_llm_client: MockOpenAIClie
     findings_dir = run_dir / "findings"
     assert findings_dir.exists(), "findings/ directory not found"
     # Agent outputs are saved as {agent_id}.json; skip auxiliary files
-    AUXILIARY_FILES = {"risk_gate_result.json", "requirements_backlog.json", "lead_pm_intermediate.json"}
+    auxiliary_files = {"risk_gate_result.json", "requirements_backlog.json", "lead_pm_intermediate.json"}
     findings_files = [
-        f for f in findings_dir.glob("*.json") if f.name not in AUXILIARY_FILES
+        f for f in findings_dir.glob("*.json") if f.name not in auxiliary_files
     ]
     assert len(findings_files) >= 7, f"Expected ≥7 findings files, got {len(findings_files)}"
     for ff in findings_files:
