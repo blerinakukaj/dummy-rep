@@ -16,7 +16,7 @@ class RunConfig(BaseModel):
     input_path: str = Field(..., description="Path to input bundle directory or prompt file")
     output_dir: str = Field(default="output", description="Base directory for pipeline outputs")
     provider: Literal["openai"] = Field(default="openai", description="LLM provider to use")
-    model: str = Field(default="gpt-4o", description="Model identifier to use for LLM calls")
+    model: str = Field(default="gpt-4o-mini", description="Model identifier to use for LLM calls")
     temperature: float = Field(default=0.2, ge=0.0, le=2.0, description="LLM sampling temperature")
     policy_path: str = Field(
         default="src/aipm/policies/default_policy.yaml",
@@ -31,7 +31,7 @@ class RunConfig(BaseModel):
                     "input_path": "input_bundles/sample_bundle",
                     "output_dir": "output",
                     "provider": "openai",
-                    "model": "gpt-4o",
+                    "model": "gpt-4o-mini",
                     "temperature": 0.2,
                     "policy_path": "src/aipm/policies/default_policy.yaml",
                 }

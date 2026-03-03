@@ -75,7 +75,7 @@ class TokenTracker:
         # Match model to pricing key
         pricing_key = model
         if pricing_key not in PRICING:
-            pricing_key = "gpt-4o"
+            pricing_key = "gpt-4o-mini"
 
         rates = PRICING[pricing_key]
         summary = self.get_summary()
@@ -86,7 +86,7 @@ class TokenTracker:
 
         return round(input_cost + output_cost, 6)
 
-    def save_report(self, output_dir: str, run_id: str = "", provider: str = "openai", model: str = "gpt-4o") -> str:
+    def save_report(self, output_dir: str, run_id: str = "", provider: str = "openai", model: str = "gpt-4o-mini") -> str:
         """Save token usage report as token_usage.json.
 
         Args:

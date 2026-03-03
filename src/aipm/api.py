@@ -63,7 +63,7 @@ class RunRequest(BaseModel):
 
     prompt: str = Field(..., description="Product idea or feature description as free text")
     provider: Literal["openai"] = Field(default="openai", description="LLM provider to use")
-    model: str = Field(default="gpt-4o", description="Model identifier")
+    model: str = Field(default="gpt-4o-mini", description="Model identifier")
     temperature: float = Field(default=0.2, ge=0.0, le=2.0, description="LLM sampling temperature")
     policy_path: str = Field(default="src/aipm/policies/default_policy.yaml", description="Path to policy YAML")
     output_dir: str = Field(default="output", description="Base output directory")
@@ -139,7 +139,7 @@ def _start_run(
     background_tasks: BackgroundTasks,
     input_path: str,
     provider: str = "openai",
-    model: str = "gpt-4o",
+    model: str = "gpt-4o-mini",
     temperature: float = 0.2,
     policy_path: str = "src/aipm/policies/default_policy.yaml",
     output_dir: str = "output",
@@ -184,51 +184,52 @@ def _get_run_or_404(run_id: str) -> dict:
 @app.post("/api/v1/run", response_model=RunStartedResponse, status_code=202)
 async def start_run(
     background_tasks: BackgroundTasks,
-    body: RunRequest | None = None,
-    file: UploadFile | None = None,
+    body: RunRequest = ...,
 ) -> RunStartedResponse:
-    """Start a pipeline run from a JSON prompt or a zip bundle upload.
+    """Start a pipeline run from a JSON prompt.
 
-    Accepts **either** a JSON body `{prompt: str, ...}` **or** a multipart
-    file upload of a `.zip` bundle directory (not both).
+    Accepts a JSON body `{prompt: str, ...}`.
     Returns immediately with `{run_id, status: "started"}`.
     """
-    if file is not None:
-        # Multipart zip upload — extract to a temp directory and use it as input
-        if not file.filename or not file.filename.endswith(".zip"):
-            raise HTTPException(status_code=400, detail="Uploaded file must be a .zip archive")
-
-        tmp_dir = tempfile.mkdtemp(prefix="aipm_bundle_")
-        zip_path = Path(tmp_dir) / "bundle.zip"
-        zip_path.write_bytes(await file.read())
-
-        try:
-            with zipfile.ZipFile(zip_path, "r") as zf:
-                zf.extractall(tmp_dir)
-        except zipfile.BadZipFile:
-            raise HTTPException(status_code=400, detail="Uploaded file is not a valid zip archive")
-
-        # Use the extracted directory as input_path (the zip root)
-        input_path = tmp_dir
-        run_id = _start_run(background_tasks, input_path)
-
-    elif body is not None:
-        run_id = _start_run(
-            background_tasks,
-            input_path=body.prompt,
-            provider=body.provider,
-            model=body.model,
-            temperature=body.temperature,
-            policy_path=body.policy_path,
-            output_dir=body.output_dir,
-        )
-    else:
-        raise HTTPException(
-            status_code=400,
-            detail="Provide either a JSON body with 'prompt' or a multipart 'file' upload",
-        )
-
+    run_id = _start_run(
+        background_tasks,
+        input_path=body.prompt,
+        provider=body.provider,
+        model=body.model,
+        temperature=body.temperature,
+        policy_path=body.policy_path,
+        output_dir=body.output_dir,
+    )
     logger.info("Accepted run_id=%s", run_id)
+    return RunStartedResponse(run_id=run_id)
+
+
+@app.post("/api/v1/run/upload", response_model=RunStartedResponse, status_code=202)
+async def start_run_upload(
+    background_tasks: BackgroundTasks,
+    file: UploadFile = ...,
+) -> RunStartedResponse:
+    """Start a pipeline run from a zip bundle upload.
+
+    Accepts a multipart file upload of a `.zip` bundle directory.
+    Returns immediately with `{run_id, status: "started"}`.
+    """
+    if not file.filename or not file.filename.endswith(".zip"):
+        raise HTTPException(status_code=400, detail="Uploaded file must be a .zip archive")
+
+    tmp_dir = tempfile.mkdtemp(prefix="aipm_bundle_")
+    zip_path = Path(tmp_dir) / "bundle.zip"
+    zip_path.write_bytes(await file.read())
+
+    try:
+        with zipfile.ZipFile(zip_path, "r") as zf:
+            zf.extractall(tmp_dir)
+    except zipfile.BadZipFile:
+        raise HTTPException(status_code=400, detail="Uploaded file is not a valid zip archive")
+
+    input_path = tmp_dir
+    run_id = _start_run(background_tasks, input_path)
+    logger.info("Accepted upload run_id=%s", run_id)
     return RunStartedResponse(run_id=run_id)
 
 

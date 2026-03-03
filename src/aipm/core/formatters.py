@@ -100,7 +100,7 @@ def _estimate_cost(manifest: dict) -> float:
     if model in _PRICING:
         rates = _PRICING[model]
     else:
-        rates = _PRICING["gpt-4o"]
+        rates = _PRICING["gpt-4o-mini"]
 
     return round(
         (prompt / 1_000_000) * rates["input"] + (completion / 1_000_000) * rates["output"],

@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 # Model ID mappings per provider
 MODELS: dict[str, dict[str, str]] = {
     "openai": {
-        "default": "gpt-4o",
+        "default": "gpt-4o-mini",
         "fast": "gpt-4o-mini",
     },
 }
