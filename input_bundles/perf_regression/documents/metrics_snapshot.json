@@ -1,0 +1,15 @@
+{
+  "dashboard_p95_load_time_ms": 4800,
+  "dashboard_p95_baseline_ms": 1200,
+  "api_p95_latency_ms": 380,
+  "api_p95_baseline_ms": 120,
+  "websocket_crash_rate_per_day": 3,
+  "websocket_memory_leak_mb_per_hour": 2,
+  "error_rate_pct": 2.3,
+  "error_rate_baseline_pct": 0.4,
+  "customer_support_tickets_last_7_days": 89,
+  "customer_support_tickets_baseline_7_days": 12,
+  "nps_current": 18,
+  "nps_baseline": 52,
+  "uptime_last_30_days": 0.9934
+}

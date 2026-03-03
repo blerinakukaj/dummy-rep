@@ -1,0 +1,52 @@
+[
+  {
+    "id": "CM-301",
+    "title": "Design and implement usage-based billing engine",
+    "description": "Migrate from flat monthly pricing ($49/$99/$199 tiers) to consumption-based pricing where customers pay per metric ingested and per dashboard query. Requires a metering pipeline that tracks usage in real time, a rating engine to apply pricing rules, and integration with Stripe for invoicing.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["feature", "billing", "pricing"],
+    "created_at": "2025-07-15",
+    "source": "jira"
+  },
+  {
+    "id": "CM-302",
+    "title": "Build pricing calculator and cost estimator for customers",
+    "description": "Customers migrating to usage-based pricing need transparency on expected costs. Build an in-app pricing calculator that estimates monthly costs based on current usage patterns, and a predictive cost dashboard showing projected spend for the next billing cycle.",
+    "status": "open",
+    "priority": "high",
+    "labels": ["feature", "ux", "pricing"],
+    "created_at": "2025-08-01",
+    "source": "jira"
+  },
+  {
+    "id": "CM-303",
+    "title": "Implement usage alerts and spending caps",
+    "description": "To prevent bill shock during pricing transition, customers need configurable spending alerts (50%, 75%, 90%, 100% of budget) and optional hard spending caps that pause non-critical data ingestion when exceeded. Must handle graceful degradation without data loss.",
+    "status": "open",
+    "priority": "high",
+    "labels": ["feature", "billing", "alerts"],
+    "created_at": "2025-08-20",
+    "source": "jira"
+  },
+  {
+    "id": "CM-304",
+    "title": "Grandfather existing customers with 12-month price lock",
+    "description": "Product and legal agreed to honor current pricing for existing customers for 12 months after the switch. Need a grandfathering system that tracks customer cohorts, applies correct pricing tiers, and automatically transitions customers after the lock period with 60-day advance notice.",
+    "status": "open",
+    "priority": "high",
+    "labels": ["billing", "migration", "legal"],
+    "created_at": "2025-09-10",
+    "source": "jira"
+  },
+  {
+    "id": "CM-305",
+    "title": "Customer churn risk analysis for pricing migration",
+    "description": "Finance and product need a model that identifies which customer segments will see cost increases vs. decreases under the new pricing. Flag accounts where projected spend increases >30% for proactive account management outreach. CEOs concern is losing mid-market accounts during transition.",
+    "status": "open",
+    "priority": "medium",
+    "labels": ["analytics", "pricing", "retention"],
+    "created_at": "2025-09-25",
+    "source": "jira"
+  }
+]

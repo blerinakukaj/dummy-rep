@@ -1,0 +1,13 @@
+{
+  "total_tenants": 340,
+  "enterprise_tenants": 12,
+  "enterprise_pipeline_value_usd": 2800000,
+  "avg_seats_per_enterprise": 850,
+  "monthly_active_users": 28000,
+  "churn_rate_enterprise": 0.02,
+  "churn_rate_smb": 0.09,
+  "p99_api_latency_ms": 1200,
+  "uptime_last_90_days": 0.9987,
+  "soc2_findings_open": 4,
+  "avg_onboarding_days_enterprise": 45
+}

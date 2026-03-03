@@ -1,0 +1,5 @@
+{
+  "product_name": "PageSpeed",
+  "description": "Web performance monitoring and optimization platform experiencing a critical regression in core page load metrics",
+  "input_type": "bundle"
+}

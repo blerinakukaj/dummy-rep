@@ -1,0 +1,17 @@
+{
+  "total_customers": 1850,
+  "mrr_usd": 312000,
+  "avg_revenue_per_account_usd": 168.65,
+  "customers_by_tier": {
+    "starter_49": 1200,
+    "pro_99": 480,
+    "business_199": 140,
+    "enterprise_custom": 30
+  },
+  "projected_churn_increase_pct": 8.5,
+  "customers_with_cost_increase": 620,
+  "customers_with_cost_decrease": 1230,
+  "avg_cost_increase_pct": 45,
+  "avg_cost_decrease_pct": 22,
+  "nps_score": 42
+}

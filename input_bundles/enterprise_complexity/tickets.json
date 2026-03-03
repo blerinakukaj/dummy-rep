@@ -1,0 +1,52 @@
+[
+  {
+    "id": "ENT-201",
+    "title": "Implement SSO/SAML integration for enterprise onboarding",
+    "description": "Enterprise prospects require SSO via SAML 2.0 and OIDC before signing contracts. Current authentication only supports email/password. Need to integrate with Okta, Azure AD, and OneLogin. Must support IdP-initiated and SP-initiated flows with JIT provisioning.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["feature", "auth", "enterprise"],
+    "created_at": "2025-08-20",
+    "source": "jira"
+  },
+  {
+    "id": "ENT-202",
+    "title": "Multi-tenant data isolation audit and remediation",
+    "description": "Security audit flagged that tenant data isolation relies on application-level row filtering rather than schema or database-level separation. Two Fortune-500 prospects require SOC 2 Type II compliance before procurement approval. Need to evaluate and implement proper isolation boundaries.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["security", "compliance", "architecture"],
+    "created_at": "2025-09-05",
+    "source": "jira"
+  },
+  {
+    "id": "ENT-203",
+    "title": "Role-based access control with custom permission sets",
+    "description": "Enterprise customers need fine-grained RBAC beyond our current admin/member/viewer model. Requirements include custom role definitions, permission inheritance, resource-level access controls, and audit logging of all permission changes.",
+    "status": "in_progress",
+    "priority": "high",
+    "labels": ["feature", "auth", "enterprise"],
+    "created_at": "2025-09-18",
+    "source": "jira"
+  },
+  {
+    "id": "ENT-204",
+    "title": "Data residency controls for EU and APAC regions",
+    "description": "GDPR and data sovereignty requirements mean enterprise customers must choose where their data is stored. Need to implement region-pinned storage with cross-region replication disabled by default. Affects database, file storage, and search indices.",
+    "status": "open",
+    "priority": "high",
+    "labels": ["compliance", "infrastructure", "enterprise"],
+    "created_at": "2025-10-01",
+    "source": "jira"
+  },
+  {
+    "id": "ENT-205",
+    "title": "White-label theming and custom domain support",
+    "description": "Three enterprise prospects require white-label branding with custom logos, color schemes, and domain names (app.customer.com). Current architecture serves all tenants from a single domain and shared asset pipeline.",
+    "status": "open",
+    "priority": "medium",
+    "labels": ["feature", "frontend", "enterprise"],
+    "created_at": "2025-10-22",
+    "source": "jira"
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "product_name": "DataPipe",
+  "description": "Real-time data pipeline platform facing critical technical dependency risks from deprecated libraries, vendor lock-in, and end-of-life infrastructure",
+  "input_type": "bundle"
+}

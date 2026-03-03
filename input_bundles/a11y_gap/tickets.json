@@ -1,0 +1,52 @@
+[
+  {
+    "id": "LP-501",
+    "title": "Screen reader cannot navigate course catalog or enrollment flow",
+    "description": "JAWS and NVDA screen readers cannot navigate the course catalog grid or complete the enrollment flow. The course cards use div-based layouts without ARIA roles, the catalog filter controls are custom dropdowns without keyboard support, and the enrollment button is a styled div instead of a semantic button. Affects all visually impaired users.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["bug", "a11y", "screen-reader"],
+    "created_at": "2025-09-01",
+    "source": "jira"
+  },
+  {
+    "id": "LP-502",
+    "title": "Video player lacks captions, transcripts, and keyboard controls",
+    "description": "The custom video player used for course content has no closed captions, no transcripts, and cannot be operated via keyboard. Play/pause, volume, and seek controls require mouse interaction. This blocks deaf and hard-of-hearing users, motor-impaired users, and fails WCAG 1.2.2, 1.2.3, and 2.1.1.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["bug", "a11y", "video", "wcag"],
+    "created_at": "2025-09-10",
+    "source": "jira"
+  },
+  {
+    "id": "LP-503",
+    "title": "Color contrast failures across 60% of UI components",
+    "description": "Accessibility audit found that 60% of text elements fail WCAG AA contrast ratios (4.5:1 for normal text, 3:1 for large text). Primary offenders: light gray text on white backgrounds for secondary labels, orange-on-white for warning messages, and the brand purple (#8B5CF6) used for links fails against the light gray (#F3F4F6) card backgrounds.",
+    "status": "open",
+    "priority": "high",
+    "labels": ["bug", "a11y", "design", "wcag"],
+    "created_at": "2025-09-20",
+    "source": "jira"
+  },
+  {
+    "id": "LP-504",
+    "title": "Quiz and assessment forms not accessible to assistive technologies",
+    "description": "Quiz forms use custom radio buttons and checkboxes that are invisible to screen readers. Error messages for incorrect answers are conveyed only through color (red border) without text descriptions. Timer countdowns are not announced to screen readers. Focus management after form submission is broken — focus jumps to the top of the page instead of the results section.",
+    "status": "open",
+    "priority": "high",
+    "labels": ["bug", "a11y", "forms", "wcag"],
+    "created_at": "2025-10-01",
+    "source": "jira"
+  },
+  {
+    "id": "LP-505",
+    "title": "Implement VPAT and publish accessibility conformance statement",
+    "description": "Government and education sector prospects require a Voluntary Product Accessibility Template (VPAT) documenting WCAG 2.1 AA conformance. Currently no such document exists. Need to conduct a full accessibility audit, create the VPAT, and publish an accessibility statement on the marketing site.",
+    "status": "open",
+    "priority": "high",
+    "labels": ["compliance", "a11y", "documentation"],
+    "created_at": "2025-10-15",
+    "source": "jira"
+  }
+]

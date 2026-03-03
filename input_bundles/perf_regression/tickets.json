@@ -1,0 +1,52 @@
+[
+  {
+    "id": "PS-401",
+    "title": "Dashboard load time regressed from 1.2s to 4.8s after v3.2 deploy",
+    "description": "After deploying v3.2 which included the new charting library migration, the main analytics dashboard p95 load time jumped from 1.2s to 4.8s. The regression affects all dashboard views with more than 10 data series. Roll-back is not feasible as v3.2 includes critical security patches. Root cause appears to be unoptimized SVG rendering in the new charting library.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["bug", "performance", "frontend"],
+    "created_at": "2025-10-05",
+    "source": "jira"
+  },
+  {
+    "id": "PS-402",
+    "title": "API response times degraded 3x after database migration",
+    "description": "The migration from PostgreSQL 14 to 16 introduced a query planner regression on our most frequent query pattern (time-series aggregation with window functions). p95 API latency went from 120ms to 380ms. Database team suspects the new planner chooses a less efficient join strategy for our partitioned tables.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["bug", "performance", "backend", "database"],
+    "created_at": "2025-10-08",
+    "source": "jira"
+  },
+  {
+    "id": "PS-403",
+    "title": "Memory leak in real-time WebSocket connections",
+    "description": "Real-time monitoring dashboard connections leak approximately 2MB per hour per connection. After 8 hours, the WebSocket server OOMs and crashes, dropping all active connections. Affects customers using the live monitoring dashboard. Heap profiling shows event listener accumulation in the metric aggregation pipeline.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["bug", "performance", "backend", "stability"],
+    "created_at": "2025-10-12",
+    "source": "jira"
+  },
+  {
+    "id": "PS-404",
+    "title": "Implement performance regression detection in CI pipeline",
+    "description": "The v3.2 regression could have been caught with automated performance benchmarking in CI. Implement a benchmark suite that runs on every PR, compares against baseline, and blocks merges if p95 latency regresses more than 15% or memory usage increases more than 10%.",
+    "status": "open",
+    "priority": "high",
+    "labels": ["improvement", "ci", "performance"],
+    "created_at": "2025-10-15",
+    "source": "jira"
+  },
+  {
+    "id": "PS-405",
+    "title": "Customer-facing status page showing real-time performance metrics",
+    "description": "During the regression incident, customers had no visibility into the degradation until they experienced it. Build a public status page that shows real-time p50/p95/p99 latencies, error rates, and uptime. Include historical data for the last 90 days.",
+    "status": "open",
+    "priority": "medium",
+    "labels": ["feature", "transparency", "customer-trust"],
+    "created_at": "2025-10-20",
+    "source": "jira"
+  }
+]

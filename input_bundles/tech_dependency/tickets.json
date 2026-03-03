@@ -1,0 +1,52 @@
+[
+  {
+    "id": "DP-601",
+    "title": "Migrate from deprecated Apache Kafka 2.x to Kafka 3.7+",
+    "description": "Core message broker runs Kafka 2.8 which reaches end-of-life in Q1 2026. The Kafka 2.x client libraries have known vulnerabilities (CVE-2023-25194) and are incompatible with the new KRaft consensus protocol needed to eliminate ZooKeeper dependency. Migration requires updating all 14 producer services and 22 consumer services, plus rewriting custom partition assignors.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["tech-debt", "security", "infrastructure"],
+    "created_at": "2025-08-10",
+    "source": "jira"
+  },
+  {
+    "id": "DP-602",
+    "title": "Eliminate vendor lock-in on proprietary transformation engine",
+    "description": "The data transformation layer relies on VendorX's proprietary ETL SDK ($180K/year license). VendorX was acquired last quarter and the new parent company announced a 3x price increase effective January 2026. Need to evaluate open-source alternatives (Apache Beam, dbt, custom Flink jobs) and plan migration off the proprietary SDK.",
+    "status": "open",
+    "priority": "critical",
+    "labels": ["tech-debt", "vendor", "cost"],
+    "created_at": "2025-09-01",
+    "source": "jira"
+  },
+  {
+    "id": "DP-603",
+    "title": "Python 3.9 EOL migration for all pipeline workers",
+    "description": "Pipeline worker services run Python 3.9 which reaches end-of-life October 2025. Need to upgrade to Python 3.12 across 8 services. Key blockers: numpy 1.x dependency incompatible with 3.12, custom C extensions need recompilation, and the internal ML library uses removed asyncio APIs (loop parameter).",
+    "status": "in_progress",
+    "priority": "high",
+    "labels": ["tech-debt", "python", "migration"],
+    "created_at": "2025-09-15",
+    "source": "jira"
+  },
+  {
+    "id": "DP-604",
+    "title": "Replace single-region Redis cluster with multi-region caching",
+    "description": "The entire caching layer is a single Redis 6 cluster in us-east-1. Redis 6 EOL is March 2026. Additionally, customers in EU and APAC regions experience 200ms+ cache miss latency. Need to migrate to Redis 7+ with multi-region replication or evaluate alternative caching solutions (DragonflyDB, KeyDB).",
+    "status": "open",
+    "priority": "high",
+    "labels": ["infrastructure", "latency", "tech-debt"],
+    "created_at": "2025-10-01",
+    "source": "jira"
+  },
+  {
+    "id": "DP-605",
+    "title": "Create dependency health dashboard and automated CVE alerting",
+    "description": "There is no centralized view of dependency health across the platform. Engineers discover EOL and CVE issues reactively. Build a dashboard showing all runtime dependencies with versions, EOL dates, known CVEs, and upgrade paths. Integrate with GitHub Dependabot and Snyk for automated alerting.",
+    "status": "open",
+    "priority": "medium",
+    "labels": ["tooling", "security", "observability"],
+    "created_at": "2025-10-20",
+    "source": "jira"
+  }
+]

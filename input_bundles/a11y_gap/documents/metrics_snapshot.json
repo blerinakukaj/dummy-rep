@@ -1,0 +1,15 @@
+{
+  "total_users": 85000,
+  "users_with_registered_disabilities_pct": 8.5,
+  "wcag_violations_critical": 12,
+  "wcag_violations_serious": 23,
+  "wcag_violations_moderate": 12,
+  "pages_audited": 15,
+  "pages_passing_aa": 2,
+  "screen_reader_task_completion_rate": 0.15,
+  "keyboard_only_task_completion_rate": 0.30,
+  "gov_edu_pipeline_value_usd": 1200000,
+  "deals_blocked_by_vpat": 4,
+  "support_tickets_a11y_last_90_days": 34,
+  "nps_users_with_disabilities": -12
+}

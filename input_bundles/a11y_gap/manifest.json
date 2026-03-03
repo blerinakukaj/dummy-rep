@@ -1,0 +1,5 @@
+{
+  "product_name": "LearnPath",
+  "description": "Online learning management system with significant WCAG 2.1 AA accessibility gaps affecting visually impaired and motor-disabled users",
+  "input_type": "bundle"
+}
