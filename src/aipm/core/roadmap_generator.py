@@ -262,30 +262,14 @@ class RoadmapGenerator:
     # ------------------------------------------------------------------
 
     async def _call_llm(self, system: str, user: str) -> str:
-        """Call the LLM using the appropriate provider API."""
-        client_type = type(self.llm_client).__module__
-
-        if "openai" in client_type:
-            response = await self.llm_client.chat.completions.create(
-                model=self.run_config.model,
-                messages=[
-                    {"role": "system", "content": system},
-                    {"role": "user", "content": user},
-                ],
-                response_format={"type": "json_object"},
-                temperature=self.run_config.temperature,
-            )
-            return response.choices[0].message.content or ""
-
-        elif "anthropic" in client_type:
-            response = await self.llm_client.messages.create(
-                model=self.run_config.model,
-                max_tokens=4096,
-                system=system + "\n\nRespond with valid JSON only.",
-                messages=[{"role": "user", "content": user}],
-                temperature=self.run_config.temperature,
-            )
-            return response.content[0].text if response.content else ""
-
-        else:
-            raise ValueError(f"Unsupported LLM client type: {type(self.llm_client)}")
+        """Call the LLM using the OpenAI provider API."""
+        response = await self.llm_client.chat.completions.create(
+            model=self.run_config.model,
+            messages=[
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+            response_format={"type": "json_object"},
+            temperature=self.run_config.temperature,
+        )
+        return response.choices[0].message.content or ""

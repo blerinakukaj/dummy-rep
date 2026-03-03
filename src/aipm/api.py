@@ -62,7 +62,7 @@ class RunRequest(BaseModel):
     """JSON body for starting a pipeline run from a text prompt."""
 
     prompt: str = Field(..., description="Product idea or feature description as free text")
-    provider: Literal["openai", "anthropic"] = Field(default="openai", description="LLM provider to use")
+    provider: Literal["openai"] = Field(default="openai", description="LLM provider to use")
     model: str = Field(default="gpt-4o", description="Model identifier")
     temperature: float = Field(default=0.2, ge=0.0, le=2.0, description="LLM sampling temperature")
     policy_path: str = Field(default="src/aipm/policies/default_policy.yaml", description="Path to policy YAML")

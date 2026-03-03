@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 # Approximate pricing per 1M tokens (USD)
 PRICING = {
     "gpt-4o": {"input": 2.50, "output": 10.00},
-    "claude-sonnet": {"input": 3.00, "output": 15.00},
+    "gpt-4o-mini": {"input": 0.15, "output": 0.60},
 }
 
 
@@ -66,7 +66,7 @@ class TokenTracker:
         if the model is not recognized.
 
         Args:
-            provider: LLM provider name (openai or anthropic).
+            provider: LLM provider name.
             model: Model identifier.
 
         Returns:
@@ -75,10 +75,7 @@ class TokenTracker:
         # Match model to pricing key
         pricing_key = model
         if pricing_key not in PRICING:
-            if "claude" in model.lower() or provider == "anthropic":
-                pricing_key = "claude-sonnet"
-            else:
-                pricing_key = "gpt-4o"
+            pricing_key = "gpt-4o"
 
         rates = PRICING[pricing_key]
         summary = self.get_summary()

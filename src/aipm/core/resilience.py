@@ -72,11 +72,6 @@ def _is_retryable(exc: Exception) -> bool:
         if exc_type in ("RateLimitError", "APITimeoutError", "APIConnectionError"):
             return True
 
-    # Anthropic transient / rate-limit errors
-    if "anthropic" in exc_module:
-        if exc_type in ("RateLimitError", "APIStatusError", "APITimeoutError", "APIConnectionError"):
-            return True
-
     # Generic connection / timeout errors
     if exc_type in ("TimeoutError", "ConnectionError"):
         return True

@@ -6,7 +6,7 @@ policy configurations, and output artifacts.
 Usage:
     python scripts/demo.py                 # Run all demos
     python scripts/demo.py --demo 1        # Run a specific demo (1-5)
-    python scripts/demo.py --provider anthropic --model claude-3-5-sonnet-20241022
+    python scripts/demo.py --model gpt-4o-mini
 """
 
 import argparse
@@ -366,8 +366,7 @@ def main() -> None:
               python scripts/demo.py                          # Run all demos
               python scripts/demo.py --demo 1                 # Privacy risk only
               python scripts/demo.py --demo 4                 # Policy comparison
-              python scripts/demo.py --provider anthropic \\
-                  --model claude-3-5-sonnet-20241022           # Use Anthropic
+              python scripts/demo.py --model gpt-4o-mini      # Use a different model
         """),
     )
     parser.add_argument(
@@ -381,7 +380,7 @@ def main() -> None:
         "--provider",
         type=str,
         default="openai",
-        help="LLM provider: openai or anthropic (default: openai)",
+        help="LLM provider (default: openai)",
     )
     parser.add_argument(
         "--model",

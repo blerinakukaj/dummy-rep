@@ -40,7 +40,7 @@ def _setup_logging(verbose: bool) -> None:
 def run(
     input_path: str = typer.Argument(..., help="Path to input bundle directory or prompt file"),
     output_dir: str = typer.Option("output", help="Output directory"),
-    provider: str = typer.Option("openai", help="LLM provider: openai or anthropic"),
+    provider: str = typer.Option("openai", help="LLM provider"),
     model: str = typer.Option("gpt-4o", help="Model to use"),
     temperature: float = typer.Option(0.2, help="LLM temperature"),
     policy: str = typer.Option("src/aipm/policies/default_policy.yaml", help="Policy YAML path"),
@@ -185,7 +185,7 @@ def validate(
 def prompt(
     prompt_text: str = typer.Argument(..., help="Product idea as text"),
     output_dir: str = typer.Option("output", help="Output directory"),
-    provider: str = typer.Option("openai", help="LLM provider: openai or anthropic"),
+    provider: str = typer.Option("openai", help="LLM provider"),
     model: str = typer.Option("gpt-4o", help="Model to use"),
     policy: str = typer.Option("src/aipm/policies/default_policy.yaml", help="Policy YAML path"),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Enable debug logging"),

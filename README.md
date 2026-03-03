@@ -29,7 +29,7 @@ The pipeline runs in four stages:
 
 ### Prerequisites
 - Python 3.12+
-- An OpenAI API key and/or Anthropic API key
+- An OpenAI API key
 
 ### Setup
 
@@ -48,7 +48,7 @@ pip install -e ".[dev]"
 
 # Configure environment
 cp .env.example .env
-# Edit .env and add your OPENAI_API_KEY and/or ANTHROPIC_API_KEY
+# Edit .env and add your OPENAI_API_KEY
 ```
 
 ### Usage
@@ -60,8 +60,8 @@ aipm run input_bundles/sample_bundle/
 # Run from a text prompt
 aipm prompt "Build a notification prioritization system using ML"
 
-# Run with a specific provider and model
-aipm run input_bundles/sample_bundle/ --provider anthropic --model claude-sonnet-4-20250514
+# Run with a specific model
+aipm run input_bundles/sample_bundle/ --model gpt-4o-mini
 
 # Custom policy
 aipm run input_bundles/sample_bundle/ --policy src/aipm/policies/strict_privacy_policy.yaml
@@ -249,21 +249,20 @@ docker run --rm \
   -v "$(pwd)/output:/app/output" \
   aipm-api aipm prompt "Build a smart notification prioritisation system"
 
-# Use Anthropic provider
+# Use a different model
 docker run --rm \
   --env-file .env \
   -v "$(pwd)/input_bundles:/app/input_bundles" \
   -v "$(pwd)/output:/app/output" \
   aipm-api aipm run /app/input_bundles/sample_bundle/ \
-    --provider anthropic --model claude-sonnet-4-20250514
+    --model gpt-4o-mini
 ```
 
 ### Environment Variables
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `OPENAI_API_KEY` | OpenAI API key (for GPT-4o) | If using OpenAI provider |
-| `ANTHROPIC_API_KEY` | Anthropic API key (for Claude) | If using Anthropic provider |
+| `OPENAI_API_KEY` | OpenAI API key (for GPT-4o) | Yes |
 
 ## Demo Scripts
 

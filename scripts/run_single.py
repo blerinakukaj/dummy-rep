@@ -3,7 +3,7 @@
 Usage:
     python scripts/run_single.py input_bundles/sample_bundle/
     python scripts/run_single.py input_bundles/privacy_risk/ --policy src/aipm/policies/strict_privacy_policy.yaml
-    python scripts/run_single.py input_bundles/metric_drop/ --provider anthropic --model claude-3-5-sonnet-20241022
+    python scripts/run_single.py input_bundles/metric_drop/ --model gpt-4o-mini
     python scripts/run_single.py --prompt "A mobile app for tracking daily water intake"
 """
 
@@ -176,7 +176,7 @@ def main() -> None:
         "--provider",
         type=str,
         default="openai",
-        help="LLM provider: openai or anthropic (default: openai)",
+        help="LLM provider (default: openai)",
     )
     parser.add_argument(
         "--model",

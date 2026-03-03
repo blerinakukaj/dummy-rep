@@ -172,33 +172,17 @@ class ExperimentPlanGenerator:
     # ------------------------------------------------------------------
 
     async def _call_llm(self, system: str, user: str) -> str:
-        """Call the LLM using the configured provider."""
-        client_module = type(self.llm_client).__module__
-
-        if "openai" in client_module:
-            response = await self.llm_client.chat.completions.create(
-                model=self.run_config.model,
-                messages=[
-                    {"role": "system", "content": system},
-                    {"role": "user", "content": user},
-                ],
-                response_format={"type": "json_object"},
-                temperature=0.3,
-            )
-            return response.choices[0].message.content or ""
-
-        elif "anthropic" in client_module:
-            response = await self.llm_client.messages.create(
-                model=self.run_config.model,
-                max_tokens=4096,
-                system=system + "\n\nRespond with valid JSON only.",
-                messages=[{"role": "user", "content": user}],
-                temperature=0.3,
-            )
-            return response.content[0].text if response.content else ""
-
-        else:
-            raise ValueError(f"Unsupported LLM client type: {type(self.llm_client)}")
+        """Call the LLM using the OpenAI provider."""
+        response = await self.llm_client.chat.completions.create(
+            model=self.run_config.model,
+            messages=[
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+            response_format={"type": "json_object"},
+            temperature=0.3,
+        )
+        return response.choices[0].message.content or ""
 
     # ------------------------------------------------------------------
     # Public API

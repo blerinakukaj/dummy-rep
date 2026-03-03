@@ -18,10 +18,6 @@ MODELS: dict[str, dict[str, str]] = {
         "default": "gpt-4o",
         "fast": "gpt-4o-mini",
     },
-    "anthropic": {
-        "default": "claude-sonnet-4-20250514",
-        "powerful": "claude-opus-4-20250514",
-    },
 }
 
 
@@ -31,14 +27,14 @@ def load_env() -> None:
     logger.debug("Loaded environment variables from .env")
 
 
-def get_llm_client(provider: str) -> Any:
-    """Return an initialized LLM client for the given provider.
+def get_llm_client(provider: str = "openai") -> Any:
+    """Return an initialized OpenAI LLM client.
 
     Args:
-        provider: Either "openai" or "anthropic".
+        provider: Must be "openai".
 
     Returns:
-        An OpenAI or Anthropic client instance.
+        An OpenAI client instance.
 
     Raises:
         ValueError: If the provider is not supported.
@@ -55,17 +51,8 @@ def get_llm_client(provider: str) -> Any:
         logger.info("Initializing OpenAI client")
         return openai.OpenAI(api_key=api_key)
 
-    elif provider == "anthropic":
-        import anthropic
-
-        api_key = os.environ.get("ANTHROPIC_API_KEY")
-        if not api_key:
-            raise OSError("ANTHROPIC_API_KEY is not set. Add it to your .env file.")
-        logger.info("Initializing Anthropic client")
-        return anthropic.Anthropic(api_key=api_key)
-
     else:
-        raise ValueError(f"Unsupported provider: '{provider}'. Use 'openai' or 'anthropic'.")
+        raise ValueError(f"Unsupported provider: '{provider}'. Use 'openai'.")
 
 
 def load_run_config(input_path: str, output_dir: str = "output", **overrides: object) -> RunConfig:

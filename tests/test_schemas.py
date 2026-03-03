@@ -504,8 +504,8 @@ class TestRunConfig:
             run_id="custom-run-id",
             input_path="/data/my_bundle",
             output_dir="/data/output",
-            provider="anthropic",
-            model="claude-sonnet-4-20250514",
+            provider="openai",
+            model="gpt-4o-mini",
             temperature=0.7,
             policy_path="policies/strict_privacy_policy.yaml",
         )
@@ -513,8 +513,8 @@ class TestRunConfig:
         assert config.run_id == "custom-run-id"
         assert config.input_path == "/data/my_bundle"
         assert config.output_dir == "/data/output"
-        assert config.provider == "anthropic"
-        assert config.model == "claude-sonnet-4-20250514"
+        assert config.provider == "openai"
+        assert config.model == "gpt-4o-mini"
         assert config.temperature == 0.7
         assert config.policy_path == "policies/strict_privacy_policy.yaml"
 

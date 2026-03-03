@@ -38,7 +38,7 @@ _IMPACT_BADGE: dict[str, str] = {
 # Cost estimation — USD per 1 M tokens
 _PRICING: dict[str, dict[str, float]] = {
     "gpt-4o": {"input": 2.50, "output": 10.00},
-    "claude-sonnet": {"input": 3.00, "output": 15.00},
+    "gpt-4o-mini": {"input": 0.15, "output": 0.60},
 }
 
 
@@ -98,10 +98,10 @@ def _estimate_cost(manifest: dict) -> float:
     model = manifest.get("model", "")
     provider = manifest.get("provider", "")
 
-    if "claude" in model.lower() or provider == "anthropic":
-        rates = _PRICING["claude-sonnet"]
+    if model in _PRICING:
+        rates = _PRICING[model]
     else:
-        rates = _PRICING.get(model, _PRICING["gpt-4o"])
+        rates = _PRICING["gpt-4o"]
 
     return round(
         (prompt / 1_000_000) * rates["input"] + (completion / 1_000_000) * rates["output"],

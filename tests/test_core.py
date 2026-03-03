@@ -44,15 +44,15 @@ class TestConfig:
         config = load_run_config(
             "my_bundle",
             output_dir="/tmp/out",
-            provider="anthropic",
-            model="claude-sonnet-4-20250514",
+            provider="openai",
+            model="gpt-4o-mini",
             temperature=0.5,
         )
 
         assert config.input_path == "my_bundle"
         assert config.output_dir == "/tmp/out"
-        assert config.provider == "anthropic"
-        assert config.model == "claude-sonnet-4-20250514"
+        assert config.provider == "openai"
+        assert config.model == "gpt-4o-mini"
         assert config.temperature == 0.5
 
     def test_ensure_output_dirs(self, tmp_path):
@@ -80,20 +80,6 @@ class TestConfig:
         mock_openai_class.assert_called_once_with(api_key="test-key-123")
         assert client == mock_openai_class.return_value
 
-    def test_get_llm_client_anthropic(self, monkeypatch):
-        """Mock Anthropic and verify client creation."""
-        monkeypatch.setenv("ANTHROPIC_API_KEY", "test-key-456")
-
-        mock_anthropic_class = MagicMock()
-        mock_module = MagicMock()
-        mock_module.Anthropic = mock_anthropic_class
-
-        with patch.dict("sys.modules", {"anthropic": mock_module}):
-            client = get_llm_client("anthropic")
-
-        mock_anthropic_class.assert_called_once_with(api_key="test-key-456")
-        assert client == mock_anthropic_class.return_value
-
     def test_get_llm_client_missing_key(self, monkeypatch):
         """Verify error when API key is missing."""
         monkeypatch.delenv("OPENAI_API_KEY", raising=False)
@@ -109,9 +95,8 @@ class TestConfig:
     def test_models_dict(self):
         """Verify MODELS mapping has expected structure."""
         assert "openai" in MODELS
-        assert "anthropic" in MODELS
         assert "default" in MODELS["openai"]
-        assert "default" in MODELS["anthropic"]
+        assert "fast" in MODELS["openai"]
 
 
 # ===================================================================
