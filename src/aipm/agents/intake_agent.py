@@ -71,7 +71,10 @@ class IntakeAgent(BaseAgent):
                     agent_id=self.agent_id,
                     type="gap",
                     title=f"Missing data: {gap}",
-                    description=f"The input bundle is missing: {gap}. This may reduce the quality of downstream agent analysis.",
+                    description=(
+                        f"The input bundle is missing: {gap}. "
+                        "This may reduce the quality of downstream agent analysis."
+                    ),
                     impact="medium",
                     confidence="validated",
                     tags=["data_quality"],
@@ -300,7 +303,10 @@ class IntakeAgent(BaseAgent):
                 hotspots.append(
                     RiskHotspot(
                         category=category,
-                        description=f"Detected {category} risk keywords in {len(source_ids)} source(s): {', '.join(sorted(source_ids))}",
+                        description=(
+                            f"Detected {category} risk keywords in "
+                            f"{len(source_ids)} source(s): {', '.join(sorted(source_ids))}"
+                        ),
                         severity=severity,
                         source_ids=sorted(source_ids),
                     )
@@ -331,7 +337,10 @@ class IntakeAgent(BaseAgent):
             return await self.call_llm(system_prompt, user_prompt)
         except Exception as exc:
             self.logger.warning("Summary generation failed: %s", exc)
-            return f"Intake processed {len(packet.tickets)} tickets and {len(packet.documents)} documents for {packet.product_name}."
+            return (
+                f"Intake processed {len(packet.tickets)} tickets and "
+                f"{len(packet.documents)} documents for {packet.product_name}."
+            )
 
     def _save_context_packet(self, packet: ContextPacket) -> str:
         """Save the ContextPacket to the run output directory."""

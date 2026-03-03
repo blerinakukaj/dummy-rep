@@ -7,77 +7,13 @@ major requirement.
 
 import json
 import logging
-import re
 from pathlib import Path
 
 from aipm.agents.base import BaseAgent
-from aipm.schemas.findings import AgentOutput, EvidenceItem, Finding
+from aipm.core.prompts import SYSTEM_PROMPTS, parse_llm_findings
+from aipm.schemas.findings import AgentOutput, Finding
 
 logger = logging.getLogger(__name__)
-
-SYSTEM_PROMPT = """\
-You are an expert software architect and technical program manager. Your job is to \
-assess the technical feasibility of product requirements and propose a phased \
-delivery plan.
-
-Analyze ALL the evidence below and produce structured findings.
-
-You MUST cover each of these areas:
-
-1. **Technical Dependencies**: For each major requirement, identify what systems, \
-services, APIs, databases, or infrastructure components it depends on. Note \
-whether each dependency is internal or external.
-
-2. **Constraints Assessment**: Identify constraints across these dimensions:
-   - Infrastructure (compute, storage, networking, scaling limits)
-   - Data (availability, quality, migration needs, privacy/compliance)
-   - Third-party services (APIs, SDKs, licensing, rate limits)
-   - Team capacity and skill gaps
-
-3. **Complexity Classification**: Classify each major work item into buckets:
-   - Simple: 1-3 days (well-understood, minimal dependencies)
-   - Medium: 1-2 weeks (some integration, moderate dependencies)
-   - Complex: 2-4 weeks (significant integration, multiple dependencies)
-   - Epic: 4+ weeks (cross-team, architectural changes, high uncertainty)
-
-4. **Phased Delivery Plan**: Suggest phases:
-   - **MVP**: Minimal viable set — must-haves only, fastest path to value
-   - **V1**: Complete core experience — full feature set for initial release
-   - **V2**: Enhancements and scale — optimization, advanced features, scaling
-
-5. **Build vs Buy Decisions**: For each component where a choice exists, provide:
-   - Build option: effort, pros, cons
-   - Buy/integrate option: cost, vendor, pros, cons
-   - Recommendation with rationale
-
-6. **Blocking Dependencies**: Flag items that MUST be resolved before other work \
-can proceed. Include the dependency chain (what blocks what).
-
-7. **Technical Risk Assessment**: For each major component, estimate:
-   - Risk level (critical / high / medium / low)
-   - Risk description and potential impact
-   - Mitigation strategy
-
-You MUST produce findings of these types:
-- "dependency": technical dependencies and constraints
-- "risk": technical risks with mitigation strategies
-- "recommendation": build-vs-buy decisions, phasing suggestions, and delivery strategies
-
-For each finding, include structured metadata:
-{{
-  "complexity": "simple" | "medium" | "complex" | "epic",
-  "phase": "MVP" | "V1" | "V2",
-  "dependencies": ["<list of dependency IDs or names>"],
-  "blocking": true | false
-}}
-
-IMPORTANT:
-- Every finding must reference at least one source_id from the provided data.
-- Use the exact source IDs given (finding IDs like "requirements-001", ticket IDs like "T-001").
-- Return ONLY valid JSON matching the schema below. No markdown fences, no extra text.
-
-{schema}
-"""
 
 
 class FeasibilityAgent(BaseAgent):
@@ -105,14 +41,15 @@ class FeasibilityAgent(BaseAgent):
             return output
 
         # Build prompts
-        system = SYSTEM_PROMPT.format(schema=self._build_findings_prompt_section())
+        system = SYSTEM_PROMPTS[self.agent_id]
         user_prompt = self._build_user_prompt(upstream_data)
 
         # Call LLM
         response = await self.call_llm(system, user_prompt, response_format={"type": "json_object"})
 
         # Parse findings
-        findings, errors = self._parse_response(response)
+        findings = parse_llm_findings(response, self.agent_id)
+        errors: list[str] = []
 
         summary = self._extract_summary(response, findings)
 
@@ -226,54 +163,6 @@ class FeasibilityAgent(BaseAgent):
             "flag build-vs-buy decisions, identify blocking dependencies, "
             "and estimate technical risk for each major component."
         )
-
-    def _parse_response(self, response: str) -> tuple[list[Finding], list[str]]:
-        """Parse the LLM JSON response into Finding objects."""
-        errors: list[str] = []
-
-        try:
-            data = json.loads(response)
-        except json.JSONDecodeError as exc:
-            match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", response, re.DOTALL)
-            if match:
-                try:
-                    data = json.loads(match.group(1))
-                except json.JSONDecodeError:
-                    errors.append(f"Failed to parse LLM response as JSON: {exc}")
-                    return [], errors
-            else:
-                errors.append(f"Failed to parse LLM response as JSON: {exc}")
-                return [], errors
-
-        findings: list[Finding] = []
-        raw_findings = data.get("findings", [])
-
-        for i, raw in enumerate(raw_findings):
-            try:
-                raw["agent_id"] = self.agent_id
-                if "id" not in raw:
-                    raw["id"] = f"{self.agent_id}-{i + 1:03d}"
-
-                # Parse evidence items
-                evidence = []
-                for ev in raw.get("evidence", []):
-                    evidence.append(
-                        EvidenceItem(
-                            source_id=ev.get("source_id", "UNKNOWN"),
-                            source_type=ev.get("source_type", "doc"),
-                            excerpt=ev.get("excerpt", ""),
-                            url=ev.get("url"),
-                        )
-                    )
-                raw["evidence"] = evidence
-
-                finding = Finding.model_validate(raw)
-                findings.append(finding)
-            except Exception as exc:
-                errors.append(f"Failed to parse finding {i + 1}: {exc}")
-
-        self.logger.info("Parsed %d findings (%d errors)", len(findings), len(errors))
-        return findings, errors
 
     def _extract_summary(self, response: str, findings: list[Finding]) -> str:
         """Extract or generate a summary from the response."""

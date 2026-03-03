@@ -7,98 +7,13 @@ backlog candidates (epics and stories with priority, complexity, and phase).
 
 import json
 import logging
-import re
 from pathlib import Path
 
 from aipm.agents.base import BaseAgent
-from aipm.schemas.findings import AgentOutput, EvidenceItem, Finding
+from aipm.core.prompts import SYSTEM_PROMPTS, parse_llm_findings
+from aipm.schemas.findings import AgentOutput, Finding
 
 logger = logging.getLogger(__name__)
-
-SYSTEM_PROMPT = """\
-You are an expert UX designer and product requirements engineer. Your job is to \
-convert customer insights and metrics findings into actionable requirements and \
-a structured product backlog.
-
-Analyze ALL the evidence below and produce structured findings.
-
-You MUST cover each of these areas:
-
-1. **User Journeys**: For each key user segment or need identified in the insights, \
-define a user journey covering:
-   - Happy path (ideal flow)
-   - Edge cases and error scenarios
-   - Entry and exit points
-
-2. **Functional Requirements**: Define clear requirements using acceptance criteria format:
-   GIVEN [context] WHEN [action] THEN [expected result]
-   Each requirement must have a unique story_id.
-
-3. **Non-Functional Requirements**: Define performance, scalability, security, and \
-accessibility requirements. Include measurable thresholds where possible.
-
-4. **Backlog Candidates**: Organize requirements into epics and stories:
-   - **Epic**: A high-level capability grouping related stories
-   - **Story**: A specific implementable unit with:
-     - Acceptance criteria (GIVEN/WHEN/THEN)
-     - Priority: P0 (critical launch blocker), P1 (must-have for launch), \
-P2 (should-have for V1), P3 (nice-to-have / V2+)
-     - Complexity: S (small, <1 day), M (medium, 1-3 days), L (large, 3-5 days), \
-XL (extra-large, 5+ days)
-     - Suggested phase: MVP, V1, or V2
-
-5. **Edge Cases & Error Scenarios**: Identify failure modes, boundary conditions, \
-and error states that must be handled.
-
-6. **UX Considerations**: Note accessibility requirements (WCAG 2.1 AA), \
-responsive design needs, and key interaction patterns.
-
-You MUST produce findings of these types:
-- "requirement": each functional or non-functional requirement
-- "recommendation": UX considerations, accessibility, and suggested approaches
-- "gap": missing information needed to finalize requirements
-
-For each requirement finding, include structured metadata:
-{{
-  "requirement_type": "functional" | "non_functional" | "ux" | "accessibility",
-  "acceptance_criteria": "GIVEN ... WHEN ... THEN ...",
-  "priority": "P0" | "P1" | "P2" | "P3",
-  "complexity": "S" | "M" | "L" | "XL",
-  "phase": "MVP" | "V1" | "V2",
-  "epic_id": "<epic identifier>",
-  "story_id": "<story identifier>"
-}}
-
-Also include a "backlog" key in the top-level JSON with the preliminary backlog:
-{{
-  "backlog": {{
-    "epics": [
-      {{
-        "epic_id": "EPIC-001",
-        "title": "...",
-        "description": "...",
-        "stories": [
-          {{
-            "story_id": "STORY-001",
-            "title": "...",
-            "acceptance_criteria": "GIVEN ... WHEN ... THEN ...",
-            "priority": "P0",
-            "complexity": "M",
-            "phase": "MVP"
-          }}
-        ]
-      }}
-    ]
-  }}
-}}
-
-IMPORTANT:
-- Every finding must reference at least one source_id from the provided data.
-- Use the exact source IDs given (finding IDs like "customer-001", document IDs like "DOC-001").
-- Return ONLY valid JSON matching the schema below. No markdown fences, no extra text.
-
-{schema}
-"""
 
 
 class RequirementsAgent(BaseAgent):
@@ -126,14 +41,24 @@ class RequirementsAgent(BaseAgent):
             return output
 
         # Build prompts
-        system = SYSTEM_PROMPT.format(schema=self._build_findings_prompt_section())
+        system = SYSTEM_PROMPTS[self.agent_id]
         user_prompt = self._build_user_prompt(upstream_data)
 
         # Call LLM
         response = await self.call_llm(system, user_prompt, response_format={"type": "json_object"})
 
         # Parse findings
-        findings, errors = self._parse_response(response)
+        findings = parse_llm_findings(response, self.agent_id)
+        errors: list[str] = []
+
+        # Extract and save backlog data separately (parse_llm_findings only handles findings)
+        try:
+            resp_data = json.loads(response)
+            backlog = resp_data.get("backlog")
+            if backlog:
+                self._save_backlog(backlog)
+        except (json.JSONDecodeError, OSError):
+            pass
 
         summary = self._extract_summary(response, findings)
 
@@ -217,59 +142,6 @@ class RequirementsAgent(BaseAgent):
             "(epics and stories with priority, complexity, and phase), edge cases, "
             "and UX/accessibility considerations."
         )
-
-    def _parse_response(self, response: str) -> tuple[list[Finding], list[str]]:
-        """Parse the LLM JSON response into Finding objects."""
-        errors: list[str] = []
-
-        try:
-            data = json.loads(response)
-        except json.JSONDecodeError as exc:
-            match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", response, re.DOTALL)
-            if match:
-                try:
-                    data = json.loads(match.group(1))
-                except json.JSONDecodeError:
-                    errors.append(f"Failed to parse LLM response as JSON: {exc}")
-                    return [], errors
-            else:
-                errors.append(f"Failed to parse LLM response as JSON: {exc}")
-                return [], errors
-
-        findings: list[Finding] = []
-        raw_findings = data.get("findings", [])
-
-        for i, raw in enumerate(raw_findings):
-            try:
-                raw["agent_id"] = self.agent_id
-                if "id" not in raw:
-                    raw["id"] = f"{self.agent_id}-{i + 1:03d}"
-
-                # Parse evidence items
-                evidence = []
-                for ev in raw.get("evidence", []):
-                    evidence.append(
-                        EvidenceItem(
-                            source_id=ev.get("source_id", "UNKNOWN"),
-                            source_type=ev.get("source_type", "doc"),
-                            excerpt=ev.get("excerpt", ""),
-                            url=ev.get("url"),
-                        )
-                    )
-                raw["evidence"] = evidence
-
-                finding = Finding.model_validate(raw)
-                findings.append(finding)
-            except Exception as exc:
-                errors.append(f"Failed to parse finding {i + 1}: {exc}")
-
-        # Save backlog data as separate metadata file if present
-        backlog = data.get("backlog")
-        if backlog:
-            self._save_backlog(backlog)
-
-        self.logger.info("Parsed %d findings (%d errors)", len(findings), len(errors))
-        return findings, errors
 
     def _save_backlog(self, backlog: dict) -> None:
         """Save the preliminary backlog as a separate JSON file."""
