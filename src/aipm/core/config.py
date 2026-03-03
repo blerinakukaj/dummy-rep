@@ -28,13 +28,13 @@ def load_env() -> None:
 
 
 def get_llm_client(provider: str = "openai") -> Any:
-    """Return an initialized OpenAI LLM client.
+    """Return an initialized async OpenAI LLM client.
 
     Args:
         provider: Must be "openai".
 
     Returns:
-        An OpenAI client instance.
+        An AsyncOpenAI client instance.
 
     Raises:
         ValueError: If the provider is not supported.
@@ -48,8 +48,8 @@ def get_llm_client(provider: str = "openai") -> Any:
         api_key = os.environ.get("OPENAI_API_KEY")
         if not api_key:
             raise OSError("OPENAI_API_KEY is not set. Add it to your .env file.")
-        logger.info("Initializing OpenAI client")
-        return openai.OpenAI(api_key=api_key)
+        logger.info("Initializing async OpenAI client")
+        return openai.AsyncOpenAI(api_key=api_key)
 
     else:
         raise ValueError(f"Unsupported provider: '{provider}'. Use 'openai'.")

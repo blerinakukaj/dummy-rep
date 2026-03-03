@@ -94,7 +94,7 @@ class BaseAgent(ABC):
         user_prompt: str,
         response_format: dict | None,
     ) -> str:
-        """Dispatch an LLM call via the OpenAI SDK."""
+        """Dispatch an LLM call via the async OpenAI SDK."""
         kwargs: dict = {
             "model": self.run_config.model,
             "temperature": self.run_config.temperature,
@@ -106,7 +106,7 @@ class BaseAgent(ABC):
         if response_format:
             kwargs["response_format"] = {"type": "json_object"}
 
-        response = self.llm_client.chat.completions.create(**kwargs)
+        response = await self.llm_client.chat.completions.create(**kwargs)
 
         usage = response.usage
         if usage:
@@ -177,6 +177,7 @@ class BaseAgent(ABC):
 
 Rules:
 - Every finding MUST reference at least one evidence source_id from the provided data.
-- Classify confidence as: "validated" (multiple corroborating sources), "directional" (single strong source), "speculative" (inferred, needs validation).
+- Classify confidence as: "validated" (multiple corroborating sources),
+  "directional" (single strong source), "speculative" (inferred, needs validation).
 - Use sequential IDs starting from 001.
 - Return ONLY valid JSON. No markdown code fences, no extra text."""
