@@ -42,6 +42,8 @@ def get_llm_client(provider: str = "openai") -> Any:
     """
     import os
 
+    load_dotenv()  # ensure .env is loaded regardless of entry point
+
     if provider == "openai":
         import openai
 
