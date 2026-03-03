@@ -13,6 +13,7 @@ from pathlib import Path
 
 from aipm.agents.base import BaseAgent
 from aipm.core.backlog_generator import BacklogGenerator
+from aipm.core.final_plan_generator import FinalPlanGenerator
 from aipm.core.policy import PolicyPack
 from aipm.core.template_engine import load_template, render_template
 from aipm.core.token_tracker import TokenTracker
@@ -708,7 +709,10 @@ class LeadPMAgent(BaseAgent):
                     "num": idx,
                     "decision": conflict.get("resolution", "N/A"),
                     "rationale": conflict.get("reasoning", conflict.get("description", "")),
-                    "alternatives": f"Prioritize {conflict.get('finding_a', '?')} over {conflict.get('finding_b', '?')} or vice versa",
+                    "alternatives": (
+                        f"Prioritize {conflict.get('finding_a', '?')} over "
+                        f"{conflict.get('finding_b', '?')} or vice versa"
+                    ),
                     "confidence": "directional",
                     "status": "Decided",
                     "date": date_str,
@@ -734,7 +738,8 @@ class LeadPMAgent(BaseAgent):
 
         # Build template rows
         rows = "\n".join(
-            f"| {d['num']} | {d['decision']} | {d['rationale']} | {d['alternatives']} | {d['confidence']} | {d['status']} | {d['date']} |"
+            f"| {d['num']} | {d['decision']} | {d['rationale']} "
+            f"| {d['alternatives']} | {d['confidence']} | {d['status']} | {d['date']} |"
             for d in decisions
         )
 
@@ -788,5 +793,69 @@ class LeadPMAgent(BaseAgent):
         paths["decision_log"] = await self.generate_decision_log()
         paths["backlog"] = await self.generate_backlog()
 
+        # Generate final_plan.json — the master consolidated output
+        paths["final_plan"] = await self.generate_final_plan()
+
         self.logger.info("Generated %d artifacts: %s", len(paths), list(paths.keys()))
+        return paths
+
+    async def generate_final_plan(self) -> str:
+        """Generate final_plan.json using the FinalPlanGenerator.
+
+        Returns:
+            Path to the saved final_plan.json file.
+        """
+        # Collect all findings from all agents
+        all_findings = self._collect_all_findings()
+
+        # Get lead_pm output (last output added by analyze())
+        lead_pm_output = None
+        for output in reversed(self.all_agent_outputs):
+            if output.agent_id == self.agent_id:
+                lead_pm_output = output
+                break
+
+        # If analyze() was already called, use its output saved on self
+        if lead_pm_output is None:
+            lead_pm_output = AgentOutput(
+                agent_id=self.agent_id,
+                agent_name=self.agent_name,
+                run_id=self.run_config.run_id,
+                findings=[],
+                summary="",
+            )
+
+        # Build artifact_paths without final_plan (to avoid circular ref)
+        existing_artifacts = {
+            k: v for k, v in self._current_artifact_paths().items()
+            if k != "final_plan"
+        }
+
+        generator = FinalPlanGenerator(
+            llm_client=self.llm_client,
+            lead_pm_output=lead_pm_output,
+            all_findings=all_findings,
+            policy_pack=self.policy_pack,
+            run_config=self.run_config,
+            artifact_paths=existing_artifacts,
+            product_name=self.context_packet.product_name,
+        )
+
+        plan = await generator.generate()
+        output_path = str(self._artifacts_dir() / "final_plan.json")
+        generator.save(plan, output_path)
+        self.logger.info("Saved final_plan.json to %s", output_path)
+        return output_path
+
+    def _current_artifact_paths(self) -> dict[str, str]:
+        """Return artifact paths generated so far (for final_plan cross-refs)."""
+        artifacts_dir = self._artifacts_dir()
+        paths: dict[str, str] = {}
+        for name in ("prd.md", "roadmap.json", "experiment_plan.md", "decision_log.md", "backlog.csv"):
+            p = artifacts_dir / name
+            if p.exists():
+                key = name.split(".")[0]
+                if key == "experiment_plan":
+                    key = "experiment_plan"
+                paths[key] = str(p)
         return paths
