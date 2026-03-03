@@ -494,7 +494,7 @@ class TestRunConfig:
         # Check defaults
         assert config.output_dir == "output"
         assert config.provider == "openai"
-        assert config.model == "gpt-4o"
+        assert config.model == "gpt-4o-mini"
         assert config.temperature == 0.2
         assert config.policy_path == "src/aipm/policies/default_policy.yaml"
 

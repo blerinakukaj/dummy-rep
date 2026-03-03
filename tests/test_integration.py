@@ -581,7 +581,7 @@ class TestMockClientContract:
 
     async def test_response_has_choices_and_usage(self, mock_client: MockOpenAIClient):
         resp = await mock_client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4o-mini",
             messages=[{"role": "user", "content": "hello"}],
         )
         assert hasattr(resp, "choices")

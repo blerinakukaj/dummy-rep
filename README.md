@@ -175,7 +175,7 @@ curl -X POST http://localhost:8000/api/v1/run \
   -d '{
     "prompt": "Build a notification prioritization system using ML",
     "provider": "openai",
-    "model": "gpt-4o"
+    "model": "gpt-4o-mini"
   }'
 ```
 
@@ -262,7 +262,7 @@ docker run --rm \
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `OPENAI_API_KEY` | OpenAI API key (for GPT-4o) | Yes |
+| `OPENAI_API_KEY` | OpenAI API key (for GPT-4o-mini) | Yes |
 
 ## Demo Scripts
 

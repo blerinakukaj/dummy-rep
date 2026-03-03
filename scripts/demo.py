@@ -76,7 +76,7 @@ async def run_pipeline(
     *,
     policy: str = "src/aipm/policies/default_policy.yaml",
     provider: str = "openai",
-    model: str = "gpt-4o",
+    model: str = "gpt-4o-mini",
     output_dir: str = "output",
     temperature: float = 0.2,
 ) -> dict:
@@ -443,7 +443,7 @@ async def demo_12(result: dict | None, provider: str, model: str) -> None:
 # ---------------------------------------------------------------------------
 async def run_demo(
     provider: str = "openai",
-    model: str = "gpt-4o",
+    model: str = "gpt-4o-mini",
     demo_number: int | None = None,
 ) -> None:
     """Run all (or a single) demo scenario."""
@@ -532,8 +532,8 @@ def main() -> None:
     parser.add_argument(
         "--model",
         type=str,
-        default="gpt-4o",
-        help="Model name (default: gpt-4o)",
+        default="gpt-4o-mini",
+        help="Model name (default: gpt-4o-mini)",
     )
     args = parser.parse_args()
 

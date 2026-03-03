@@ -35,7 +35,7 @@ class TestConfig:
         assert config.input_path == "input_bundles/sample_bundle"
         assert config.output_dir == "output"
         assert config.provider == "openai"
-        assert config.model == "gpt-4o"
+        assert config.model == "gpt-4o-mini"
         assert config.temperature == 0.2
         assert len(config.run_id) == 36  # UUID format
 

@@ -186,7 +186,7 @@ def main() -> None:
         "--model",
         type=str,
         default="gpt-4o-mini",
-        help="Model name (default: gpt-4o)",
+        help="Model name (default: gpt-4o-mini)",
     )
     parser.add_argument(
         "--policy",
