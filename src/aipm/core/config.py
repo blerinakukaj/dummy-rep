@@ -38,7 +38,7 @@ def get_llm_client(provider: str = "openai") -> Any:
 
     Raises:
         ValueError: If the provider is not supported.
-        EnvironmentError: If the required API key is not set.
+        OSError: If the required API key is not set.
     """
     import os
 
@@ -47,7 +47,7 @@ def get_llm_client(provider: str = "openai") -> Any:
 
         api_key = os.environ.get("OPENAI_API_KEY")
         if not api_key:
-            raise EnvironmentError("OPENAI_API_KEY is not set. Add it to your .env file.")
+            raise OSError("OPENAI_API_KEY is not set. Add it to your .env file.")
         logger.info("Initializing async OpenAI client")
         return openai.AsyncOpenAI(api_key=api_key)
 

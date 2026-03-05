@@ -86,7 +86,9 @@ class TokenTracker:
 
         return round(input_cost + output_cost, 6)
 
-    def save_report(self, output_dir: str, run_id: str = "", provider: str = "openai", model: str = "gpt-4o-mini") -> str:
+    def save_report(
+        self, output_dir: str, run_id: str = "", provider: str = "openai", model: str = "gpt-4o-mini",
+    ) -> str:
         """Save token usage report as token_usage.json.
 
         Args:
