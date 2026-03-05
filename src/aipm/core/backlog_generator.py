@@ -2,9 +2,12 @@
 
 import csv
 import io
+import logging
 from collections import Counter
 
 from aipm.schemas.findings import Finding
+
+logger = logging.getLogger(__name__)
 
 # Sort orderings
 PHASE_ORDER = {"MVP": 0, "V1": 1, "V2": 2}
@@ -33,12 +36,14 @@ class BacklogGenerator:
         self,
         requirements_findings: list[Finding],
         feasibility_findings: list[Finding],
+        tickets: list | None = None,
     ) -> str:
         """Generate backlog.csv content from requirements and feasibility findings.
 
         Args:
             requirements_findings: Findings of type 'requirement' with story/epic metadata.
             feasibility_findings: Findings from the feasibility agent with complexity/phase data.
+            tickets: Optional list of input TicketItem objects for coverage validation.
 
         Returns:
             CSV string with header and sorted rows.
@@ -96,6 +101,15 @@ class BacklogGenerator:
             )
         )
 
+        # Post-process: ensure every input ticket has at least one story
+        if tickets:
+            self._ensure_ticket_coverage(rows, tickets)
+
+        # Post-process: auto-infer dependencies from phase/epic structure
+        # when the LLM leaves them empty.  Runs AFTER ticket coverage so stub
+        # stories also get dependency chains.
+        self._infer_dependencies(rows)
+
         return self._rows_to_csv(rows)
 
     def save_csv(self, csv_content: str, output_path: str) -> None:
@@ -139,6 +153,129 @@ class BacklogGenerator:
             "stories_per_phase": dict(phase_counter),
             "stories_per_priority": dict(priority_counter),
         }
+
+    @staticmethod
+    def _slugify(text: str) -> str:
+        """Convert text to a kebab-case slug suitable for story/epic IDs."""
+        import re as _re
+        slug = _re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+        return slug[:60]  # cap length
+
+    def _ensure_ticket_coverage(self, rows: list[dict[str, str]], tickets: list) -> None:
+        """Create stub stories for any input tickets not covered by existing rows.
+
+        Scans all row descriptions and story titles for ticket ID references to
+        determine coverage.  For any uncovered ticket, appends a minimal row so
+        the backlog is never missing an input work-item.
+        """
+        # Build a set of ticket IDs already mentioned in existing rows.
+        # Match by (a) ticket ID text appearing anywhere, or (b) ticket title
+        # appearing as a significant substring in the story title/description
+        # (case-insensitive, min 4 chars to avoid false positives).
+        covered_ids: set[str] = set()
+        for row in rows:
+            blob = " ".join([
+                row.get("description", ""),
+                row.get("story_title", ""),
+                row.get("story_id", ""),
+                row.get("labels", ""),
+                row.get("acceptance_criteria", ""),
+            ]).upper()
+            for ticket in tickets:
+                if ticket.id.upper() in blob:
+                    covered_ids.add(ticket.id)
+                # Also check if the ticket title (≥ 4 chars) is largely contained
+                elif len(ticket.title) >= 4:
+                    t_words = set(ticket.title.upper().split())
+                    # If ≥ 60% of the ticket-title words appear in the row blob, consider covered
+                    if t_words and sum(1 for w in t_words if w in blob) / len(t_words) >= 0.6:
+                        covered_ids.add(ticket.id)
+
+        # Also check if any requirement finding's source_ids reference the ticket
+        # (already captured in labels or description by the LLM usually)
+
+        missing = [t for t in tickets if t.id not in covered_ids]
+        if not missing:
+            return
+
+        logger.info(
+            "Backlog coverage gap: %d/%d tickets missing — generating stub stories for: %s",
+            len(missing), len(tickets), ", ".join(t.id for t in missing),
+        )
+
+        # Map raw priority labels (CRITICAL, HIGH, etc.) to P0-P3 format
+        _PRIORITY_NORMALIZE = {
+            "CRITICAL": "P0", "HIGH": "P1", "MEDIUM": "P2", "LOW": "P3",
+            "P0": "P0", "P1": "P1", "P2": "P2", "P3": "P3",
+        }
+
+        for ticket in missing:
+            story_slug = self._slugify(ticket.title)
+            # Determine a default epic from the ticket ID prefix (e.g. GROW -> epic-grow)
+            prefix = ticket.id.split("-")[0].lower() if "-" in ticket.id else "backlog"
+            epic_id = f"epic-{prefix}"
+            raw_priority = (ticket.priority or "").upper()
+            priority = _PRIORITY_NORMALIZE.get(raw_priority, "P2")
+
+            rows.append({
+                "epic_id": epic_id,
+                "epic_title": f"{prefix.upper()} Initiatives",
+                "story_id": f"story-{story_slug}",
+                "story_title": ticket.title,
+                "description": ticket.description,
+                "acceptance_criteria": "",
+                "priority": priority,
+                "complexity": "medium",
+                "phase": "V1",
+                "labels": ", ".join(ticket.labels) if ticket.labels else ticket.id,
+                "dependencies": "",
+            })
+
+    @staticmethod
+    def _infer_dependencies(rows: list[dict[str, str]]) -> None:
+        """Auto-infer story dependencies from phase and epic structure.
+
+        Rules applied (only when a story has no explicit dependencies):
+        - A V1 story depends on all MVP stories in the same epic.
+        - A V2 story depends on all V1 stories in the same epic.
+        - If no same-epic predecessor exists, fall back to all stories in the
+          prior phase (cross-epic), preventing isolated stories.
+        """
+        # Index stories by (epic_id, phase)
+        epic_phase_stories: dict[tuple[str, str], list[str]] = {}
+        for row in rows:
+            sid = row.get("story_id", "")
+            eid = row.get("epic_id", "")
+            phase = row.get("phase", "")
+            if sid:
+                epic_phase_stories.setdefault((eid, phase), []).append(sid)
+
+        phase_predecessors = {"V1": "MVP", "V2": "V1"}
+
+        for row in rows:
+            # Skip if already has explicit dependencies
+            if row.get("dependencies", "").strip():
+                continue
+
+            phase = row.get("phase", "")
+            epic_id = row.get("epic_id", "")
+            prior_phase = phase_predecessors.get(phase)
+            if not prior_phase:
+                continue  # MVP stories have no predecessor phase
+
+            # Prefer same-epic predecessors, fall back to all prior-phase stories
+            deps = epic_phase_stories.get((epic_id, prior_phase), [])
+            if not deps:
+                # Collect all stories in the prior phase across all epics
+                deps = [
+                    sid
+                    for (eid, ph), sids in epic_phase_stories.items()
+                    if ph == prior_phase
+                    for sid in sids
+                ]
+
+            if deps:
+                row["dependencies"] = ", ".join(deps)
 
     def _build_feasibility_map(self, feasibility_findings: list[Finding]) -> dict[str, dict]:
         """Build a lookup of feasibility data keyed by story/epic ID."""

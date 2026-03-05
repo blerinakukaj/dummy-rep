@@ -107,13 +107,22 @@ SYSTEM_PROMPTS: dict[str, str] = {
         "1. Define North Star metrics and supporting KPIs aligned with product goals.\n"
         "2. Design a metrics hierarchy: North Star → primary KPIs → secondary metrics → guardrails.\n"
         "3. Specify data sources, collection methods, and baseline values where available.\n"
-        "4. Recommend A/B testing opportunities with statistical parameters.\n"
+        "4. Recommend experiment opportunities with statistical parameters.\n"
         "5. Identify measurement gaps — areas where data collection is insufficient.\n"
         "6. Propose success criteria and thresholds for go/no-go decisions.\n\n"
+        "CRITICAL TAGGING RULES:\n"
+        "- The North Star metric MUST include 'north_star' in its tags array.\n"
+        "- Primary KPIs (input/driver metrics) MUST include 'input_metric' in their tags array.\n"
+        "- Guardrail metrics (metrics that must not degrade) MUST include 'guardrail' in their "
+        "tags array.\n"
+        "- Every metric finding MUST include 'baseline' and 'target' fields in metadata with "
+        "the current measured value (or 'unknown — requires audit' if unavailable) and the goal.\n"
+        "- Every metric finding MUST include a 'measurement_method' field in metadata.\n\n"
         "Produce findings of type 'metric', 'recommendation', or 'gap'. Include metric "
-        "definitions, units, targets, and data sources in metadata. Reference source_ids from "
-        "metrics snapshots, tickets, and docs that informed each recommendation. Mark metrics "
-        "with existing baselines as 'validated' and newly proposed ones as 'directional'.\n\n" + _JSON_SCHEMA
+        "definitions, units, targets, baseline values, and data sources in metadata. Reference "
+        "source_ids from metrics snapshots, tickets, and docs that informed each recommendation. "
+        "Mark metrics with existing baselines as 'validated' and newly proposed ones as "
+        "'directional'.\n\n" + _JSON_SCHEMA
     ),
     "requirements": (
         "You are an expert product manager specializing in requirements engineering, user "
@@ -127,10 +136,43 @@ SYSTEM_PROMPTS: dict[str, str] = {
         "and delivery phase (MVP/V1/V2).\n"
         "5. Group related stories into epics with clear boundaries.\n"
         "6. Identify edge cases, error states, and integration points.\n\n"
+        "CRITICAL RULES for metadata quality:\n"
+        "- TICKET COVERAGE: You MUST create at least one requirement for EVERY input ticket. "
+        "Do NOT skip any ticket. If there are 5 tickets, there must be at least 5 requirements "
+        "(one per ticket, more if a ticket needs decomposition). Cross-check your output against "
+        "the ticket list before finalizing.\n"
+        "- epic_id: Every requirement MUST have an epic_id (e.g. 'epic-navigation', 'epic-video').\n"
+        "- epic_title: Every requirement MUST have an epic_title that is a human-readable name "
+        "for the epic (e.g. 'Screen Reader Navigation', 'Video Accessibility').\n"
+        "- story_id: Every requirement MUST have a unique story_id (e.g. 'story-aria-landmarks').\n"
+        "- story_title: Every requirement MUST have a story_title.\n"
+        "- priority: Use varied, realistic priorities. NOT all requirements are P0. Apply this "
+        "distribution guideline: ~20% P0 (critical blockers), ~40% P1 (important), "
+        "~30% P2 (nice to have for MVP), ~10% P3 (future). P0 should be reserved for "
+        "items that block compliance or cause legal/safety risk.\n"
+        "- complexity: Use varied complexity levels based on actual scope. Small UI fixes "
+        "are 'simple', multi-component changes are 'medium', architectural changes are 'complex', "
+        "and cross-system initiatives are 'epic'.\n"
+        "- phase: Distribute across MVP, V1, and V2 realistically. Not everything belongs in MVP.\n"
+        "- acceptance_criteria: Use specific, measurable GIVEN/WHEN/THEN with concrete thresholds "
+        "(e.g. 'contrast ratio >= 4.5:1' not 'meets standards').\n"
+        "- dependencies: ACTIVELY infer logical prerequisite relationships between stories. "
+        "For example, a compliance documentation story (like VPAT) depends on the stories that "
+        "fix the underlying violations it documents. A user feedback story depends on having "
+        "the core features in place first. Do NOT leave dependencies empty — think about what "
+        "must ship before each story can be meaningfully completed.\n"
+        "- Break down large requirements into multiple smaller stories. Each story should be "
+        "completable in 1-2 weeks.\n"
+        "- MINIMUM STORY COUNT: You MUST produce at least 12-15 requirement findings. "
+        "Each input ticket should decompose into 2-4 stories (e.g. a 'video accessibility' ticket "
+        "becomes: 'add closed captions', 'add transcripts', 'add keyboard controls', 'add audio descriptions'). "
+        "Also create cross-cutting stories for: testing/QA, documentation, monitoring/alerting, "
+        "and user feedback collection. A professional backlog is NOT 1 story per ticket.\n\n"
         "Produce findings of type 'requirement' with metadata including requirement_type, "
-        "acceptance_criteria, priority, complexity, phase, epic_id, and story_id. Every "
-        "requirement must trace back to at least one upstream finding via source_ids. "
-        "Use 'validated' for requirements directly supported by customer data.\n\n" + _JSON_SCHEMA
+        "acceptance_criteria, priority, complexity, phase, epic_id, epic_title, story_id, "
+        "story_title, and dependencies. Every requirement must trace back to at least one "
+        "upstream finding via source_ids. Use 'validated' for requirements directly supported "
+        "by customer data.\n\n" + _JSON_SCHEMA
     ),
     "feasibility": (
         "You are an expert solutions architect and technical lead specializing in feasibility "
@@ -262,6 +304,14 @@ def build_user_prompt(
             for gap in context_packet.missing_info:
                 sections.append(f"- {gap}")
 
+        # For requirements agent, include original tickets so it can cross-check coverage
+        if agent_id == "requirements" and context_packet.tickets:
+            sections.append(
+                "\n## INPUT TICKETS — You MUST generate at least one requirement for EACH ticket below."
+            )
+            for t in context_packet.tickets:
+                sections.append(f"- [{t.id}] {t.title}: {t.description}")
+
     # Append previous findings for downstream agents
     if previous_findings:
         sections.append("\n## Upstream Findings")
@@ -322,20 +372,39 @@ def parse_llm_findings(response: str, agent_id: str) -> list[Finding]:
 
     for i, raw in enumerate(raw_findings):
         try:
-            # Auto-generate ID if missing
-            if "id" not in raw:
+            # Ensure finding ID is unique across agents by prefixing with agent_id.
+            # The LLM often generates generic IDs like "agent-001" instead of
+            # "customer-001", causing collisions when findings are merged downstream.
+            raw_id = raw.get("id", "")
+            if not raw_id:
                 raw["id"] = f"{agent_id}-{i + 1:03d}"
+            elif not raw_id.startswith(f"{agent_id}-"):
+                # Re-prefix: "agent-001" → "customer-001", preserving the sequence number
+                seq = raw_id.split("-", 1)[-1] if "-" in raw_id else f"{i + 1:03d}"
+                raw["id"] = f"{agent_id}-{seq}"
 
             # Ensure agent_id is set
             raw["agent_id"] = agent_id
 
-            # Parse evidence items
+            # Parse evidence items — normalize source_type to valid literals
+            _SOURCE_TYPE_MAP = {
+                "ticket": "ticket", "doc": "doc", "note": "note",
+                "metric": "metric", "interview": "interview",
+                # Common LLM hallucinations → best-fit valid type
+                "insight": "note", "risk": "doc", "requirement": "doc",
+                "gap": "doc", "recommendation": "doc", "dependency": "doc",
+                "feasibility": "doc", "competitive": "doc", "customer": "interview",
+                "report": "doc", "analysis": "doc", "survey": "interview",
+                "feedback": "interview", "bug": "ticket", "issue": "ticket",
+            }
             evidence = []
             for ev in raw.get("evidence", []):
+                raw_type = ev.get("source_type", "doc")
+                normalized_type = _SOURCE_TYPE_MAP.get(raw_type, "doc")
                 evidence.append(
                     EvidenceItem(
                         source_id=ev.get("source_id", "UNKNOWN"),
-                        source_type=ev.get("source_type", "doc"),
+                        source_type=normalized_type,
                         excerpt=ev.get("excerpt", ""),
                         url=ev.get("url"),
                     )

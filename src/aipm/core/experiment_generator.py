@@ -17,35 +17,54 @@ from aipm.schemas.findings import Finding
 logger = logging.getLogger(__name__)
 
 _SYSTEM_PROMPT = """\
-You are a senior product manager and experimentation specialist designing a rigorous A/B test.
+You are a senior product manager and experimentation specialist designing a rigorous experiment.
 Write in clear, quantitative language. Avoid vague statements — use specific thresholds,
 percentages, and time windows wherever possible.
 Reference finding IDs in brackets (e.g. [metrics-002]) for traceability.
+
+IMPORTANT — Choose the right experiment design based on context:
+- For accessibility, compliance, or legal-risk changes: Use a PHASED ROLLOUT (not A/B test).
+  Withholding accessibility fixes from a control group of users with disabilities is unethical.
+  Instead, design a staged rollout (e.g. 10% → 25% → 50% → 100%) with before/after measurement.
+- For optional features, UX variations, or performance optimizations: Use a standard A/B test
+  with control and treatment groups.
+- For infrastructure or backend changes: Use a canary deployment with progressive traffic ramp.
 
 Return a JSON object with exactly these keys (each value is a markdown string):
   hypothesis, success_metrics, guardrail_metrics, experiment_design,
   sample_size_duration, segmentation, rollback_criteria, data_collection, analysis_plan
 
 Guidelines per section:
-- hypothesis: One precise sentence in the form
+- hypothesis: One precise, TESTABLE sentence in the form
     "If we [change X], then [metric Y] will [increase/decrease] by [Z%] because [mechanism]."
+  The hypothesis must be about user behaviour or outcomes, NOT about code compliance
+  (e.g. "implementing ARIA landmarks will improve task completion" not "will improve compliance rate").
   Then 2-3 sentences of supporting rationale backed by finding IDs.
-- success_metrics: Primary metric(s) with specific numeric thresholds and measurement window.
-  Include secondary metrics. Use a markdown table.
+- success_metrics: Primary metric(s) with specific numeric thresholds (baseline → target),
+  measurement window, and measurement method. Include secondary metrics. Use a markdown table
+  with columns: Metric, Baseline, Target, Measurement Method, Window.
 - guardrail_metrics: Metrics that must NOT degrade beyond stated bounds.
-  List each with acceptable degradation threshold. Use a markdown table.
-- experiment_design: Control vs. treatment description, traffic allocation (%),
-  targeting rules (which users), and randomisation unit (user / session / device).
-- sample_size_duration: Estimated sample size per arm with MDE, power, and significance
-  assumptions stated explicitly. Estimated calendar duration given traffic volume.
-- segmentation: Which cohorts to analyse post-hoc (e.g. new vs returning, mobile vs desktop).
-  Explain why each segment matters.
-- rollback_criteria: Concrete conditions (metric breaches or error thresholds) that
-  trigger immediate experiment termination.
+  List each with a specific acceptable degradation threshold (e.g. "no more than 2% decline").
+  Use a markdown table with columns: Metric, Current Value, Max Acceptable Degradation, Measurement Method.
+- experiment_design: For phased rollouts — describe each phase with traffic percentage, duration,
+  and go/no-go criteria for advancing. For A/B tests — describe control vs. treatment,
+  traffic allocation (%), targeting rules, and randomisation unit (user / session / device).
+  Address ethical considerations for the chosen design.
+- sample_size_duration: Estimated sample size with MDE (minimum detectable effect), power (typically 0.8),
+  and significance level (typically 0.05) stated explicitly. Show the calculation or formula used.
+  Estimated calendar duration given traffic volume. For phased rollouts, specify observation period per phase.
+- segmentation: Which cohorts to analyse post-hoc (e.g. screen reader users vs. sighted users,
+  keyboard-only vs. mouse users, new vs. returning). Explain why each segment matters
+  and how users will be identified/classified.
+- rollback_criteria: Concrete conditions (specific metric breaches with numeric thresholds or
+  error rate thresholds) that trigger immediate experiment termination or phase reversal.
 - data_collection: Specific event names, properties, and logging requirements needed
-  to measure the success and guardrail metrics.
-- analysis_plan: Statistical test(s) to use, when interim looks are scheduled,
-  how multiple-comparison correction is applied, and who signs off on results.
+  to measure the success and guardrail metrics. Include assistive technology detection
+  where relevant (screen reader usage, keyboard-only navigation patterns).
+- analysis_plan: Statistical test(s) to use (and why — e.g. chi-square for proportions,
+  Mann-Whitney U for non-normal distributions, paired t-test for before/after).
+  When interim looks are scheduled, how multiple-comparison correction is applied
+  (e.g. Bonferroni, Holm-Bonferroni), significance level, and who signs off on results.
 
 Return ONLY valid JSON — no prose outside the JSON object."""
 
@@ -129,6 +148,30 @@ class ExperimentPlanGenerator:
             lines.append(f"  - {field}: {val}")
         return "\n".join(lines)
 
+    def _extract_metric_baselines(self) -> str:
+        """Extract verified baseline/target values from metrics findings metadata.
+
+        Returns a formatted string of hard metric constraints that must be used
+        verbatim in the experiment plan — prevents the LLM from hallucinating numbers.
+        """
+        metric_findings = [f for f in self.metrics_findings if f.type == "metric"]
+        if not metric_findings:
+            return ""
+
+        lines = [
+            "MANDATORY METRIC VALUES — Use these EXACT numbers for baselines and targets. "
+            "Do NOT round, estimate, or invent different values:"
+        ]
+        for f in metric_findings:
+            meta = f.metadata or {}
+            baseline = meta.get("baseline", "unknown")
+            target = meta.get("target", "unknown")
+            method = meta.get("measurement_method", "")
+            lines.append(f"  - {f.title}: baseline={baseline}, target={target}")
+            if method:
+                lines.append(f"    measurement_method: {method}")
+        return "\n".join(lines)
+
     def _build_user_prompt(self) -> str:
         """Assemble the full user prompt from findings and policy."""
         north_star = self._extract_north_star()
@@ -144,6 +187,8 @@ class ExperimentPlanGenerator:
 
         sections = [
             f"Product: {self.product_name or self.run_config.run_id}",
+            "",
+            self._extract_metric_baselines(),
             "",
             self._format_findings(north_star, "North Star Metrics"),
             "",
@@ -219,21 +264,37 @@ class ExperimentPlanGenerator:
         if not isinstance(sections, dict):
             sections = {}
 
+        # Build findings-based fallbacks so no placeholder is ever left unfilled
+        ns = self._format_findings(self._extract_north_star(), "North Star Metrics")
+        inp = self._format_findings(self._extract_input_metrics(), "Input / Driver Metrics")
+        guard = self._format_findings(self._extract_guardrail_findings(), "Guardrail Metrics")
+        all_m = self._format_findings(self.metrics_findings, "All Metrics Findings")
+        risks = self._format_findings(self.risk_findings[:5], "Relevant Risks")
+        exp_policy = self._build_policy_constraints()
+
+        fallbacks: dict[str, str] = {
+            "hypothesis": f"_Hypothesis to be defined based on findings._\n\n{ns}",
+            "success_metrics": ns or all_m,
+            "guardrail_metrics": guard or "_See policy constraints._",
+            "experiment_design": "_Experiment design to be defined._",
+            "sample_size_duration": exp_policy,
+            "segmentation": "_Segmentation to be defined._",
+            "rollback_criteria": risks or "_Rollback criteria to be defined._",
+            "data_collection": inp or all_m,
+            "analysis_plan": "_Analysis plan to be defined._",
+        }
+
+        for key, fallback in fallbacks.items():
+            if not sections.get(key):
+                sections[key] = fallback
+
         # Render template
         template = load_template("experiment_plan_template.md")
         context = {
             "product_name": self.product_name or self.run_config.run_id,
             "run_id": self.run_config.run_id,
             "date": datetime.now(UTC).strftime("%Y-%m-%d"),
-            "hypothesis": sections.get("hypothesis", ""),
-            "success_metrics": sections.get("success_metrics", ""),
-            "guardrail_metrics": sections.get("guardrail_metrics", ""),
-            "experiment_design": sections.get("experiment_design", ""),
-            "sample_size_duration": sections.get("sample_size_duration", ""),
-            "segmentation": sections.get("segmentation", ""),
-            "rollback_criteria": sections.get("rollback_criteria", ""),
-            "data_collection": sections.get("data_collection", ""),
-            "analysis_plan": sections.get("analysis_plan", ""),
+            **sections,
         }
         rendered = render_template(template, context)
 
