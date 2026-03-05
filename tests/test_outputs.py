@@ -39,6 +39,7 @@ class _Completion:
                 (),
                 {
                     "message": type("Msg", (), {"content": content})(),
+                    "finish_reason": "stop",
                 },
             )(),
         ]

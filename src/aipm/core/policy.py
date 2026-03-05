@@ -225,19 +225,28 @@ def evaluate_risk_gate(findings: list[Finding], policy: PolicyPack) -> dict:
 
     risk_findings = [f for f in findings if f.type == "risk"]
     high_risk_count = 0
+    blocker_ids: set[str] = set()  # Track which findings already added as blockers
 
     for finding in risk_findings:
         tags = [t.lower() for t in finding.tags]
         is_critical = finding.impact == "critical"
         is_high = finding.impact == "high"
+        meta = finding.metadata or {}
+
+        # Respect the risk agent's explicit is_blocker flag
+        if meta.get("is_blocker") and finding.id not in blocker_ids:
+            blockers.append(f"BLOCKED: Risk agent flagged as blocker — {finding.title} [{finding.id}]")
+            blocker_ids.add(finding.id)
 
         # Critical privacy gate
-        if is_critical and "privacy" in tags and gating.block_on_critical_privacy:
+        if is_critical and "privacy" in tags and gating.block_on_critical_privacy and finding.id not in blocker_ids:
             blockers.append(f"BLOCKED: Critical privacy risk — {finding.title} [{finding.id}]")
+            blocker_ids.add(finding.id)
 
         # Critical security gate
-        if is_critical and "security" in tags and gating.block_on_critical_security:
+        if is_critical and "security" in tags and gating.block_on_critical_security and finding.id not in blocker_ids:
             blockers.append(f"BLOCKED: Critical security risk — {finding.title} [{finding.id}]")
+            blocker_ids.add(finding.id)
 
         # PII legal review gate
         if "pii" in tags or "privacy" in tags:

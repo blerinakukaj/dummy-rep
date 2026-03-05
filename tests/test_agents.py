@@ -40,6 +40,7 @@ class _Message:
 class _Choice:
     def __init__(self, content: str) -> None:
         self.message = _Message(content)
+        self.finish_reason = "stop"
 
 
 class _Completion:

@@ -216,53 +216,19 @@ The test suite includes:
 - **Individual agent tests** — per-agent validation with error handling scenarios
 - **Output validation tests** — quality checks on generated artifacts (PRD structure, roadmap schema, backlog CSV, decision log completeness)
 
-## Docker
+## Streamlit UI
 
-### Prerequisites
-- [Docker](https://docs.docker.com/get-docker/) 24+
-- [Docker Compose](https://docs.docker.com/compose/) v2
-
-### Build and run the API server
+A full-featured web UI for running the pipeline, browsing results, and exploring findings:
 
 ```bash
-cp .env.example .env
-# Edit .env and add your API key(s)
-
-docker compose up --build
+streamlit run streamlit_app.py
 ```
 
-The API will be available at `http://localhost:8000`. Docker Compose polls `GET /api/v1/health` every 30s to verify container health.
-
-### Run the CLI inside Docker
-
-```bash
-# Run pipeline from a bundle
-docker run --rm \
-  --env-file .env \
-  -v "$(pwd)/input_bundles:/app/input_bundles" \
-  -v "$(pwd)/output:/app/output" \
-  aipm-api aipm run /app/input_bundles/sample_bundle/
-
-# Run from a text prompt
-docker run --rm \
-  --env-file .env \
-  -v "$(pwd)/output:/app/output" \
-  aipm-api aipm prompt "Build a smart notification prioritisation system"
-
-# Use a different model
-docker run --rm \
-  --env-file .env \
-  -v "$(pwd)/input_bundles:/app/input_bundles" \
-  -v "$(pwd)/output:/app/output" \
-  aipm-api aipm run /app/input_bundles/sample_bundle/ \
-    --model gpt-4o-mini
-```
-
-### Environment Variables
-
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `OPENAI_API_KEY` | OpenAI API key (for GPT-4o-mini) | Yes |
+The UI provides four pages:
+- **Run Pipeline** — select a bundle, policy, and model, then run the pipeline and view results
+- **Browse Outputs** — explore previous run manifests, artifacts, and findings
+- **Test All Bundles** — run every bundle sequentially and compare results in a table
+- **Tests & Lint** — run pytest and ruff directly from the browser
 
 ## Demo Scripts
 
