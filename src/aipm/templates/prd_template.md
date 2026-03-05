@@ -10,6 +10,10 @@
 
 {overview}
 
+## Stakeholders
+
+{stakeholders}
+
 ## Goals & Success Metrics
 
 {goals}

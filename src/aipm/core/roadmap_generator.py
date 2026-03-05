@@ -29,6 +29,10 @@ Rules:
 - Success criteria must be specific and measurable.
 - The critical path is the longest chain of dependent milestones.
 - Sequencing entries explain WHY one milestone must precede another.
+- EVERY milestone MUST include estimated_start (YYYY-MM-DD) and estimated_duration_weeks.
+  Use realistic engineering estimates: simple items = 2-3 weeks, medium = 4-6 weeks,
+  complex = 6-10 weeks. Phase start dates should be sequential — V1 starts after MVP ends,
+  V2 starts after V1 ends.
 
 Return ONLY a valid JSON object with this exact structure:
 {
@@ -44,6 +48,8 @@ Return ONLY a valid JSON object with this exact structure:
       "description": "<string>",
       "items": ["<requirement_finding_id>", ...],
       "dependencies": ["<milestone_id>", ...],
+      "estimated_start": "YYYY-MM-DD",
+      "estimated_duration_weeks": <int>,
       "success_criteria": "<string>"
     }
   ],
@@ -69,10 +75,12 @@ class RoadmapGenerator:
         llm_client: object,
         all_findings: list[Finding],
         run_config: RunConfig,
+        product_name: str = "",
     ) -> None:
         self.llm_client = llm_client
         self.all_findings = all_findings
         self.run_config = run_config
+        self.product_name = product_name
 
     # ------------------------------------------------------------------
     # Public API
@@ -166,6 +174,9 @@ class RoadmapGenerator:
         requirement_findings: list[Finding],
     ) -> str:
         """Construct the user-facing prompt with all relevant context."""
+        from datetime import UTC, datetime
+
+        current_date = datetime.now(UTC).strftime("%Y-%m-%d")
 
         # Summarise requirements
         req_lines: list[str] = []
@@ -186,11 +197,17 @@ class RoadmapGenerator:
                 group_lines.append(f"  {phase.upper()}: {', '.join(ids)}")
         group_section = "\n".join(group_lines) if group_lines else "(no groupings)"
 
-        # Product name from context (fallback)
-        product_name = self.run_config.input_path.rstrip("/\\").split("/")[-1].split("\\")[-1]
+        # Product name: prefer explicit name, fall back to input directory name
+        product_name = (
+            self.product_name
+            or self.run_config.input_path.rstrip("/\\").split("/")[-1].split("\\")[-1]
+        )
 
         return (
-            f"Product: {product_name}\n\n"
+            f"Product: {product_name}\n"
+            f"Today's Date: {current_date}\n"
+            f"IMPORTANT: MVP should start from today's date. All estimated_start dates "
+            f"must be {current_date} or later.\n\n"
             f"--- REQUIREMENT FINDINGS ---\n{req_section}\n\n"
             f"--- PHASE GROUPINGS ---\n{group_section}\n\n"
             f"--- FEASIBILITY & DELIVERY DETAILS ---\n{phase_info}\n\n"
