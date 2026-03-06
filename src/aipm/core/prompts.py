@@ -387,7 +387,7 @@ def parse_llm_findings(response: str, agent_id: str) -> list[Finding]:
             raw["agent_id"] = agent_id
 
             # Parse evidence items — normalize source_type to valid literals
-            _SOURCE_TYPE_MAP = {
+            source_type_map = {
                 "ticket": "ticket", "doc": "doc", "note": "note",
                 "metric": "metric", "interview": "interview",
                 # Common LLM hallucinations → best-fit valid type
@@ -400,7 +400,7 @@ def parse_llm_findings(response: str, agent_id: str) -> list[Finding]:
             evidence = []
             for ev in raw.get("evidence", []):
                 raw_type = ev.get("source_type", "doc")
-                normalized_type = _SOURCE_TYPE_MAP.get(raw_type, "doc")
+                normalized_type = source_type_map.get(raw_type, "doc")
                 evidence.append(
                     EvidenceItem(
                         source_id=ev.get("source_id", "UNKNOWN"),

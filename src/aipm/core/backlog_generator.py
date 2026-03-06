@@ -204,7 +204,7 @@ class BacklogGenerator:
         )
 
         # Map raw priority labels (CRITICAL, HIGH, etc.) to P0-P3 format
-        _PRIORITY_NORMALIZE = {
+        priority_normalize = {
             "CRITICAL": "P0", "HIGH": "P1", "MEDIUM": "P2", "LOW": "P3",
             "P0": "P0", "P1": "P1", "P2": "P2", "P3": "P3",
         }
@@ -215,7 +215,7 @@ class BacklogGenerator:
             prefix = ticket.id.split("-")[0].lower() if "-" in ticket.id else "backlog"
             epic_id = f"epic-{prefix}"
             raw_priority = (ticket.priority or "").upper()
-            priority = _PRIORITY_NORMALIZE.get(raw_priority, "P2")
+            priority = priority_normalize.get(raw_priority, "P2")
 
             rows.append({
                 "epic_id": epic_id,
