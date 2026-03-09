@@ -11,6 +11,7 @@ from rich.panel import Panel
 from rich.progress import Progress, SpinnerColumn, TextColumn
 from rich.table import Table
 
+from aipm.core.config import load_env
 from aipm.core.orchestrator import PipelineOrchestrator
 from aipm.core.validators import (
     generate_evidence_index,
@@ -48,6 +49,7 @@ def run(
 ) -> None:
     """Run the full AIPM pipeline on an input bundle."""
     _setup_logging(verbose)
+    load_env()
 
     console.print(
         Panel(
@@ -192,6 +194,7 @@ def prompt(
 ) -> None:
     """Run AIPM from a simple text prompt instead of a bundle."""
     _setup_logging(verbose)
+    load_env()
 
     console.print(
         Panel(
