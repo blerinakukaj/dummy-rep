@@ -1,0 +1,132 @@
+{
+  "agent_id": "competitive",
+  "agent_name": "Competitive & Positioning Agent",
+  "run_id": "2576ea64-acc2-456d-8d3c-6a7c49564eb8",
+  "timestamp": "2026-03-09T20:22:28.846468Z",
+  "findings": [
+    {
+      "id": "competitive-001",
+      "agent_id": "competitive",
+      "type": "insight",
+      "title": "Strong Competitor Landscape Identified",
+      "description": "The competitive landscape for SmartNotify includes direct competitors like PushFlow, AlertHub, and Notifai, each with distinct strengths and weaknesses. PushFlow excels in delivery reliability and analytics, AlertHub offers robust enterprise features but lacks innovation, and Notifai is an emerging AI-native player with potential but current reliability issues.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Competitor A: PushFlow... Competitor B: AlertHub... Competitor C: Notifai...",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Monitor competitors closely for feature updates and market positioning changes."
+      ],
+      "tags": [
+        "competitors",
+        "market analysis"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "competitive-002",
+      "agent_id": "competitive",
+      "type": "gap",
+      "title": "Feature Gaps in SmartNotify Compared to Competitors",
+      "description": "SmartNotify lacks certain features that competitors offer, such as A/B testing (PushFlow), granular role-based policies (AlertHub), and AI-native prioritization (Notifai). Addressing these gaps could enhance SmartNotify's appeal.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "SmartNotify aims to compete directly with these features."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "PushFlow... built-in A/B testing for notification copy.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "AlertHub... granular role-based notification policies.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Notifai... automatic categorization and priority scoring.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Develop A/B testing and role-based notification features."
+      ],
+      "tags": [
+        "feature gaps",
+        "product development"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "competitive-003",
+      "agent_id": "competitive",
+      "type": "recommendation",
+      "title": "Leverage Pricing Strategy to Compete",
+      "description": "Given that PushFlow's pricing is 40% higher than SmartNotify's, there is an opportunity to position SmartNotify as a cost-effective alternative while enhancing features to match or exceed competitors.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [
+        "Price sensitivity is a key factor for potential customers."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Pricing is 40% higher than SmartNotify at scale.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Highlight cost-effectiveness in marketing materials."
+      ],
+      "tags": [
+        "pricing",
+        "market positioning"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "competitive-004",
+      "agent_id": "competitive",
+      "type": "risk",
+      "title": "Emerging Threat from Notifai",
+      "description": "Notifai, as an AI-native product, poses a potential threat if it resolves its reliability issues. Its aggressive hiring and focus on ML could lead to rapid feature development that may outpace SmartNotify.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Notifai will successfully address its current weaknesses."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Notifai... reliability concerns (reported 3 outages in the last quarter).",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Monitor Notifai's progress and consider strategic partnerships or enhancements."
+      ],
+      "tags": [
+        "competitive threat",
+        "emerging competitors"
+      ],
+      "metadata": {}
+    }
+  ],
+  "summary": "The competitive landscape for SmartNotify is robust, with direct competitors offering various strengths and features. Identifying gaps in SmartNotify's offerings and leveraging pricing strategies can enhance its market position. Additionally, the emerging threat from Notifai necessitates close monitoring and potential strategic responses.",
+  "errors": []
+}

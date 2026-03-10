@@ -1,0 +1,157 @@
+{
+  "run_id": "57c812f2-883d-4582-8e51-b74e62e04b23",
+  "product_name": "EnterpriseSuite",
+  "product_description": "Unified enterprise platform consolidating CRM, project management, and analytics into a single multi-tenant SaaS solution",
+  "tickets": [
+    {
+      "id": "ENT-201",
+      "title": "Implement SSO/SAML integration for enterprise onboarding",
+      "description": "Enterprise prospects require SSO via SAML 2.0 and OIDC before signing contracts. Current authentication only supports email/password. Need to integrate with Okta, Azure AD, and OneLogin. Must support IdP-initiated and SP-initiated flows with JIT provisioning.",
+      "status": "open",
+      "priority": "critical",
+      "labels": [
+        "feature",
+        "auth",
+        "enterprise"
+      ],
+      "created_at": "2025-08-20",
+      "source": "jira"
+    },
+    {
+      "id": "ENT-202",
+      "title": "Multi-tenant data isolation audit and remediation",
+      "description": "Security audit flagged that tenant data isolation relies on application-level row filtering rather than schema or database-level separation. Two Fortune-500 prospects require SOC 2 Type II compliance before procurement approval. Need to evaluate and implement proper isolation boundaries.",
+      "status": "open",
+      "priority": "critical",
+      "labels": [
+        "security",
+        "compliance",
+        "architecture"
+      ],
+      "created_at": "2025-09-05",
+      "source": "jira"
+    },
+    {
+      "id": "ENT-203",
+      "title": "Role-based access control with custom permission sets",
+      "description": "Enterprise customers need fine-grained RBAC beyond our current admin/member/viewer model. Requirements include custom role definitions, permission inheritance, resource-level access controls, and audit logging of all permission changes.",
+      "status": "in_progress",
+      "priority": "high",
+      "labels": [
+        "feature",
+        "auth",
+        "enterprise"
+      ],
+      "created_at": "2025-09-18",
+      "source": "jira"
+    },
+    {
+      "id": "ENT-204",
+      "title": "Data residency controls for EU and APAC regions",
+      "description": "GDPR and data sovereignty requirements mean enterprise customers must choose where their data is stored. Need to implement region-pinned storage with cross-region replication disabled by default. Affects database, file storage, and search indices.",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "compliance",
+        "infrastructure",
+        "enterprise"
+      ],
+      "created_at": "2025-10-01",
+      "source": "jira"
+    },
+    {
+      "id": "ENT-205",
+      "title": "White-label theming and custom domain support",
+      "description": "Three enterprise prospects require white-label branding with custom logos, color schemes, and domain names (app.customer.com). Current architecture serves all tenants from a single domain and shared asset pipeline.",
+      "status": "open",
+      "priority": "medium",
+      "labels": [
+        "feature",
+        "frontend",
+        "enterprise"
+      ],
+      "created_at": "2025-10-22",
+      "source": "jira"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-001",
+      "title": "competitor_brief.md",
+      "content": "# Competitive Brief — EnterpriseSuite\n\n## Competitor A: PlatformOne\n- **Strengths:** Best-in-class enterprise features: SSO, SCIM provisioning, custom RBAC, audit logging, data residency. SOC 2 Type II and ISO 27001 certified. 8 regional data centers.\n- **Weaknesses:** Very expensive ($85/seat/month enterprise tier), slow release cadence (quarterly), UI is functional but dated.\n- **Recent moves:** Added FedRAMP certification in Q3 2025 targeting government contracts. Raised Series D at $2B valuation.\n\n## Competitor B: WorkLayer\n- **Strengths:** Modern UI, competitive pricing ($25/seat/month), strong API ecosystem with 200+ integrations. Fast onboarding (average 5 days).\n- **Weaknesses:** No data residency controls, basic RBAC only, SOC 2 Type I only (not Type II). Limited to US and EU regions.\n- **Recent moves:** Launched AI assistant feature in Q4 2025. Growing rapidly in mid-market but losing enterprise deals to PlatformOne on compliance requirements.\n",
+      "doc_type": "competitor_brief",
+      "tags": []
+    },
+    {
+      "id": "DOC-002",
+      "title": "customer_notes.md",
+      "content": "# Customer Notes — EnterpriseSuite\n\n## Interview 1: David L. (CTO, Fortune-500 Prospect)\nDavid's team evaluated EnterpriseSuite for 6 months but procurement is blocked on SSO and data isolation. \"We can't deploy a SaaS tool that doesn't support SAML — it's a non-starter for our security team.\" He estimated their organization would bring 2,000 seats at the enterprise tier if these requirements are met. He also raised concerns about vendor lock-in, asking for data export APIs and contractual SLAs around uptime (99.95% minimum).\n\n## Interview 2: Rachel M. (VP Engineering, Mid-Market Customer)\nRachel's 150-person team is an existing customer but has hit scaling walls. \"The permissions model is too simple — I have to give everyone admin just to let them manage their own projects.\" She described spending 3 hours per week manually adjusting access. Her security team also flagged that audit logs don't capture permission changes, which is a SOC 2 audit finding.\n\n## Interview 3: Kenji S. (Head of Compliance, APAC Enterprise Prospect)\nKenji requires data residency in the Tokyo region for regulatory compliance. \"Japanese financial services regulations require all customer data to remain within Japan. Cross-region replication would disqualify your platform.\" He also needs detailed data processing agreements and GDPR-equivalent privacy controls. His team would license 500 seats pending compliance verification.\n",
+      "doc_type": "note",
+      "tags": []
+    },
+    {
+      "id": "DOC-003",
+      "title": "metrics_snapshot.json",
+      "content": "{\n  \"total_tenants\": 340,\n  \"enterprise_tenants\": 12,\n  \"enterprise_pipeline_value_usd\": 2800000,\n  \"avg_seats_per_enterprise\": 850,\n  \"monthly_active_users\": 28000,\n  \"churn_rate_enterprise\": 0.02,\n  \"churn_rate_smb\": 0.09,\n  \"p99_api_latency_ms\": 1200,\n  \"uptime_last_90_days\": 0.9987,\n  \"soc2_findings_open\": 4,\n  \"avg_onboarding_days_enterprise\": 45\n}\n",
+      "doc_type": "metrics_snapshot",
+      "tags": []
+    }
+  ],
+  "risk_hotspots": [
+    {
+      "category": "privacy",
+      "description": "Detected privacy risk keywords in 2 source(s): DOC-002, ENT-204",
+      "severity": "medium",
+      "source_ids": [
+        "DOC-002",
+        "ENT-204"
+      ]
+    },
+    {
+      "category": "auth",
+      "description": "Detected auth risk keywords in 3 source(s): DOC-001, DOC-002, ENT-201",
+      "severity": "high",
+      "source_ids": [
+        "DOC-001",
+        "DOC-002",
+        "ENT-201"
+      ]
+    },
+    {
+      "category": "pricing",
+      "description": "Detected pricing risk keywords in 3 source(s): DOC-001, DOC-002, DOC-003",
+      "severity": "high",
+      "source_ids": [
+        "DOC-001",
+        "DOC-002",
+        "DOC-003"
+      ]
+    },
+    {
+      "category": "platform",
+      "description": "Detected platform risk keywords in 4 source(s): DOC-001, DOC-002, DOC-003, ENT-201",
+      "severity": "high",
+      "source_ids": [
+        "DOC-001",
+        "DOC-002",
+        "DOC-003",
+        "ENT-201"
+      ]
+    },
+    {
+      "category": "compliance",
+      "description": "Detected compliance risk keywords in 4 source(s): DOC-001, DOC-002, ENT-202, ENT-203",
+      "severity": "high",
+      "source_ids": [
+        "DOC-001",
+        "DOC-002",
+        "ENT-202",
+        "ENT-203"
+      ]
+    }
+  ],
+  "missing_info": [],
+  "dedup_log": [],
+  "raw_input_type": "bundle",
+  "created_at": "2026-03-06T12:40:45.539539Z"
+}

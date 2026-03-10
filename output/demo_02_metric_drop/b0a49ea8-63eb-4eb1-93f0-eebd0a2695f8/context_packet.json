@@ -1,0 +1,171 @@
+{
+  "run_id": "b0a49ea8-63eb-4eb1-93f0-eebd0a2695f8",
+  "product_name": "SearchBoost Query Engine",
+  "product_description": "Investigation into 15% drop in search relevance scores after recent deployment",
+  "tickets": [
+    {
+      "id": "SEARCH-201",
+      "title": "Search relevance score dropped 15% after deploy v2.4.1",
+      "description": "Our p50 search relevance score fell from 0.85 to 0.72 immediately following the v2.4.1 release on 2025-10-28. The new ranking algorithm was intended to improve personalization but has had the opposite effect for the majority of queries. Rollback was considered but blocked by a dependent feature flag change. Requires root-cause analysis and remediation plan.",
+      "status": "open",
+      "priority": "critical",
+      "labels": [
+        "bug",
+        "search",
+        "ranking",
+        "regression"
+      ],
+      "created_at": "2025-10-29",
+      "source": "jira"
+    },
+    {
+      "id": "SEARCH-202",
+      "title": "Users reporting irrelevant search results",
+      "description": "Support volume has spiked 3x since v2.4.1 rolled out. Users are reporting that top results no longer match their intent — e.g., searching 'invoice template' returns blog posts instead of product pages. Qualitative pattern: navigational queries are most affected. Long-tail queries seem unaffected. NPS from search sessions dropped from 42 to 28 in the past 7 days.",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "bug",
+        "search",
+        "ux",
+        "user-feedback"
+      ],
+      "created_at": "2025-10-30",
+      "source": "jira"
+    },
+    {
+      "id": "SEARCH-203",
+      "title": "Search latency increased on mobile web",
+      "description": "P95 search latency on mobile web has climbed to 890ms, up from a baseline of ~420ms pre-deploy. Desktop is unaffected at 210ms p95. Hypothesis: the new ranking model runs a heavier re-ranking step that is not cached for mobile sessions. No SLO breach yet but trending toward it. Requires profiling and either model optimization or mobile-specific caching.",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "performance",
+        "mobile",
+        "search",
+        "latency"
+      ],
+      "created_at": "2025-10-31",
+      "source": "jira"
+    },
+    {
+      "id": "SEARCH-204",
+      "title": "Missing search analytics events for new query types",
+      "description": "The v2.4.1 release added support for image search and voice search, but no analytics events were instrumented for these new query types. Events 'image_search_query', 'voice_search_query', and 'filter_applied' are completely absent from our data pipeline. This means we have zero visibility into adoption, success rates, or failure modes for these surfaces. Baseline instrumentation must be added before any experimentation.",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "analytics",
+        "instrumentation",
+        "image-search",
+        "voice-search"
+      ],
+      "created_at": "2025-11-01",
+      "source": "jira"
+    },
+    {
+      "id": "SEARCH-205",
+      "title": "A/B test for new ranking algorithm inconclusive",
+      "description": "The pre-launch A/B test (experiment ID: EXP-881) ran for 14 days with a 50/50 traffic split. Results were inconclusive: relevance improved +2% for signed-in users but degraded -8% for anonymous users. The test was not powered for the anonymous-user segment separately. Decision was made to ship anyway targeting the signed-in majority. Post-ship data suggests the anonymous segment is larger than estimated at ~40% of queries.",
+      "status": "open",
+      "priority": "medium",
+      "labels": [
+        "experimentation",
+        "ranking",
+        "analytics",
+        "ab-test"
+      ],
+      "created_at": "2025-11-02",
+      "source": "jira"
+    },
+    {
+      "id": "SEARCH-206",
+      "title": "Need baseline metrics for image search (just launched)",
+      "description": "Image search launched with v2.4.1 but we have no baseline metrics to measure against. We need to establish: query volume, zero-result rate, click-through rate on image results, and session continuation rate after an image search. Without a baseline we cannot run meaningful experiments or define success criteria for future improvements.",
+      "status": "open",
+      "priority": "medium",
+      "labels": [
+        "image-search",
+        "metrics",
+        "baseline",
+        "analytics"
+      ],
+      "created_at": "2025-11-03",
+      "source": "jira"
+    },
+    {
+      "id": "SEARCH-207",
+      "title": "Search autocomplete suggestions showing stale data",
+      "description": "Autocomplete suggestions are sourced from a cache refreshed every 24 hours. Since v2.4.1 the cache TTL was inadvertently extended to 7 days due to a config change in the deployment pipeline. Users are seeing suggestions for products that are out of stock or promotions that have ended. The stale data is compounding the relevance problem — users click an autocomplete suggestion and land on a zero-result page.",
+      "status": "open",
+      "priority": "medium",
+      "labels": [
+        "bug",
+        "autocomplete",
+        "cache",
+        "search"
+      ],
+      "created_at": "2025-11-04",
+      "source": "jira"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-001",
+      "title": "customer_notes.md",
+      "content": "# Customer Support Notes — SearchBoost Query Engine\n\n**Period:** October 29 – November 4, 2025\n**Compiled by:** Customer Success Team\n**Trigger:** Post-deploy v2.4.1 support spike\n\n---\n\n## Summary\n\nSupport ticket volume increased 3x in the 6 days following the v2.4.1 deployment. The vast majority of complaints fall into two categories: irrelevant search results and slow search on mobile. A smaller but growing segment reports broken autocomplete suggestions leading to dead-end pages.\n\n---\n\n## Verbatim Support Tickets (Sample)\n\n**Ticket #CS-9041** — Submitted 2025-10-30\n> \"I used to find what I needed in one search. Now I have to try four or five different phrasings. Your search got a lot worse this week.\"\n\n**Ticket #CS-9058** — Submitted 2025-10-30\n> \"Searching 'annual report template' gives me news articles. That's not what I want. The old search was fine.\"\n\n**Ticket #CS-9072** — Submitted 2025-10-31\n> \"Your mobile app search takes forever to load now. I timed it — almost 2 seconds from when I hit search to when results appear. My wifi is fine.\"\n\n**Ticket #CS-9089** — Submitted 2025-10-31\n> \"I searched for something using your autocomplete suggestion and got a page that said 'no results found.' Why are you suggesting things you don't have?\"\n\n**Ticket #CS-9103** — Submitted 2025-11-01\n> \"Search quality has really gone downhill. I'm considering switching to a competitor because I can't find what I need efficiently.\"\n\n**Ticket #CS-9117** — Submitted 2025-11-01\n> \"Tried your new image search feature. It returned zero results for 'product diagram.' Not sure if it's working at all.\"\n\n**Ticket #CS-9145** — Submitted 2025-11-02\n> \"I filter by category all the time. Now when I apply a filter the page just reloads and the filter doesn't stick. Super frustrating.\"\n\n**Ticket #CS-9162** — Submitted 2025-11-02\n> \"As a power user I notice the ranking changed significantly. Product pages that used to be at the top are now buried. Was this intentional?\"\n\n**Ticket #CS-9190** — Submitted 2025-11-03\n> \"Mobile search is really slow. Desktop is fine. Something broke on the phone version specifically.\"\n\n**Ticket #CS-9211** — Submitted 2025-11-04\n> \"I keep getting autocomplete suggestions for sales that ended months ago. When I click them I get a 'no results' page. Please fix this.\"\n\n---\n\n## Aggregate Patterns\n\n| Theme                          | Ticket Count | % of Total |\n|-------------------------------|-------------|------------|\n| Irrelevant / degraded results  | 47          | 38%        |\n| Slow search on mobile          | 32          | 26%        |\n| Stale / broken autocomplete    | 21          | 17%        |\n| Image search not working       | 14          | 11%        |\n| Filter not working             | 9           | 7%         |\n\n**Total tickets in period:** 123 (vs. 41 in the equivalent prior 6-day period)\n\n---\n\n## Customer Sentiment\n\n- **Churning / threatening to leave:** 8 enterprise accounts, 3 SMB accounts\n- **Explicitly praising v2.4.0 and asking to revert:** 19 tickets\n- **Reporting the issue as a bug (not a feature change):** 94% of tickets\n\n---\n\n## Affected Segments\n\n- **Anonymous users:** Disproportionately affected based on ticket language (\"not logged in,\" \"just browsing\")\n- **Mobile web users:** Explicitly cited in 26% of tickets\n- **Power users / navigational queries:** Mentioned in 12% of tickets as specifically degraded\n",
+      "doc_type": "note",
+      "tags": []
+    },
+    {
+      "id": "DOC-002",
+      "title": "incident_report.md",
+      "content": "# Incident Report — SearchBoost v2.4.1 Deployment\n**Severity:** P1\n**Status:** Ongoing / Mitigated\n**Incident ID:** INC-2025-1028\n**Date of Deploy:** 2025-10-28 14:32 UTC\n**Incident Declared:** 2025-10-29 09:15 UTC\n**Authored by:** Engineering On-Call Team\n\n---\n\n## Executive Summary\n\nThe v2.4.1 release introduced a new ML-based ranking algorithm intended to improve search personalization for signed-in users. The release also launched two new search surfaces: image search and voice search. Within 18 hours of full traffic ramp-up, search relevance scores dropped 15% at p50. The incident disproportionately affected anonymous users (~40% of query volume), a segment that was insufficiently represented in pre-launch A/B testing.\n\nRollback was blocked because v2.4.1 included a feature flag dependency for the new onboarding flow that was already in use for a concurrent marketing campaign. A partial remediation (model config override) was applied on day 3, stabilizing relevance at -15% rather than allowing continued degradation. Full remediation requires a targeted model patch or re-segment A/B test.\n\n---\n\n## Timeline\n\n| Time (UTC)         | Event |\n|--------------------|-------|\n| 2025-10-28 14:32   | v2.4.1 deployed to 10% of traffic (canary) |\n| 2025-10-28 16:00   | Canary metrics nominal; ramp to 50% traffic |\n| 2025-10-28 22:00   | Full 100% traffic ramp completed |\n| 2025-10-29 07:00   | Automated relevance monitor detects -8% drop; alert fired |\n| 2025-10-29 09:15   | On-call acknowledges; P1 incident declared |\n| 2025-10-29 11:30   | Root cause identified: anonymous user ranking path not covered by A/B test |\n| 2025-10-29 14:00   | Rollback evaluated; blocked by onboarding feature flag dependency |\n| 2025-10-29 18:45   | Model config override applied; degradation stabilized |\n| 2025-10-30 09:00   | Support ticket spike confirmed (3x baseline) |\n| 2025-10-31 15:00   | Autocomplete cache TTL misconfiguration identified (7d instead of 24h) |\n| 2025-10-31 17:30   | Cache TTL corrected; autocomplete fix will propagate within 7 days |\n| 2025-11-01 10:00   | Instrumentation gap confirmed: 3 event types missing from new search surfaces |\n| 2025-11-04 08:00   | Incident ongoing; remediation plan in progress |\n\n---\n\n## Root Cause Analysis\n\n### Primary: Anonymous User Segment Not Represented in A/B Test\n\nThe A/B test (EXP-881) for the new ranking algorithm measured relevance improvement for signed-in users only. The power analysis assumed anonymous traffic was ~35% of queries. Post-launch data shows it is actually ~40%. The algorithm performs significantly worse for anonymous users because it relies on historical session data unavailable for non-authenticated requests. The new ranking model falls back to a less-calibrated generic model for anonymous users, which explains the navigational query degradation.\n\n### Secondary: Autocomplete Cache TTL Misconfiguration\n\nDuring the v2.4.1 deployment pipeline, an environment variable for `AUTOCOMPLETE_CACHE_TTL` was overwritten from `86400` (24 hours) to `604800` (7 days). This was caused by a misconfigured secrets merge step that pulled stale values from a staging environment configuration. Result: autocomplete suggestions are stale by up to 7 days, surfacing expired promotions and out-of-stock products.\n\n### Contributing: Missing Instrumentation for New Query Types\n\nThe v2.4.1 release added image search and voice search without corresponding analytics event instrumentation. Events `image_search_query`, `voice_search_query`, and `filter_applied` were not added to the event schema. This means the team has zero observability into these new surfaces and cannot quantify their contribution to the overall relevance drop or user experience degradation.\n\n---\n\n## Impact\n\n- **Search relevance p50:** -15.3% (0.85 → 0.72)\n- **Mobile search latency p95:** +112% (420ms → 890ms)\n- **Zero-result rate:** +200% (0.06 → 0.18)\n- **Search CTR:** -34% (0.47 → 0.31)\n- **Session abandonment post-search:** +57% (0.28 → 0.44)\n- **Support ticket volume:** +200% (41 → 123 in 7 days)\n- **NPS (search sessions):** -14 points (42 → 28)\n- **Enterprise accounts flagging churn risk:** 8\n\n---\n\n## Immediate Actions Taken\n\n1. Model config override applied to stabilize relevance degradation\n2. Autocomplete cache TTL corrected to 24 hours (propagation in progress)\n3. Rollback deprioritized due to onboarding feature flag dependency; scheduled for next sprint\n\n---\n\n## Open Remediation Items\n\n1. **Re-run A/B test** scoped to anonymous users with properly powered sample size\n2. **Patch ranking model** for anonymous user fallback path\n3. **Add instrumentation** for `image_search_query`, `voice_search_query`, `filter_applied`\n4. **Establish baseline metrics** for image search and voice search\n5. **Fix deployment pipeline** to prevent staging config bleed into production\n6. **Improve canary metrics** to include anonymous-user-specific relevance scores\n7. **Mobile latency investigation**: profile ranking re-ranker for mobile session path\n\n---\n\n## Lessons Learned\n\n- A/B tests must be powered for all major traffic segments independently, not just the majority\n- New feature surfaces require instrumentation sign-off as a deploy gate\n- Cache configuration changes should be validated as a separate deployment artifact\n- Canary phase should run for minimum 48 hours to capture diurnal and authenticated/anonymous traffic patterns\n",
+      "doc_type": "note",
+      "tags": []
+    },
+    {
+      "id": "DOC-003",
+      "title": "metrics_snapshot.json",
+      "content": "{\n  \"snapshot_date\": \"2025-11-04\",\n  \"snapshot_period\": \"7-day trailing average post v2.4.1 deploy\",\n  \"search_relevance_p50\": 0.72,\n  \"search_relevance_p50_previous\": 0.85,\n  \"search_relevance_delta_pct\": -15.3,\n  \"search_latency_p95_ms\": 890,\n  \"search_latency_p95_ms_previous\": 420,\n  \"search_latency_desktop_p95_ms\": 210,\n  \"queries_per_session\": 3.2,\n  \"queries_per_session_previous\": 2.1,\n  \"zero_result_rate\": 0.18,\n  \"zero_result_rate_previous\": 0.06,\n  \"search_ctr\": 0.31,\n  \"search_ctr_previous\": 0.47,\n  \"session_abandonment_after_search\": 0.44,\n  \"session_abandonment_after_search_previous\": 0.28,\n  \"autocomplete_click_to_zero_result_rate\": 0.23,\n  \"nps_search_sessions\": 28,\n  \"nps_search_sessions_previous\": 42,\n  \"missing_events\": [\n    \"image_search_query\",\n    \"voice_search_query\",\n    \"filter_applied\"\n  ],\n  \"baseline_coverage\": 0.6,\n  \"instrumented_query_types\": [\"text_search\", \"autocomplete_select\"],\n  \"uninstrumented_query_types\": [\"image_search\", \"voice_search\", \"filtered_search\"],\n  \"support_ticket_volume_7d\": 123,\n  \"support_ticket_volume_7d_previous\": 41,\n  \"ab_test_exp_881\": {\n    \"status\": \"completed_inconclusive\",\n    \"signed_in_relevance_delta\": 0.02,\n    \"anonymous_relevance_delta\": -0.08,\n    \"anonymous_traffic_share_estimated\": 0.35,\n    \"anonymous_traffic_share_actual\": 0.40,\n    \"conclusion\": \"Shipped to all traffic; anonymous segment underweighted in power analysis\"\n  },\n  \"image_search\": {\n    \"status\": \"launched_no_baseline\",\n    \"query_volume\": null,\n    \"zero_result_rate\": null,\n    \"ctr\": null,\n    \"note\": \"No analytics events instrumented; metrics unavailable\"\n  },\n  \"voice_search\": {\n    \"status\": \"launched_no_baseline\",\n    \"query_volume\": null,\n    \"zero_result_rate\": null,\n    \"note\": \"No analytics events instrumented; metrics unavailable\"\n  }\n}\n",
+      "doc_type": "metrics_snapshot",
+      "tags": []
+    }
+  ],
+  "risk_hotspots": [
+    {
+      "category": "auth",
+      "description": "Detected auth risk keywords in 5 source(s): DOC-002, DOC-003, SEARCH-202, SEARCH-203, SEARCH-206",
+      "severity": "high",
+      "source_ids": [
+        "DOC-002",
+        "DOC-003",
+        "SEARCH-202",
+        "SEARCH-203",
+        "SEARCH-206"
+      ]
+    },
+    {
+      "category": "pricing",
+      "description": "Detected pricing risk keywords in 3 source(s): DOC-001, DOC-002, SEARCH-201",
+      "severity": "high",
+      "source_ids": [
+        "DOC-001",
+        "DOC-002",
+        "SEARCH-201"
+      ]
+    },
+    {
+      "category": "accessibility",
+      "description": "Detected accessibility risk keywords in 1 source(s): DOC-002",
+      "severity": "low",
+      "source_ids": [
+        "DOC-002"
+      ]
+    }
+  ],
+  "missing_info": [],
+  "dedup_log": [],
+  "raw_input_type": "bundle",
+  "created_at": "2026-03-09T20:01:24.911101Z"
+}

@@ -1,0 +1,52 @@
+{
+  "per_agent": {
+    "intake": {
+      "prompt_tokens": 472,
+      "completion_tokens": 83,
+      "total_tokens": 555
+    },
+    "customer": {
+      "prompt_tokens": 1381,
+      "completion_tokens": 1024,
+      "total_tokens": 2405
+    },
+    "competitive": {
+      "prompt_tokens": 874,
+      "completion_tokens": 858,
+      "total_tokens": 1732
+    },
+    "metrics": {
+      "prompt_tokens": 1259,
+      "completion_tokens": 1190,
+      "total_tokens": 2449
+    },
+    "feasibility": {
+      "prompt_tokens": 1106,
+      "completion_tokens": 1245,
+      "total_tokens": 2351
+    },
+    "requirements": {
+      "prompt_tokens": 2439,
+      "completion_tokens": 3375,
+      "total_tokens": 5814
+    },
+    "risk": {
+      "prompt_tokens": 3412,
+      "completion_tokens": 1038,
+      "total_tokens": 4450
+    },
+    "lead_pm": {
+      "prompt_tokens": 5953,
+      "completion_tokens": 2055,
+      "total_tokens": 8008
+    }
+  },
+  "total": {
+    "prompt_tokens": 16896,
+    "completion_tokens": 10868,
+    "total_tokens": 27764
+  },
+  "estimated_cost_usd": 0.009055,
+  "provider": "openai",
+  "model": "gpt-4o-mini"
+}

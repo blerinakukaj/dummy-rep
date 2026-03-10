@@ -1,0 +1,170 @@
+{
+  "agent_id": "competitive",
+  "agent_name": "Competitive & Positioning Agent",
+  "run_id": "7540bcf1-5d51-4d44-b953-83d435771b67",
+  "timestamp": "2026-03-06T13:11:51.518460Z",
+  "findings": [
+    {
+      "id": "competitive-001",
+      "agent_id": "competitive",
+      "type": "insight",
+      "title": "Competitor Landscape Overview",
+      "description": "SmartNotify faces competition from PushFlow, AlertHub, and Notifai, each with distinct strengths and weaknesses. PushFlow excels in reliability and analytics but lacks batching features. AlertHub offers strong enterprise capabilities but is slow to innovate. Notifai is an emerging player with AI prioritization but has reliability issues.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Competitor A: PushFlow... Competitor B: AlertHub... Competitor C: Notifai...",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Monitor competitor feature releases closely."
+      ],
+      "tags": [
+        "competition",
+        "market analysis"
+      ],
+      "metadata": {
+        "competitors": [
+          "PushFlow",
+          "AlertHub",
+          "Notifai"
+        ]
+      }
+    },
+    {
+      "id": "competitive-002",
+      "agent_id": "competitive",
+      "type": "gap",
+      "title": "Feature Parity Gaps Identified",
+      "description": "SmartNotify lacks certain features that competitors offer, such as PushFlow's A/B testing and real-time analytics dashboard, and AlertHub's granular role-based notification policies. Additionally, SmartNotify does not currently support multiple languages, which is a strength for AlertHub.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "PushFlow... built-in A/B testing for notification copy... AlertHub... granular role-based notification policies.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Consider adding A/B testing and multi-language support."
+      ],
+      "tags": [
+        "feature gap",
+        "product development"
+      ],
+      "metadata": {
+        "missing_features": [
+          "A/B testing",
+          "real-time analytics",
+          "multi-language support"
+        ]
+      }
+    },
+    {
+      "id": "competitive-003",
+      "agent_id": "competitive",
+      "type": "recommendation",
+      "title": "Differentiation Opportunities",
+      "description": "SmartNotify should leverage its intelligent notification prioritization as a unique selling proposition. Emphasizing reduced notification fatigue through ML could attract users from competitors like PushFlow and AlertHub, who lack this specific focus.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Users prioritize notification management features."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Intelligent notification prioritization system that uses ML to reduce notification fatigue.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Market the unique ML prioritization feature more aggressively."
+      ],
+      "tags": [
+        "differentiation",
+        "marketing strategy"
+      ],
+      "metadata": {
+        "unique_features": [
+          "ML prioritization"
+        ]
+      }
+    },
+    {
+      "id": "competitive-004",
+      "agent_id": "competitive",
+      "type": "risk",
+      "title": "Pricing Sensitivity in the Market",
+      "description": "SmartNotify's pricing is positioned lower than PushFlow, which is 40% higher at scale. However, pricing concerns have been flagged across multiple sources, indicating potential vulnerability to competitive pricing strategies.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Price sensitivity is a significant factor for customers."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Pricing is 40% higher than SmartNotify at scale.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Detected pricing risk keywords in 3 source(s).",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Evaluate pricing strategy to ensure competitiveness."
+      ],
+      "tags": [
+        "pricing",
+        "market risk"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "competitive-005",
+      "agent_id": "competitive",
+      "type": "insight",
+      "title": "Emerging Threats from Notifai",
+      "description": "Notifai, although early stage, poses a potential threat due to its AI-first approach and focus on ML prioritization. If they resolve reliability issues, they could capture market share rapidly.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Emerging competitors can disrupt established players."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Could become a serious threat in 12-18 months if they solve reliability.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Monitor Notifai's developments closely."
+      ],
+      "tags": [
+        "emerging threat",
+        "competitive landscape"
+      ],
+      "metadata": {
+        "emerging_competitor": "Notifai"
+      }
+    }
+  ],
+  "summary": "SmartNotify operates in a competitive landscape with notable players like PushFlow, AlertHub, and Notifai. Key gaps in features and potential pricing risks have been identified, alongside opportunities for differentiation through its unique ML prioritization. Continuous monitoring of competitors and market trends is essential for strategic positioning.",
+  "errors": []
+}

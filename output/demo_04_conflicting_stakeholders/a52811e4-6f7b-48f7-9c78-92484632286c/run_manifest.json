@@ -1,0 +1,164 @@
+{
+  "run_id": "a52811e4-6f7b-48f7-9c78-92484632286c",
+  "timestamp": "2026-03-09T20:12:29.824717+00:00",
+  "input_path": "input_bundles/conflicting_stakeholders/",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "duration_seconds": 205.55,
+  "agents_run": [
+    "intake",
+    "competitive",
+    "customer",
+    "metrics",
+    "feasibility",
+    "requirements",
+    "risk",
+    "lead_pm"
+  ],
+  "agents_failed": [],
+  "total_findings": 45,
+  "findings_by_type": {
+    "risk": 14,
+    "gap": 2,
+    "insight": 7,
+    "recommendation": 6,
+    "metric": 3,
+    "dependency": 2,
+    "requirement": 11
+  },
+  "recommendation": "do_not_pursue",
+  "artifacts": {
+    "prd": "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\artifacts\\prd.md",
+    "roadmap": "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\artifacts\\roadmap.json",
+    "experiment_plan": "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\artifacts\\experiment_plan.md",
+    "decision_log": "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\artifacts\\decision_log.md",
+    "backlog": "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\artifacts\\backlog.csv",
+    "final_plan": "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\artifacts\\final_plan.json"
+  },
+  "token_usage": {
+    "per_agent": {
+      "intake": {
+        "prompt_tokens": 603,
+        "completion_tokens": 99,
+        "total_tokens": 702
+      },
+      "competitive": {
+        "prompt_tokens": 1297,
+        "completion_tokens": 950,
+        "total_tokens": 2247
+      },
+      "customer": {
+        "prompt_tokens": 2573,
+        "completion_tokens": 1101,
+        "total_tokens": 3674
+      },
+      "metrics": {
+        "prompt_tokens": 1126,
+        "completion_tokens": 1150,
+        "total_tokens": 2276
+      },
+      "feasibility": {
+        "prompt_tokens": 1395,
+        "completion_tokens": 1770,
+        "total_tokens": 3165
+      },
+      "requirements": {
+        "prompt_tokens": 2664,
+        "completion_tokens": 3193,
+        "total_tokens": 5857
+      },
+      "risk": {
+        "prompt_tokens": 3769,
+        "completion_tokens": 1404,
+        "total_tokens": 5173
+      },
+      "lead_pm": {
+        "prompt_tokens": 5668,
+        "completion_tokens": 2222,
+        "total_tokens": 7890
+      }
+    },
+    "total": {
+      "prompt_tokens": 19095,
+      "completion_tokens": 11889,
+      "total_tokens": 30984
+    }
+  },
+  "estimated_cost": 0.009998,
+  "agent_details": [
+    {
+      "agent_id": "competitive",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 16.44,
+      "error": null
+    },
+    {
+      "agent_id": "customer",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 21.36,
+      "error": null
+    },
+    {
+      "agent_id": "metrics",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 26.51,
+      "error": null
+    },
+    {
+      "agent_id": "feasibility",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 27.42,
+      "error": null
+    },
+    {
+      "agent_id": "requirements",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 52.46,
+      "error": null
+    },
+    {
+      "agent_id": "risk",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 20.85,
+      "error": null
+    },
+    {
+      "agent_id": "lead_pm",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 99.22,
+      "error": null
+    }
+  ],
+  "bundle_warnings": [],
+  "output_files": {
+    "context_packet": "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\context_packet.json",
+    "findings": [
+      "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\findings\\competitive.json",
+      "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\findings\\customer.json",
+      "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\findings\\feasibility.json",
+      "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\findings\\intake.json",
+      "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\findings\\lead_pm.json",
+      "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\findings\\lead_pm_intermediate.json",
+      "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\findings\\metrics.json",
+      "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\findings\\requirements.json",
+      "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\findings\\risk.json",
+      "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\findings\\risk_gate_result.json"
+    ],
+    "artifacts": [
+      "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\artifacts\\backlog.csv",
+      "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\artifacts\\decision_log.md",
+      "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\artifacts\\experiment_plan.md",
+      "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\artifacts\\final_plan.json",
+      "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\artifacts\\prd.md",
+      "output\\demo_04_conflicting_stakeholders\\a52811e4-6f7b-48f7-9c78-92484632286c\\artifacts\\roadmap.json"
+    ]
+  },
+  "errors": {}
+}

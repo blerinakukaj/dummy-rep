@@ -1,0 +1,159 @@
+{
+  "agent_id": "metrics",
+  "agent_name": "Metrics & Analytics Agent",
+  "run_id": "a45219c3-a78f-4408-8808-01aa19a18ca3",
+  "timestamp": "2026-03-06T12:47:33.287226Z",
+  "findings": [
+    {
+      "id": "metrics-001",
+      "agent_id": "metrics",
+      "type": "metric",
+      "title": "North Star Metric: Monthly Recurring Revenue (MRR)",
+      "description": "The North Star metric for CloudMetrics is Monthly Recurring Revenue (MRR), which reflects the total revenue generated from customers on a monthly basis. This metric is crucial as it directly correlates with the success of the transition to consumption-based pricing.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "MRR will increase as customers adapt to usage-based pricing."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-003",
+          "source_type": "doc",
+          "excerpt": "mrr_usd: 312000",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Monitor MRR closely during the transition to consumption-based pricing."
+      ],
+      "tags": [
+        "north_star"
+      ],
+      "metadata": {
+        "baseline": 312000,
+        "target": 400000,
+        "measurement_method": "Monthly financial reporting"
+      }
+    },
+    {
+      "id": "metrics-002",
+      "agent_id": "metrics",
+      "type": "metric",
+      "title": "Primary KPI: Average Revenue Per Account (ARPA)",
+      "description": "Average Revenue Per Account (ARPA) is a primary KPI that measures the average revenue generated from each customer account. This metric helps in understanding customer value and the effectiveness of pricing strategies.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "ARPA will increase as customers migrate to consumption-based pricing."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-003",
+          "source_type": "doc",
+          "excerpt": "avg_revenue_per_account_usd: 168.65",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Track ARPA to assess the impact of pricing changes."
+      ],
+      "tags": [
+        "input_metric"
+      ],
+      "metadata": {
+        "baseline": 168.65,
+        "target": 200,
+        "measurement_method": "Monthly financial reporting"
+      }
+    },
+    {
+      "id": "metrics-003",
+      "agent_id": "metrics",
+      "type": "metric",
+      "title": "Guardrail Metric: Projected Churn Increase Percentage",
+      "description": "Projected Churn Increase Percentage is a guardrail metric that indicates the expected increase in customer churn during the transition to consumption-based pricing. Maintaining this metric below a certain threshold is critical to ensure business stability.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Churn will increase due to customer dissatisfaction with pricing changes."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-003",
+          "source_type": "doc",
+          "excerpt": "projected_churn_increase_pct: 8.5",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement proactive customer engagement strategies to mitigate churn."
+      ],
+      "tags": [
+        "guardrail"
+      ],
+      "metadata": {
+        "baseline": 8.5,
+        "target": 5,
+        "measurement_method": "Customer churn analysis"
+      }
+    },
+    {
+      "id": "metrics-004",
+      "agent_id": "metrics",
+      "type": "gap",
+      "title": "Measurement Gap: Customer Segmentation Data",
+      "description": "There is a gap in the data regarding detailed customer segmentation, which is necessary for understanding how different customer tiers will react to the new pricing model. This data is crucial for targeted communication and support.",
+      "impact": "high",
+      "confidence": "speculative",
+      "assumptions": [
+        "Customer segmentation data will help in predicting churn and revenue changes."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-305",
+          "source_type": "ticket",
+          "excerpt": "Finance and product need a model that identifies which customer segments will see cost increases vs. decreases under the new pricing.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct a customer segmentation analysis to fill this gap."
+      ],
+      "tags": [],
+      "metadata": {}
+    },
+    {
+      "id": "metrics-005",
+      "agent_id": "metrics",
+      "type": "recommendation",
+      "title": "Experiment Opportunity: Pricing Sensitivity Testing",
+      "description": "Conduct experiments to test customer sensitivity to different pricing models within the consumption-based framework. This will help in understanding optimal pricing strategies and customer willingness to pay.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Different pricing models will yield varying levels of customer acceptance."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-302",
+          "source_type": "ticket",
+          "excerpt": "Build an in-app pricing calculator that estimates monthly costs based on current usage patterns.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Design A/B tests for various pricing models."
+      ],
+      "tags": [],
+      "metadata": {
+        "statistical_parameters": {
+          "sample_size": 500,
+          "confidence_level": 95,
+          "margin_of_error": 5
+        }
+      }
+    }
+  ],
+  "summary": "The analysis identifies the North Star metric as Monthly Recurring Revenue (MRR) and establishes primary KPIs and guardrail metrics to monitor during the transition to consumption-based pricing. Gaps in customer segmentation data and opportunities for pricing sensitivity testing are also highlighted for further exploration.",
+  "errors": []
+}

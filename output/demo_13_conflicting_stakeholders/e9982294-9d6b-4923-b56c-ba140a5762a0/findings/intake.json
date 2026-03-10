@@ -1,0 +1,215 @@
+{
+  "agent_id": "intake",
+  "agent_name": "Intake & Context Agent",
+  "run_id": "e9982294-9d6b-4923-b56c-ba140a5762a0",
+  "timestamp": "2026-03-09T20:37:30.640702Z",
+  "findings": [
+    {
+      "id": "intake-001",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: auth",
+      "description": "Detected auth risk keywords in 3 source(s): CUST-302, GROW-101, PLAT-201",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "CUST-302",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "GROW-101",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "PLAT-201",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "auth"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-002",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: pricing",
+      "description": "Detected pricing risk keywords in 10 source(s): CUST-301, CUST-302, DOC-001, DOC-002, DOC-003, DOC-004, GROW-101, PLAT-201, PLAT-202, PLAT-203",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "CUST-301",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "CUST-302",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-001",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-003",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-004",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "GROW-101",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "PLAT-201",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "PLAT-202",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "PLAT-203",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "pricing"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-003",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: platform",
+      "description": "Detected platform risk keywords in 5 source(s): CUST-302, DOC-003, DOC-004, PLAT-201, PLAT-203",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "CUST-302",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-003",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-004",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "PLAT-201",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "PLAT-203",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "platform"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-004",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: accessibility",
+      "description": "Detected accessibility risk keywords in 1 source(s): DOC-002",
+      "impact": "low",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "accessibility"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-005",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: compliance",
+      "description": "Detected compliance risk keywords in 1 source(s): DOC-004",
+      "impact": "low",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-004",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "compliance"
+      ],
+      "metadata": {}
+    }
+  ],
+  "summary": "Intake processed 8 tickets and 4 documents for QuickPay Checkout Redesign.",
+  "errors": []
+}

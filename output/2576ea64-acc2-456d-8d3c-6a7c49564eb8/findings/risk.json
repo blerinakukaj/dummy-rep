@@ -1,0 +1,174 @@
+{
+  "agent_id": "risk",
+  "agent_name": "Risk/Privacy/Compliance Guardrails Agent",
+  "run_id": "2576ea64-acc2-456d-8d3c-6a7c49564eb8",
+  "timestamp": "2026-03-09T20:24:10.670437Z",
+  "findings": [
+    {
+      "id": "risk-001",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Privacy Risk Hotspot Detected",
+      "description": "Detected privacy risk keywords indicating potential issues with PII handling and consent mechanisms in the documentation.",
+      "impact": "low",
+      "confidence": "directional",
+      "assumptions": [
+        "The documentation may contain ambiguous language regarding PII handling."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Detected privacy risk keywords in 1 source(s)",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Review documentation to clarify PII handling and consent mechanisms."
+      ],
+      "tags": [
+        "privacy"
+      ],
+      "metadata": {
+        "category": "privacy",
+        "is_blocker": false,
+        "mitigation": "Clarify PII handling and consent mechanisms in documentation.",
+        "policy_rule": "Privacy by design — data minimization at every layer"
+      }
+    },
+    {
+      "id": "risk-002",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Critical Android Notification Delivery Failure",
+      "description": "Push notifications are failing on Android 14 devices, affecting 8% of users. This is a critical issue that needs to be resolved to ensure reliable notification delivery.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "The failure rate is consistent across affected devices."
+      ],
+      "evidence": [
+        {
+          "source_id": "NOTIFY-102",
+          "source_type": "doc",
+          "excerpt": "Push notifications are failing on Android 14 devices, affecting 8% of users.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Investigate and resolve the notification delivery failure on Android 14 devices."
+      ],
+      "tags": [
+        "android",
+        "notification",
+        "failure",
+        "security"
+      ],
+      "metadata": {
+        "category": "security",
+        "is_blocker": true,
+        "mitigation": "Resolve the notification delivery failure on Android 14 devices.",
+        "policy_rule": "Block on critical security"
+      }
+    },
+    {
+      "id": "risk-003",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "High Risk of Pricing Misalignment",
+      "description": "Detected pricing risk keywords indicating potential issues with pricing strategy that may not align with user expectations or market standards.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Pricing may not be competitive or clear to users."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Detected pricing risk keywords in 3 source(s)",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Review and adjust pricing strategy to ensure competitiveness and clarity."
+      ],
+      "tags": [
+        "pricing",
+        "compliance"
+      ],
+      "metadata": {
+        "category": "compliance",
+        "is_blocker": false,
+        "mitigation": "Review and adjust pricing strategy.",
+        "policy_rule": "Legal review is a gate, not a checkbox"
+      }
+    },
+    {
+      "id": "risk-004",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Accessibility Issues in Notification Center",
+      "description": "Users, particularly those using screen readers, face challenges navigating the notification center, indicating a need for improved accessibility features.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Accessibility features are not fully implemented or tested."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Several users face challenges navigating the notification center.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Enhance the notification center to ensure it is navigable by users with screen readers."
+      ],
+      "tags": [
+        "accessibility"
+      ],
+      "metadata": {
+        "category": "accessibility",
+        "is_blocker": false,
+        "mitigation": "Improve accessibility features in the notification center.",
+        "policy_rule": "Accessibility is a requirement, not an afterthought"
+      }
+    },
+    {
+      "id": "risk-005",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Compliance Risk with Data Handling Policies",
+      "description": "Detected compliance risk keywords indicating potential issues with adherence to GDPR and CCPA regulations regarding data handling and retention.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Data handling practices may not fully comply with regulations."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Detected compliance risk keywords in 2 source(s)",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct a compliance audit to ensure adherence to GDPR and CCPA."
+      ],
+      "tags": [
+        "compliance"
+      ],
+      "metadata": {
+        "category": "compliance",
+        "is_blocker": false,
+        "mitigation": "Conduct a compliance audit.",
+        "policy_rule": "Legal review for PII"
+      }
+    }
+  ],
+  "summary": "Identified 5 risks (1 accessibility, 2 compliance, 1 privacy, 1 security). 1 flagged as blockers. Risk gate: FAILED (2 blockers, 1 warnings).",
+  "errors": []
+}

@@ -1,0 +1,184 @@
+{
+  "run_id": "fb78e87d-55a6-46e6-8d50-08f3d86d2a83",
+  "product_name": "CollabDocs Real-time Editor",
+  "product_description": "Adding real-time collaboration features to match competitor launch of live co-editing",
+  "tickets": [
+    {
+      "id": "COLLAB-301",
+      "title": "Competitor launched real-time co-editing — we need parity",
+      "description": "Competitor X (Notion-adjacent) launched live co-editing on 2025-10-15 with a heavy marketing push directly targeting our enterprise segment. Sales has fielded 14 inbound inquiries in two weeks asking when CollabDocs will support simultaneous editing. Without parity we risk losing competitive positioning in the enterprise document space. This ticket tracks the initiative to deliver real-time co-editing at feature parity or better.",
+      "status": "open",
+      "priority": "critical",
+      "labels": [
+        "strategic",
+        "competitive",
+        "collaboration",
+        "initiative"
+      ],
+      "created_at": "2025-10-20",
+      "source": "jira"
+    },
+    {
+      "id": "COLLAB-302",
+      "title": "Enterprise customers asking for simultaneous editing",
+      "description": "Three enterprise accounts (Acme Corp, Vertex Partners, NordicBank) have submitted formal feature requests for simultaneous multi-user editing. All three cited a competitor's recent launch as the trigger. Combined ARR at risk: $420K. Customer Success has escalated to Product with a 60-day window before formal churn conversations begin. Each customer has 50–200 active users who collaborate on shared documents daily.",
+      "status": "open",
+      "priority": "critical",
+      "labels": [
+        "enterprise",
+        "feature-request",
+        "churn-risk",
+        "collaboration"
+      ],
+      "created_at": "2025-10-22",
+      "source": "jira"
+    },
+    {
+      "id": "COLLAB-303",
+      "title": "Current document locking causes user frustration",
+      "description": "CollabDocs currently implements pessimistic locking: when a user opens a document for editing, it is locked to that user and others are placed in read-only mode. Support receives ~40 tickets per week from users who are blocked because a colleague has a document open. Common pattern: document left open in a background tab by a user who is not actively editing. Users are manually pinging colleagues on Slack to 'close the doc.' This is the most-cited UX complaint in our quarterly NPS survey.",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "ux",
+        "bug",
+        "locking",
+        "collaboration"
+      ],
+      "created_at": "2025-10-10",
+      "source": "jira"
+    },
+    {
+      "id": "COLLAB-304",
+      "title": "Need presence indicators (who's viewing/editing)",
+      "description": "Users have no visibility into who else is currently viewing or editing a document. This causes duplicate work (two people editing the same section simultaneously then manually merging) and communication overhead. Requested feature: real-time presence avatars in the document header showing active viewers and editors, with cursor position indicators per user. This is a prerequisite for real-time co-editing and has standalone value for read-only collaboration workflows.",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "feature",
+        "presence",
+        "ux",
+        "collaboration"
+      ],
+      "created_at": "2025-10-18",
+      "source": "jira"
+    },
+    {
+      "id": "COLLAB-305",
+      "title": "Conflict resolution for concurrent edits",
+      "description": "When two users edit the same document (currently only possible via a race condition before the lock is acquired), the last-write-wins behavior causes silent data loss. One user's changes are overwritten without notification. As we move toward real-time co-editing, a formal conflict resolution strategy is required. Engineering has evaluated two approaches: Operational Transformation (OT) as used by Google Docs and CRDTs (Conflict-free Replicated Data Types) used by competitors. Each has different tradeoffs for our document model.",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "feature",
+        "conflict-resolution",
+        "crdt",
+        "ot",
+        "architecture"
+      ],
+      "created_at": "2025-10-23",
+      "source": "jira"
+    },
+    {
+      "id": "COLLAB-306",
+      "title": "Mobile editing support for collaboration",
+      "description": "Mobile accounts for 22% of our DAU but the mobile editing experience lags significantly behind desktop. The current document locking model on mobile causes even more frustration because lock release requires manually closing the document (no background tab concept on mobile). As we build real-time collaboration, mobile must be a first-class client from day one — not a follow-up. This requires WebSocket support on iOS and Android apps, presence indicator rendering at small screen sizes, and a touch-friendly conflict UI.",
+      "status": "open",
+      "priority": "medium",
+      "labels": [
+        "mobile",
+        "collaboration",
+        "ios",
+        "android",
+        "ux"
+      ],
+      "created_at": "2025-10-25",
+      "source": "jira"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-001",
+      "title": "competitor_brief.md",
+      "content": "# Competitive Brief — Real-Time Co-Editing\n\n**Prepared by:** Product Strategy\n**Date:** 2025-11-01\n**Distribution:** Internal — Product & Engineering\n\n---\n\n## Overview\n\nTwo competitors have shipped real-time co-editing in 2025. This brief summarizes their approaches, feature sets, and known limitations to inform CollabDocs' implementation strategy.\n\n---\n\n## Competitor X — \"LiveWrite\"\n\n**Launch Date:** October 15, 2025\n**Positioning:** \"Edit together, in real time, on any device\"\n**Pricing:** Included in all paid tiers (no add-on cost)\n\n### Feature Set (as of November 2025)\n\n| Feature | Status |\n|---------|--------|\n| Simultaneous multi-user editing | ✅ Live |\n| Presence avatars (up to 8 users) | ✅ Live |\n| Per-user cursor and selection highlighting | ✅ Live |\n| Real-time comment threads | ✅ Live |\n| Conflict-free concurrent edits (CRDT-based) | ✅ Live |\n| Offline editing with sync-on-reconnect | ✅ Live |\n| Mobile (iOS + Android) | ✅ Live |\n| Version history with per-user attribution | ✅ Live |\n| Granular edit permissions (view/comment/edit) | ✅ Live |\n| @mentions in document body | ✅ Live |\n| Guest access (no account required) | ❌ Not available |\n| Document templates with live collaboration | ⚠️ Beta |\n\n### Technical Approach (inferred from engineering blog)\n\nCompetitor X uses a **CRDT (Conflict-free Replicated Data Type)** implementation — specifically a variant of the Yjs framework for the document model, with a proprietary sync server over WebSocket. Key properties:\n- Every client holds the full document state; changes are merged automatically\n- No central lock authority; any client can write at any time\n- Convergence is guaranteed — all clients will reach the same state\n- Offline edits are queued and merged on reconnect\n\n**Known limitations observed:**\n- Presence is limited to 8 simultaneous users (beyond 8, avatars collapse to a count)\n- Cursor positions occasionally jump for 200–400ms during high-concurrency bursts\n- Large documents (>100 pages) show lag on initial load for collaborative sessions\n- No conflict UI shown to users — all merges are automatic (can confuse users when content appears to rearrange)\n\n### Go-to-Market\n\n- Announced via a \"State of Collaboration 2025\" report targeting enterprise buyers\n- Direct ad campaigns targeting CollabDocs and Google Docs users on LinkedIn\n- Case study featuring a 500-person law firm that switched from a locking-model tool\n- Free 30-day trial with no credit card for teams of any size\n\n---\n\n## Competitor Y — \"CoEdit Pro\"\n\n**Launch Date:** March 2024 (18 months ahead of CollabDocs)\n**Positioning:** \"Enterprise-grade real-time editing with admin controls\"\n**Pricing:** Add-on tier at +$8/user/month\n\n### Feature Set (as of November 2025)\n\n| Feature | Status |\n|---------|--------|\n| Simultaneous multi-user editing | ✅ Live |\n| Presence avatars (unlimited) | ✅ Live |\n| Per-user cursor highlighting | ✅ Live |\n| Conflict resolution UI (explicit merge prompts) | ✅ Live |\n| Operational Transformation (OT) engine | ✅ Live |\n| Offline editing | ❌ Not available |\n| Mobile (iOS only) | ✅ Live — Android in beta |\n| Admin controls (lock sections, restrict co-editors) | ✅ Live |\n| Audit log of all real-time edits | ✅ Live |\n| SSO integration | ✅ Live |\n\n### Technical Approach\n\nCompetitor Y uses **Operational Transformation (OT)** — the same fundamental approach as Google Docs. OT requires a central server to sequence operations from multiple clients, ensuring consistency.\n\n**Known limitations:**\n- Requires persistent server connection; no offline support\n- Scalability challenges at very high concurrency (>20 simultaneous editors) — known from engineering job postings referencing \"OT scalability work\"\n- Conflict resolution UI surfaces merge prompts that some users find confusing\n- Android app still in beta after 6 months\n\n### Positioning vs. Competitor X\n\nCompetitor Y targets regulated industries (finance, legal, healthcare) that need audit trails and admin controls. They are not competing on consumer-friendliness — their conflict UI is more explicit and their pricing signals enterprise.\n\n---\n\n## Google Docs (Benchmark)\n\nGoogle Docs remains the gold standard for real-time co-editing, but is not a direct competitor for CollabDocs' positioning (document management + workflow vs. freeform document creation).\n\nKey features relevant as benchmarks:\n- OT-based real-time editing, unlimited simultaneous users\n- Named cursor highlighting, presence avatars\n- Comment threads with @mentions\n- Suggestion mode (tracked changes)\n- Full offline support via Chrome extension\n- Mobile (iOS + Android) — mature implementations\n\n**Differentiation opportunity:** Google Docs lacks document workflow features (approval chains, structured templates, version gating) that are CollabDocs' core strength.\n\n---\n\n## Competitive Gap Summary\n\n| Capability | CollabDocs | Competitor X | Competitor Y | Google Docs |\n|------------|-----------|--------------|--------------|-------------|\n| Real-time co-editing | ❌ | ✅ | ✅ | ✅ |\n| Presence indicators | ❌ | ✅ | ✅ | ✅ |\n| Conflict resolution | ❌ | Auto (CRDT) | Manual (OT) | Auto (OT) |\n| Offline support | ❌ | ✅ | ❌ | ✅ |\n| Mobile collaboration | ❌ | ✅ | Partial | ✅ |\n| Document workflow | ✅ | ❌ | Partial | ❌ |\n| Admin section locking | ✅ | ❌ | ✅ | ❌ |\n| Audit trail | ✅ | ❌ | ✅ | Partial |\n\n**Key insight:** CollabDocs leads on workflow and governance features. The real-time collaboration gap is the only critical feature area where we trail all three competitors. Closing this gap while preserving our workflow differentiation is the strategic priority.\n",
+      "doc_type": "competitor_brief",
+      "tags": []
+    },
+    {
+      "id": "DOC-002",
+      "title": "customer_notes.md",
+      "content": "# Customer Notes — CollabDocs Real-time Editor\n\n**Period:** October 15 – November 1, 2025\n**Compiled by:** Customer Success Team\n**Context:** Post-competitor-launch escalation\n\n---\n\n## Summary\n\nSince Competitor X launched live co-editing on October 15, three enterprise customers have formally escalated with churn risk language. NPS for the collaboration workflow dropped 12 points (from 44 to 32) in the October pulse survey. Competitor mention rate in support tickets and NPS verbatims has risen from under 5% to 28% in three weeks.\n\n---\n\n## Enterprise Escalations\n\n### Acme Corp — ARR: $180K — 200 active users\n\n**CS Owner:** Jamie Reyes\n**Escalation Date:** 2025-10-21\n**Verbatim from procurement lead:**\n> \"We evaluated CollabDocs and Competitor X side by side this quarter. Your document locking model is a dealbreaker for our legal and contracts team — we have four people who need to comment and edit simultaneously on the same brief. Competitor X now does this natively. We are giving you 60 days to show a real-time editing roadmap before we make a switch decision.\"\n\n**Account Status:** At risk. Renewal in January 2026.\n\n---\n\n### Vertex Partners — ARR: $140K — 85 active users\n\n**CS Owner:** Priya Nair\n**Escalation Date:** 2025-10-24\n**Verbatim from VP of Operations:**\n> \"We use CollabDocs for our weekly strategy documents. Every Monday we have five people who need to edit the same doc simultaneously and right now only one person can type at a time. It's 2025 — this should be solved. We saw the Competitor X demo. We need this.\"\n\n**Account Status:** Evaluating alternatives. Trial of Competitor X already started.\n\n---\n\n### NordicBank — ARR: $100K — 120 active users\n\n**CS Owner:** Tobias Lindqvist\n**Escalation Date:** 2025-10-28\n**Verbatim from IT Director:**\n> \"Our compliance team flags every tool switch, so we would prefer to stay with CollabDocs. But the locking behavior creates real workflow problems for our audit document reviews. We have sent internal escalations asking to evaluate alternatives. If you can commit to a Q1 2026 delivery of co-editing we will stay.\"\n\n**Account Status:** Willing to stay if roadmap commitment given by end of November.\n\n---\n\n## General Customer Feedback (NPS Survey — October 2025)\n\n**NPS Score (collaboration workflow):** 32 (down from 44 in July 2025)\n\n### Selected Verbatims from Detractors\n\n> \"The document locking is a dealbreaker. My whole team uses Slack to tell each other 'I'm done editing' before someone else can work on it. That's embarrassing for a document tool.\"\n— Enterprise user, 50-person company\n\n> \"Competitor X just launched live editing. We're strongly considering switching unless CollabDocs catches up fast.\"\n— SMB user, 12-person team\n\n> \"I left a document open on my laptop and went to a meeting. My colleague couldn't edit for two hours. This is not acceptable.\"\n— Enterprise user, financial services\n\n> \"Real-time collaboration is table stakes now. I don't understand why CollabDocs still has a locking model.\"\n— SMB user, consulting firm\n\n> \"Mobile editing is practically unusable for collaboration. You can't tell if anyone else is in the doc.\"\n— Mid-market user, marketing agency\n\n### Selected Verbatims from Passives/Promoters\n\n> \"Love the formatting tools and version history. Just fix the locking and I'd give 10/10.\"\n— Enterprise user\n\n> \"CollabDocs is our primary doc tool. We just wish we could edit together in real time like Google Docs.\"\n— SMB user\n\n---\n\n## Competitive Mention Analysis\n\n| Month       | Competitor Mentions (% of tickets + NPS verbatims) |\n|-------------|-----------------------------------------------------|\n| August 2025 | 4%                                                  |\n| September 2025 | 7%                                               |\n| October 2025 | 28%                                               |\n\nPrimary competitors mentioned: Competitor X (82% of mentions), Google Docs (14%), Competitor Y (4%).\n",
+      "doc_type": "note",
+      "tags": []
+    },
+    {
+      "id": "DOC-003",
+      "title": "metrics_snapshot.json",
+      "content": "{\n  \"snapshot_date\": \"2025-11-01\",\n  \"snapshot_period\": \"30-day trailing average\",\n  \"dau\": 120000,\n  \"docs_created_daily\": 8500,\n  \"concurrent_edit_attempts_blocked\": 2300,\n  \"enterprise_churn_risk\": 0.15,\n  \"nps_score\": 32,\n  \"nps_score_previous\": 44,\n  \"nps_delta\": -12,\n  \"competitor_mention_rate\": 0.28,\n  \"competitor_mention_rate_previous\": 0.04,\n  \"collaboration_sessions_daily\": 14200,\n  \"avg_collaborators_per_doc\": 2.8,\n  \"docs_with_lock_wait_events_daily\": 3100,\n  \"avg_lock_wait_duration_minutes\": 18,\n  \"lock_frustrated_abandonment_rate\": 0.31,\n  \"mobile_dau_pct\": 0.22,\n  \"mobile_editing_sessions_daily\": 1900,\n  \"mobile_lock_release_failure_rate\": 0.41,\n  \"enterprise_accounts\": 87,\n  \"enterprise_arr_usd\": 2800000,\n  \"enterprise_accounts_at_churn_risk\": 13,\n  \"enterprise_arr_at_risk_usd\": 420000,\n  \"feature_request_volume_realtime_collab_30d\": 94,\n  \"competitor_trial_starts_detected\": 31,\n  \"sales_lost_to_collab_gap_30d\": 6,\n  \"sales_lost_arr_usd\": 185000,\n  \"version_history_usage_pct\": 0.68,\n  \"comment_thread_usage_pct\": 0.54,\n  \"template_usage_pct\": 0.47,\n  \"approval_workflow_usage_pct\": 0.38\n}\n",
+      "doc_type": "metrics_snapshot",
+      "tags": []
+    },
+    {
+      "id": "DOC-004",
+      "title": "tech_assessment.md",
+      "content": "# Technical Assessment — Real-Time Co-Editing Architecture\n\n**Prepared by:** Engineering Platform Team\n**Date:** 2025-10-30\n**Status:** Draft — for Product review\n\n---\n\n## Background\n\nCollabDocs currently uses a pessimistic locking model backed by a PostgreSQL advisory lock and a Redis session store. The lock is acquired when a user opens a document in edit mode and released when they close it or after a 30-minute idle timeout. This model was chosen in 2022 for simplicity and consistency guarantees. It is now a competitive liability.\n\nThis document assesses two primary architectural approaches for real-time co-editing and provides a recommendation with tradeoffs.\n\n---\n\n## Approach 1: Operational Transformation (OT)\n\n### How it works\n\nOT treats each edit as an operation (insert character at position X, delete N characters at position Y). A central server sequences all incoming operations and transforms conflicting operations to ensure all clients converge to the same document state.\n\n### Prior art\n\n- Google Docs (in production at massive scale since ~2010)\n- Competitor Y (CoEdit Pro)\n- Microsoft Office Online\n\n### Pros\n\n- Well-understood algorithm with decades of production hardening\n- Central server authority makes audit trails straightforward\n- Familiar model for our existing server-side architecture (stateful sessions, PostgreSQL)\n- Easier to implement permission checks (e.g., section-level locking for admin features)\n- Good library support: ShareDB (Node.js), OT.js\n\n### Cons\n\n- Requires persistent, low-latency connection to the central OT server\n- No offline support — clients must be connected to make changes\n- Horizontal scaling of the OT server is non-trivial; requires sticky sessions or shared operation log\n- At very high concurrency (>20 simultaneous editors) transformation complexity grows; known to cause latency spikes\n- Implementing OT for rich-text (beyond plain text) requires significantly more complexity (paragraphs, formatting, tables)\n\n### Estimated implementation effort\n\n| Component | Estimate |\n|-----------|----------|\n| OT server (Node.js, ShareDB) | 4 weeks |\n| Client integration (web) | 3 weeks |\n| Presence / cursor sync | 2 weeks |\n| Mobile client (iOS + Android) | 4 weeks |\n| Migration from locking model | 2 weeks |\n| Testing + hardening | 3 weeks |\n| **Total** | **~18 weeks** |\n\n---\n\n## Approach 2: CRDT (Conflict-free Replicated Data Types)\n\n### How it works\n\nCRDTs define a document as a data structure where any two states can always be merged without conflict. Each client holds its own full copy of the document. Changes are broadcast as diffs; all clients independently merge diffs and converge to the same state. No central sequencer is required.\n\n### Prior art\n\n- Competitor X (LiveWrite) — uses Yjs, an open-source CRDT library\n- Figma (multiplayer design tool) — CRDT-inspired approach\n- Notion (partial CRDT implementation for blocks)\n- Apple Notes (offline sync)\n\n### Pros\n\n- Native offline support: edits queue locally and sync on reconnect\n- No single point of failure for the sync server (can be stateless relay)\n- Scales horizontally with minimal coordination overhead\n- Convergence is mathematically guaranteed — no merge conflicts surface to users\n- Active open-source ecosystem: **Yjs** (most mature, MIT license), Automerge\n\n### Cons\n\n- More complex client-side logic: every client maintains full document state\n- Initial document load can be slow for very large documents (full state transfer)\n- CRDT history grows unboundedly without garbage collection — requires periodic compaction\n- Rich-text CRDTs (Yjs has `y-prosemirror`, `y-quill`) require adapting our existing Slate.js editor\n- Harder to implement admin section-locking (our differentiating feature) — requires custom extension\n- Less familiar to the team; steeper learning curve\n- Debugging convergence issues is harder than OT\n\n### Estimated implementation effort\n\n| Component | Estimate |\n|-----------|----------|\n| Yjs integration + sync server (y-websocket) | 3 weeks |\n| Slate.js → y-slate binding | 4 weeks |\n| Presence / cursor sync (Yjs awareness API) | 1 week |\n| Mobile client (iOS + Android) | 5 weeks |\n| Migration from locking model + CRDT history bootstrap | 3 weeks |\n| Admin section-locking extension | 2 weeks |\n| Testing + hardening + compaction | 3 weeks |\n| **Total** | **~21 weeks** |\n\n---\n\n## Approach 3: Hybrid (Locking → OT Phased Migration)\n\n### Description\n\nPhase 1: Replace pessimistic locking with an **optimistic locking + last-write-wins** model as a fast interim fix. This eliminates the lock-wait frustration immediately while the full OT implementation is built. Users see a conflict notification if their edit was overwritten, and can recover from version history.\n\nPhase 2: Ship full OT-based real-time co-editing as the permanent solution.\n\n### Pros\n\n- Phase 1 ships in ~3 weeks and directly addresses the top UX complaint\n- Buys time to build OT properly without competitive pressure forcing a rushed CRDT migration\n- Phase 1 is entirely server-side; no client changes\n\n### Cons\n\n- Phase 1 still has silent data loss risk (mitigated but not eliminated)\n- Two migrations instead of one; technical debt in Phase 1\n- Does not deliver the \"live editing\" experience that customers are asking for until Phase 2\n\n### Estimated effort\n\n- Phase 1: ~3 weeks\n- Phase 2: ~18 weeks (same as Approach 1)\n- **Total: ~21 weeks** (but Phase 1 value delivered at 3 weeks)\n\n---\n\n## Engineering Recommendation\n\nThe team recommends **Approach 2 (CRDT / Yjs)** for the following reasons:\n\n1. **Offline support** is a frequently requested feature that OT cannot provide; CRDT delivers it as a byproduct\n2. **Yjs is battle-tested** in production at Competitor X and multiple open-source projects; we would not be building CRDT from scratch\n3. **Stateless sync relay** is easier to operate and scale than an OT server with sticky sessions\n4. **Mobile-first**: CRDT handles intermittent mobile connectivity naturally; OT requires connection recovery logic\n5. The additional 3-week estimate over OT is largely in the Slate.js binding, which also delivers editor performance improvements\n\n**Risk mitigation**: We recommend a 2-week proof-of-concept spike on `y-slate` integration before committing to the full timeline, to validate the Slate.js binding complexity.\n\n**Secondary recommendation**: Regardless of approach chosen, implement **presence indicators** (cursors + avatars) first — they are independent of the conflict resolution engine and can ship in ~3 weeks, providing visible progress to at-risk enterprise accounts.\n\n---\n\n## Open Questions for Product\n\n1. Should admin section-locking be preserved in the MVP of co-editing, or deferred to V2? (Impacts CRDT extension scope by ~2 weeks)\n2. What is the maximum simultaneous editor count we need to support at launch? (Impacts CRDT compaction strategy)\n3. Is offline support a V1 requirement or V2? (Would allow OT to remain competitive if offline is not urgent)\n4. Should the co-editing feature be available on all tiers, or gated to paid/enterprise? (No architectural impact, but affects rollout strategy)\n",
+      "doc_type": "note",
+      "tags": []
+    }
+  ],
+  "risk_hotspots": [
+    {
+      "category": "auth",
+      "description": "Detected auth risk keywords in 3 source(s): DOC-001, DOC-003, DOC-004",
+      "severity": "high",
+      "source_ids": [
+        "DOC-001",
+        "DOC-003",
+        "DOC-004"
+      ]
+    },
+    {
+      "category": "pricing",
+      "description": "Detected pricing risk keywords in 5 source(s): COLLAB-302, DOC-001, DOC-002, DOC-003, DOC-004",
+      "severity": "high",
+      "source_ids": [
+        "COLLAB-302",
+        "DOC-001",
+        "DOC-002",
+        "DOC-003",
+        "DOC-004"
+      ]
+    },
+    {
+      "category": "platform",
+      "description": "Detected platform risk keywords in 2 source(s): DOC-001, DOC-004",
+      "severity": "medium",
+      "source_ids": [
+        "DOC-001",
+        "DOC-004"
+      ]
+    },
+    {
+      "category": "accessibility",
+      "description": "Detected accessibility risk keywords in 1 source(s): DOC-001",
+      "severity": "low",
+      "source_ids": [
+        "DOC-001"
+      ]
+    },
+    {
+      "category": "compliance",
+      "description": "Detected compliance risk keywords in 3 source(s): DOC-001, DOC-002, DOC-004",
+      "severity": "high",
+      "source_ids": [
+        "DOC-001",
+        "DOC-002",
+        "DOC-004"
+      ]
+    }
+  ],
+  "missing_info": [],
+  "dedup_log": [],
+  "raw_input_type": "bundle",
+  "created_at": "2026-03-09T20:05:25.234908Z"
+}

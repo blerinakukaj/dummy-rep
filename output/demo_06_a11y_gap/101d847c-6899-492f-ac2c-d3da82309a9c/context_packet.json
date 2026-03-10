@@ -1,0 +1,144 @@
+{
+  "run_id": "101d847c-6899-492f-ac2c-d3da82309a9c",
+  "product_name": "LearnPath",
+  "product_description": "Online learning management system with significant WCAG 2.1 AA accessibility gaps affecting visually impaired and motor-disabled users",
+  "tickets": [
+    {
+      "id": "LP-501",
+      "title": "Screen reader cannot navigate course catalog or enrollment flow",
+      "description": "JAWS and NVDA screen readers cannot navigate the course catalog grid or complete the enrollment flow. The course cards use div-based layouts without ARIA roles, the catalog filter controls are custom dropdowns without keyboard support, and the enrollment button is a styled div instead of a semantic button. Affects all visually impaired users.",
+      "status": "open",
+      "priority": "critical",
+      "labels": [
+        "bug",
+        "a11y",
+        "screen-reader"
+      ],
+      "created_at": "2025-09-01",
+      "source": "jira"
+    },
+    {
+      "id": "LP-502",
+      "title": "Video player lacks captions, transcripts, and keyboard controls",
+      "description": "The custom video player used for course content has no closed captions, no transcripts, and cannot be operated via keyboard. Play/pause, volume, and seek controls require mouse interaction. This blocks deaf and hard-of-hearing users, motor-impaired users, and fails WCAG 1.2.2, 1.2.3, and 2.1.1.",
+      "status": "open",
+      "priority": "critical",
+      "labels": [
+        "bug",
+        "a11y",
+        "video",
+        "wcag"
+      ],
+      "created_at": "2025-09-10",
+      "source": "jira"
+    },
+    {
+      "id": "LP-503",
+      "title": "Color contrast failures across 60% of UI components",
+      "description": "Accessibility audit found that 60% of text elements fail WCAG AA contrast ratios (4.5:1 for normal text, 3:1 for large text). Primary offenders: light gray text on white backgrounds for secondary labels, orange-on-white for warning messages, and the brand purple (#8B5CF6) used for links fails against the light gray (#F3F4F6) card backgrounds.",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "bug",
+        "a11y",
+        "design",
+        "wcag"
+      ],
+      "created_at": "2025-09-20",
+      "source": "jira"
+    },
+    {
+      "id": "LP-504",
+      "title": "Quiz and assessment forms not accessible to assistive technologies",
+      "description": "Quiz forms use custom radio buttons and checkboxes that are invisible to screen readers. Error messages for incorrect answers are conveyed only through color (red border) without text descriptions. Timer countdowns are not announced to screen readers. Focus management after form submission is broken — focus jumps to the top of the page instead of the results section.",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "bug",
+        "a11y",
+        "forms",
+        "wcag"
+      ],
+      "created_at": "2025-10-01",
+      "source": "jira"
+    },
+    {
+      "id": "LP-505",
+      "title": "Implement VPAT and publish accessibility conformance statement",
+      "description": "Government and education sector prospects require a Voluntary Product Accessibility Template (VPAT) documenting WCAG 2.1 AA conformance. Currently no such document exists. Need to conduct a full accessibility audit, create the VPAT, and publish an accessibility statement on the marketing site.",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "compliance",
+        "a11y",
+        "documentation"
+      ],
+      "created_at": "2025-10-15",
+      "source": "jira"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-001",
+      "title": "competitor_brief.md",
+      "content": "# Competitive Brief — LearnPath Accessibility\n\n## Competitor A: EduAccess LMS\n- **Strengths:** WCAG 2.1 AA fully conformant, published VPAT updated quarterly, dedicated accessibility team of 6 engineers. ARIA patterns are exemplary — frequently cited in accessibility blog posts as best practice. Keyboard navigation covers 100% of features.\n- **Weaknesses:** Limited feature set outside of core LMS, no AI features, dated visual design. Higher pricing ($12/user/month vs LearnPath's $8).\n- **Recent moves:** Achieved WCAG 2.2 AA conformance in Q3 2025, first LMS to do so. Won 3 major government contracts citing accessibility as the deciding factor.\n\n## Competitor B: SkillForge\n- **Strengths:** Modern UI, AI-powered personalized learning paths, strong mobile experience, competitive pricing.\n- **Weaknesses:** Similar accessibility gaps to LearnPath — no VPAT, multiple WCAG failures. Lost a $600K government deal last quarter due to accessibility non-compliance.\n- **Recent moves:** Announced an \"accessibility initiative\" in Q4 2025 but no timeline or VPAT commitment yet. Community forums show frustrated users with disabilities.\n",
+      "doc_type": "competitor_brief",
+      "tags": []
+    },
+    {
+      "id": "DOC-002",
+      "title": "customer_notes.md",
+      "content": "# Customer Notes — LearnPath Accessibility Gaps\n\n## Interview 1: Dr. Susan M. (Head of Digital Learning, State University)\nDr. Susan's university is evaluating LMS platforms for 30,000 students. \"We are legally required to meet Section 508 and WCAG 2.1 AA for all educational technology. LearnPath's feature set is exactly what we need, but our accessibility review found 47 WCAG violations. We cannot proceed until these are resolved.\" She emphasized that 12% of their student body has registered disabilities, and any inaccessible tool exposes the university to lawsuit risk under the ADA.\n\n## Interview 2: James R. (Visually Impaired User, Corporate Training)\nJames uses JAWS screen reader and is enrolled in mandatory corporate training through LearnPath at his employer. \"I literally cannot complete my required training courses. The course catalog reads as a flat wall of text with no structure, the video player is completely unusable with a keyboard, and the quizzes are impossible — I can't tell which radio button I'm selecting.\" He has filed a formal ADA complaint with his employer's HR department.\n\n## Interview 3: Emily K. (Procurement Manager, Government Agency)\nEmily's agency needs a VPAT before any purchasing decision. \"No VPAT means no contract — it's a hard procurement requirement under Section 508. We've seen your product demo and it's strong functionally, but our accessibility office needs to review a conformance statement. Our contract would be $400K annually covering 5,000 employees across multiple departments.\"\n",
+      "doc_type": "note",
+      "tags": []
+    },
+    {
+      "id": "DOC-003",
+      "title": "metrics_snapshot.json",
+      "content": "{\n  \"total_users\": 85000,\n  \"users_with_registered_disabilities_pct\": 8.5,\n  \"wcag_violations_critical\": 12,\n  \"wcag_violations_serious\": 23,\n  \"wcag_violations_moderate\": 12,\n  \"pages_audited\": 15,\n  \"pages_passing_aa\": 2,\n  \"screen_reader_task_completion_rate\": 0.15,\n  \"keyboard_only_task_completion_rate\": 0.30,\n  \"gov_edu_pipeline_value_usd\": 1200000,\n  \"deals_blocked_by_vpat\": 4,\n  \"support_tickets_a11y_last_90_days\": 34,\n  \"nps_users_with_disabilities\": -12\n}\n",
+      "doc_type": "metrics_snapshot",
+      "tags": []
+    }
+  ],
+  "risk_hotspots": [
+    {
+      "category": "pricing",
+      "description": "Detected pricing risk keywords in 1 source(s): DOC-001",
+      "severity": "low",
+      "source_ids": [
+        "DOC-001"
+      ]
+    },
+    {
+      "category": "accessibility",
+      "description": "Detected accessibility risk keywords in 8 source(s): DOC-001, DOC-002, DOC-003, LP-501, LP-502, LP-503, LP-504, LP-505",
+      "severity": "high",
+      "source_ids": [
+        "DOC-001",
+        "DOC-002",
+        "DOC-003",
+        "LP-501",
+        "LP-502",
+        "LP-503",
+        "LP-504",
+        "LP-505"
+      ]
+    },
+    {
+      "category": "compliance",
+      "description": "Detected compliance risk keywords in 5 source(s): DOC-001, DOC-002, DOC-003, LP-503, LP-505",
+      "severity": "high",
+      "source_ids": [
+        "DOC-001",
+        "DOC-002",
+        "DOC-003",
+        "LP-503",
+        "LP-505"
+      ]
+    }
+  ],
+  "missing_info": [],
+  "dedup_log": [],
+  "raw_input_type": "bundle",
+  "created_at": "2026-03-09T20:15:37.812724Z"
+}

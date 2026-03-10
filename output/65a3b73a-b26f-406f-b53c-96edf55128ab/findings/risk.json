@@ -1,0 +1,140 @@
+{
+  "agent_id": "risk",
+  "agent_name": "Risk/Privacy/Compliance Guardrails Agent",
+  "run_id": "65a3b73a-b26f-406f-b53c-96edf55128ab",
+  "timestamp": "2026-03-09T20:11:50.167798Z",
+  "findings": [
+    {
+      "id": "risk-001",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Privacy Risk Hotspot Detected",
+      "description": "Detected privacy risk keywords indicating potential issues with PII handling or data collection gaps in the documentation.",
+      "impact": "low",
+      "confidence": "directional",
+      "assumptions": [
+        "The keywords indicate a potential privacy concern that needs further investigation."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Detected privacy risk keywords in the documentation.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct a thorough review of data handling practices to ensure compliance with privacy policies."
+      ],
+      "tags": [
+        "privacy"
+      ],
+      "metadata": {
+        "category": "privacy",
+        "is_blocker": false,
+        "mitigation": "Review data handling practices.",
+        "policy_rule": "Legal review for PII"
+      }
+    },
+    {
+      "id": "risk-002",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Critical Push Notification Delivery Failure on Android 14",
+      "description": "The failure of push notifications on Android 14 devices poses a critical risk to user engagement and retention.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "This issue affects a significant portion of users and needs immediate resolution."
+      ],
+      "evidence": [
+        {
+          "source_id": "NOTIFY-102",
+          "source_type": "doc",
+          "excerpt": "Fix Silent Notification Failures on Android 14.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Resolve the issue with push notifications on Android 14 devices immediately."
+      ],
+      "tags": [
+        "notification",
+        "Android",
+        "security"
+      ],
+      "metadata": {
+        "category": "security",
+        "is_blocker": true,
+        "mitigation": "Immediate resolution of push notification failures.",
+        "policy_rule": "Block on critical security"
+      }
+    },
+    {
+      "id": "risk-003",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Accessibility Concerns in Notification Center",
+      "description": "Users with disabilities are facing challenges navigating the notification center, particularly with color-only indicators, highlighting a need for improved accessibility features.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Accessibility features are not fully compliant with WCAG standards."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Users with disabilities are facing challenges navigating the notification center.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Enhance the notification center to address accessibility concerns."
+      ],
+      "tags": [
+        "accessibility"
+      ],
+      "metadata": {
+        "category": "accessibility",
+        "is_blocker": false,
+        "mitigation": "Improve accessibility features in the notification center.",
+        "policy_rule": "Accessibility is a requirement, not an afterthought"
+      }
+    },
+    {
+      "id": "risk-004",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Compliance Risk Hotspot Detected",
+      "description": "Detected compliance risk keywords indicating potential issues with GDPR, CCPA, or other regulatory requirements in the documentation.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "The keywords indicate a potential compliance concern that needs further investigation."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Detected compliance risk keywords in the documentation.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct a compliance review to ensure adherence to GDPR, CCPA, and other regulations."
+      ],
+      "tags": [
+        "compliance"
+      ],
+      "metadata": {
+        "category": "compliance",
+        "is_blocker": false,
+        "mitigation": "Review compliance with GDPR and CCPA.",
+        "policy_rule": "Legal review for PII"
+      }
+    }
+  ],
+  "summary": "Identified 4 risks (1 accessibility, 1 compliance, 1 privacy, 1 security). 1 flagged as blockers. Risk gate: FAILED (1 blockers, 1 warnings).",
+  "errors": []
+}

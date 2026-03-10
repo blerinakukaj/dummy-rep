@@ -1,0 +1,141 @@
+{
+  "agent_id": "risk",
+  "agent_name": "Risk/Privacy/Compliance Guardrails Agent",
+  "run_id": "57c812f2-883d-4582-8e51-b74e62e04b23",
+  "timestamp": "2026-03-06T12:42:29.018062Z",
+  "findings": [
+    {
+      "id": "risk-001",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Privacy Risk: Data Handling Gaps",
+      "description": "Detected privacy risk keywords indicating potential gaps in PII handling and data collection practices, particularly in relation to the justification for data collection and consent mechanisms.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Data handling practices may not align with policy requirements."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Privacy risk keywords detected.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Review and enhance data handling practices to ensure compliance with data minimization and consent requirements."
+      ],
+      "tags": [
+        "privacy"
+      ],
+      "metadata": {
+        "category": "privacy",
+        "is_blocker": false,
+        "mitigation": "Enhance data handling practices.",
+        "policy_rule": "Require collection justification and consent mechanism."
+      }
+    },
+    {
+      "id": "risk-002",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Authentication Risk: Weaknesses in Auth Flow",
+      "description": "Identified potential weaknesses in the authentication flow, particularly the lack of SSO/SAML integration, which is critical for enterprise security compliance.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Enterprise clients require SSO/SAML for compliance."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Risk keywords related to authentication detected.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement SSO/SAML integration to enhance security compliance."
+      ],
+      "tags": [
+        "auth",
+        "security"
+      ],
+      "metadata": {
+        "category": "security",
+        "is_blocker": true,
+        "mitigation": "Integrate SSO/SAML.",
+        "policy_rule": "Block on critical security."
+      }
+    },
+    {
+      "id": "risk-003",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Compliance Risk: Data Residency Controls",
+      "description": "Compliance risks identified due to lack of data residency controls, which are necessary to meet GDPR and data sovereignty requirements.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Enterprise clients require strict data residency controls."
+      ],
+      "evidence": [
+        {
+          "source_id": "ENT-204",
+          "source_type": "doc",
+          "excerpt": "Data residency compliance requirements highlighted.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Establish data residency controls to comply with GDPR."
+      ],
+      "tags": [
+        "compliance",
+        "data residency"
+      ],
+      "metadata": {
+        "category": "compliance",
+        "is_blocker": true,
+        "mitigation": "Implement data residency controls.",
+        "policy_rule": "Legal review for PII."
+      }
+    },
+    {
+      "id": "risk-004",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Security Risk: Data Isolation Compliance",
+      "description": "The current application-level row filtering for tenant data isolation poses a compliance risk, especially with SOC 2 Type II requirements.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Proper data isolation is necessary for compliance."
+      ],
+      "evidence": [
+        {
+          "source_id": "ENT-202",
+          "source_type": "doc",
+          "excerpt": "Compliance risk due to data isolation model.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement schema or database-level separation for data isolation."
+      ],
+      "tags": [
+        "security",
+        "compliance"
+      ],
+      "metadata": {
+        "category": "security",
+        "is_blocker": true,
+        "mitigation": "Remediate data isolation model.",
+        "policy_rule": "Block on critical security."
+      }
+    }
+  ],
+  "summary": "Identified 4 risks (1 compliance, 1 privacy, 2 security). 3 flagged as blockers. Risk gate: FAILED (4 blockers, 1 warnings).",
+  "errors": []
+}

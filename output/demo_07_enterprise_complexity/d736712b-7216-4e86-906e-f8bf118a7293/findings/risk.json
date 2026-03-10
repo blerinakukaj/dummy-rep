@@ -1,0 +1,175 @@
+{
+  "agent_id": "risk",
+  "agent_name": "Risk/Privacy/Compliance Guardrails Agent",
+  "run_id": "d736712b-7216-4e86-906e-f8bf118a7293",
+  "timestamp": "2026-03-09T20:21:34.200459Z",
+  "findings": [
+    {
+      "id": "risk-001",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Privacy Risk: Data Handling Gaps",
+      "description": "Detected privacy risk keywords indicating potential gaps in PII handling and consent mechanisms. The current data handling practices may not align with the data-minimal principle and retention policy.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Current data handling practices are not fully compliant with privacy policies."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Detected privacy risk keywords in the documentation.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Review and enhance data handling practices to ensure compliance with data minimization and retention policies."
+      ],
+      "tags": [
+        "privacy",
+        "data handling"
+      ],
+      "metadata": {
+        "category": "privacy",
+        "is_blocker": false,
+        "mitigation": "Enhance data handling practices.",
+        "policy_rule": "Data-minimal by default"
+      }
+    },
+    {
+      "id": "risk-002",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Critical Security Risk: Authentication Weaknesses",
+      "description": "Identified significant weaknesses in the authentication mechanisms, which could lead to unauthorized access and data breaches.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Current authentication methods may not meet industry standards."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Detected auth risk keywords in the documentation.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement stronger authentication mechanisms, including multi-factor authentication."
+      ],
+      "tags": [
+        "security",
+        "authentication"
+      ],
+      "metadata": {
+        "category": "security",
+        "is_blocker": true,
+        "mitigation": "Implement stronger authentication mechanisms.",
+        "policy_rule": "Block on critical security"
+      }
+    },
+    {
+      "id": "risk-003",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "High Compliance Risk: Data Isolation",
+      "description": "The current reliance on application-level row filtering for tenant data isolation poses a compliance risk, particularly for SOC 2 Type II requirements.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Application-level row filtering is insufficient for compliance."
+      ],
+      "evidence": [
+        {
+          "source_id": "ENT-202",
+          "source_type": "doc",
+          "excerpt": "Current reliance on application-level row filtering for tenant data isolation poses a compliance risk.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement multi-tenant data isolation methods to meet compliance requirements."
+      ],
+      "tags": [
+        "compliance",
+        "data isolation"
+      ],
+      "metadata": {
+        "category": "compliance",
+        "is_blocker": true,
+        "mitigation": "Implement multi-tenant data isolation methods.",
+        "policy_rule": "Legal review for PII"
+      }
+    },
+    {
+      "id": "risk-004",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "High Compliance Risk: Data Residency Controls",
+      "description": "Enterprise customers require data residency controls to comply with local laws, which are currently lacking in the platform.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Data residency controls are necessary for compliance in regulated markets."
+      ],
+      "evidence": [
+        {
+          "source_id": "ENT-204",
+          "source_type": "doc",
+          "excerpt": "Enterprise customers require data residency controls to comply with local laws.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Enable data residency controls to allow enterprise customers to choose where their data is stored."
+      ],
+      "tags": [
+        "compliance",
+        "data residency"
+      ],
+      "metadata": {
+        "category": "compliance",
+        "is_blocker": true,
+        "mitigation": "Enable data residency controls.",
+        "policy_rule": "Legal review for PII"
+      }
+    },
+    {
+      "id": "risk-005",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "High Security Risk: Role-Based Access Control Gaps",
+      "description": "The current role-based access control (RBAC) system is too simplistic, leading to security concerns and inefficiencies.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Current RBAC system does not meet enterprise security needs."
+      ],
+      "evidence": [
+        {
+          "source_id": "ENT-203",
+          "source_type": "doc",
+          "excerpt": "Current RBAC model is too simplistic, leading to inefficiencies and security concerns.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Develop a fine-grained RBAC system that allows for custom role definitions and resource-level access controls."
+      ],
+      "tags": [
+        "security",
+        "RBAC"
+      ],
+      "metadata": {
+        "category": "security",
+        "is_blocker": false,
+        "mitigation": "Develop a fine-grained RBAC system.",
+        "policy_rule": ""
+      }
+    }
+  ],
+  "summary": "Identified 5 risks (2 compliance, 1 privacy, 2 security). 3 flagged as blockers. Risk gate: FAILED (4 blockers, 1 warnings).",
+  "errors": []
+}

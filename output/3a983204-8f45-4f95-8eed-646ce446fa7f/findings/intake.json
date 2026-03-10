@@ -1,0 +1,90 @@
+{
+  "agent_id": "intake",
+  "agent_name": "Intake & Context Agent",
+  "run_id": "3a983204-8f45-4f95-8eed-646ce446fa7f",
+  "timestamp": "2026-03-09T20:16:34.951926Z",
+  "findings": [
+    {
+      "id": "intake-001",
+      "agent_id": "intake",
+      "type": "gap",
+      "title": "Missing data: No tickets or work items provided",
+      "description": "The input bundle is missing: No tickets or work items provided. This may reduce the quality of downstream agent analysis.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [],
+      "recommendations": [],
+      "tags": [
+        "data_quality"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-002",
+      "agent_id": "intake",
+      "type": "gap",
+      "title": "Missing data: No supporting documents provided",
+      "description": "The input bundle is missing: No supporting documents provided. This may reduce the quality of downstream agent analysis.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [],
+      "recommendations": [],
+      "tags": [
+        "data_quality"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-003",
+      "agent_id": "intake",
+      "type": "gap",
+      "title": "Missing data: No customer notes or interview data",
+      "description": "The input bundle is missing: No customer notes or interview data. This may reduce the quality of downstream agent analysis.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [],
+      "recommendations": [],
+      "tags": [
+        "data_quality"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-004",
+      "agent_id": "intake",
+      "type": "gap",
+      "title": "Missing data: No metrics snapshot data",
+      "description": "The input bundle is missing: No metrics snapshot data. This may reduce the quality of downstream agent analysis.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [],
+      "recommendations": [],
+      "tags": [
+        "data_quality"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-005",
+      "agent_id": "intake",
+      "type": "gap",
+      "title": "Missing data: No competitive analysis or competitor brief",
+      "description": "The input bundle is missing: No competitive analysis or competitor brief. This may reduce the quality of downstream agent analysis.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [],
+      "recommendations": [],
+      "tags": [
+        "data_quality"
+      ],
+      "metadata": {}
+    }
+  ],
+  "summary": "The product is a machine learning-based notification prioritization system designed to enhance user experience by intelligently sorting and prioritizing notifications. Key user pain points include information overload and the difficulty in distinguishing important notifications from less relevant ones. Currently, there are no tickets, documents, or customer insights available, indicating a lack of user feedback and data to inform development and assess demand for the product.",
+  "errors": []
+}

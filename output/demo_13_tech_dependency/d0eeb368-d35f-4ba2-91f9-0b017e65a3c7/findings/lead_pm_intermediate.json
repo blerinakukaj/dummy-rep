@@ -1,0 +1,364 @@
+{
+  "evidence_index": {
+    "DOC-001": [
+      "intake-002",
+      "intake-003",
+      "customer-001",
+      "customer-002",
+      "customer-003"
+    ],
+    "DOC-003": [
+      "intake-002",
+      "intake-003",
+      "customer-001",
+      "customer-002"
+    ],
+    "DP-602": [
+      "intake-002",
+      "intake-003",
+      "competitive-001",
+      "competitive-003",
+      "customer-002",
+      "feasibility-002",
+      "requirements-002",
+      "risk-002"
+    ],
+    "DP-603": [
+      "intake-002",
+      "intake-003",
+      "customer-003",
+      "feasibility-003",
+      "requirements-003",
+      "risk-003"
+    ],
+    "DP-605": [
+      "intake-002",
+      "metrics-004",
+      "feasibility-005",
+      "requirements-005"
+    ],
+    "DP-601": [
+      "intake-003",
+      "customer-001",
+      "feasibility-001",
+      "requirements-001",
+      "risk-001"
+    ],
+    "DP-604": [
+      "competitive-002",
+      "competitive-004",
+      "customer-004",
+      "feasibility-004",
+      "requirements-004",
+      "risk-004"
+    ],
+    "DOC-002": [
+      "metrics-001",
+      "metrics-002",
+      "metrics-003",
+      "metrics-005"
+    ],
+    "metrics-003": [
+      "requirements-006"
+    ],
+    "metrics-005": [
+      "requirements-007",
+      "requirements-009"
+    ],
+    "metrics-004": [
+      "requirements-008"
+    ]
+  },
+  "dedup_log": [
+    {
+      "cluster": [
+        "intake-001",
+        "competitive-002",
+        "customer-004",
+        "feasibility-004",
+        "requirements-004",
+        "risk-004"
+      ],
+      "kept": "intake-001",
+      "removed": [
+        "feasibility-004",
+        "risk-004",
+        "competitive-002",
+        "customer-004",
+        "requirements-004"
+      ],
+      "reason": "All findings address the need for a multi-region caching solution to improve performance and reduce latency."
+    },
+    {
+      "cluster": [
+        "intake-002",
+        "competitive-001",
+        "customer-002",
+        "feasibility-002",
+        "risk-002"
+      ],
+      "kept": "competitive-001",
+      "removed": [
+        "customer-002",
+        "feasibility-002",
+        "risk-002",
+        "intake-002"
+      ],
+      "reason": "All findings highlight the risk associated with vendor lock-in due to reliance on VendorX's proprietary ETL SDK."
+    },
+    {
+      "cluster": [
+        "intake-003",
+        "feasibility-003",
+        "requirements-003",
+        "risk-003"
+      ],
+      "kept": "feasibility-003",
+      "removed": [
+        "requirements-003",
+        "risk-003",
+        "intake-003"
+      ],
+      "reason": "All findings discuss the urgency of migrating from Python 3.9 due to its end-of-life status and associated risks."
+    },
+    {
+      "cluster": [
+        "customer-001",
+        "feasibility-001",
+        "risk-001",
+        "requirements-001"
+      ],
+      "kept": "customer-001",
+      "removed": [
+        "feasibility-001",
+        "risk-001",
+        "requirements-001"
+      ],
+      "reason": "All findings emphasize the critical need to migrate from deprecated Apache Kafka 2.8 to Kafka 3.7+ due to security vulnerabilities."
+    }
+  ],
+  "ranked_findings": [
+    {
+      "finding_id": "metrics-001",
+      "title": "North Star Metric: Events Processed Per Day",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 3,
+      "risk": 5,
+      "priority_score": 3.63
+    },
+    {
+      "finding_id": "metrics-003",
+      "title": "Guardrail Metric: Critical CVEs Open",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 3,
+      "risk": 7,
+      "priority_score": 2.576
+    },
+    {
+      "finding_id": "intake-001",
+      "title": "Missing data: No competitive analysis or competitor brief",
+      "user_impact": 5,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.458
+    },
+    {
+      "finding_id": "metrics-005",
+      "title": "Experiment Opportunity: CVE Resolution Impact",
+      "user_impact": 5,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.458
+    },
+    {
+      "finding_id": "requirements-007",
+      "title": "Conduct experiment to measure CVE resolution impact",
+      "user_impact": 5,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.458
+    },
+    {
+      "finding_id": "competitive-003",
+      "title": "Explore Open-Source Alternatives to Reduce Costs",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 5,
+      "risk": 5,
+      "priority_score": 2.429
+    },
+    {
+      "finding_id": "competitive-004",
+      "title": "Emerging Threats from End-of-Life Infrastructure",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 7,
+      "priority_score": 2.297
+    },
+    {
+      "finding_id": "customer-001",
+      "title": "Critical Need for Kafka Migration",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 7,
+      "risk": 8,
+      "priority_score": 2.25
+    },
+    {
+      "finding_id": "metrics-004",
+      "title": "Measurement Gap: Dependency Health Overview",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.237
+    },
+    {
+      "finding_id": "requirements-008",
+      "title": "Establish a centralized view of dependency health",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.237
+    },
+    {
+      "finding_id": "requirements-009",
+      "title": "Implement user feedback collection for CVE resolutions",
+      "user_impact": 4,
+      "business_value": 3,
+      "effort": 3,
+      "risk": 3,
+      "priority_score": 2.19
+    },
+    {
+      "finding_id": "competitive-001",
+      "title": "Vendor Lock-in Risk from Proprietary SDK",
+      "user_impact": 9,
+      "business_value": 8,
+      "effort": 6,
+      "risk": 9,
+      "priority_score": 2.176
+    },
+    {
+      "finding_id": "requirements-002",
+      "title": "Eliminate vendor lock-in on proprietary transformation engine",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 7,
+      "risk": 9,
+      "priority_score": 2.127
+    },
+    {
+      "finding_id": "customer-003",
+      "title": "Urgent Python 3.9 Migration Required",
+      "user_impact": 6,
+      "business_value": 5,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 2.118
+    },
+    {
+      "finding_id": "metrics-002",
+      "title": "Primary KPI: Services on EOL Dependencies",
+      "user_impact": 6,
+      "business_value": 5,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 2.118
+    },
+    {
+      "finding_id": "requirements-006",
+      "title": "Implement monitoring for critical CVEs",
+      "user_impact": 6,
+      "business_value": 5,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 2.118
+    },
+    {
+      "finding_id": "feasibility-005",
+      "title": "Dependency Health Dashboard Implementation",
+      "user_impact": 5,
+      "business_value": 4,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 1.903
+    },
+    {
+      "finding_id": "requirements-005",
+      "title": "Create dependency health dashboard and automated CVE alerting",
+      "user_impact": 5,
+      "business_value": 4,
+      "effort": 5,
+      "risk": 4,
+      "priority_score": 1.844
+    },
+    {
+      "finding_id": "feasibility-003",
+      "title": "Python 3.9 End-of-Life Migration",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 8,
+      "risk": 7,
+      "priority_score": 1.604
+    }
+  ],
+  "conflicts": [
+    {
+      "finding_a": "competitive-001",
+      "finding_b": "requirements-002",
+      "description": "Vendor lock-in risk from proprietary SDK contradicts the requirement to eliminate vendor lock-in.",
+      "resolution": "Prioritize migration to open-source alternatives while negotiating with VendorX for better terms until migration is complete.",
+      "reasoning": "Addressing the vendor lock-in risk is critical for long-term sustainability, and immediate action is necessary to mitigate financial risks."
+    },
+    {
+      "finding_a": "customer-001",
+      "finding_b": "feasibility-003",
+      "description": "The critical need for Kafka migration conflicts with the complicated migration process of Python 3.9 due to incompatible dependencies.",
+      "resolution": "Develop a phased migration plan that prioritizes Kafka migration first, while concurrently addressing Python 3.9 dependencies.",
+      "reasoning": "Ensuring customer stability through Kafka migration is paramount, and addressing Python dependencies can occur in parallel to minimize disruption."
+    },
+    {
+      "finding_a": "metrics-002",
+      "finding_b": "metrics-004",
+      "description": "Tracking services on EOL dependencies conflicts with the lack of a centralized view of dependency health.",
+      "resolution": "Implement the dependency health dashboard as a priority to enable effective tracking of EOL dependencies.",
+      "reasoning": "A centralized view is essential for proactive management and will support the metric tracking efforts."
+    },
+    {
+      "finding_a": "requirements-006",
+      "finding_b": "requirements-009",
+      "description": "Implementing monitoring for critical CVEs may conflict with the need to collect user feedback post-CVE resolution.",
+      "resolution": "Establish a feedback mechanism that is integrated into the CVE monitoring process to ensure user input is collected without delaying security responses.",
+      "reasoning": "Security must be prioritized, but user feedback is also important for continuous improvement and satisfaction."
+    }
+  ],
+  "consolidated_finding_ids": [
+    "intake-001",
+    "competitive-001",
+    "competitive-003",
+    "competitive-004",
+    "customer-001",
+    "customer-003",
+    "metrics-001",
+    "metrics-002",
+    "metrics-003",
+    "metrics-004",
+    "metrics-005",
+    "feasibility-003",
+    "feasibility-005",
+    "requirements-002",
+    "requirements-005",
+    "requirements-006",
+    "requirements-007",
+    "requirements-008",
+    "requirements-009"
+  ]
+}

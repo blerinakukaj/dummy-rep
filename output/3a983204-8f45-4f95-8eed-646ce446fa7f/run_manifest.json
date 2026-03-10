@@ -1,0 +1,145 @@
+{
+  "run_id": "3a983204-8f45-4f95-8eed-646ce446fa7f",
+  "timestamp": "2026-03-09T20:18:23.413796+00:00",
+  "input_path": "Build a notification prioritization system using ML",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "duration_seconds": 112.13,
+  "agents_run": [
+    "intake",
+    "customer",
+    "competitive",
+    "metrics",
+    "feasibility",
+    "requirements",
+    "risk",
+    "lead_pm"
+  ],
+  "agents_failed": [],
+  "total_findings": 18,
+  "findings_by_type": {
+    "gap": 5,
+    "requirement": 5,
+    "risk": 5,
+    "insight": 2,
+    "recommendation": 1
+  },
+  "recommendation": "do_not_pursue",
+  "artifacts": {
+    "prd": "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\artifacts\\prd.md",
+    "roadmap": "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\artifacts\\roadmap.json",
+    "experiment_plan": "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\artifacts\\experiment_plan.md",
+    "decision_log": "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\artifacts\\decision_log.md",
+    "backlog": "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\artifacts\\backlog.csv",
+    "final_plan": "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\artifacts\\final_plan.json"
+  },
+  "token_usage": {
+    "per_agent": {
+      "intake": {
+        "prompt_tokens": 132,
+        "completion_tokens": 75,
+        "total_tokens": 207
+      },
+      "requirements": {
+        "prompt_tokens": 1178,
+        "completion_tokens": 1596,
+        "total_tokens": 2774
+      },
+      "risk": {
+        "prompt_tokens": 1399,
+        "completion_tokens": 1214,
+        "total_tokens": 2613
+      },
+      "lead_pm": {
+        "prompt_tokens": 1737,
+        "completion_tokens": 582,
+        "total_tokens": 2319
+      }
+    },
+    "total": {
+      "prompt_tokens": 4446,
+      "completion_tokens": 3467,
+      "total_tokens": 7913
+    }
+  },
+  "estimated_cost": 0.002747,
+  "agent_details": [
+    {
+      "agent_id": "customer",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 0.0,
+      "error": null
+    },
+    {
+      "agent_id": "competitive",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 0.0,
+      "error": null
+    },
+    {
+      "agent_id": "metrics",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 0.0,
+      "error": null
+    },
+    {
+      "agent_id": "feasibility",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 0.0,
+      "error": null
+    },
+    {
+      "agent_id": "requirements",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 27.83,
+      "error": null
+    },
+    {
+      "agent_id": "risk",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 22.34,
+      "error": null
+    },
+    {
+      "agent_id": "lead_pm",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 58.27,
+      "error": null
+    }
+  ],
+  "bundle_warnings": [
+    "No tickets provided \u2014 agents will have limited input data",
+    "No documents provided \u2014 agents will have limited context"
+  ],
+  "output_files": {
+    "context_packet": "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\context_packet.json",
+    "findings": [
+      "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\findings\\competitive.json",
+      "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\findings\\customer.json",
+      "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\findings\\feasibility.json",
+      "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\findings\\intake.json",
+      "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\findings\\lead_pm.json",
+      "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\findings\\lead_pm_intermediate.json",
+      "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\findings\\metrics.json",
+      "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\findings\\requirements.json",
+      "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\findings\\risk.json",
+      "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\findings\\risk_gate_result.json"
+    ],
+    "artifacts": [
+      "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\artifacts\\backlog.csv",
+      "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\artifacts\\decision_log.md",
+      "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\artifacts\\experiment_plan.md",
+      "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\artifacts\\final_plan.json",
+      "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\artifacts\\prd.md",
+      "output\\3a983204-8f45-4f95-8eed-646ce446fa7f\\artifacts\\roadmap.json"
+    ]
+  },
+  "errors": {}
+}

@@ -1,0 +1,18 @@
+{
+  "run_id": "3a983204-8f45-4f95-8eed-646ce446fa7f",
+  "product_name": "Build a notification prioritization system using ML",
+  "product_description": "Build a notification prioritization system using ML",
+  "tickets": [],
+  "documents": [],
+  "risk_hotspots": [],
+  "missing_info": [
+    "No tickets or work items provided",
+    "No supporting documents provided",
+    "No customer notes or interview data",
+    "No metrics snapshot data",
+    "No competitive analysis or competitor brief"
+  ],
+  "dedup_log": [],
+  "raw_input_type": "prompt",
+  "created_at": "2026-03-09T20:16:31.284553Z"
+}

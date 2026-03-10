@@ -1,0 +1,11 @@
+{
+  "agent_id": "customer",
+  "agent_name": "Customer Insights Agent",
+  "run_id": "3a983204-8f45-4f95-8eed-646ce446fa7f",
+  "timestamp": "2026-03-09T20:16:34.962654Z",
+  "findings": [],
+  "summary": "No customer-facing data available for analysis.",
+  "errors": [
+    "No tickets, notes, or interview data found in context packet"
+  ]
+}

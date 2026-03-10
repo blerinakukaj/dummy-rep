@@ -1,0 +1,152 @@
+{
+  "agent_id": "customer",
+  "agent_name": "Customer Insights Agent",
+  "run_id": "2df07c8e-3c9c-49f9-8e07-b9080284dab1",
+  "timestamp": "2026-03-09T20:27:30.781658Z",
+  "findings": [
+    {
+      "id": "customer-001",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Need for Cost Transparency in Usage-Based Pricing",
+      "description": "Customers transitioning to usage-based pricing require clear visibility into their expected costs to avoid bill shock. This includes the need for a pricing calculator and predictive cost dashboard to estimate monthly expenses based on usage patterns.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Customers are concerned about unexpected charges under the new pricing model."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-302",
+          "source_type": "ticket",
+          "excerpt": "Build an in-app pricing calculator that estimates monthly costs based on current usage patterns.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "note",
+          "excerpt": "Alex wants clear visibility into usage with no surprise charges.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "note",
+          "excerpt": "Linda wants spending caps and a cost simulator before committing.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Develop and implement a pricing calculator and predictive cost dashboard."
+      ],
+      "tags": [
+        "pricing",
+        "transparency"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-002",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Concerns Over Significant Price Increases",
+      "description": "Some customers, particularly those on higher flat-rate plans, face substantial price increases under the new consumption-based model. This could lead to churn if not managed properly, especially for mid-market accounts.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Customers will react negatively to unexpected price increases."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-305",
+          "source_type": "ticket",
+          "excerpt": "Flag accounts where projected spend increases >30% for proactive account management outreach.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "note",
+          "excerpt": "Linda's estimated cost would jump to approximately $480/month.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement proactive account management strategies for customers facing significant price increases."
+      ],
+      "tags": [
+        "pricing",
+        "churn"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-003",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Need for Spending Alerts and Caps",
+      "description": "Customers transitioning to usage-based pricing express a strong need for configurable spending alerts and optional hard spending caps to manage their budgets effectively and prevent bill shock.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Customers want to avoid exceeding their budget during the transition."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-303",
+          "source_type": "ticket",
+          "excerpt": "Customers need configurable spending alerts and optional hard spending caps.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "note",
+          "excerpt": "Linda wants spending caps and a cost simulator before committing.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Develop configurable spending alerts and hard spending cap features."
+      ],
+      "tags": [
+        "alerts",
+        "budgeting"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-004",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Desire for Price Lock Guarantee",
+      "description": "Customers, especially those with existing custom pricing, are seeking a price lock guarantee during the transition to mitigate the risk of increased costs. This is crucial for maintaining trust and satisfaction.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [
+        "Customers with custom pricing feel vulnerable to price increases."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-304",
+          "source_type": "ticket",
+          "excerpt": "Need a grandfathering system that tracks customer cohorts.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "note",
+          "excerpt": "Tom asked for detailed usage reporting and the ability to set per-team budgets.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement a grandfathering system with a price lock guarantee for existing customers."
+      ],
+      "tags": [
+        "pricing",
+        "trust"
+      ],
+      "metadata": {}
+    }
+  ],
+  "summary": "The analysis reveals critical insights regarding customer needs during the transition to a usage-based pricing model. Key areas of focus include the necessity for cost transparency, management of significant price increases, implementation of spending alerts, and the establishment of price lock guarantees to maintain customer trust and satisfaction.",
+  "errors": []
+}

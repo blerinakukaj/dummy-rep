@@ -1,0 +1,172 @@
+{
+  "agent_id": "risk",
+  "agent_name": "Risk/Privacy/Compliance Guardrails Agent",
+  "run_id": "a719360e-4b71-47c1-9acb-888e9116d263",
+  "timestamp": "2026-03-06T12:35:07.967701Z",
+  "findings": [
+    {
+      "id": "risk-001",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Privacy Risk Hotspot Detected",
+      "description": "Detected privacy risk keywords indicating potential issues with PII handling or consent mechanisms in the documentation.",
+      "impact": "low",
+      "confidence": "directional",
+      "assumptions": [
+        "Privacy risks may arise from inadequate PII handling or lack of consent mechanisms."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Detected privacy risk keywords in 1 source(s)",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Review PII handling practices and ensure compliance with consent mechanisms."
+      ],
+      "tags": [
+        "privacy"
+      ],
+      "metadata": {
+        "category": "privacy",
+        "is_blocker": false,
+        "mitigation": "Review PII handling practices and ensure compliance with consent mechanisms.",
+        "policy_rule": "Legal review for PII"
+      }
+    },
+    {
+      "id": "risk-002",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Critical Push Notification Failure on Android 14",
+      "description": "Push notifications are failing to deliver on Android 14 devices, affecting approximately 8% of users. This issue needs to be resolved to ensure reliable notification delivery.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Failure to deliver notifications on Android 14 could lead to user dissatisfaction and loss of engagement."
+      ],
+      "evidence": [
+        {
+          "source_id": "NOTIFY-102",
+          "source_type": "doc",
+          "excerpt": "Push notifications are failing to deliver on Android 14 devices.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Resolve the push notification delivery issue on Android 14 devices."
+      ],
+      "tags": [
+        "android",
+        "notifications",
+        "security"
+      ],
+      "metadata": {
+        "category": "security",
+        "is_blocker": true,
+        "mitigation": "Resolve the push notification delivery issue on Android 14 devices.",
+        "policy_rule": "Block on critical security"
+      }
+    },
+    {
+      "id": "risk-003",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Accessibility Issues in Notification Center",
+      "description": "There are significant accessibility issues within the notification center, particularly for users with visual impairments, highlighting the need for inclusive design practices.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [
+        "Accessibility issues may hinder user experience for individuals with disabilities."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Accessibility concerns with Notification Center.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Address accessibility issues in the notification center to ensure compliance with inclusive design practices."
+      ],
+      "tags": [
+        "accessibility"
+      ],
+      "metadata": {
+        "category": "accessibility",
+        "is_blocker": false,
+        "mitigation": "Address accessibility issues in the notification center.",
+        "policy_rule": "Accessibility is a requirement, not an afterthought"
+      }
+    },
+    {
+      "id": "risk-004",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Compliance Risk Hotspot Detected",
+      "description": "Detected compliance risk keywords indicating potential issues with GDPR, CCPA, or other regulatory requirements in the documentation.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Compliance risks may arise from inadequate adherence to data protection regulations."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Detected compliance risk keywords in 2 source(s)",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct a compliance review to ensure adherence to GDPR, CCPA, and other regulations."
+      ],
+      "tags": [
+        "compliance"
+      ],
+      "metadata": {
+        "category": "compliance",
+        "is_blocker": false,
+        "mitigation": "Conduct a compliance review to ensure adherence to GDPR, CCPA, and other regulations.",
+        "policy_rule": "Legal review for PII"
+      }
+    },
+    {
+      "id": "risk-005",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Pricing Risk Hotspot Detected",
+      "description": "Detected pricing risk keywords indicating potential issues with pricing strategy that may affect competitiveness in the market.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Pricing concerns may lead to loss of market share if not addressed."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Detected pricing risk keywords in 3 source(s)",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Evaluate and adjust pricing strategy to ensure competitiveness."
+      ],
+      "tags": [
+        "pricing"
+      ],
+      "metadata": {
+        "category": "pricing",
+        "is_blocker": false,
+        "mitigation": "Evaluate and adjust pricing strategy to ensure competitiveness.",
+        "policy_rule": "Max unmitigated high risks: 2"
+      }
+    }
+  ],
+  "summary": "Identified 5 risks (1 accessibility, 1 compliance, 1 pricing, 1 privacy, 1 security). 1 flagged as blockers. Risk gate: FAILED (1 blockers, 1 warnings).",
+  "errors": []
+}

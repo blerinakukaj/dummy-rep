@@ -1,0 +1,145 @@
+{
+  "agent_id": "intake",
+  "agent_name": "Intake & Context Agent",
+  "run_id": "efd6af80-2df6-45f2-b0e1-7a66fc9f61ae",
+  "timestamp": "2026-03-06T12:37:20.074843Z",
+  "findings": [
+    {
+      "id": "intake-001",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: pricing",
+      "description": "Detected pricing risk keywords in 1 source(s): DOC-001",
+      "impact": "low",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "pricing"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-002",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: accessibility",
+      "description": "Detected accessibility risk keywords in 8 source(s): DOC-001, DOC-002, DOC-003, LP-501, LP-502, LP-503, LP-504, LP-505",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-003",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "LP-501",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "LP-502",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "LP-503",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "LP-504",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "LP-505",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "accessibility"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-003",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: compliance",
+      "description": "Detected compliance risk keywords in 5 source(s): DOC-001, DOC-002, DOC-003, LP-503, LP-505",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-003",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "LP-503",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "LP-505",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "compliance"
+      ],
+      "metadata": {}
+    }
+  ],
+  "summary": "LearnPath is an online learning management system that currently faces significant accessibility challenges, particularly for visually impaired and motor-disabled users, as highlighted by multiple tickets addressing navigation, video accessibility, color contrast, and assistive technology compatibility. Key user pain points include the inability to effectively navigate the course catalog, lack of accessible multimedia content, and non-compliant assessment forms, which hinder the learning experience for users with disabilities. The most critical signals from the data indicate urgent compliance risks related to accessibility standards, which could impact user satisfaction and market competitiveness if not addressed promptly.",
+  "errors": []
+}

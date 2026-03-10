@@ -1,0 +1,159 @@
+{
+  "agent_id": "metrics",
+  "agent_name": "Metrics & Analytics Agent",
+  "run_id": "57c812f2-883d-4582-8e51-b74e62e04b23",
+  "timestamp": "2026-03-06T12:41:04.667628Z",
+  "findings": [
+    {
+      "id": "metrics-001",
+      "agent_id": "metrics",
+      "type": "metric",
+      "title": "North Star Metric: Monthly Active Enterprise Users",
+      "description": "The North Star metric for EnterpriseSuite is the number of monthly active users (MAU) specifically from enterprise tenants. This metric reflects user engagement and the overall health of the enterprise segment.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Enterprise users will drive revenue growth and retention."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-003",
+          "source_type": "metric",
+          "excerpt": "monthly_active_users: 28000",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Monitor MAU trends monthly to assess engagement."
+      ],
+      "tags": [
+        "north_star"
+      ],
+      "metadata": {
+        "baseline": 28000,
+        "target": 35000,
+        "measurement_method": "User activity tracking through analytics platform"
+      }
+    },
+    {
+      "id": "metrics-002",
+      "agent_id": "metrics",
+      "type": "metric",
+      "title": "Primary KPI: Churn Rate for Enterprise Tenants",
+      "description": "This primary KPI measures the percentage of enterprise tenants that discontinue service over a specific period. A lower churn rate indicates better customer retention.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Reducing churn will improve overall revenue."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-003",
+          "source_type": "metric",
+          "excerpt": "churn_rate_enterprise: 0.02",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement customer feedback loops to identify churn causes."
+      ],
+      "tags": [
+        "input_metric"
+      ],
+      "metadata": {
+        "baseline": 0.02,
+        "target": 0.015,
+        "measurement_method": "Customer retention analysis"
+      }
+    },
+    {
+      "id": "metrics-003",
+      "agent_id": "metrics",
+      "type": "metric",
+      "title": "Guardrail Metric: Uptime Percentage",
+      "description": "This guardrail metric tracks the uptime of the platform over the last 90 days. Maintaining high uptime is critical for customer satisfaction and retention.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "High uptime correlates with customer satisfaction."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-003",
+          "source_type": "metric",
+          "excerpt": "uptime_last_90_days: 0.9987",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Ensure uptime remains above 99.5%."
+      ],
+      "tags": [
+        "guardrail"
+      ],
+      "metadata": {
+        "baseline": 0.9987,
+        "target": 0.999,
+        "measurement_method": "System monitoring tools"
+      }
+    },
+    {
+      "id": "metrics-004",
+      "agent_id": "metrics",
+      "type": "gap",
+      "title": "Measurement Gap: Customer Satisfaction Scores",
+      "description": "Currently, there is no systematic collection of customer satisfaction scores for enterprise tenants. This data is crucial for understanding user experience and improving retention.",
+      "impact": "high",
+      "confidence": "speculative",
+      "assumptions": [
+        "Customer satisfaction directly impacts churn."
+      ],
+      "evidence": [
+        {
+          "source_id": "ENT-201",
+          "source_type": "ticket",
+          "excerpt": "Enterprise prospects require SSO via SAML 2.0 and OIDC before signing contracts.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement regular customer satisfaction surveys."
+      ],
+      "tags": [],
+      "metadata": {}
+    },
+    {
+      "id": "metrics-005",
+      "agent_id": "metrics",
+      "type": "recommendation",
+      "title": "Experiment Opportunity: Onboarding Process Optimization",
+      "description": "Conduct A/B testing on the onboarding process for enterprise tenants to identify which methods lead to faster onboarding times and higher satisfaction.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Improving onboarding will reduce churn."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-003",
+          "source_type": "metric",
+          "excerpt": "avg_onboarding_days_enterprise: 45",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Test different onboarding flows and measure time to complete."
+      ],
+      "tags": [],
+      "metadata": {
+        "statistical_parameters": {
+          "sample_size": 100,
+          "confidence_level": 0.95,
+          "margin_of_error": 0.05
+        }
+      }
+    }
+  ],
+  "summary": "The analysis defines a clear North Star metric focused on monthly active enterprise users, supported by primary KPIs like churn rate and guardrail metrics such as uptime. Key gaps in customer satisfaction measurement and opportunities for onboarding optimization have been identified, guiding future data collection and experimentation efforts.",
+  "errors": []
+}

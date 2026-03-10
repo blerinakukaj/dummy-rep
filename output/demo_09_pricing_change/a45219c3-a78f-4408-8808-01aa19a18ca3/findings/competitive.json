@@ -1,0 +1,137 @@
+{
+  "agent_id": "competitive",
+  "agent_name": "Competitive & Positioning Agent",
+  "run_id": "a45219c3-a78f-4408-8808-01aa19a18ca3",
+  "timestamp": "2026-03-06T12:47:29.674652Z",
+  "findings": [
+    {
+      "id": "competitive-001",
+      "agent_id": "competitive",
+      "type": "insight",
+      "title": "Competitor Landscape Overview",
+      "description": "The competitive landscape for CloudMetrics includes direct competitors like DataDogLite and MetricStream. DataDogLite offers a consumption-based pricing model and a strong developer community, while MetricStream provides flat-rate pricing that appeals to enterprise customers.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Competitors are actively targeting similar customer segments."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Competitor A: DataDogLite... Competitor B: MetricStream...",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Monitor competitor pricing strategies closely."
+      ],
+      "tags": [
+        "competition",
+        "market analysis"
+      ],
+      "metadata": {
+        "competitors": [
+          "DataDogLite",
+          "MetricStream"
+        ]
+      }
+    },
+    {
+      "id": "competitive-002",
+      "agent_id": "competitive",
+      "type": "gap",
+      "title": "Feature Parity Gap with DataDogLite",
+      "description": "CloudMetrics lacks a transparent cost calculator and a generous free tier compared to DataDogLite, which could hinder customer acquisition and retention.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Customers value transparency and free usage tiers."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "DataDogLite... transparent cost calculator, generous free tier.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Develop a cost calculator and consider introducing a free tier."
+      ],
+      "tags": [
+        "feature gap",
+        "product development"
+      ],
+      "metadata": {
+        "missing_features": [
+          "cost calculator",
+          "free tier"
+        ]
+      }
+    },
+    {
+      "id": "competitive-003",
+      "agent_id": "competitive",
+      "type": "risk",
+      "title": "Pricing Risk from Competitors",
+      "description": "The shift to consumption-based pricing may expose CloudMetrics to pricing risks, especially as DataDogLite has received complaints about rapid cost escalation ('bill shock').",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Pricing sensitivity is high among target customers."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Costs escalate rapidly at scale (known 'bill shock' complaints).",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement clear pricing communication and usage alerts."
+      ],
+      "tags": [
+        "pricing risk",
+        "customer satisfaction"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "competitive-004",
+      "agent_id": "competitive",
+      "type": "recommendation",
+      "title": "Explore Differentiation Opportunities",
+      "description": "CloudMetrics should consider offering a hybrid pricing model that combines the predictability of flat-rate pricing with the flexibility of consumption-based pricing to attract enterprise customers.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Enterprise customers prefer predictable pricing."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "MetricStream... flat-rate pricing that enterprise customers love.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Test a hybrid pricing model to gauge customer response."
+      ],
+      "tags": [
+        "pricing strategy",
+        "market positioning"
+      ],
+      "metadata": {
+        "pricing_models": [
+          "hybrid",
+          "flat-rate"
+        ]
+      }
+    }
+  ],
+  "summary": "CloudMetrics faces a competitive landscape with significant pricing and feature gaps compared to DataDogLite and MetricStream. Addressing these gaps through enhanced pricing transparency and feature offerings will be crucial for market positioning and customer acquisition.",
+  "errors": []
+}

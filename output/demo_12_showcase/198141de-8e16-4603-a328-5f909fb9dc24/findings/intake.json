@@ -1,0 +1,155 @@
+{
+  "agent_id": "intake",
+  "agent_name": "Intake & Context Agent",
+  "run_id": "198141de-8e16-4603-a328-5f909fb9dc24",
+  "timestamp": "2026-03-06T13:03:33.763690Z",
+  "findings": [
+    {
+      "id": "intake-001",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: privacy",
+      "description": "Detected privacy risk keywords in 1 source(s): DOC-002",
+      "impact": "low",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "privacy"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-002",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: pricing",
+      "description": "Detected pricing risk keywords in 3 source(s): DOC-001, DOC-002, NOTIFY-101",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "NOTIFY-101",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "pricing"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-003",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: platform",
+      "description": "Detected platform risk keywords in 2 source(s): DOC-001, NOTIFY-104",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "NOTIFY-104",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "platform"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-004",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: accessibility",
+      "description": "Detected accessibility risk keywords in 2 source(s): DOC-001, DOC-002",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "accessibility"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-005",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: compliance",
+      "description": "Detected compliance risk keywords in 2 source(s): DOC-001, DOC-002",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "compliance"
+      ],
+      "metadata": {}
+    }
+  ],
+  "summary": "SmartNotify is an intelligent notification prioritization system designed to alleviate notification fatigue through machine learning. Key user pain points include inconsistent notification delivery, particularly on Android 14 devices, and the need for customizable notification priority levels and categories. Data signals indicate a critical focus on improving notification delivery latency and implementing machine learning features for better user experience, while also addressing potential risks related to privacy and compliance.",
+  "errors": []
+}

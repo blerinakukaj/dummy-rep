@@ -1,0 +1,511 @@
+{
+  "evidence_index": {
+    "DOC-001": [
+      "intake-001",
+      "intake-002",
+      "intake-003",
+      "competitive-001",
+      "competitive-002",
+      "competitive-003",
+      "competitive-004"
+    ],
+    "DOC-002": [
+      "intake-002",
+      "intake-003",
+      "customer-001",
+      "customer-002",
+      "customer-004"
+    ],
+    "DOC-003": [
+      "intake-002",
+      "intake-003",
+      "metrics-001",
+      "metrics-002",
+      "metrics-003",
+      "metrics-004"
+    ],
+    "LP-501": [
+      "intake-002",
+      "customer-001",
+      "feasibility-001",
+      "feasibility-002",
+      "requirements-001",
+      "requirements-010",
+      "risk-001"
+    ],
+    "LP-502": [
+      "intake-002",
+      "customer-002",
+      "feasibility-001",
+      "feasibility-003",
+      "requirements-002",
+      "risk-002"
+    ],
+    "LP-503": [
+      "intake-002",
+      "intake-003",
+      "customer-003",
+      "feasibility-001",
+      "feasibility-004",
+      "requirements-003",
+      "risk-003"
+    ],
+    "LP-504": [
+      "intake-002",
+      "customer-001",
+      "feasibility-001",
+      "feasibility-005",
+      "requirements-004",
+      "requirements-011"
+    ],
+    "LP-505": [
+      "intake-002",
+      "intake-003",
+      "customer-004",
+      "feasibility-001",
+      "feasibility-006",
+      "requirements-005",
+      "requirements-009",
+      "risk-004"
+    ],
+    "metrics-005": [
+      "requirements-006"
+    ],
+    "metrics-006": [
+      "requirements-007"
+    ],
+    "metrics-004": [
+      "requirements-008"
+    ]
+  },
+  "dedup_log": [
+    {
+      "cluster": [
+        "intake-002",
+        "customer-001"
+      ],
+      "kept": "customer-001",
+      "removed": [
+        "intake-002"
+      ],
+      "reason": "Both findings address accessibility issues affecting visually impaired users."
+    },
+    {
+      "cluster": [
+        "intake-003",
+        "customer-003"
+      ],
+      "kept": "customer-003",
+      "removed": [
+        "intake-003"
+      ],
+      "reason": "Both findings highlight compliance and color contrast issues impacting users with visual impairments."
+    },
+    {
+      "cluster": [
+        "customer-002",
+        "feasibility-003"
+      ],
+      "kept": "customer-002",
+      "removed": [
+        "feasibility-003"
+      ],
+      "reason": "Both findings discuss the need for video accessibility features to support users with hearing impairments."
+    },
+    {
+      "cluster": [
+        "competitive-001",
+        "risk-001"
+      ],
+      "kept": "competitive-001",
+      "removed": [
+        "risk-001"
+      ],
+      "reason": "Both findings identify significant accessibility compliance gaps that pose risks to the platform."
+    },
+    {
+      "cluster": [
+        "feasibility-001",
+        "risk-002"
+      ],
+      "kept": "feasibility-001",
+      "removed": [
+        "risk-002"
+      ],
+      "reason": "Both findings emphasize the high risk of non-compliance with accessibility standards due to existing gaps."
+    },
+    {
+      "cluster": [
+        "requirements-005",
+        "risk-004"
+      ],
+      "kept": "requirements-005",
+      "removed": [
+        "risk-004"
+      ],
+      "reason": "Both findings highlight the absence of a Voluntary Product Accessibility Template (VPAT) as a barrier for compliance."
+    },
+    {
+      "cluster": [
+        "requirements-003",
+        "risk-003"
+      ],
+      "kept": "requirements-003",
+      "removed": [
+        "risk-003"
+      ],
+      "reason": "Both findings focus on the high risk of non-compliance related to color contrast standards."
+    }
+  ],
+  "ranked_findings": [
+    {
+      "finding_id": "metrics-001",
+      "title": "North Star Metric: Accessibility Compliance Rate",
+      "user_impact": 8,
+      "business_value": 8,
+      "effort": 3,
+      "risk": 6,
+      "priority_score": 3.467
+    },
+    {
+      "finding_id": "customer-003",
+      "title": "Color Contrast Issues Across UI Components",
+      "user_impact": 7,
+      "business_value": 7,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.935
+    },
+    {
+      "finding_id": "metrics-002",
+      "title": "Primary KPI: Screen Reader Task Completion Rate",
+      "user_impact": 6,
+      "business_value": 6,
+      "effort": 3,
+      "risk": 5,
+      "priority_score": 2.889
+    },
+    {
+      "finding_id": "metrics-003",
+      "title": "Primary KPI: Keyboard-Only Task Completion Rate",
+      "user_impact": 6,
+      "business_value": 6,
+      "effort": 3,
+      "risk": 5,
+      "priority_score": 2.889
+    },
+    {
+      "finding_id": "requirements-009",
+      "title": "Accessibility Documentation Updates",
+      "user_impact": 3,
+      "business_value": 3,
+      "effort": 2,
+      "risk": 2,
+      "priority_score": 2.786
+    },
+    {
+      "finding_id": "competitive-004",
+      "title": "Leverage Accessibility as a Differentiator",
+      "user_impact": 6,
+      "business_value": 7,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.71
+    },
+    {
+      "finding_id": "competitive-002",
+      "title": "Competitive Pricing Positioning",
+      "user_impact": 5,
+      "business_value": 5,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.708
+    },
+    {
+      "finding_id": "customer-001",
+      "title": "Critical Accessibility Gaps for Visually Impaired Users",
+      "user_impact": 9,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 7,
+      "priority_score": 2.707
+    },
+    {
+      "finding_id": "feasibility-005",
+      "title": "Quiz and Assessment Accessibility Fixes",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.553
+    },
+    {
+      "finding_id": "requirements-011",
+      "title": "Error Message Accessibility Improvements",
+      "user_impact": 6,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.516
+    },
+    {
+      "finding_id": "competitive-003",
+      "title": "Emerging Accessibility Threats",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 2.5
+    },
+    {
+      "finding_id": "metrics-006",
+      "title": "Experiment Opportunity: Accessibility Feature A/B Testing",
+      "user_impact": 4,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 3,
+      "priority_score": 2.476
+    },
+    {
+      "finding_id": "requirements-007",
+      "title": "Accessibility Feature A/B Testing",
+      "user_impact": 4,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 3,
+      "priority_score": 2.476
+    },
+    {
+      "finding_id": "requirements-008",
+      "title": "Monitoring Accessibility Compliance Metrics",
+      "user_impact": 4,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 3,
+      "priority_score": 2.476
+    },
+    {
+      "finding_id": "customer-002",
+      "title": "Lack of Video Accessibility Features",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.437
+    },
+    {
+      "finding_id": "requirements-001",
+      "title": "Screen Reader Navigation Improvement",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.437
+    },
+    {
+      "finding_id": "requirements-002",
+      "title": "Video Accessibility Features Implementation",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.437
+    },
+    {
+      "finding_id": "metrics-005",
+      "title": "Measurement Gap: Comprehensive User Feedback on Accessibility",
+      "user_impact": 6,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 5,
+      "priority_score": 2.4
+    },
+    {
+      "finding_id": "metrics-004",
+      "title": "Guardrail Metric: Number of Critical WCAG Violations",
+      "user_impact": 5,
+      "business_value": 5,
+      "effort": 4,
+      "risk": 4,
+      "priority_score": 2.321
+    },
+    {
+      "finding_id": "feasibility-004",
+      "title": "Color Contrast Improvements",
+      "user_impact": 5,
+      "business_value": 5,
+      "effort": 4,
+      "risk": 4,
+      "priority_score": 2.321
+    },
+    {
+      "finding_id": "feasibility-006",
+      "title": "VPAT Implementation",
+      "user_impact": 5,
+      "business_value": 5,
+      "effort": 4,
+      "risk": 4,
+      "priority_score": 2.321
+    },
+    {
+      "finding_id": "requirements-006",
+      "title": "User Feedback Collection on Accessibility",
+      "user_impact": 5,
+      "business_value": 5,
+      "effort": 4,
+      "risk": 4,
+      "priority_score": 2.321
+    },
+    {
+      "finding_id": "feasibility-002",
+      "title": "Screen Reader Navigation Fix Dependency",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 7,
+      "risk": 7,
+      "priority_score": 2.245
+    },
+    {
+      "finding_id": "customer-004",
+      "title": "Need for VPAT for Compliance and Procurement",
+      "user_impact": 6,
+      "business_value": 6,
+      "effort": 5,
+      "risk": 5,
+      "priority_score": 2.229
+    },
+    {
+      "finding_id": "requirements-003",
+      "title": "Color Contrast Improvements",
+      "user_impact": 6,
+      "business_value": 6,
+      "effort": 5,
+      "risk": 5,
+      "priority_score": 2.229
+    },
+    {
+      "finding_id": "requirements-004",
+      "title": "Quiz and Assessment Accessibility Fixes",
+      "user_impact": 6,
+      "business_value": 6,
+      "effort": 5,
+      "risk": 5,
+      "priority_score": 2.229
+    },
+    {
+      "finding_id": "requirements-010",
+      "title": "Keyboard Navigation for All Components",
+      "user_impact": 6,
+      "business_value": 6,
+      "effort": 5,
+      "risk": 5,
+      "priority_score": 2.229
+    },
+    {
+      "finding_id": "requirements-005",
+      "title": "VPAT Creation and Publication",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 7,
+      "risk": 6,
+      "priority_score": 2.109
+    },
+    {
+      "finding_id": "feasibility-001",
+      "title": "Accessibility Compliance Risk",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.021
+    },
+    {
+      "finding_id": "competitive-001",
+      "title": "Accessibility Compliance Gap",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 7,
+      "risk": 9,
+      "priority_score": 2.0
+    },
+    {
+      "finding_id": "intake-001",
+      "title": "Risk hotspot detected: pricing",
+      "user_impact": 2,
+      "business_value": 3,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 1.333
+    }
+  ],
+  "conflicts": [
+    {
+      "finding_a": "feasibility-001",
+      "finding_b": "competitive-001",
+      "description": "Significant accessibility gaps pose a high risk of non-compliance with WCAG 2.1 AA standards, which is a critical weakness compared to competitors.",
+      "resolution": "Prioritize immediate remediation of accessibility gaps to achieve compliance and enhance competitive positioning.",
+      "reasoning": "Compliance with accessibility standards is essential to mitigate risks and improve market competitiveness."
+    },
+    {
+      "finding_a": "requirements-005",
+      "finding_b": "feasibility-006",
+      "description": "Creating a VPAT is essential for compliance and should be initiated after the MVP is completed, but the absence of a VPAT is a significant barrier for potential clients.",
+      "resolution": "Accelerate the VPAT creation process to coincide with MVP development to ensure compliance and attract clients.",
+      "reasoning": "Immediate action on VPAT is necessary to address compliance needs and support procurement processes."
+    },
+    {
+      "finding_a": "customer-001",
+      "finding_b": "requirements-001",
+      "description": "The need for ARIA roles and keyboard support for visually impaired users is critical, yet existing gaps hinder navigation.",
+      "resolution": "Implement ARIA roles and keyboard support as a priority to resolve navigation issues for visually impaired users.",
+      "reasoning": "Addressing these requirements is essential to improve user experience and accessibility compliance."
+    },
+    {
+      "finding_a": "customer-002",
+      "finding_b": "requirements-002",
+      "description": "The lack of video accessibility features is critical for users with hearing impairments, yet implementation is not prioritized.",
+      "resolution": "Prioritize the implementation of video accessibility features, including captions and transcripts, to meet user needs.",
+      "reasoning": "Enhancing video accessibility is crucial for compliance and user satisfaction."
+    },
+    {
+      "finding_a": "customer-003",
+      "finding_b": "requirements-003",
+      "description": "Color contrast issues across UI components are high impact, but existing requirements to improve contrast may not be prioritized.",
+      "resolution": "Prioritize color contrast improvements in the MVP to ensure compliance and enhance readability for users with visual impairments.",
+      "reasoning": "Addressing color contrast is essential for meeting accessibility standards and improving user experience."
+    }
+  ],
+  "consolidated_finding_ids": [
+    "intake-001",
+    "customer-001",
+    "customer-002",
+    "customer-003",
+    "customer-004",
+    "competitive-001",
+    "competitive-002",
+    "competitive-003",
+    "competitive-004",
+    "metrics-001",
+    "metrics-002",
+    "metrics-003",
+    "metrics-004",
+    "metrics-005",
+    "metrics-006",
+    "feasibility-001",
+    "feasibility-002",
+    "feasibility-004",
+    "feasibility-005",
+    "feasibility-006",
+    "requirements-001",
+    "requirements-002",
+    "requirements-003",
+    "requirements-004",
+    "requirements-005",
+    "requirements-006",
+    "requirements-007",
+    "requirements-008",
+    "requirements-009",
+    "requirements-010",
+    "requirements-011"
+  ]
+}

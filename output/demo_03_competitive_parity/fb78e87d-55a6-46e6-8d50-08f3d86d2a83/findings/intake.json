@@ -1,0 +1,179 @@
+{
+  "agent_id": "intake",
+  "agent_name": "Intake & Context Agent",
+  "run_id": "fb78e87d-55a6-46e6-8d50-08f3d86d2a83",
+  "timestamp": "2026-03-09T20:05:31.056377Z",
+  "findings": [
+    {
+      "id": "intake-001",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: auth",
+      "description": "Detected auth risk keywords in 3 source(s): DOC-001, DOC-003, DOC-004",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-003",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-004",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "auth"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-002",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: pricing",
+      "description": "Detected pricing risk keywords in 5 source(s): COLLAB-302, DOC-001, DOC-002, DOC-003, DOC-004",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "COLLAB-302",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-001",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-003",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-004",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "pricing"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-003",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: platform",
+      "description": "Detected platform risk keywords in 2 source(s): DOC-001, DOC-004",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-004",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "platform"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-004",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: accessibility",
+      "description": "Detected accessibility risk keywords in 1 source(s): DOC-001",
+      "impact": "low",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "accessibility"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-005",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: compliance",
+      "description": "Detected compliance risk keywords in 3 source(s): DOC-001, DOC-002, DOC-004",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-004",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "compliance"
+      ],
+      "metadata": {}
+    }
+  ],
+  "summary": "CollabDocs Real-time Editor is a collaborative document editing tool aimed at enhancing user experience by introducing live co-editing features to compete with similar offerings in the market. Key user pain points include frustration with current document locking mechanisms, the need for simultaneous editing capabilities, and the absence of presence indicators for collaborators. Data signals indicate a strong demand from enterprise customers for these features, alongside identified risk hotspots in authentication, pricing, platform compatibility, accessibility, and compliance that need to be addressed to ensure successful implementation.",
+  "errors": []
+}

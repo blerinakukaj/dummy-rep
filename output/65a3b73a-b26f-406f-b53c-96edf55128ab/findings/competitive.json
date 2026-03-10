@@ -1,0 +1,165 @@
+{
+  "agent_id": "competitive",
+  "agent_name": "Competitive & Positioning Agent",
+  "run_id": "65a3b73a-b26f-406f-b53c-96edf55128ab",
+  "timestamp": "2026-03-09T20:10:42.206970Z",
+  "findings": [
+    {
+      "id": "competitive-001",
+      "agent_id": "competitive",
+      "type": "insight",
+      "title": "PushFlow's Strong Delivery Metrics",
+      "description": "PushFlow boasts a 99.7% delivery rate and has recently introduced AI-powered send-time optimization, which enhances its competitive edge in notification delivery effectiveness.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "PushFlow's delivery metrics are consistent and reliable."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Excellent mobile reliability (99.7% delivery rate), real-time delivery analytics dashboard.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Consider enhancing SmartNotify's delivery metrics and analytics capabilities."
+      ],
+      "tags": [
+        "delivery",
+        "analytics"
+      ],
+      "metadata": {
+        "competitor": "PushFlow",
+        "feature": "delivery rate"
+      }
+    },
+    {
+      "id": "competitive-002",
+      "agent_id": "competitive",
+      "type": "gap",
+      "title": "Lack of Notification Batching in Competitors",
+      "description": "While PushFlow lacks a notification batching feature, SmartNotify can leverage this gap to differentiate itself by offering effective notification batching to reduce fatigue.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [
+        "Notification batching is a desirable feature for users."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "No notification batching/digest feature.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Develop and promote a notification batching feature."
+      ],
+      "tags": [
+        "feature gap",
+        "differentiation"
+      ],
+      "metadata": {
+        "competitor": "PushFlow",
+        "feature": "notification batching"
+      }
+    },
+    {
+      "id": "competitive-003",
+      "agent_id": "competitive",
+      "type": "risk",
+      "title": "Emerging Threat from Notifai",
+      "description": "Notifai, an AI-native product, poses a potential threat due to its focus on ML prioritization and aggressive hiring of ML engineers, which could lead to rapid improvements in their offering.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Notifai will successfully improve its reliability and feature set."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Could become a serious threat in 12-18 months if they solve reliability.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Monitor Notifai's developments closely and consider strategic partnerships or enhancements."
+      ],
+      "tags": [
+        "competitive threat",
+        "monitoring"
+      ],
+      "metadata": {
+        "competitor": "Notifai",
+        "feature": "ML prioritization"
+      }
+    },
+    {
+      "id": "competitive-004",
+      "agent_id": "competitive",
+      "type": "recommendation",
+      "title": "Enhance Enterprise Features",
+      "description": "AlertHub's strong enterprise feature set highlights a gap in SmartNotify's offering. Developing more robust enterprise features could attract larger clients.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Enterprise clients require advanced features and compliance."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Strong enterprise feature set with granular role-based notification policies.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Invest in developing enterprise-level features and compliance certifications."
+      ],
+      "tags": [
+        "enterprise",
+        "features"
+      ],
+      "metadata": {
+        "competitor": "AlertHub",
+        "feature": "enterprise features"
+      }
+    },
+    {
+      "id": "competitive-005",
+      "agent_id": "competitive",
+      "type": "insight",
+      "title": "Pricing Sensitivity in the Market",
+      "description": "Pricing is a significant concern, with SmartNotify being positioned lower than competitors like PushFlow. This could be leveraged to attract cost-sensitive customers.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [
+        "Price sensitivity is a key factor for potential customers."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Pricing is 40% higher than SmartNotify at scale.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Highlight SmartNotify's cost-effectiveness in marketing materials."
+      ],
+      "tags": [
+        "pricing",
+        "market positioning"
+      ],
+      "metadata": {
+        "competitor": "PushFlow",
+        "feature": "pricing"
+      }
+    }
+  ],
+  "summary": "SmartNotify faces a competitive landscape with strengths and weaknesses among key players like PushFlow, AlertHub, and Notifai. Opportunities exist in enhancing features like notification batching and enterprise capabilities, while pricing strategies can attract cost-sensitive customers. Monitoring emerging threats from Notifai will be crucial for maintaining market position.",
+  "errors": []
+}

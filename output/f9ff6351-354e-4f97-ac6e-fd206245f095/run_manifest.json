@@ -1,0 +1,160 @@
+{
+  "run_id": "f9ff6351-354e-4f97-ac6e-fd206245f095",
+  "timestamp": "2026-03-09T20:33:21.387703+00:00",
+  "input_path": "input_bundles/sample_bundle/",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "duration_seconds": 305.41,
+  "agents_run": [
+    "intake",
+    "competitive",
+    "metrics",
+    "customer",
+    "feasibility",
+    "requirements",
+    "risk",
+    "lead_pm"
+  ],
+  "agents_failed": [
+    "lead_pm"
+  ],
+  "total_findings": 45,
+  "findings_by_type": {
+    "risk": 13,
+    "insight": 8,
+    "gap": 3,
+    "recommendation": 4,
+    "metric": 5,
+    "dependency": 2,
+    "requirement": 10
+  },
+  "recommendation": "",
+  "artifacts": {},
+  "token_usage": {
+    "per_agent": {
+      "intake": {
+        "prompt_tokens": 491,
+        "completion_tokens": 93,
+        "total_tokens": 584
+      },
+      "competitive": {
+        "prompt_tokens": 1053,
+        "completion_tokens": 1151,
+        "total_tokens": 2204
+      },
+      "metrics": {
+        "prompt_tokens": 1043,
+        "completion_tokens": 1545,
+        "total_tokens": 2588
+      },
+      "customer": {
+        "prompt_tokens": 1460,
+        "completion_tokens": 1112,
+        "total_tokens": 2572
+      },
+      "feasibility": {
+        "prompt_tokens": 1133,
+        "completion_tokens": 1232,
+        "total_tokens": 2365
+      },
+      "requirements": {
+        "prompt_tokens": 2582,
+        "completion_tokens": 2695,
+        "total_tokens": 5277
+      },
+      "risk": {
+        "prompt_tokens": 3592,
+        "completion_tokens": 1246,
+        "total_tokens": 4838
+      },
+      "lead_pm": {
+        "prompt_tokens": 6436,
+        "completion_tokens": 2220,
+        "total_tokens": 8656
+      }
+    },
+    "total": {
+      "prompt_tokens": 17790,
+      "completion_tokens": 11294,
+      "total_tokens": 29084
+    }
+  },
+  "estimated_cost": 0.009445,
+  "agent_details": [
+    {
+      "agent_id": "competitive",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 23.85,
+      "error": null
+    },
+    {
+      "agent_id": "metrics",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 29.19,
+      "error": null
+    },
+    {
+      "agent_id": "customer",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 32.45,
+      "error": null
+    },
+    {
+      "agent_id": "feasibility",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 26.02,
+      "error": null
+    },
+    {
+      "agent_id": "requirements",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 52.22,
+      "error": null
+    },
+    {
+      "agent_id": "risk",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 34.94,
+      "error": null
+    },
+    {
+      "agent_id": "lead_pm",
+      "status": "failed",
+      "output_path": "",
+      "duration_seconds": 0.0,
+      "error": "Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+    }
+  ],
+  "bundle_warnings": [],
+  "output_files": {
+    "context_packet": "output\\f9ff6351-354e-4f97-ac6e-fd206245f095\\context_packet.json",
+    "findings": [
+      "output\\f9ff6351-354e-4f97-ac6e-fd206245f095\\findings\\competitive.json",
+      "output\\f9ff6351-354e-4f97-ac6e-fd206245f095\\findings\\customer.json",
+      "output\\f9ff6351-354e-4f97-ac6e-fd206245f095\\findings\\feasibility.json",
+      "output\\f9ff6351-354e-4f97-ac6e-fd206245f095\\findings\\intake.json",
+      "output\\f9ff6351-354e-4f97-ac6e-fd206245f095\\findings\\lead_pm.json",
+      "output\\f9ff6351-354e-4f97-ac6e-fd206245f095\\findings\\lead_pm_intermediate.json",
+      "output\\f9ff6351-354e-4f97-ac6e-fd206245f095\\findings\\metrics.json",
+      "output\\f9ff6351-354e-4f97-ac6e-fd206245f095\\findings\\requirements.json",
+      "output\\f9ff6351-354e-4f97-ac6e-fd206245f095\\findings\\risk.json",
+      "output\\f9ff6351-354e-4f97-ac6e-fd206245f095\\findings\\risk_gate_result.json"
+    ],
+    "artifacts": [
+      "output\\f9ff6351-354e-4f97-ac6e-fd206245f095\\artifacts\\backlog.csv",
+      "output\\f9ff6351-354e-4f97-ac6e-fd206245f095\\artifacts\\decision_log.md",
+      "output\\f9ff6351-354e-4f97-ac6e-fd206245f095\\artifacts\\experiment_plan.md",
+      "output\\f9ff6351-354e-4f97-ac6e-fd206245f095\\artifacts\\prd.md",
+      "output\\f9ff6351-354e-4f97-ac6e-fd206245f095\\artifacts\\roadmap.json"
+    ]
+  },
+  "errors": {
+    "lead_pm": "Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+  }
+}

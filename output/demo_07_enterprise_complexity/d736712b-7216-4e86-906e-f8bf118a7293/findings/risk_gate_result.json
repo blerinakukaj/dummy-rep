@@ -1,0 +1,12 @@
+{
+  "passed": false,
+  "blockers": [
+    "BLOCKED: Risk agent flagged as blocker \u2014 Critical Security Risk: Authentication Weaknesses [risk-002]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 High Compliance Risk: Data Isolation [risk-003]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 High Compliance Risk: Data Residency Controls [risk-004]",
+    "BLOCKED: 4 unmitigated high risks exceed maximum of 2"
+  ],
+  "warnings": [
+    "Legal review required for PII/privacy \u2014 Privacy Risk: Data Handling Gaps [risk-001]"
+  ]
+}

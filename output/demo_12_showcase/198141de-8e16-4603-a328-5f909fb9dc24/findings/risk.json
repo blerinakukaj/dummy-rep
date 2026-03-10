@@ -1,0 +1,174 @@
+{
+  "agent_id": "risk",
+  "agent_name": "Risk/Privacy/Compliance Guardrails Agent",
+  "run_id": "198141de-8e16-4603-a328-5f909fb9dc24",
+  "timestamp": "2026-03-06T13:05:32.253510Z",
+  "findings": [
+    {
+      "id": "risk-001",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Potential Privacy Risk Identified",
+      "description": "Detected privacy risk keywords indicating potential issues with PII handling or consent mechanisms in the documentation.",
+      "impact": "low",
+      "confidence": "directional",
+      "assumptions": [
+        "Privacy risks may arise from inadequate PII handling or consent mechanisms."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Detected privacy risk keywords in 1 source(s)",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Review and enhance PII handling and consent mechanisms."
+      ],
+      "tags": [
+        "privacy"
+      ],
+      "metadata": {
+        "category": "privacy",
+        "is_blocker": false,
+        "mitigation": "Review and enhance PII handling and consent mechanisms.",
+        "policy_rule": "Legal review for PII"
+      }
+    },
+    {
+      "id": "risk-002",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Critical Mobile Notification Delivery Issues",
+      "description": "Silent failures in push notifications for Android 14 users pose a critical risk to user engagement and satisfaction.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Failure to deliver notifications will lead to user attrition."
+      ],
+      "evidence": [
+        {
+          "source_id": "NOTIFY-102",
+          "source_type": "doc",
+          "excerpt": "A significant portion of users on Android 14 are experiencing silent failures in push notifications.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Resolve silent failures in push notifications for Android 14."
+      ],
+      "tags": [
+        "notification",
+        "android",
+        "security"
+      ],
+      "metadata": {
+        "category": "security",
+        "is_blocker": true,
+        "mitigation": "Resolve silent failures in push notifications for Android 14.",
+        "policy_rule": "Block on critical security"
+      }
+    },
+    {
+      "id": "risk-003",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "High Risk of Notification Delivery Latency",
+      "description": "The need to reduce notification delivery latency from p95 340ms to under 200ms poses a high risk to performance and user experience.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "High latency will negatively impact user satisfaction."
+      ],
+      "evidence": [
+        {
+          "source_id": "NOTIFY-105",
+          "source_type": "doc",
+          "excerpt": "Reducing notification delivery latency from p95 340ms to under 200ms is critical for performance.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Optimize the delivery pipeline to reduce latency."
+      ],
+      "tags": [
+        "performance",
+        "latency",
+        "security"
+      ],
+      "metadata": {
+        "category": "security",
+        "is_blocker": false,
+        "mitigation": "Optimize the delivery pipeline to reduce latency.",
+        "policy_rule": "Max unmitigated high risks: 2"
+      }
+    },
+    {
+      "id": "risk-004",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Accessibility Concerns in Notification Center",
+      "description": "Users with disabilities face challenges navigating the notification center due to color-only priority indicators, indicating a need for improved accessibility features.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Inadequate accessibility features may lead to user exclusion."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Users with disabilities face challenges navigating the notification center.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Enhance accessibility features in the notification center."
+      ],
+      "tags": [
+        "accessibility"
+      ],
+      "metadata": {
+        "category": "accessibility",
+        "is_blocker": false,
+        "mitigation": "Enhance accessibility features in the notification center.",
+        "policy_rule": "Accessibility is a requirement, not an afterthought"
+      }
+    },
+    {
+      "id": "risk-005",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Compliance Documentation Gaps",
+      "description": "Lack of compliance documentation for notification features may lead to legal and accessibility standard violations.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Inadequate compliance documentation can result in legal repercussions."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Create compliance documentation for notification features.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Document compliance for notification features."
+      ],
+      "tags": [
+        "compliance"
+      ],
+      "metadata": {
+        "category": "compliance",
+        "is_blocker": true,
+        "mitigation": "Document compliance for notification features.",
+        "policy_rule": "Block on critical privacy"
+      }
+    }
+  ],
+  "summary": "Identified 5 risks (1 accessibility, 1 compliance, 1 privacy, 2 security). 2 flagged as blockers. Risk gate: FAILED (2 blockers, 1 warnings).",
+  "errors": []
+}

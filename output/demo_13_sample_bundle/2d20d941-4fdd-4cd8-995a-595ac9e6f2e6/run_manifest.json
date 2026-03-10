@@ -1,0 +1,103 @@
+{
+  "run_id": "2d20d941-4fdd-4cd8-995a-595ac9e6f2e6",
+  "timestamp": "2026-03-09T20:39:23.835587+00:00",
+  "input_path": "input_bundles/sample_bundle/",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "duration_seconds": 68.45,
+  "agents_run": [
+    "intake"
+  ],
+  "agents_failed": [
+    "competitive",
+    "customer",
+    "metrics",
+    "requirements",
+    "feasibility",
+    "risk",
+    "lead_pm"
+  ],
+  "total_findings": 5,
+  "findings_by_type": {
+    "risk": 5
+  },
+  "recommendation": "",
+  "artifacts": {},
+  "token_usage": {
+    "per_agent": {},
+    "total": {
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0
+    }
+  },
+  "estimated_cost": 0.0,
+  "agent_details": [
+    {
+      "agent_id": "competitive",
+      "status": "failed",
+      "output_path": "",
+      "duration_seconds": 0.0,
+      "error": "[competitive] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+    },
+    {
+      "agent_id": "customer",
+      "status": "failed",
+      "output_path": "",
+      "duration_seconds": 0.0,
+      "error": "[customer] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+    },
+    {
+      "agent_id": "metrics",
+      "status": "failed",
+      "output_path": "",
+      "duration_seconds": 0.0,
+      "error": "[metrics] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+    },
+    {
+      "agent_id": "requirements",
+      "status": "failed",
+      "output_path": "",
+      "duration_seconds": 0.0,
+      "error": "[requirements] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+    },
+    {
+      "agent_id": "feasibility",
+      "status": "failed",
+      "output_path": "",
+      "duration_seconds": 0.0,
+      "error": "[feasibility] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+    },
+    {
+      "agent_id": "risk",
+      "status": "failed",
+      "output_path": "",
+      "duration_seconds": 0.0,
+      "error": "[risk] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+    },
+    {
+      "agent_id": "lead_pm",
+      "status": "failed",
+      "output_path": "",
+      "duration_seconds": 0.0,
+      "error": "[lead_pm] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+    }
+  ],
+  "bundle_warnings": [],
+  "output_files": {
+    "context_packet": "output\\demo_13_sample_bundle\\2d20d941-4fdd-4cd8-995a-595ac9e6f2e6\\context_packet.json",
+    "findings": [
+      "output\\demo_13_sample_bundle\\2d20d941-4fdd-4cd8-995a-595ac9e6f2e6\\findings\\intake.json"
+    ],
+    "artifacts": []
+  },
+  "errors": {
+    "competitive": "[competitive] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "customer": "[customer] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "metrics": "[metrics] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "requirements": "[requirements] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "feasibility": "[feasibility] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "risk": "[risk] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "lead_pm": "[lead_pm] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+  }
+}

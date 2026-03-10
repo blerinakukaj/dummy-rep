@@ -1,0 +1,164 @@
+{
+  "run_id": "917f8c38-3ea4-4160-ab4d-21694aff44ab",
+  "timestamp": "2026-03-06T12:23:30.758168+00:00",
+  "input_path": "input_bundles/privacy_risk/",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "duration_seconds": 191.75,
+  "agents_run": [
+    "intake",
+    "competitive",
+    "metrics",
+    "customer",
+    "feasibility",
+    "requirements",
+    "risk",
+    "lead_pm"
+  ],
+  "agents_failed": [],
+  "total_findings": 41,
+  "findings_by_type": {
+    "risk": 13,
+    "insight": 8,
+    "gap": 2,
+    "recommendation": 4,
+    "metric": 3,
+    "dependency": 1,
+    "requirement": 10
+  },
+  "recommendation": "do_not_pursue",
+  "artifacts": {
+    "prd": "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\artifacts\\prd.md",
+    "roadmap": "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\artifacts\\roadmap.json",
+    "experiment_plan": "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\artifacts\\experiment_plan.md",
+    "decision_log": "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\artifacts\\decision_log.md",
+    "backlog": "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\artifacts\\backlog.csv",
+    "final_plan": "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\artifacts\\final_plan.json"
+  },
+  "token_usage": {
+    "per_agent": {
+      "intake": {
+        "prompt_tokens": 486,
+        "completion_tokens": 90,
+        "total_tokens": 576
+      },
+      "competitive": {
+        "prompt_tokens": 1438,
+        "completion_tokens": 1014,
+        "total_tokens": 2452
+      },
+      "metrics": {
+        "prompt_tokens": 1493,
+        "completion_tokens": 1139,
+        "total_tokens": 2632
+      },
+      "customer": {
+        "prompt_tokens": 2978,
+        "completion_tokens": 1332,
+        "total_tokens": 4310
+      },
+      "feasibility": {
+        "prompt_tokens": 1349,
+        "completion_tokens": 1164,
+        "total_tokens": 2513
+      },
+      "requirements": {
+        "prompt_tokens": 2710,
+        "completion_tokens": 3066,
+        "total_tokens": 5776
+      },
+      "risk": {
+        "prompt_tokens": 3609,
+        "completion_tokens": 1275,
+        "total_tokens": 4884
+      },
+      "lead_pm": {
+        "prompt_tokens": 6097,
+        "completion_tokens": 2140,
+        "total_tokens": 8237
+      }
+    },
+    "total": {
+      "prompt_tokens": 20160,
+      "completion_tokens": 11220,
+      "total_tokens": 31380
+    }
+  },
+  "estimated_cost": 0.009756,
+  "agent_details": [
+    {
+      "agent_id": "competitive",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 15.21,
+      "error": null
+    },
+    {
+      "agent_id": "metrics",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 20.02,
+      "error": null
+    },
+    {
+      "agent_id": "customer",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 25.02,
+      "error": null
+    },
+    {
+      "agent_id": "feasibility",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 17.31,
+      "error": null
+    },
+    {
+      "agent_id": "requirements",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 61.49,
+      "error": null
+    },
+    {
+      "agent_id": "risk",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 20.53,
+      "error": null
+    },
+    {
+      "agent_id": "lead_pm",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 80.98,
+      "error": null
+    }
+  ],
+  "bundle_warnings": [],
+  "output_files": {
+    "context_packet": "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\context_packet.json",
+    "findings": [
+      "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\findings\\competitive.json",
+      "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\findings\\customer.json",
+      "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\findings\\feasibility.json",
+      "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\findings\\intake.json",
+      "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\findings\\lead_pm.json",
+      "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\findings\\lead_pm_intermediate.json",
+      "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\findings\\metrics.json",
+      "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\findings\\requirements.json",
+      "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\findings\\risk.json",
+      "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\findings\\risk_gate_result.json"
+    ],
+    "artifacts": [
+      "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\artifacts\\backlog.csv",
+      "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\artifacts\\decision_log.md",
+      "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\artifacts\\experiment_plan.md",
+      "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\artifacts\\final_plan.json",
+      "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\artifacts\\prd.md",
+      "output\\demo_01_privacy_risk\\917f8c38-3ea4-4160-ab4d-21694aff44ab\\artifacts\\roadmap.json"
+    ]
+  },
+  "errors": {}
+}

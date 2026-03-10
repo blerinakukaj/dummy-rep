@@ -1,0 +1,232 @@
+{
+  "agent_id": "lead_pm",
+  "agent_name": "Lead PM Agent",
+  "run_id": "a45219c3-a78f-4408-8808-01aa19a18ca3",
+  "timestamp": "2026-03-06T12:49:35.927046Z",
+  "findings": [
+    {
+      "id": "lead_pm-001",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Pipeline Consolidation Summary",
+      "description": "Consolidated 36 findings from 7 agents into 30 unique findings. Removed 6 duplicates. Identified 3 cross-agent conflicts.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "intake",
+          "source_type": "doc",
+          "excerpt": "Intake & Context Agent: 3 findings",
+          "url": null
+        },
+        {
+          "source_id": "customer",
+          "source_type": "doc",
+          "excerpt": "Customer Insights Agent: 4 findings",
+          "url": null
+        },
+        {
+          "source_id": "competitive",
+          "source_type": "doc",
+          "excerpt": "Competitive & Positioning Agent: 4 findings",
+          "url": null
+        },
+        {
+          "source_id": "metrics",
+          "source_type": "doc",
+          "excerpt": "Metrics & Analytics Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "feasibility",
+          "source_type": "doc",
+          "excerpt": "Tech Feasibility & Delivery Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "requirements",
+          "source_type": "doc",
+          "excerpt": "UX & Requirements Agent: 11 findings",
+          "url": null
+        },
+        {
+          "source_id": "risk",
+          "source_type": "doc",
+          "excerpt": "Risk/Privacy/Compliance Guardrails Agent: 4 findings",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "consolidation",
+        "meta"
+      ],
+      "metadata": {
+        "original_count": 36,
+        "deduped_count": 30,
+        "duplicates_removed": 6,
+        "conflicts_resolved": 3,
+        "evidence_sources": 10
+      }
+    },
+    {
+      "id": "lead_pm-002",
+      "agent_id": "lead_pm",
+      "type": "recommendation",
+      "title": "Top Priority Findings",
+      "description": "Highest priority items based on weighted scoring (user_impact×0.35 + business_value×0.30) / (effort×0.20 + risk×0.15): North Star Metric: Monthly Recurring Revenue (MRR) (score=3.162); Primary KPI: Average Revenue Per Account (ARPA) (score=3.148); Competitor Landscape Overview (score=3.0); Desire for Spending Controls (score=2.882); Explore Differentiation Opportunities (score=2.81)",
+      "impact": "critical",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "metrics-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.162",
+          "url": null
+        },
+        {
+          "source_id": "metrics-002",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.148",
+          "url": null
+        },
+        {
+          "source_id": "competitive-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.0",
+          "url": null
+        },
+        {
+          "source_id": "customer-003",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.882",
+          "url": null
+        },
+        {
+          "source_id": "competitive-004",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.81",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "prioritization",
+        "meta"
+      ],
+      "metadata": {
+        "top_priorities": [
+          {
+            "finding_id": "metrics-001",
+            "title": "North Star Metric: Monthly Recurring Revenue (MRR)",
+            "user_impact": 9,
+            "business_value": 9,
+            "effort": 4,
+            "risk": 7,
+            "priority_score": 3.162
+          },
+          {
+            "finding_id": "metrics-002",
+            "title": "Primary KPI: Average Revenue Per Account (ARPA)",
+            "user_impact": 7,
+            "business_value": 6,
+            "effort": 3,
+            "risk": 5,
+            "priority_score": 3.148
+          },
+          {
+            "finding_id": "competitive-001",
+            "title": "Competitor Landscape Overview",
+            "user_impact": 6,
+            "business_value": 5,
+            "effort": 3,
+            "risk": 4,
+            "priority_score": 3.0
+          },
+          {
+            "finding_id": "customer-003",
+            "title": "Desire for Spending Controls",
+            "user_impact": 8,
+            "business_value": 7,
+            "effort": 4,
+            "risk": 6,
+            "priority_score": 2.882
+          },
+          {
+            "finding_id": "competitive-004",
+            "title": "Explore Differentiation Opportunities",
+            "user_impact": 5,
+            "business_value": 4,
+            "effort": 3,
+            "risk": 3,
+            "priority_score": 2.81
+          }
+        ]
+      }
+    },
+    {
+      "id": "lead_pm-003",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Cross-Agent Conflict Resolution Report",
+      "description": "Resolved 3 conflicts between agent findings. requirements-001 vs risk-003: The implementation of a usage-based billing engine requires the collection of PII, which poses compliance risks under GDPR and CCPA.; customer-002 vs feasibility-002: Concerns over price increases may lead to customer churn, which is already identified as a high risk during the pricing migration.; competitive-003 vs feasibility-003: The pricing risk from competitors highlights the potential for 'bill shock,' while the recommendation to implement spending alerts aims to prevent this issue.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "requirements-001",
+          "source_type": "doc",
+          "excerpt": "The implementation of a usage-based billing engine requires the collection of PII, which poses compliance risks under GDPR and CCPA.",
+          "url": null
+        },
+        {
+          "source_id": "customer-002",
+          "source_type": "doc",
+          "excerpt": "Concerns over price increases may lead to customer churn, which is already identified as a high risk during the pricing migration.",
+          "url": null
+        },
+        {
+          "source_id": "competitive-003",
+          "source_type": "doc",
+          "excerpt": "The pricing risk from competitors highlights the potential for 'bill shock,' while the recommendation to implement spending alerts aims to prevent this issue.",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "conflicts",
+        "meta"
+      ],
+      "metadata": {
+        "conflicts": [
+          {
+            "finding_a": "requirements-001",
+            "finding_b": "risk-003",
+            "description": "The implementation of a usage-based billing engine requires the collection of PII, which poses compliance risks under GDPR and CCPA.",
+            "resolution": "Ensure that PII collection is minimized and that explicit consent is obtained from users, along with implementing robust data retention policies.",
+            "reasoning": "Compliance with privacy regulations is critical, and the feature can proceed if it adheres to data protection laws."
+          },
+          {
+            "finding_a": "customer-002",
+            "finding_b": "feasibility-002",
+            "description": "Concerns over price increases may lead to customer churn, which is already identified as a high risk during the pricing migration.",
+            "resolution": "Develop a proactive communication strategy to address customer concerns about potential price increases and provide reassurance through grandfathering existing customers.",
+            "reasoning": "Addressing customer concerns directly can mitigate churn risks while transitioning to the new pricing model."
+          },
+          {
+            "finding_a": "competitive-003",
+            "finding_b": "feasibility-003",
+            "description": "The pricing risk from competitors highlights the potential for 'bill shock,' while the recommendation to implement spending alerts aims to prevent this issue.",
+            "resolution": "Integrate spending alerts and caps as a core feature of the new pricing model to enhance customer trust and reduce the risk of bill shock.",
+            "reasoning": "By implementing these features, CloudMetrics can differentiate itself from competitors and alleviate customer concerns about unexpected charges."
+          }
+        ]
+      }
+    }
+  ],
+  "summary": "Consolidated 36 findings into 30 unique items. Removed 6 duplicates, resolved 3 conflicts. Top priority: North Star Metric: Monthly Recurring Revenue (MRR).",
+  "errors": []
+}

@@ -1,0 +1,10 @@
+{
+  "passed": false,
+  "blockers": [
+    "BLOCKED: Risk agent flagged as blocker \u2014 Critical Android Notification Delivery Failure [risk-002]",
+    "BLOCKED: 1 unmitigated high risks exceed maximum of 0"
+  ],
+  "warnings": [
+    "Legal review required for PII/privacy \u2014 Privacy Risk Hotspot Detected [risk-001]"
+  ]
+}

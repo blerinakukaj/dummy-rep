@@ -1,0 +1,491 @@
+{
+  "evidence_index": {
+    "DOC-002": [
+      "intake-001",
+      "intake-002",
+      "competitive-003",
+      "customer-001",
+      "customer-002"
+    ],
+    "PS-402": [
+      "intake-001",
+      "intake-002",
+      "customer-002",
+      "feasibility-002",
+      "requirements-002"
+    ],
+    "DOC-001": [
+      "intake-002",
+      "intake-003",
+      "competitive-004",
+      "customer-001",
+      "customer-002",
+      "customer-003",
+      "customer-005",
+      "requirements-010",
+      "risk-005"
+    ],
+    "DOC-003": [
+      "intake-002"
+    ],
+    "PS-401": [
+      "intake-002",
+      "customer-001",
+      "metrics-001",
+      "feasibility-001",
+      "requirements-001",
+      "requirements-008",
+      "risk-001"
+    ],
+    "PS-404": [
+      "competitive-001",
+      "competitive-002",
+      "customer-004",
+      "metrics-004",
+      "feasibility-004",
+      "requirements-004",
+      "requirements-006",
+      "risk-002",
+      "risk-004"
+    ],
+    "PS-403": [
+      "customer-003",
+      "feasibility-003",
+      "requirements-003",
+      "risk-003"
+    ],
+    "PS-405": [
+      "customer-005",
+      "metrics-005",
+      "feasibility-005",
+      "requirements-005",
+      "requirements-007",
+      "requirements-009"
+    ],
+    "metrics_snapshot.json": [
+      "metrics-002",
+      "metrics-003"
+    ],
+    "metrics-001": [
+      "requirements-011"
+    ]
+  },
+  "dedup_log": [
+    {
+      "cluster": [
+        "feasibility-001",
+        "risk-001"
+      ],
+      "kept": "feasibility-001",
+      "removed": [
+        "risk-001"
+      ],
+      "reason": "Both describe a critical performance regression in dashboard load time due to the v3.2 deployment."
+    },
+    {
+      "cluster": [
+        "competitive-003",
+        "risk-002"
+      ],
+      "kept": "competitive-003",
+      "removed": [
+        "risk-002"
+      ],
+      "reason": "Both highlight significant pricing risks that could affect PageSpeed's competitive position."
+    },
+    {
+      "cluster": [
+        "customer-001",
+        "metrics-001"
+      ],
+      "kept": "customer-001",
+      "removed": [
+        "metrics-001"
+      ],
+      "reason": "Both address the critical issue of dashboard load time impacting user experience."
+    },
+    {
+      "cluster": [
+        "customer-002",
+        "metrics-002"
+      ],
+      "kept": "customer-002",
+      "removed": [
+        "metrics-002"
+      ],
+      "reason": "Both findings discuss the degradation of API response times affecting user experience."
+    },
+    {
+      "cluster": [
+        "customer-003",
+        "risk-003"
+      ],
+      "kept": "customer-003",
+      "removed": [
+        "risk-003"
+      ],
+      "reason": "Both findings report on a memory leak in WebSocket connections leading to server crashes."
+    },
+    {
+      "cluster": [
+        "customer-004",
+        "requirements-004"
+      ],
+      "kept": "customer-004",
+      "removed": [
+        "requirements-004"
+      ],
+      "reason": "Both emphasize the need for automated performance regression detection in the CI pipeline."
+    },
+    {
+      "cluster": [
+        "customer-005",
+        "requirements-005"
+      ],
+      "kept": "customer-005",
+      "removed": [
+        "requirements-005"
+      ],
+      "reason": "Both findings recommend building a public status page to improve customer visibility during incidents."
+    },
+    {
+      "cluster": [
+        "feasibility-004",
+        "requirements-004"
+      ],
+      "kept": "requirements-004",
+      "removed": [
+        "feasibility-004"
+      ],
+      "reason": "Both findings recommend implementing performance regression detection in the CI pipeline."
+    },
+    {
+      "cluster": [
+        "requirements-005",
+        "requirements-006"
+      ],
+      "kept": "requirements-005",
+      "removed": [
+        "requirements-006"
+      ],
+      "reason": "Both findings involve creating a public status page and setting up monitoring for performance metrics."
+    }
+  ],
+  "ranked_findings": [
+    {
+      "finding_id": "customer-001",
+      "title": "Critical Dashboard Load Time Regression",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 4,
+      "risk": 8,
+      "priority_score": 2.925
+    },
+    {
+      "finding_id": "metrics-003",
+      "title": "Guardrail Metric: Error Rate",
+      "user_impact": 6,
+      "business_value": 6,
+      "effort": 3,
+      "risk": 5,
+      "priority_score": 2.889
+    },
+    {
+      "finding_id": "customer-003",
+      "title": "WebSocket Memory Leak Issue",
+      "user_impact": 6,
+      "business_value": 7,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.71
+    },
+    {
+      "finding_id": "feasibility-005",
+      "title": "Build Customer-Facing Status Page",
+      "user_impact": 5,
+      "business_value": 5,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.708
+    },
+    {
+      "finding_id": "competitive-002",
+      "title": "Lack of Automated Performance Benchmarking",
+      "user_impact": 7,
+      "business_value": 7,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 2.676
+    },
+    {
+      "finding_id": "customer-005",
+      "title": "Lack of Customer Visibility During Incidents",
+      "user_impact": 7,
+      "business_value": 7,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 2.676
+    },
+    {
+      "finding_id": "customer-002",
+      "title": "API Latency Degradation",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 5,
+      "risk": 8,
+      "priority_score": 2.659
+    },
+    {
+      "finding_id": "requirements-001",
+      "title": "Dashboard Load Time Optimization",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 5,
+      "risk": 8,
+      "priority_score": 2.659
+    },
+    {
+      "finding_id": "requirements-002",
+      "title": "API Latency Improvement",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 5,
+      "risk": 8,
+      "priority_score": 2.659
+    },
+    {
+      "finding_id": "intake-001",
+      "title": "Risk hotspot detected: pricing",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 3,
+      "risk": 5,
+      "priority_score": 2.63
+    },
+    {
+      "finding_id": "customer-004",
+      "title": "Need for Performance Regression Detection",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 3,
+      "risk": 5,
+      "priority_score": 2.63
+    },
+    {
+      "finding_id": "competitive-004",
+      "title": "Enhance Platform Features",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.553
+    },
+    {
+      "finding_id": "intake-002",
+      "title": "Risk hotspot detected: platform",
+      "user_impact": 8,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 7,
+      "priority_score": 2.537
+    },
+    {
+      "finding_id": "competitive-001",
+      "title": "Critical Regression in Core Metrics",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.437
+    },
+    {
+      "finding_id": "metrics-004",
+      "title": "Instrumentation Gap: Performance Regression Detection",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.437
+    },
+    {
+      "finding_id": "feasibility-002",
+      "title": "Database Migration Impact on API Response Times",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.437
+    },
+    {
+      "finding_id": "requirements-003",
+      "title": "WebSocket Memory Leak Fix",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.437
+    },
+    {
+      "finding_id": "risk-004",
+      "title": "Lack of Automated Performance Regression Detection",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.437
+    },
+    {
+      "finding_id": "metrics-005",
+      "title": "Implement Real-time Status Page",
+      "user_impact": 4,
+      "business_value": 5,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.417
+    },
+    {
+      "finding_id": "competitive-003",
+      "title": "Emerging Pricing Risks",
+      "user_impact": 5,
+      "business_value": 5,
+      "effort": 3,
+      "risk": 5,
+      "priority_score": 2.407
+    },
+    {
+      "finding_id": "feasibility-003",
+      "title": "Memory Leak in WebSocket Connections",
+      "user_impact": 7,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.395
+    },
+    {
+      "finding_id": "requirements-007",
+      "title": "User Feedback Collection Mechanism",
+      "user_impact": 4,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.167
+    },
+    {
+      "finding_id": "requirements-008",
+      "title": "Documentation for Performance Changes",
+      "user_impact": 4,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.167
+    },
+    {
+      "finding_id": "requirements-009",
+      "title": "User Training on New Features",
+      "user_impact": 4,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.167
+    },
+    {
+      "finding_id": "requirements-010",
+      "title": "Accessibility Compliance Review",
+      "user_impact": 4,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.167
+    },
+    {
+      "finding_id": "requirements-011",
+      "title": "Performance Metrics Monitoring",
+      "user_impact": 4,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.167
+    },
+    {
+      "finding_id": "feasibility-001",
+      "title": "Critical Performance Regression in Dashboard Load Time",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 7,
+      "risk": 9,
+      "priority_score": 2.127
+    },
+    {
+      "finding_id": "risk-005",
+      "title": "Accessibility Compliance Review Needed",
+      "user_impact": 3,
+      "business_value": 3,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 1.625
+    },
+    {
+      "finding_id": "intake-003",
+      "title": "Risk hotspot detected: accessibility",
+      "user_impact": 2,
+      "business_value": 3,
+      "effort": 2,
+      "risk": 4,
+      "priority_score": 1.6
+    }
+  ],
+  "conflicts": [
+    {
+      "finding_a": "competitive-001",
+      "finding_b": "feasibility-001",
+      "description": "Critical regression in dashboard load time impacts user experience and could lead to customer dissatisfaction, contradicting the need to enhance platform features.",
+      "resolution": "Prioritize fixing the dashboard load time regression before implementing new platform features.",
+      "reasoning": "User experience is paramount; addressing critical performance issues must take precedence over feature enhancements."
+    },
+    {
+      "finding_a": "competitive-002",
+      "finding_b": "risk-004",
+      "description": "Lack of automated performance regression detection could lead to undetected performance regressions, contradicting the need for automated performance benchmarking.",
+      "resolution": "Implement automated performance regression detection in the CI pipeline to ensure performance benchmarks are met.",
+      "reasoning": "Without addressing the instrumentation gap, any benchmarking efforts may be ineffective, leading to further performance issues."
+    },
+    {
+      "finding_a": "customer-005",
+      "finding_b": "requirements-010",
+      "description": "Lack of customer visibility during incidents contradicts the need for an accessibility compliance review, as customers may not be able to access performance metrics effectively.",
+      "resolution": "Develop a public status page that provides real-time performance metrics while ensuring it meets accessibility standards.",
+      "reasoning": "Improving customer visibility during incidents is critical; accessibility compliance should be integrated into this solution."
+    }
+  ],
+  "consolidated_finding_ids": [
+    "intake-001",
+    "intake-002",
+    "intake-003",
+    "competitive-001",
+    "competitive-002",
+    "competitive-003",
+    "competitive-004",
+    "customer-001",
+    "customer-002",
+    "customer-003",
+    "customer-004",
+    "customer-005",
+    "metrics-003",
+    "metrics-004",
+    "metrics-005",
+    "feasibility-001",
+    "feasibility-002",
+    "feasibility-003",
+    "feasibility-005",
+    "requirements-001",
+    "requirements-002",
+    "requirements-003",
+    "requirements-007",
+    "requirements-008",
+    "requirements-009",
+    "requirements-010",
+    "requirements-011",
+    "risk-004",
+    "risk-005"
+  ]
+}

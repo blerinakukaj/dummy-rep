@@ -1,0 +1,143 @@
+{
+  "agent_id": "risk",
+  "agent_name": "Risk/Privacy/Compliance Guardrails Agent",
+  "run_id": "a45219c3-a78f-4408-8808-01aa19a18ca3",
+  "timestamp": "2026-03-06T12:48:54.374496Z",
+  "findings": [
+    {
+      "id": "risk-001",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Potential PII Handling Issues",
+      "description": "The transition to a consumption-based pricing model may lead to increased collection of personally identifiable information (PII) without proper justification or consent mechanisms in place, violating data handling policies.",
+      "impact": "critical",
+      "confidence": "directional",
+      "assumptions": [
+        "The new pricing model may require additional data collection from users."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-301",
+          "source_type": "doc",
+          "excerpt": "Design and Implement Usage-Based Billing Engine",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Ensure all data collection is justified and compliant with consent mechanisms."
+      ],
+      "tags": [
+        "privacy",
+        "PII"
+      ],
+      "metadata": {
+        "category": "privacy",
+        "is_blocker": true,
+        "mitigation": "Implement strict data collection policies and ensure user consent is obtained before any PII is collected.",
+        "policy_rule": "Block on critical privacy"
+      }
+    },
+    {
+      "id": "risk-002",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Authentication Weaknesses in New Pricing Model",
+      "description": "The new billing engine may introduce authentication weaknesses if not properly designed, potentially allowing unauthorized access to sensitive billing information.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "The new billing engine will require user authentication."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-301",
+          "source_type": "doc",
+          "excerpt": "Design and Implement Usage-Based Billing Engine",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct a security review of the authentication mechanisms in the new billing engine."
+      ],
+      "tags": [
+        "security",
+        "authentication"
+      ],
+      "metadata": {
+        "category": "security",
+        "is_blocker": false,
+        "mitigation": "Implement robust authentication mechanisms and conduct security testing.",
+        "policy_rule": "Max unmitigated high risks: 2"
+      }
+    },
+    {
+      "id": "risk-003",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Compliance Risk with GDPR and CCPA",
+      "description": "The new pricing model may lead to compliance risks under GDPR and CCPA if PII is collected without proper consent and retention policies are not adhered to.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "The new model will involve changes in data handling practices."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-304",
+          "source_type": "doc",
+          "excerpt": "Grandfather Existing Customers with 12-Month Price Lock",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct a legal review to ensure compliance with GDPR and CCPA regarding data collection and retention."
+      ],
+      "tags": [
+        "compliance",
+        "GDPR",
+        "CCPA"
+      ],
+      "metadata": {
+        "category": "compliance",
+        "is_blocker": false,
+        "mitigation": "Review and update data handling practices to ensure compliance with applicable regulations.",
+        "policy_rule": "Legal review for PII"
+      }
+    },
+    {
+      "id": "risk-004",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Accessibility Compliance Gaps",
+      "description": "There may be accessibility compliance gaps in the new pricing model features, particularly in the pricing calculator and cost estimator, which need to meet WCAG AA standards.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "New features will be developed without considering accessibility from the start."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-302",
+          "source_type": "doc",
+          "excerpt": "Build Pricing Calculator and Cost Estimator",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Ensure all new features are designed with accessibility in mind and undergo WCAG compliance testing."
+      ],
+      "tags": [
+        "accessibility",
+        "WCAG"
+      ],
+      "metadata": {
+        "category": "accessibility",
+        "is_blocker": false,
+        "mitigation": "Incorporate accessibility guidelines into the design and development process.",
+        "policy_rule": "Accessibility is a requirement, not an afterthought"
+      }
+    }
+  ],
+  "summary": "Identified 4 risks (1 accessibility, 1 compliance, 1 privacy, 1 security). 1 flagged as blockers. Risk gate: FAILED (1 blockers, 1 warnings).",
+  "errors": []
+}

@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "blockers": [
+    "BLOCKED: Risk agent flagged as blocker \u2014 Insufficient Consent Mechanism for GDPR Compliance [risk-001]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 GDPR Compliance Risk for EU Market Launch [risk-002]"
+  ],
+  "warnings": []
+}

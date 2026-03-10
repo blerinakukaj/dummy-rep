@@ -1,0 +1,120 @@
+{
+  "agent_id": "intake",
+  "agent_name": "Intake & Context Agent",
+  "run_id": "f5c915ad-18fa-441e-81b6-7d94797d37e6",
+  "timestamp": "2026-03-06T12:50:46.224594Z",
+  "findings": [
+    {
+      "id": "intake-001",
+      "agent_id": "intake",
+      "type": "gap",
+      "title": "Missing data: No competitive analysis or competitor brief",
+      "description": "The input bundle is missing: No competitive analysis or competitor brief. This may reduce the quality of downstream agent analysis.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [],
+      "recommendations": [],
+      "tags": [
+        "data_quality"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-002",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: pricing",
+      "description": "Detected pricing risk keywords in 5 source(s): DOC-001, DOC-003, DP-602, DP-603, DP-605",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-003",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DP-602",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DP-603",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DP-605",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "pricing"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "intake-003",
+      "agent_id": "intake",
+      "type": "risk",
+      "title": "Risk hotspot detected: platform",
+      "description": "Detected platform risk keywords in 5 source(s): DOC-001, DOC-003, DP-601, DP-602, DP-603",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DOC-003",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DP-601",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DP-602",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        },
+        {
+          "source_id": "DP-603",
+          "source_type": "ticket",
+          "excerpt": "Keyword match",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "platform"
+      ],
+      "metadata": {}
+    }
+  ],
+  "summary": "DataPipe is a real-time data pipeline platform that is currently facing significant technical dependency risks due to deprecated libraries, vendor lock-in, and aging infrastructure. Key user pain points include the need for migration from outdated technologies, the elimination of reliance on proprietary systems, and ensuring the platform's resilience through improved caching solutions. The most important signals from the data indicate urgent migration tasks, such as updating Apache Kafka and Python versions, as well as the necessity for a dependency health dashboard to proactively manage vulnerabilities.",
+  "errors": []
+}

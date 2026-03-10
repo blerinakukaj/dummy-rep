@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "blockers": [
+    "BLOCKED: Risk agent flagged as blocker \u2014 Missing Data Handling Justification [risk-001]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 Missing Consent Mechanism for Data Collection [risk-002]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 Retention Policy Violation [risk-003]",
+    "BLOCKED: 3 unmitigated high risks exceed maximum of 2"
+  ],
+  "warnings": [
+    "Legal review required for PII/privacy \u2014 Missing Data Handling Justification [risk-001]",
+    "Legal review required for PII/privacy \u2014 Missing Consent Mechanism for Data Collection [risk-002]",
+    "Legal review required for PII/privacy \u2014 Retention Policy Violation [risk-003]"
+  ]
+}

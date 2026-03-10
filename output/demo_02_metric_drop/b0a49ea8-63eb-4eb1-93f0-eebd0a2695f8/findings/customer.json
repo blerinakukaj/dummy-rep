@@ -1,0 +1,196 @@
+{
+  "agent_id": "customer",
+  "agent_name": "Customer Insights Agent",
+  "run_id": "b0a49ea8-63eb-4eb1-93f0-eebd0a2695f8",
+  "timestamp": "2026-03-09T20:02:00.140999Z",
+  "findings": [
+    {
+      "id": "customer-001",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Significant Drop in Search Relevance for Anonymous Users",
+      "description": "The new ranking algorithm introduced in v2.4.1 has led to a 15% drop in search relevance scores, particularly affecting anonymous users who make up approximately 40% of queries. This segment was not adequately represented in pre-launch A/B testing, resulting in a significant degradation of search results for navigational queries.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Anonymous users rely on the search engine without prior session data."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "The incident disproportionately affected anonymous users (~40% of query volume), a segment that was insufficiently represented in pre-launch A/B testing.",
+          "url": null
+        },
+        {
+          "source_id": "SEARCH-202",
+          "source_type": "ticket",
+          "excerpt": "Users are reporting that top results no longer match their intent — e.g., searching 'invoice template' returns blog posts instead of product pages.",
+          "url": null
+        },
+        {
+          "source_id": "SEARCH-205",
+          "source_type": "ticket",
+          "excerpt": "The pre-launch A/B test... Results were inconclusive: relevance improved +2% for signed-in users but degraded -8% for anonymous users.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Re-run A/B test scoped to anonymous users with properly powered sample size.",
+        "Patch ranking model for anonymous user fallback path."
+      ],
+      "tags": [
+        "search relevance",
+        "anonymous users",
+        "A/B testing"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-002",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Increased Support Ticket Volume Due to Irrelevant Results",
+      "description": "Following the v2.4.1 deployment, support ticket volume increased threefold, primarily due to users experiencing irrelevant search results. This indicates a significant user dissatisfaction and potential churn risk.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Users expect search results to be relevant and aligned with their queries."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Support ticket volume increased 3x in the 6 days following the v2.4.1 deployment.",
+          "url": null
+        },
+        {
+          "source_id": "SEARCH-202",
+          "source_type": "ticket",
+          "excerpt": "Users are reporting that top results no longer match their intent.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement a remediation plan to improve search relevance.",
+        "Monitor support ticket trends closely to gauge user sentiment."
+      ],
+      "tags": [
+        "support tickets",
+        "user dissatisfaction",
+        "search results"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-003",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Mobile Search Latency Increased Significantly",
+      "description": "Post-deployment, mobile search latency increased to 890ms, significantly impacting user experience. This latency issue is likely contributing to the negative feedback from mobile users.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Users expect fast response times from search functionalities."
+      ],
+      "evidence": [
+        {
+          "source_id": "SEARCH-203",
+          "source_type": "ticket",
+          "excerpt": "P95 search latency on mobile web has climbed to 890ms, up from a baseline of ~420ms pre-deploy.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "A smaller but growing segment reports broken autocomplete suggestions leading to dead-end pages.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Profile ranking re-ranker for mobile session path to identify optimization opportunities.",
+        "Investigate mobile-specific caching strategies."
+      ],
+      "tags": [
+        "mobile latency",
+        "user experience",
+        "search performance"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-004",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Stale Autocomplete Suggestions Contributing to User Frustration",
+      "description": "The autocomplete feature is showing stale data due to a misconfigured cache TTL, leading to users encountering outdated suggestions. This exacerbates the relevance issues and frustrates users.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [
+        "Users rely on autocomplete for efficient searching."
+      ],
+      "evidence": [
+        {
+          "source_id": "SEARCH-207",
+          "source_type": "ticket",
+          "excerpt": "Users are seeing suggestions for products that are out of stock or promotions that have ended.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Stale / broken autocomplete reported in 21 tickets.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Correct the autocomplete cache TTL to prevent stale data.",
+        "Enhance monitoring of autocomplete suggestions for freshness."
+      ],
+      "tags": [
+        "autocomplete",
+        "user frustration",
+        "search quality"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-005",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Lack of Instrumentation for New Search Features",
+      "description": "The new image and voice search features lack proper analytics instrumentation, resulting in zero visibility into their adoption and performance. This gap hinders the ability to assess their impact on overall search relevance.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [
+        "Analytics are essential for measuring the success of new features."
+      ],
+      "evidence": [
+        {
+          "source_id": "SEARCH-204",
+          "source_type": "ticket",
+          "excerpt": "Missing search analytics events for new query types.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "This means we have zero visibility into adoption, success rates, or failure modes for these surfaces.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Add instrumentation for 'image_search_query', 'voice_search_query', and 'filter_applied'.",
+        "Establish baseline metrics for new search features."
+      ],
+      "tags": [
+        "analytics",
+        "new features",
+        "visibility"
+      ],
+      "metadata": {}
+    }
+  ],
+  "summary": "The analysis reveals critical issues stemming from the v2.4.1 deployment, including a significant drop in search relevance for anonymous users, increased support ticket volume due to irrelevant results, and notable latency in mobile search. Additionally, stale autocomplete suggestions and a lack of instrumentation for new features further exacerbate user dissatisfaction. Immediate remediation actions are recommended to address these pain points.",
+  "errors": []
+}

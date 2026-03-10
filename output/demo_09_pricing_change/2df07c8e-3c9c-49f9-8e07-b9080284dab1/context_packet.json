@@ -1,0 +1,140 @@
+{
+  "run_id": "2df07c8e-3c9c-49f9-8e07-b9080284dab1",
+  "product_name": "CloudMetrics",
+  "product_description": "Usage-based cloud cost monitoring and optimization platform migrating from flat-rate to consumption-based pricing",
+  "tickets": [
+    {
+      "id": "CM-301",
+      "title": "Design and implement usage-based billing engine",
+      "description": "Migrate from flat monthly pricing ($49/$99/$199 tiers) to consumption-based pricing where customers pay per metric ingested and per dashboard query. Requires a metering pipeline that tracks usage in real time, a rating engine to apply pricing rules, and integration with Stripe for invoicing.",
+      "status": "open",
+      "priority": "critical",
+      "labels": [
+        "feature",
+        "billing",
+        "pricing"
+      ],
+      "created_at": "2025-07-15",
+      "source": "jira"
+    },
+    {
+      "id": "CM-302",
+      "title": "Build pricing calculator and cost estimator for customers",
+      "description": "Customers migrating to usage-based pricing need transparency on expected costs. Build an in-app pricing calculator that estimates monthly costs based on current usage patterns, and a predictive cost dashboard showing projected spend for the next billing cycle.",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "feature",
+        "ux",
+        "pricing"
+      ],
+      "created_at": "2025-08-01",
+      "source": "jira"
+    },
+    {
+      "id": "CM-303",
+      "title": "Implement usage alerts and spending caps",
+      "description": "To prevent bill shock during pricing transition, customers need configurable spending alerts (50%, 75%, 90%, 100% of budget) and optional hard spending caps that pause non-critical data ingestion when exceeded. Must handle graceful degradation without data loss.",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "feature",
+        "billing",
+        "alerts"
+      ],
+      "created_at": "2025-08-20",
+      "source": "jira"
+    },
+    {
+      "id": "CM-304",
+      "title": "Grandfather existing customers with 12-month price lock",
+      "description": "Product and legal agreed to honor current pricing for existing customers for 12 months after the switch. Need a grandfathering system that tracks customer cohorts, applies correct pricing tiers, and automatically transitions customers after the lock period with 60-day advance notice.",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "billing",
+        "migration",
+        "legal"
+      ],
+      "created_at": "2025-09-10",
+      "source": "jira"
+    },
+    {
+      "id": "CM-305",
+      "title": "Customer churn risk analysis for pricing migration",
+      "description": "Finance and product need a model that identifies which customer segments will see cost increases vs. decreases under the new pricing. Flag accounts where projected spend increases >30% for proactive account management outreach. CEOs concern is losing mid-market accounts during transition.",
+      "status": "open",
+      "priority": "medium",
+      "labels": [
+        "analytics",
+        "pricing",
+        "retention"
+      ],
+      "created_at": "2025-09-25",
+      "source": "jira"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-001",
+      "title": "competitor_brief.md",
+      "content": "# Competitive Brief — CloudMetrics Pricing\n\n## Competitor A: DataDogLite\n- **Strengths:** Already consumption-based pricing, transparent cost calculator, generous free tier (50K metrics/month). Strong developer community.\n- **Weaknesses:** Costs escalate rapidly at scale (known \"bill shock\" complaints on social media), limited enterprise support, no custom pricing.\n- **Recent moves:** Introduced committed-use discounts (pay upfront for 20% savings) in Q3 2025. Customer satisfaction around pricing is mixed.\n\n## Competitor B: MetricStream\n- **Strengths:** Flat-rate pricing that enterprise customers love for budget predictability. All-inclusive tiers with no usage limits.\n- **Weaknesses:** Over-provisioned for small customers, no usage-efficient option. Losing startup segment to pay-as-you-go competitors.\n- **Recent moves:** Testing a hybrid model in beta: flat base + overage charges above tier limits. Early feedback is negative — perceived as worst of both worlds.\n",
+      "doc_type": "competitor_brief",
+      "tags": []
+    },
+    {
+      "id": "DOC-002",
+      "title": "customer_notes.md",
+      "content": "# Customer Notes — CloudMetrics Pricing Change\n\n## Interview 1: Alex P. (Startup CTO, Current $49/month plan)\nAlex ingests fewer than 10,000 metrics per month and runs about 50 dashboard queries daily. Under the new pricing model, his bill would drop to approximately $22/month. \"I love the idea of paying for what I use — the flat rate always felt like I was subsidizing bigger customers.\" However, he wants clear visibility into usage with no surprise charges.\n\n## Interview 2: Linda W. (Director of Platform, Current $199/month plan)\nLinda's team ingests 2.5 million metrics per month and runs complex queries across 40 dashboards. Under the new pricing model, her estimated cost would jump to approximately $480/month. \"A 140% price increase is going to be a hard conversation with finance. I need at least 6 months notice and a migration path.\" She wants spending caps and a cost simulator before committing.\n\n## Interview 3: Tom H. (VP Engineering, Enterprise Account, Custom Pricing)\nTom's organization has a custom $15K/month contract negotiated two years ago. His usage has grown 3x since then. \"We're actually underpaying relative to usage, so consumption-based pricing might work in our favor long-term, but we need the price lock guarantee during the transition period.\" He asked for detailed usage reporting and the ability to set per-team budgets within the organization.\n",
+      "doc_type": "note",
+      "tags": []
+    },
+    {
+      "id": "DOC-003",
+      "title": "metrics_snapshot.json",
+      "content": "{\n  \"total_customers\": 1850,\n  \"mrr_usd\": 312000,\n  \"avg_revenue_per_account_usd\": 168.65,\n  \"customers_by_tier\": {\n    \"starter_49\": 1200,\n    \"pro_99\": 480,\n    \"business_199\": 140,\n    \"enterprise_custom\": 30\n  },\n  \"projected_churn_increase_pct\": 8.5,\n  \"customers_with_cost_increase\": 620,\n  \"customers_with_cost_decrease\": 1230,\n  \"avg_cost_increase_pct\": 45,\n  \"avg_cost_decrease_pct\": 22,\n  \"nps_score\": 42\n}\n",
+      "doc_type": "metrics_snapshot",
+      "tags": []
+    }
+  ],
+  "risk_hotspots": [
+    {
+      "category": "pricing",
+      "description": "Detected pricing risk keywords in 8 source(s): CM-301, CM-302, CM-303, CM-304, CM-305, DOC-001, DOC-002, DOC-003",
+      "severity": "high",
+      "source_ids": [
+        "CM-301",
+        "CM-302",
+        "CM-303",
+        "CM-304",
+        "CM-305",
+        "DOC-001",
+        "DOC-002",
+        "DOC-003"
+      ]
+    },
+    {
+      "category": "platform",
+      "description": "Detected platform risk keywords in 4 source(s): CM-301, CM-305, DOC-001, DOC-002",
+      "severity": "high",
+      "source_ids": [
+        "CM-301",
+        "CM-305",
+        "DOC-001",
+        "DOC-002"
+      ]
+    },
+    {
+      "category": "compliance",
+      "description": "Detected compliance risk keywords in 1 source(s): CM-304",
+      "severity": "low",
+      "source_ids": [
+        "CM-304"
+      ]
+    }
+  ],
+  "missing_info": [],
+  "dedup_log": [],
+  "raw_input_type": "bundle",
+  "created_at": "2026-03-09T20:27:06.790821Z"
+}

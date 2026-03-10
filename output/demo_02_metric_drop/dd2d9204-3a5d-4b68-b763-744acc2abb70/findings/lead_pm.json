@@ -1,0 +1,245 @@
+{
+  "agent_id": "lead_pm",
+  "agent_name": "Lead PM Agent",
+  "run_id": "dd2d9204-3a5d-4b68-b763-744acc2abb70",
+  "timestamp": "2026-03-06T12:25:19.471247Z",
+  "findings": [
+    {
+      "id": "lead_pm-001",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Pipeline Consolidation Summary",
+      "description": "Consolidated 34 findings from 7 agents into 22 unique findings. Removed 12 duplicates. Identified 4 cross-agent conflicts.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "intake",
+          "source_type": "doc",
+          "excerpt": "Intake & Context Agent: 3 findings",
+          "url": null
+        },
+        {
+          "source_id": "competitive",
+          "source_type": "doc",
+          "excerpt": "Competitive & Positioning Agent: 0 findings",
+          "url": null
+        },
+        {
+          "source_id": "metrics",
+          "source_type": "doc",
+          "excerpt": "Metrics & Analytics Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "customer",
+          "source_type": "doc",
+          "excerpt": "Customer Insights Agent: 4 findings",
+          "url": null
+        },
+        {
+          "source_id": "feasibility",
+          "source_type": "doc",
+          "excerpt": "Tech Feasibility & Delivery Agent: 7 findings",
+          "url": null
+        },
+        {
+          "source_id": "requirements",
+          "source_type": "doc",
+          "excerpt": "UX & Requirements Agent: 11 findings",
+          "url": null
+        },
+        {
+          "source_id": "risk",
+          "source_type": "doc",
+          "excerpt": "Risk/Privacy/Compliance Guardrails Agent: 4 findings",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "consolidation",
+        "meta"
+      ],
+      "metadata": {
+        "original_count": 34,
+        "deduped_count": 22,
+        "duplicates_removed": 12,
+        "conflicts_resolved": 4,
+        "evidence_sources": 12
+      }
+    },
+    {
+      "id": "lead_pm-002",
+      "agent_id": "lead_pm",
+      "type": "recommendation",
+      "title": "Top Priority Findings",
+      "description": "Highest priority items based on weighted scoring (user_impact×0.35 + business_value×0.30) / (effort×0.20 + risk×0.15): North Star Metric: Search Relevance Score (score=4.333); Instrumentation Gap for New Query Types (score=3.0); Significant Drop in Search Relevance for Anonymous Users (score=2.955); Primary KPI: Search Click-Through Rate (CTR) (score=2.853); Conduct User Feedback Collection (score=2.786)",
+      "impact": "critical",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "metrics-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 4.333",
+          "url": null
+        },
+        {
+          "source_id": "metrics-004",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.0",
+          "url": null
+        },
+        {
+          "source_id": "customer-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.955",
+          "url": null
+        },
+        {
+          "source_id": "metrics-002",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.853",
+          "url": null
+        },
+        {
+          "source_id": "requirements-009",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.786",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "prioritization",
+        "meta"
+      ],
+      "metadata": {
+        "top_priorities": [
+          {
+            "finding_id": "metrics-001",
+            "title": "North Star Metric: Search Relevance Score",
+            "user_impact": 9,
+            "business_value": 9,
+            "effort": 3,
+            "risk": 5,
+            "priority_score": 4.333
+          },
+          {
+            "finding_id": "metrics-004",
+            "title": "Instrumentation Gap for New Query Types",
+            "user_impact": 9,
+            "business_value": 9,
+            "effort": 6,
+            "risk": 5,
+            "priority_score": 3.0
+          },
+          {
+            "finding_id": "customer-001",
+            "title": "Significant Drop in Search Relevance for Anonymous Users",
+            "user_impact": 10,
+            "business_value": 10,
+            "effort": 5,
+            "risk": 8,
+            "priority_score": 2.955
+          },
+          {
+            "finding_id": "metrics-002",
+            "title": "Primary KPI: Search Click-Through Rate (CTR)",
+            "user_impact": 7,
+            "business_value": 8,
+            "effort": 4,
+            "risk": 6,
+            "priority_score": 2.853
+          },
+          {
+            "finding_id": "requirements-009",
+            "title": "Conduct User Feedback Collection",
+            "user_impact": 3,
+            "business_value": 3,
+            "effort": 2,
+            "risk": 2,
+            "priority_score": 2.786
+          }
+        ]
+      }
+    },
+    {
+      "id": "lead_pm-003",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Cross-Agent Conflict Resolution Report",
+      "description": "Resolved 4 conflicts between agent findings. requirements-010 vs risk-002: Implementing security measures for search queries may conflict with potential PII handling issues raised by the recent deployment.; customer-001 vs metrics-001: The significant drop in search relevance for anonymous users contradicts the goal of improving the Search Relevance Score as a North Star metric.; customer-002 vs metrics-003: Increased support ticket volume due to irrelevant results suggests high session abandonment rates, which contradicts the goal of improving user engagement metrics.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "requirements-010",
+          "source_type": "doc",
+          "excerpt": "Implementing security measures for search queries may conflict with potential PII handling issues raised by the recent deployment.",
+          "url": null
+        },
+        {
+          "source_id": "customer-001",
+          "source_type": "doc",
+          "excerpt": "The significant drop in search relevance for anonymous users contradicts the goal of improving the Search Relevance Score as a North Star metric.",
+          "url": null
+        },
+        {
+          "source_id": "customer-002",
+          "source_type": "doc",
+          "excerpt": "Increased support ticket volume due to irrelevant results suggests high session abandonment rates, which contradicts the goal of improving user engagement metrics.",
+          "url": null
+        },
+        {
+          "source_id": "feasibility-002",
+          "source_type": "doc",
+          "excerpt": "The dependency on a feature flag for rollback conflicts with the need for search latency optimization, which requires immediate action.",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "conflicts",
+        "meta"
+      ],
+      "metadata": {
+        "conflicts": [
+          {
+            "finding_a": "requirements-010",
+            "finding_b": "risk-002",
+            "description": "Implementing security measures for search queries may conflict with potential PII handling issues raised by the recent deployment.",
+            "resolution": "Conduct a thorough audit of the search query handling process to ensure compliance with privacy regulations while implementing security measures.",
+            "reasoning": "Security measures must be aligned with privacy compliance to protect user data, especially for anonymous users."
+          },
+          {
+            "finding_a": "customer-001",
+            "finding_b": "metrics-001",
+            "description": "The significant drop in search relevance for anonymous users contradicts the goal of improving the Search Relevance Score as a North Star metric.",
+            "resolution": "Prioritize addressing the drop in search relevance for anonymous users by refining the ranking algorithm before focusing on overall metrics.",
+            "reasoning": "Improving user experience for a significant segment is essential for achieving the North Star metric."
+          },
+          {
+            "finding_a": "customer-002",
+            "finding_b": "metrics-003",
+            "description": "Increased support ticket volume due to irrelevant results suggests high session abandonment rates, which contradicts the goal of improving user engagement metrics.",
+            "resolution": "Implement immediate fixes to the ranking algorithm to reduce irrelevant results, thereby decreasing support tickets and improving session retention.",
+            "reasoning": "Addressing user dissatisfaction directly impacts engagement metrics positively."
+          },
+          {
+            "finding_a": "feasibility-002",
+            "finding_b": "feasibility-004",
+            "description": "The dependency on a feature flag for rollback conflicts with the need for search latency optimization, which requires immediate action.",
+            "resolution": "Decouple the feature flag dependency from the optimization process to allow for immediate performance improvements while planning for rollback.",
+            "reasoning": "Performance issues must be addressed promptly, and dependencies should not hinder necessary optimizations."
+          }
+        ]
+      }
+    }
+  ],
+  "summary": "Consolidated 34 findings into 22 unique items. Removed 12 duplicates, resolved 4 conflicts. Top priority: North Star Metric: Search Relevance Score.",
+  "errors": []
+}

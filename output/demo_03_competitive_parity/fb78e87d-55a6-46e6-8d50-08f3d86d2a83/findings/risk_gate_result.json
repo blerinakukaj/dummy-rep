@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "blockers": [
+    "BLOCKED: Risk agent flagged as blocker \u2014 Authentication Weakness Detected [risk-001]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 Compliance Risk Identified [risk-002]"
+  ],
+  "warnings": []
+}

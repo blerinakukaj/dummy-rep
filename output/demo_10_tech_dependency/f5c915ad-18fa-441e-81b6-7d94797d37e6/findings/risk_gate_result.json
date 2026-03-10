@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "blockers": [
+    "BLOCKED: Risk agent flagged as blocker \u2014 End-of-Life Apache Kafka Migration Risk [risk-001]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 Vendor Lock-in Risk with ETL SDK [risk-002]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 Deprecated Apache Kafka Migration Risk [risk-004]"
+  ],
+  "warnings": []
+}

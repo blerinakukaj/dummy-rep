@@ -1,0 +1,509 @@
+{
+  "evidence_index": {
+    "DOC-002": [
+      "intake-001",
+      "intake-002",
+      "intake-004",
+      "intake-005",
+      "customer-001",
+      "customer-002",
+      "customer-003",
+      "customer-004",
+      "customer-005",
+      "risk-001",
+      "risk-004"
+    ],
+    "DOC-001": [
+      "intake-002",
+      "intake-003",
+      "intake-004",
+      "intake-005",
+      "competitive-001",
+      "competitive-002",
+      "competitive-003",
+      "competitive-004",
+      "risk-005"
+    ],
+    "NOTIFY-101": [
+      "intake-002",
+      "customer-001",
+      "feasibility-001",
+      "requirements-001"
+    ],
+    "NOTIFY-104": [
+      "intake-003",
+      "customer-004",
+      "feasibility-004",
+      "requirements-004"
+    ],
+    "NOTIFY-103": [
+      "customer-003",
+      "metrics-006",
+      "feasibility-003",
+      "requirements-003"
+    ],
+    "DOC-003": [
+      "metrics-001",
+      "metrics-002",
+      "metrics-003",
+      "metrics-004",
+      "metrics-005",
+      "metrics-007"
+    ],
+    "NOTIFY-102": [
+      "feasibility-002",
+      "requirements-002",
+      "risk-002"
+    ],
+    "NOTIFY-105": [
+      "feasibility-005",
+      "requirements-005",
+      "risk-003"
+    ],
+    "metrics-007": [
+      "requirements-006"
+    ],
+    "customer-005": [
+      "requirements-007"
+    ],
+    "metrics-006": [
+      "requirements-008",
+      "requirements-010"
+    ],
+    "metrics-005": [
+      "requirements-009"
+    ]
+  },
+  "dedup_log": [
+    {
+      "cluster": [
+        "intake-001",
+        "risk-001"
+      ],
+      "kept": "intake-001",
+      "removed": [
+        "risk-001"
+      ],
+      "reason": "Both describe potential privacy risks related to PII handling."
+    },
+    {
+      "cluster": [
+        "intake-002",
+        "risk-002"
+      ],
+      "kept": "risk-002",
+      "removed": [
+        "intake-002"
+      ],
+      "reason": "Both address the critical issue of notification delivery failures on Android 14 devices."
+    },
+    {
+      "cluster": [
+        "intake-004",
+        "customer-005",
+        "risk-004",
+        "requirements-007"
+      ],
+      "kept": "requirements-007",
+      "removed": [
+        "intake-004",
+        "customer-005",
+        "risk-004"
+      ],
+      "reason": "All findings highlight accessibility issues with the notification center, particularly for users with disabilities."
+    },
+    {
+      "cluster": [
+        "intake-005",
+        "risk-005"
+      ],
+      "kept": "intake-005",
+      "removed": [
+        "risk-005"
+      ],
+      "reason": "Both findings discuss compliance risks related to data handling practices."
+    },
+    {
+      "cluster": [
+        "metrics-004",
+        "requirements-006"
+      ],
+      "kept": "metrics-004",
+      "removed": [
+        "requirements-006"
+      ],
+      "reason": "Both findings relate to the need for A/B testing to improve notification engagement metrics."
+    },
+    {
+      "cluster": [
+        "customer-001",
+        "requirements-001"
+      ],
+      "kept": "customer-001",
+      "removed": [
+        "requirements-001"
+      ],
+      "reason": "Both findings emphasize the need for a notification priority system to manage critical and routine notifications."
+    },
+    {
+      "cluster": [
+        "customer-003",
+        "requirements-003"
+      ],
+      "kept": "customer-003",
+      "removed": [
+        "requirements-003"
+      ],
+      "reason": "Both findings indicate a preference for batching low-priority notifications into a digest format."
+    },
+    {
+      "cluster": [
+        "feasibility-002",
+        "requirements-002"
+      ],
+      "kept": "feasibility-002",
+      "removed": [
+        "requirements-002"
+      ],
+      "reason": "Both findings address the issue of notification delivery failures on Android 14 devices."
+    },
+    {
+      "cluster": [
+        "feasibility-005",
+        "risk-003"
+      ],
+      "kept": "feasibility-005",
+      "removed": [
+        "risk-003"
+      ],
+      "reason": "Both findings discuss the risks associated with reducing notification delivery latency."
+    }
+  ],
+  "ranked_findings": [
+    {
+      "finding_id": "metrics-002",
+      "title": "Primary KPI: Notification Click-Through Rate (CTR)",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 3,
+      "risk": 5,
+      "priority_score": 3.593
+    },
+    {
+      "finding_id": "metrics-003",
+      "title": "Primary KPI: Unsubscribe Rate",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 3,
+      "risk": 5,
+      "priority_score": 3.593
+    },
+    {
+      "finding_id": "metrics-001",
+      "title": "North Star Metric: User Engagement",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 4,
+      "risk": 7,
+      "priority_score": 3.324
+    },
+    {
+      "finding_id": "feasibility-004",
+      "title": "User Preference Page for Notification Categories",
+      "user_impact": 8,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 5,
+      "priority_score": 2.971
+    },
+    {
+      "finding_id": "requirements-004",
+      "title": "Add User Preference Page for Notification Categories",
+      "user_impact": 8,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 5,
+      "priority_score": 2.971
+    },
+    {
+      "finding_id": "metrics-006",
+      "title": "Measurement Gap: User Preference Data",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.895
+    },
+    {
+      "finding_id": "requirements-009",
+      "title": "Monitor Notification Delivery Performance",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.895
+    },
+    {
+      "finding_id": "customer-001",
+      "title": "Need for Notification Priority Levels",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 2.882
+    },
+    {
+      "finding_id": "competitive-001",
+      "title": "Competitor Landscape Overview",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 2.853
+    },
+    {
+      "finding_id": "competitive-003",
+      "title": "Differentiation Opportunity in Notification Customization",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 5,
+      "priority_score": 2.821
+    },
+    {
+      "finding_id": "customer-003",
+      "title": "Need for Notification Digest Feature",
+      "user_impact": 8,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.737
+    },
+    {
+      "finding_id": "customer-004",
+      "title": "Granular Notification Preferences Needed",
+      "user_impact": 8,
+      "business_value": 8,
+      "effort": 6,
+      "risk": 5,
+      "priority_score": 2.667
+    },
+    {
+      "finding_id": "feasibility-001",
+      "title": "Notification Priority Levels Implementation",
+      "user_impact": 8,
+      "business_value": 8,
+      "effort": 6,
+      "risk": 5,
+      "priority_score": 2.667
+    },
+    {
+      "finding_id": "requirements-007",
+      "title": "Improve Accessibility of Notification Center",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.562
+    },
+    {
+      "finding_id": "metrics-004",
+      "title": "Guardrail Metric: Average Notifications per User",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 4,
+      "priority_score": 2.536
+    },
+    {
+      "finding_id": "requirements-008",
+      "title": "Collect User Feedback on Notification Preferences",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 4,
+      "priority_score": 2.536
+    },
+    {
+      "finding_id": "requirements-010",
+      "title": "Enhance Notification Engagement Metrics",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 4,
+      "priority_score": 2.536
+    },
+    {
+      "finding_id": "metrics-007",
+      "title": "Experiment Opportunity: Notification Format A/B Testing",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 6,
+      "risk": 5,
+      "priority_score": 2.487
+    },
+    {
+      "finding_id": "competitive-002",
+      "title": "Feature Parity Gap with Competitors",
+      "user_impact": 5,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 4,
+      "priority_score": 2.406
+    },
+    {
+      "finding_id": "metrics-005",
+      "title": "Guardrail Metric: 95th Percentile Delivery Latency",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 7,
+      "risk": 6,
+      "priority_score": 2.391
+    },
+    {
+      "finding_id": "feasibility-003",
+      "title": "ML-Based Notification Batching Implementation",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 7,
+      "risk": 6,
+      "priority_score": 2.391
+    },
+    {
+      "finding_id": "requirements-005",
+      "title": "Reduce Notification Delivery Latency",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 7,
+      "risk": 6,
+      "priority_score": 2.391
+    },
+    {
+      "finding_id": "customer-002",
+      "title": "Demand for Intelligent Notification Filtering",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 5,
+      "risk": 4,
+      "priority_score": 2.219
+    },
+    {
+      "finding_id": "competitive-004",
+      "title": "Emerging Threat from Notifai",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 7,
+      "risk": 8,
+      "priority_score": 2.115
+    },
+    {
+      "finding_id": "feasibility-002",
+      "title": "Android 14 Notification Delivery Failure",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 8,
+      "risk": 9,
+      "priority_score": 2.085
+    },
+    {
+      "finding_id": "risk-002",
+      "title": "Critical Android 14 Notification Delivery Failure",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 8,
+      "risk": 9,
+      "priority_score": 2.085
+    },
+    {
+      "finding_id": "feasibility-005",
+      "title": "Notification Delivery Latency Reduction",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 8,
+      "risk": 7,
+      "priority_score": 2.075
+    },
+    {
+      "finding_id": "intake-003",
+      "title": "Risk hotspot detected: platform",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 5,
+      "risk": 5,
+      "priority_score": 2.029
+    },
+    {
+      "finding_id": "intake-005",
+      "title": "Risk hotspot detected: compliance",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 6,
+      "risk": 5,
+      "priority_score": 1.821
+    },
+    {
+      "finding_id": "intake-001",
+      "title": "Risk hotspot detected: privacy",
+      "user_impact": 2,
+      "business_value": 3,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 1.333
+    }
+  ],
+  "conflicts": [
+    {
+      "finding_a": "risk-002",
+      "finding_b": "feasibility-002",
+      "description": "Critical risk of notification delivery failure on Android 14 devices conflicts with the need for reliable notification delivery.",
+      "resolution": "Prioritize fixing the Android 14 notification delivery issue before implementing new features or changes.",
+      "reasoning": "Ensuring reliable delivery is essential for user engagement and must take precedence over feature development."
+    },
+    {
+      "finding_a": "intake-001",
+      "finding_b": "requirements-008",
+      "description": "Privacy risk detected in user data collection conflicts with the requirement to collect user feedback on notification preferences.",
+      "resolution": "Implement strict data anonymization and user consent protocols to ensure compliance while collecting feedback.",
+      "reasoning": "User feedback is essential for improvement, but it must be collected in a way that respects privacy regulations."
+    },
+    {
+      "finding_a": "metrics-006",
+      "finding_b": "requirements-008",
+      "description": "Gap in collecting user preference data conflicts with the requirement to collect user feedback on notification preferences.",
+      "resolution": "Develop a structured approach to gather user preferences while ensuring compliance with privacy standards.",
+      "reasoning": "Addressing the measurement gap is crucial for optimizing notifications, but it must be done in a compliant manner."
+    }
+  ],
+  "consolidated_finding_ids": [
+    "intake-001",
+    "intake-003",
+    "intake-005",
+    "competitive-001",
+    "competitive-002",
+    "competitive-003",
+    "competitive-004",
+    "customer-001",
+    "customer-002",
+    "customer-003",
+    "customer-004",
+    "metrics-001",
+    "metrics-002",
+    "metrics-003",
+    "metrics-004",
+    "metrics-005",
+    "metrics-006",
+    "metrics-007",
+    "feasibility-001",
+    "feasibility-002",
+    "feasibility-003",
+    "feasibility-004",
+    "feasibility-005",
+    "requirements-004",
+    "requirements-005",
+    "requirements-007",
+    "requirements-008",
+    "requirements-009",
+    "requirements-010",
+    "risk-002"
+  ]
+}

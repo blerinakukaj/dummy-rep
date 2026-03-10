@@ -1,0 +1,143 @@
+{
+  "agent_id": "competitive",
+  "agent_name": "Competitive & Positioning Agent",
+  "run_id": "a719360e-4b71-47c1-9acb-888e9116d263",
+  "timestamp": "2026-03-06T12:33:49.231496Z",
+  "findings": [
+    {
+      "id": "competitive-001",
+      "agent_id": "competitive",
+      "type": "insight",
+      "title": "PushFlow's Strong Delivery Metrics",
+      "description": "PushFlow boasts a 99.7% delivery rate and has recently introduced AI-powered send-time optimization, which enhances its competitive edge in notification delivery effectiveness.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "PushFlow's delivery metrics are accurate and reflect user experience."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Excellent mobile reliability (99.7% delivery rate), real-time delivery analytics dashboard, built-in A/B testing for notification copy.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Consider enhancing SmartNotify's delivery metrics and analytics features to compete effectively."
+      ],
+      "tags": [
+        "delivery",
+        "analytics"
+      ],
+      "metadata": {
+        "competitor": "PushFlow",
+        "feature": "delivery rate"
+      }
+    },
+    {
+      "id": "competitive-002",
+      "agent_id": "competitive",
+      "type": "gap",
+      "title": "Lack of Notification Batching in Competitors",
+      "description": "While PushFlow lacks a notification batching feature, SmartNotify could leverage this gap by emphasizing its ability to reduce notification fatigue through batching.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [
+        "Notification batching is a desirable feature for users experiencing notification fatigue."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "No notification batching/digest feature.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Highlight SmartNotify's batching capabilities in marketing materials."
+      ],
+      "tags": [
+        "feature gap",
+        "notification batching"
+      ],
+      "metadata": {
+        "competitor": "PushFlow",
+        "feature": "notification batching"
+      }
+    },
+    {
+      "id": "competitive-003",
+      "agent_id": "competitive",
+      "type": "risk",
+      "title": "Emerging Threat from Notifai",
+      "description": "Notifai, an AI-native product, poses a potential threat due to its focus on ML prioritization and aggressive hiring of ML engineers, which could lead to rapid advancements.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Notifai will successfully improve its reliability and feature set in the near future."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Could become a serious threat in 12-18 months if they solve reliability.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Monitor Notifai's development closely and consider strategic partnerships or enhancements to maintain competitive advantage."
+      ],
+      "tags": [
+        "emerging threat",
+        "AI"
+      ],
+      "metadata": {
+        "competitor": "Notifai",
+        "feature": "ML prioritization"
+      }
+    },
+    {
+      "id": "competitive-004",
+      "agent_id": "competitive",
+      "type": "recommendation",
+      "title": "Address Pricing Concerns",
+      "description": "Pricing is a significant concern across multiple sources, indicating that SmartNotify should evaluate its pricing strategy to ensure competitiveness, especially against higher-priced competitors like PushFlow.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Price sensitivity among target customers is high."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Pricing is 40% higher than SmartNotify at scale.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Detected pricing risk keywords.",
+          "url": null
+        },
+        {
+          "source_id": "NOTIFY-101",
+          "source_type": "doc",
+          "excerpt": "Pricing concerns noted in customer feedback.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct a pricing analysis and consider promotional strategies to attract price-sensitive customers."
+      ],
+      "tags": [
+        "pricing",
+        "strategy"
+      ],
+      "metadata": {}
+    }
+  ],
+  "summary": "The competitive landscape for SmartNotify reveals significant strengths and weaknesses among competitors. PushFlow leads in delivery metrics, while gaps exist in notification batching that SmartNotify can exploit. Notifai represents an emerging threat with its AI focus, necessitating vigilance. Pricing concerns are critical and should be addressed to maintain competitiveness.",
+  "errors": []
+}

@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "blockers": [
+    "BLOCKED: Risk agent flagged as blocker \u2014 Critical Push Notification Delivery Failure on Android 14 [risk-002]"
+  ],
+  "warnings": [
+    "Legal review required for PII/privacy \u2014 Potential PII Handling Risk [risk-001]"
+  ]
+}

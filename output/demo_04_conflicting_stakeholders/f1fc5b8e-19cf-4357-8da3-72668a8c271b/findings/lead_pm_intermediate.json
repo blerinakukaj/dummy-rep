@@ -1,0 +1,569 @@
+{
+  "evidence_index": {
+    "CUST-302": [
+      "intake-001",
+      "intake-002",
+      "intake-003",
+      "competitive-004",
+      "customer-002",
+      "risk-001",
+      "risk-002"
+    ],
+    "GROW-101": [
+      "intake-001",
+      "intake-002",
+      "customer-001",
+      "metrics-005",
+      "feasibility-001",
+      "requirements-001"
+    ],
+    "PLAT-201": [
+      "intake-001",
+      "intake-002",
+      "intake-003",
+      "feasibility-002",
+      "requirements-003",
+      "risk-003"
+    ],
+    "CUST-301": [
+      "intake-002",
+      "customer-002",
+      "feasibility-005",
+      "requirements-005",
+      "risk-004"
+    ],
+    "DOC-001": [
+      "intake-002",
+      "competitive-001",
+      "competitive-002",
+      "competitive-003"
+    ],
+    "DOC-002": [
+      "intake-002",
+      "intake-004",
+      "risk-005"
+    ],
+    "DOC-003": [
+      "intake-002",
+      "intake-003",
+      "metrics-001",
+      "metrics-002",
+      "metrics-003",
+      "metrics-004"
+    ],
+    "DOC-004": [
+      "intake-002",
+      "intake-003",
+      "intake-005",
+      "customer-001",
+      "risk-006"
+    ],
+    "PLAT-202": [
+      "intake-002",
+      "feasibility-003",
+      "requirements-002"
+    ],
+    "PLAT-203": [
+      "intake-002",
+      "intake-003",
+      "feasibility-004",
+      "requirements-007"
+    ],
+    "Interview 1": [
+      "customer-001"
+    ],
+    "Interview 2": [
+      "customer-002",
+      "customer-003"
+    ],
+    "Interview 3": [
+      "customer-004",
+      "customer-004"
+    ],
+    "GROW-103": [
+      "feasibility-006",
+      "requirements-004"
+    ],
+    "GROW-102": [
+      "feasibility-007"
+    ],
+    "metrics-004": [
+      "requirements-006"
+    ],
+    "customer-003": [
+      "requirements-008"
+    ],
+    "metrics-003": [
+      "requirements-009"
+    ],
+    "metrics-005": [
+      "requirements-010"
+    ]
+  },
+  "dedup_log": [
+    {
+      "cluster": [
+        "intake-001",
+        "risk-001"
+      ],
+      "kept": "intake-001",
+      "removed": [
+        "risk-001"
+      ],
+      "reason": "Both describe risks related to authentication vulnerabilities."
+    },
+    {
+      "cluster": [
+        "intake-002",
+        "requirements-004"
+      ],
+      "kept": "requirements-004",
+      "removed": [
+        "intake-002"
+      ],
+      "reason": "Both address the need for implementing auto-apply coupon features to reduce cart abandonment."
+    },
+    {
+      "cluster": [
+        "intake-003",
+        "requirements-003"
+      ],
+      "kept": "requirements-003",
+      "removed": [
+        "intake-003"
+      ],
+      "reason": "Both highlight the need to reduce checkout API latency to enhance user experience."
+    },
+    {
+      "cluster": [
+        "intake-004",
+        "requirements-005"
+      ],
+      "kept": "requirements-005",
+      "removed": [
+        "intake-004"
+      ],
+      "reason": "Both discuss accessibility issues that may hinder users with disabilities."
+    },
+    {
+      "cluster": [
+        "intake-005",
+        "requirements-002"
+      ],
+      "kept": "requirements-002",
+      "removed": [
+        "intake-005"
+      ],
+      "reason": "Both focus on addressing payment retry reliability to prevent double charging."
+    },
+    {
+      "cluster": [
+        "competitive-001",
+        "customer-001"
+      ],
+      "kept": "competitive-001",
+      "removed": [
+        "customer-001"
+      ],
+      "reason": "Both emphasize the need for a one-click purchase feature to streamline the checkout process."
+    },
+    {
+      "cluster": [
+        "competitive-004",
+        "risk-002"
+      ],
+      "kept": "competitive-004",
+      "removed": [
+        "risk-002"
+      ],
+      "reason": "Both identify high platform risks that could affect performance and reliability."
+    },
+    {
+      "cluster": [
+        "customer-002",
+        "risk-004"
+      ],
+      "kept": "customer-002",
+      "removed": [
+        "risk-004"
+      ],
+      "reason": "Both address critical reliability issues impacting user trust and potential loss of sales."
+    },
+    {
+      "cluster": [
+        "feasibility-003",
+        "requirements-002"
+      ],
+      "kept": "feasibility-003",
+      "removed": [
+        "requirements-002"
+      ],
+      "reason": "Both emphasize the need to fix payment retry reliability to prevent double charges."
+    },
+    {
+      "cluster": [
+        "feasibility-005",
+        "risk-004"
+      ],
+      "kept": "feasibility-005",
+      "removed": [
+        "risk-004"
+      ],
+      "reason": "Both highlight the urgency of addressing mobile checkout crashes to prevent user frustration."
+    }
+  ],
+  "ranked_findings": [
+    {
+      "finding_id": "metrics-002",
+      "title": "Primary KPI: Cart Abandonment Rate",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 4.042
+    },
+    {
+      "finding_id": "metrics-005",
+      "title": "Experiment Opportunity: One-Click Purchase Flow",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 4.042
+    },
+    {
+      "finding_id": "metrics-001",
+      "title": "North Star Metric: Checkout Conversion Rate",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 3.548
+    },
+    {
+      "finding_id": "customer-004",
+      "title": "B2B Buyers Prioritize Reliability Over Features",
+      "user_impact": 6,
+      "business_value": 7,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 3.5
+    },
+    {
+      "finding_id": "feasibility-006",
+      "title": "Auto-apply best coupon feature for V1",
+      "user_impact": 6,
+      "business_value": 7,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 3.5
+    },
+    {
+      "finding_id": "requirements-006",
+      "title": "Collect User Feedback on Checkout Experience",
+      "user_impact": 6,
+      "business_value": 7,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 3.5
+    },
+    {
+      "finding_id": "customer-003",
+      "title": "User Concerns Over Auto-Apply Coupons",
+      "user_impact": 4,
+      "business_value": 5,
+      "effort": 2,
+      "risk": 3,
+      "priority_score": 3.412
+    },
+    {
+      "finding_id": "feasibility-007",
+      "title": "Implement social proof badges in V2",
+      "user_impact": 4,
+      "business_value": 5,
+      "effort": 2,
+      "risk": 3,
+      "priority_score": 3.412
+    },
+    {
+      "finding_id": "requirements-008",
+      "title": "Improve Transparency in Coupon Application",
+      "user_impact": 4,
+      "business_value": 5,
+      "effort": 2,
+      "risk": 3,
+      "priority_score": 3.412
+    },
+    {
+      "finding_id": "requirements-004",
+      "title": "Implement Auto-Apply Best Coupon",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 3.129
+    },
+    {
+      "finding_id": "requirements-010",
+      "title": "A/B Testing for Checkout Features",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 3.129
+    },
+    {
+      "finding_id": "competitive-003",
+      "title": "Implement Auto-Coupon Feature",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.958
+    },
+    {
+      "finding_id": "requirements-001",
+      "title": "One-Click Purchase Feature",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.895
+    },
+    {
+      "finding_id": "competitive-002",
+      "title": "Competitive Strength in Payment Reliability",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 2.853
+    },
+    {
+      "finding_id": "feasibility-004",
+      "title": "Migration to new payment gateway as a prerequisite",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 2.853
+    },
+    {
+      "finding_id": "competitive-001",
+      "title": "Lack of One-Click Checkout Feature",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 5,
+      "priority_score": 2.821
+    },
+    {
+      "finding_id": "feasibility-001",
+      "title": "One-click purchase flow dependency on payment method storage",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 5,
+      "priority_score": 2.821
+    },
+    {
+      "finding_id": "metrics-003",
+      "title": "Guardrail Metric: Payment Failure Rate",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 5,
+      "risk": 8,
+      "priority_score": 2.795
+    },
+    {
+      "finding_id": "feasibility-003",
+      "title": "Fix payment retry reliability before new features",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 5,
+      "risk": 8,
+      "priority_score": 2.795
+    },
+    {
+      "finding_id": "metrics-004",
+      "title": "Measurement Gap: Checkout Experience Feedback",
+      "user_impact": 6,
+      "business_value": 7,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.71
+    },
+    {
+      "finding_id": "customer-002",
+      "title": "Critical Reliability Issues Impacting Trust",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 5,
+      "risk": 8,
+      "priority_score": 2.659
+    },
+    {
+      "finding_id": "requirements-003",
+      "title": "Reduce Checkout API Latency",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.562
+    },
+    {
+      "finding_id": "requirements-009",
+      "title": "Monitor Payment Failure Rate",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.562
+    },
+    {
+      "finding_id": "requirements-007",
+      "title": "Migrate to New Payment Gateway",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.553
+    },
+    {
+      "finding_id": "feasibility-005",
+      "title": "Mobile checkout crashes need urgent attention",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 6,
+      "risk": 9,
+      "priority_score": 2.412
+    },
+    {
+      "finding_id": "intake-001",
+      "title": "Risk hotspot detected: auth",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 7,
+      "priority_score": 2.366
+    },
+    {
+      "finding_id": "risk-005",
+      "title": "Accessibility Risk Identified",
+      "user_impact": 2,
+      "business_value": 3,
+      "effort": 2,
+      "risk": 2,
+      "priority_score": 2.286
+    },
+    {
+      "finding_id": "competitive-004",
+      "title": "High Platform Risk Identified",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 7,
+      "risk": 9,
+      "priority_score": 2.236
+    },
+    {
+      "finding_id": "feasibility-002",
+      "title": "Checkout API latency impacting feature rollout",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 7,
+      "risk": 9,
+      "priority_score": 2.236
+    },
+    {
+      "finding_id": "requirements-005",
+      "title": "Address Checkout Crashes on Mobile",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 7,
+      "risk": 9,
+      "priority_score": 2.236
+    },
+    {
+      "finding_id": "risk-003",
+      "title": "Checkout API Latency Exceeds SLO",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 7,
+      "risk": 9,
+      "priority_score": 2.236
+    },
+    {
+      "finding_id": "risk-006",
+      "title": "Compliance Risk Identified",
+      "user_impact": 3,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 3,
+      "priority_score": 2.143
+    }
+  ],
+  "conflicts": [
+    {
+      "finding_a": "competitive-001",
+      "finding_b": "feasibility-005",
+      "description": "The implementation of the one-click checkout feature is hindered by critical mobile checkout crashes that need urgent attention.",
+      "resolution": "Prioritize fixing mobile checkout crashes before proceeding with the one-click checkout feature implementation.",
+      "reasoning": "User trust and functionality must be ensured before introducing new features that could exacerbate existing issues."
+    },
+    {
+      "finding_a": "feasibility-003",
+      "finding_b": "requirements-004",
+      "description": "The recommendation to fix payment retry reliability is in conflict with the requirement to implement auto-apply best coupon, as both are critical and cannot be addressed simultaneously.",
+      "resolution": "Address payment retry reliability first, then proceed with implementing the auto-apply best coupon feature.",
+      "reasoning": "Ensuring payment reliability is paramount to maintaining user trust, which must be prioritized over enhancing user experience with coupons."
+    },
+    {
+      "finding_a": "feasibility-004",
+      "finding_b": "requirements-007",
+      "description": "The migration to a new payment gateway is a prerequisite that will block feature development, including the implementation of the one-click purchase feature.",
+      "resolution": "Plan the migration to the new payment gateway first, ensuring that it is completed before starting on the one-click purchase feature.",
+      "reasoning": "The migration is critical for reducing transaction fees and improving support, which will ultimately benefit the one-click feature's performance."
+    },
+    {
+      "finding_a": "risk-006",
+      "finding_b": "competitive-001",
+      "description": "Potential compliance issues with data handling practices may hinder the implementation of the one-click checkout feature, which requires secure handling of user data.",
+      "resolution": "Conduct a compliance audit and address any identified issues before implementing the one-click checkout feature.",
+      "reasoning": "Compliance with data protection regulations is critical and must be ensured to avoid legal repercussions and maintain user trust."
+    }
+  ],
+  "consolidated_finding_ids": [
+    "intake-001",
+    "competitive-001",
+    "competitive-002",
+    "competitive-003",
+    "competitive-004",
+    "customer-002",
+    "customer-003",
+    "customer-004",
+    "metrics-001",
+    "metrics-002",
+    "metrics-003",
+    "metrics-004",
+    "metrics-005",
+    "feasibility-001",
+    "feasibility-002",
+    "feasibility-003",
+    "feasibility-004",
+    "feasibility-005",
+    "feasibility-006",
+    "feasibility-007",
+    "requirements-001",
+    "requirements-003",
+    "requirements-004",
+    "requirements-005",
+    "requirements-006",
+    "requirements-007",
+    "requirements-008",
+    "requirements-009",
+    "requirements-010",
+    "risk-003",
+    "risk-005",
+    "risk-006"
+  ]
+}

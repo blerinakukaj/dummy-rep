@@ -1,0 +1,201 @@
+{
+  "agent_id": "customer",
+  "agent_name": "Customer Insights Agent",
+  "run_id": "d9e71837-04af-4aaf-b3b0-d57cdfff8045",
+  "timestamp": "2026-03-06T12:26:48.521613Z",
+  "findings": [
+    {
+      "id": "customer-001",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Critical Need for Real-Time Co-Editing",
+      "description": "Enterprise customers are urgently requesting simultaneous editing capabilities due to a competitor's recent launch. This feature is seen as essential to retain current customers and prevent churn.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Enterprise customers prioritize real-time collaboration features.",
+        "Competitor offerings directly influence customer retention."
+      ],
+      "evidence": [
+        {
+          "source_id": "COLLAB-302",
+          "source_type": "ticket",
+          "excerpt": "Three enterprise accounts have submitted formal feature requests for simultaneous multi-user editing.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "note",
+          "excerpt": "Three enterprise customers have formally escalated with churn risk language.",
+          "url": null
+        },
+        {
+          "source_id": "COLLAB-301",
+          "source_type": "ticket",
+          "excerpt": "Competitor X launched live co-editing... Sales has fielded 14 inbound inquiries asking when CollabDocs will support simultaneous editing.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Prioritize the development of real-time co-editing features.",
+        "Communicate a clear roadmap to enterprise customers."
+      ],
+      "tags": [
+        "collaboration",
+        "enterprise",
+        "churn-risk"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-002",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "User Frustration with Document Locking",
+      "description": "The current document locking model is causing significant user frustration, leading to increased support tickets and negative feedback in NPS surveys. Users are blocked from editing due to the locking mechanism, which is seen as outdated.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Users expect modern document collaboration tools to allow multiple simultaneous editors.",
+        "Frustration with locking will lead to churn."
+      ],
+      "evidence": [
+        {
+          "source_id": "COLLAB-303",
+          "source_type": "ticket",
+          "excerpt": "Support receives ~40 tickets per week from users who are blocked because a colleague has a document open.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "note",
+          "excerpt": "NPS for the collaboration workflow dropped 12 points... Competitor mention rate in support tickets has risen to 28%.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "note",
+          "excerpt": "The document locking is a dealbreaker.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement a more flexible editing model to reduce locking issues.",
+        "Explore interim solutions to alleviate user frustration."
+      ],
+      "tags": [
+        "ux",
+        "collaboration",
+        "user-feedback"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-003",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Need for Presence Indicators",
+      "description": "Users have expressed a strong desire for presence indicators to see who is currently viewing or editing a document. This feature would reduce duplicate work and improve collaboration efficiency.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Users need visibility into document activity to collaborate effectively.",
+        "Presence indicators will enhance user satisfaction."
+      ],
+      "evidence": [
+        {
+          "source_id": "COLLAB-304",
+          "source_type": "ticket",
+          "excerpt": "Users have no visibility into who else is currently viewing or editing a document.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Develop and implement presence indicators as a priority feature.",
+        "Consider user testing to refine the design of this feature."
+      ],
+      "tags": [
+        "collaboration",
+        "feature-request",
+        "ux"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-004",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Risk of Churn Due to Competitive Pressure",
+      "description": "The recent launch of competitor features has heightened the risk of churn among enterprise customers. Several accounts have indicated they are evaluating alternatives, emphasizing the need for rapid feature development.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Competitor features directly influence customer retention.",
+        "Rapid response to competitive threats is necessary to maintain market position."
+      ],
+      "evidence": [
+        {
+          "source_id": "COLLAB-302",
+          "source_type": "ticket",
+          "excerpt": "Customer Success has escalated to Product with a 60-day window before formal churn conversations begin.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "note",
+          "excerpt": "If you can commit to a Q1 2026 delivery of co-editing we will stay.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Accelerate the development timeline for real-time co-editing features.",
+        "Communicate progress updates to at-risk customers."
+      ],
+      "tags": [
+        "churn-risk",
+        "competitive-pressure",
+        "enterprise"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-005",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Mobile Collaboration Experience Needs Improvement",
+      "description": "The mobile editing experience is currently inadequate for collaboration, causing frustration among users. This is particularly critical as mobile accounts for a significant portion of daily active users.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Mobile users expect a seamless collaboration experience.",
+        "Improving mobile functionality will enhance overall user satisfaction."
+      ],
+      "evidence": [
+        {
+          "source_id": "COLLAB-306",
+          "source_type": "ticket",
+          "excerpt": "Mobile editing support for collaboration lags significantly behind desktop.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "note",
+          "excerpt": "Mobile editing is practically unusable for collaboration.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Prioritize enhancements to the mobile editing experience.",
+        "Ensure real-time collaboration features are fully functional on mobile at launch."
+      ],
+      "tags": [
+        "mobile",
+        "collaboration",
+        "ux"
+      ],
+      "metadata": {}
+    }
+  ],
+  "summary": "The analysis reveals critical insights regarding the urgent need for real-time co-editing features due to competitive pressures, significant user frustration with the current document locking model, and the necessity for improved mobile collaboration experiences. Recommendations focus on accelerating feature development and addressing user pain points to mitigate churn risk and enhance overall satisfaction.",
+  "errors": []
+}

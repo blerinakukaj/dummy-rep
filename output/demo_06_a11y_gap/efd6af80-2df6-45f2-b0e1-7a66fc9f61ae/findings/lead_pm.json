@@ -1,0 +1,258 @@
+{
+  "agent_id": "lead_pm",
+  "agent_name": "Lead PM Agent",
+  "run_id": "efd6af80-2df6-45f2-b0e1-7a66fc9f61ae",
+  "timestamp": "2026-03-06T12:39:33.053167Z",
+  "findings": [
+    {
+      "id": "lead_pm-001",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Pipeline Consolidation Summary",
+      "description": "Consolidated 38 findings from 7 agents into 31 unique findings. Removed 7 duplicates. Identified 5 cross-agent conflicts.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "intake",
+          "source_type": "doc",
+          "excerpt": "Intake & Context Agent: 3 findings",
+          "url": null
+        },
+        {
+          "source_id": "customer",
+          "source_type": "doc",
+          "excerpt": "Customer Insights Agent: 4 findings",
+          "url": null
+        },
+        {
+          "source_id": "competitive",
+          "source_type": "doc",
+          "excerpt": "Competitive & Positioning Agent: 4 findings",
+          "url": null
+        },
+        {
+          "source_id": "metrics",
+          "source_type": "doc",
+          "excerpt": "Metrics & Analytics Agent: 6 findings",
+          "url": null
+        },
+        {
+          "source_id": "feasibility",
+          "source_type": "doc",
+          "excerpt": "Tech Feasibility & Delivery Agent: 6 findings",
+          "url": null
+        },
+        {
+          "source_id": "requirements",
+          "source_type": "doc",
+          "excerpt": "UX & Requirements Agent: 11 findings",
+          "url": null
+        },
+        {
+          "source_id": "risk",
+          "source_type": "doc",
+          "excerpt": "Risk/Privacy/Compliance Guardrails Agent: 4 findings",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "consolidation",
+        "meta"
+      ],
+      "metadata": {
+        "original_count": 38,
+        "deduped_count": 31,
+        "duplicates_removed": 7,
+        "conflicts_resolved": 5,
+        "evidence_sources": 11
+      }
+    },
+    {
+      "id": "lead_pm-002",
+      "agent_id": "lead_pm",
+      "type": "recommendation",
+      "title": "Top Priority Findings",
+      "description": "Highest priority items based on weighted scoring (user_impact×0.35 + business_value×0.30) / (effort×0.20 + risk×0.15): North Star Metric: Accessibility Compliance Rate (score=3.467); Color Contrast Issues Across UI Components (score=2.935); Primary KPI: Screen Reader Task Completion Rate (score=2.889); Primary KPI: Keyboard-Only Task Completion Rate (score=2.889); Accessibility Documentation Updates (score=2.786)",
+      "impact": "critical",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "metrics-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.467",
+          "url": null
+        },
+        {
+          "source_id": "customer-003",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.935",
+          "url": null
+        },
+        {
+          "source_id": "metrics-002",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.889",
+          "url": null
+        },
+        {
+          "source_id": "metrics-003",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.889",
+          "url": null
+        },
+        {
+          "source_id": "requirements-009",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.786",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "prioritization",
+        "meta"
+      ],
+      "metadata": {
+        "top_priorities": [
+          {
+            "finding_id": "metrics-001",
+            "title": "North Star Metric: Accessibility Compliance Rate",
+            "user_impact": 8,
+            "business_value": 8,
+            "effort": 3,
+            "risk": 6,
+            "priority_score": 3.467
+          },
+          {
+            "finding_id": "customer-003",
+            "title": "Color Contrast Issues Across UI Components",
+            "user_impact": 7,
+            "business_value": 7,
+            "effort": 4,
+            "risk": 5,
+            "priority_score": 2.935
+          },
+          {
+            "finding_id": "metrics-002",
+            "title": "Primary KPI: Screen Reader Task Completion Rate",
+            "user_impact": 6,
+            "business_value": 6,
+            "effort": 3,
+            "risk": 5,
+            "priority_score": 2.889
+          },
+          {
+            "finding_id": "metrics-003",
+            "title": "Primary KPI: Keyboard-Only Task Completion Rate",
+            "user_impact": 6,
+            "business_value": 6,
+            "effort": 3,
+            "risk": 5,
+            "priority_score": 2.889
+          },
+          {
+            "finding_id": "requirements-009",
+            "title": "Accessibility Documentation Updates",
+            "user_impact": 3,
+            "business_value": 3,
+            "effort": 2,
+            "risk": 2,
+            "priority_score": 2.786
+          }
+        ]
+      }
+    },
+    {
+      "id": "lead_pm-003",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Cross-Agent Conflict Resolution Report",
+      "description": "Resolved 5 conflicts between agent findings. feasibility-001 vs competitive-001: Significant accessibility gaps pose a high risk of non-compliance with WCAG 2.1 AA standards, which is a critical weakness compared to competitors.; requirements-005 vs feasibility-006: Creating a VPAT is essential for compliance and should be initiated after the MVP is completed, but the absence of a VPAT is a significant barrier for potential clients.; customer-001 vs requirements-001: The need for ARIA roles and keyboard support for visually impaired users is critical, yet existing gaps hinder navigation.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "feasibility-001",
+          "source_type": "doc",
+          "excerpt": "Significant accessibility gaps pose a high risk of non-compliance with WCAG 2.1 AA standards, which is a critical weakness compared to competitors.",
+          "url": null
+        },
+        {
+          "source_id": "requirements-005",
+          "source_type": "doc",
+          "excerpt": "Creating a VPAT is essential for compliance and should be initiated after the MVP is completed, but the absence of a VPAT is a significant barrier for potential clients.",
+          "url": null
+        },
+        {
+          "source_id": "customer-001",
+          "source_type": "doc",
+          "excerpt": "The need for ARIA roles and keyboard support for visually impaired users is critical, yet existing gaps hinder navigation.",
+          "url": null
+        },
+        {
+          "source_id": "customer-002",
+          "source_type": "doc",
+          "excerpt": "The lack of video accessibility features is critical for users with hearing impairments, yet implementation is not prioritized.",
+          "url": null
+        },
+        {
+          "source_id": "customer-003",
+          "source_type": "doc",
+          "excerpt": "Color contrast issues across UI components are high impact, but existing requirements to improve contrast may not be prioritized.",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "conflicts",
+        "meta"
+      ],
+      "metadata": {
+        "conflicts": [
+          {
+            "finding_a": "feasibility-001",
+            "finding_b": "competitive-001",
+            "description": "Significant accessibility gaps pose a high risk of non-compliance with WCAG 2.1 AA standards, which is a critical weakness compared to competitors.",
+            "resolution": "Prioritize immediate remediation of accessibility gaps to achieve compliance and enhance competitive positioning.",
+            "reasoning": "Compliance with accessibility standards is essential to mitigate risks and improve market competitiveness."
+          },
+          {
+            "finding_a": "requirements-005",
+            "finding_b": "feasibility-006",
+            "description": "Creating a VPAT is essential for compliance and should be initiated after the MVP is completed, but the absence of a VPAT is a significant barrier for potential clients.",
+            "resolution": "Accelerate the VPAT creation process to coincide with MVP development to ensure compliance and attract clients.",
+            "reasoning": "Immediate action on VPAT is necessary to address compliance needs and support procurement processes."
+          },
+          {
+            "finding_a": "customer-001",
+            "finding_b": "requirements-001",
+            "description": "The need for ARIA roles and keyboard support for visually impaired users is critical, yet existing gaps hinder navigation.",
+            "resolution": "Implement ARIA roles and keyboard support as a priority to resolve navigation issues for visually impaired users.",
+            "reasoning": "Addressing these requirements is essential to improve user experience and accessibility compliance."
+          },
+          {
+            "finding_a": "customer-002",
+            "finding_b": "requirements-002",
+            "description": "The lack of video accessibility features is critical for users with hearing impairments, yet implementation is not prioritized.",
+            "resolution": "Prioritize the implementation of video accessibility features, including captions and transcripts, to meet user needs.",
+            "reasoning": "Enhancing video accessibility is crucial for compliance and user satisfaction."
+          },
+          {
+            "finding_a": "customer-003",
+            "finding_b": "requirements-003",
+            "description": "Color contrast issues across UI components are high impact, but existing requirements to improve contrast may not be prioritized.",
+            "resolution": "Prioritize color contrast improvements in the MVP to ensure compliance and enhance readability for users with visual impairments.",
+            "reasoning": "Addressing color contrast is essential for meeting accessibility standards and improving user experience."
+          }
+        ]
+      }
+    }
+  ],
+  "summary": "Consolidated 38 findings into 31 unique items. Removed 7 duplicates, resolved 5 conflicts. Top priority: North Star Metric: Accessibility Compliance Rate.",
+  "errors": []
+}

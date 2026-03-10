@@ -1,0 +1,187 @@
+{
+  "agent_id": "metrics",
+  "agent_name": "Metrics & Analytics Agent",
+  "run_id": "2576ea64-acc2-456d-8d3c-6a7c49564eb8",
+  "timestamp": "2026-03-09T20:22:39.703432Z",
+  "findings": [
+    {
+      "id": "metrics-001",
+      "agent_id": "metrics",
+      "type": "metric",
+      "title": "North Star Metric: User Engagement",
+      "description": "The North Star metric for SmartNotify is the Daily Active Users (DAU), which reflects the number of unique users engaging with the notification system daily. This metric is crucial as it directly correlates with user retention and satisfaction.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "User engagement is a primary driver of product success."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-003",
+          "source_type": "metric",
+          "excerpt": "DAU: 45000",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Monitor DAU trends weekly to assess user engagement."
+      ],
+      "tags": [
+        "north_star"
+      ],
+      "metadata": {
+        "baseline": 45000,
+        "target": 60000,
+        "measurement_method": "Daily tracking of unique user logins"
+      }
+    },
+    {
+      "id": "metrics-002",
+      "agent_id": "metrics",
+      "type": "metric",
+      "title": "Primary KPI: Notification Click-Through Rate (CTR)",
+      "description": "The notification click-through rate (CTR) measures the percentage of notifications that users interact with. This metric indicates the effectiveness of notifications in capturing user attention.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Higher CTR indicates better notification relevance."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-003",
+          "source_type": "metric",
+          "excerpt": "Notification CTR: 0.12",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Aim to increase CTR by optimizing notification content."
+      ],
+      "tags": [
+        "input_metric"
+      ],
+      "metadata": {
+        "baseline": 0.12,
+        "target": 0.15,
+        "measurement_method": "Percentage of notifications clicked divided by total notifications sent"
+      }
+    },
+    {
+      "id": "metrics-003",
+      "agent_id": "metrics",
+      "type": "metric",
+      "title": "Primary KPI: Average Notifications per User",
+      "description": "This metric tracks the average number of notifications received by each user. It helps in understanding user exposure to notifications and potential fatigue.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [
+        "Lower average notifications can reduce fatigue."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-003",
+          "source_type": "metric",
+          "excerpt": "Avg notifications per user: 23",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Consider reducing average notifications to improve user experience."
+      ],
+      "tags": [
+        "input_metric"
+      ],
+      "metadata": {
+        "baseline": 23,
+        "target": 20,
+        "measurement_method": "Total notifications sent divided by total active users"
+      }
+    },
+    {
+      "id": "metrics-004",
+      "agent_id": "metrics",
+      "type": "metric",
+      "title": "Guardrail Metric: Unsubscribe Rate",
+      "description": "The unsubscribe rate indicates the percentage of users opting out of notifications. A rising unsubscribe rate may signal notification fatigue or irrelevance.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "A lower unsubscribe rate is critical for user retention."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-003",
+          "source_type": "metric",
+          "excerpt": "Unsubscribe rate: 0.08",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Monitor unsubscribe rates closely and investigate spikes."
+      ],
+      "tags": [
+        "guardrail"
+      ],
+      "metadata": {
+        "baseline": 0.08,
+        "target": 0.05,
+        "measurement_method": "Number of unsubscribes divided by total notifications sent"
+      }
+    },
+    {
+      "id": "metrics-005",
+      "agent_id": "metrics",
+      "type": "gap",
+      "title": "Measurement Gap: Notification Delivery Latency",
+      "description": "Current measurement of p95 delivery latency is available, but there is no tracking of average delivery latency or user satisfaction with delivery times. This gap limits understanding of user experience.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Delivery latency impacts user satisfaction."
+      ],
+      "evidence": [
+        {
+          "source_id": "NOTIFY-105",
+          "source_type": "ticket",
+          "excerpt": "Reduce notification delivery latency from p95 340ms to under 200ms",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement tracking for average delivery latency and user feedback on notification timing."
+      ],
+      "tags": [],
+      "metadata": {}
+    },
+    {
+      "id": "metrics-006",
+      "agent_id": "metrics",
+      "type": "recommendation",
+      "title": "Experiment Opportunity: Notification Timing Optimization",
+      "description": "Conduct A/B testing on different notification timing strategies to determine optimal delivery times based on user engagement patterns. This can help improve CTR and reduce unsubscribe rates.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "User preferences for notification timing can be identified."
+      ],
+      "evidence": [
+        {
+          "source_id": "NOTIFY-103",
+          "source_type": "ticket",
+          "excerpt": "Implement ML-based notification batching",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Run experiments with statistical significance of 95% and a minimum sample size of 1000 users."
+      ],
+      "tags": [],
+      "metadata": {
+        "sample_size": 1000,
+        "significance_level": 0.05
+      }
+    }
+  ],
+  "summary": "The analysis identifies the North Star metric as Daily Active Users, with supporting KPIs including Notification CTR and Average Notifications per User. Guardrail metrics include Unsubscribe Rate. A measurement gap exists in tracking delivery latency, and an experiment opportunity is proposed to optimize notification timing.",
+  "errors": []
+}

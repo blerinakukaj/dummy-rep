@@ -1,0 +1,154 @@
+{
+  "agent_id": "competitive",
+  "agent_name": "Competitive & Positioning Agent",
+  "run_id": "d9e71837-04af-4aaf-b3b0-d57cdfff8045",
+  "timestamp": "2026-03-06T12:26:37.254071Z",
+  "findings": [
+    {
+      "id": "competitive-001",
+      "agent_id": "competitive",
+      "type": "gap",
+      "title": "Real-time Co-Editing Feature Gap",
+      "description": "CollabDocs currently lacks real-time co-editing capabilities, which is a critical feature offered by Competitor X (LiveWrite) and Competitor Y (CoEdit Pro). This gap poses a risk of losing enterprise customers who are actively seeking this functionality.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Enterprise customers prioritize real-time collaboration features."
+      ],
+      "evidence": [
+        {
+          "source_id": "COLLAB-301",
+          "source_type": "ticket",
+          "excerpt": "Competitor X launched live co-editing on 2025-10-15 with a heavy marketing push directly targeting our enterprise segment.",
+          "url": null
+        },
+        {
+          "source_id": "COLLAB-302",
+          "source_type": "ticket",
+          "excerpt": "Three enterprise accounts have submitted formal feature requests for simultaneous multi-user editing.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Prioritize the development of real-time co-editing features to achieve parity with competitors."
+      ],
+      "tags": [
+        "feature gap",
+        "real-time collaboration"
+      ],
+      "metadata": {
+        "competitors": [
+          "LiveWrite",
+          "CoEdit Pro"
+        ],
+        "features": [
+          "real-time co-editing",
+          "simultaneous editing"
+        ]
+      }
+    },
+    {
+      "id": "competitive-002",
+      "agent_id": "competitive",
+      "type": "insight",
+      "title": "Competitive Positioning of Workflow Features",
+      "description": "CollabDocs excels in document workflow features such as approval chains and version gating, which are not offered by competitors. This positions CollabDocs as a strong choice for organizations that prioritize governance and structured document management.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Organizations value structured document management alongside collaboration."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "CollabDocs leads on workflow and governance features.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Leverage workflow features in marketing to differentiate from competitors."
+      ],
+      "tags": [
+        "differentiation",
+        "workflow features"
+      ],
+      "metadata": {
+        "features": [
+          "document workflow",
+          "approval chains",
+          "version gating"
+        ]
+      }
+    },
+    {
+      "id": "competitive-003",
+      "agent_id": "competitive",
+      "type": "risk",
+      "title": "Risk of Customer Churn Due to Feature Gaps",
+      "description": "The absence of real-time co-editing capabilities has led to formal churn conversations with enterprise customers, risking a combined ARR of $420K. Immediate action is required to address this gap to retain these accounts.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Customers will churn if their feature requests are not met."
+      ],
+      "evidence": [
+        {
+          "source_id": "COLLAB-302",
+          "source_type": "ticket",
+          "excerpt": "Combined ARR at risk: $420K. Customer Success has escalated to Product with a 60-day window before formal churn conversations begin.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Accelerate the development timeline for real-time co-editing features."
+      ],
+      "tags": [
+        "customer churn",
+        "ARR risk"
+      ],
+      "metadata": {
+        "at_risk_customers": [
+          "Acme Corp",
+          "Vertex Partners",
+          "NordicBank"
+        ]
+      }
+    },
+    {
+      "id": "competitive-004",
+      "agent_id": "competitive",
+      "type": "recommendation",
+      "title": "Adopt CRDT or OT for Conflict Resolution",
+      "description": "As CollabDocs moves towards real-time co-editing, it is essential to implement a robust conflict resolution strategy. Evaluating both CRDT and OT approaches will be crucial to ensure a seamless user experience during concurrent edits.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "A well-defined conflict resolution strategy will enhance user satisfaction."
+      ],
+      "evidence": [
+        {
+          "source_id": "COLLAB-305",
+          "source_type": "ticket",
+          "excerpt": "Engineering has evaluated two approaches: Operational Transformation (OT) and CRDTs.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct further analysis on the trade-offs of CRDT vs. OT for implementation."
+      ],
+      "tags": [
+        "conflict resolution",
+        "technical strategy"
+      ],
+      "metadata": {
+        "approaches": [
+          "CRDT",
+          "OT"
+        ]
+      }
+    }
+  ],
+  "summary": "CollabDocs faces a critical gap in real-time co-editing features compared to competitors, which poses a risk of customer churn. However, the product's strengths in document workflow features provide a unique differentiation opportunity. Immediate action is recommended to close the feature gap and enhance conflict resolution strategies.",
+  "errors": []
+}

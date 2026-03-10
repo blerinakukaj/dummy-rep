@@ -1,0 +1,137 @@
+{
+  "run_id": "c654d432-f3d3-407a-bd02-a713818375f2",
+  "product_name": "PageSpeed",
+  "product_description": "Web performance monitoring and optimization platform experiencing a critical regression in core page load metrics",
+  "tickets": [
+    {
+      "id": "PS-401",
+      "title": "Dashboard load time regressed from 1.2s to 4.8s after v3.2 deploy",
+      "description": "After deploying v3.2 which included the new charting library migration, the main analytics dashboard p95 load time jumped from 1.2s to 4.8s. The regression affects all dashboard views with more than 10 data series. Roll-back is not feasible as v3.2 includes critical security patches. Root cause appears to be unoptimized SVG rendering in the new charting library.",
+      "status": "open",
+      "priority": "critical",
+      "labels": [
+        "bug",
+        "performance",
+        "frontend"
+      ],
+      "created_at": "2025-10-05",
+      "source": "jira"
+    },
+    {
+      "id": "PS-402",
+      "title": "API response times degraded 3x after database migration",
+      "description": "The migration from PostgreSQL 14 to 16 introduced a query planner regression on our most frequent query pattern (time-series aggregation with window functions). p95 API latency went from 120ms to 380ms. Database team suspects the new planner chooses a less efficient join strategy for our partitioned tables.",
+      "status": "open",
+      "priority": "critical",
+      "labels": [
+        "bug",
+        "performance",
+        "backend",
+        "database"
+      ],
+      "created_at": "2025-10-08",
+      "source": "jira"
+    },
+    {
+      "id": "PS-403",
+      "title": "Memory leak in real-time WebSocket connections",
+      "description": "Real-time monitoring dashboard connections leak approximately 2MB per hour per connection. After 8 hours, the WebSocket server OOMs and crashes, dropping all active connections. Affects customers using the live monitoring dashboard. Heap profiling shows event listener accumulation in the metric aggregation pipeline.",
+      "status": "open",
+      "priority": "critical",
+      "labels": [
+        "bug",
+        "performance",
+        "backend",
+        "stability"
+      ],
+      "created_at": "2025-10-12",
+      "source": "jira"
+    },
+    {
+      "id": "PS-404",
+      "title": "Implement performance regression detection in CI pipeline",
+      "description": "The v3.2 regression could have been caught with automated performance benchmarking in CI. Implement a benchmark suite that runs on every PR, compares against baseline, and blocks merges if p95 latency regresses more than 15% or memory usage increases more than 10%.",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "improvement",
+        "ci",
+        "performance"
+      ],
+      "created_at": "2025-10-15",
+      "source": "jira"
+    },
+    {
+      "id": "PS-405",
+      "title": "Customer-facing status page showing real-time performance metrics",
+      "description": "During the regression incident, customers had no visibility into the degradation until they experienced it. Build a public status page that shows real-time p50/p95/p99 latencies, error rates, and uptime. Include historical data for the last 90 days.",
+      "status": "open",
+      "priority": "medium",
+      "labels": [
+        "feature",
+        "transparency",
+        "customer-trust"
+      ],
+      "created_at": "2025-10-20",
+      "source": "jira"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-001",
+      "title": "customer_notes.md",
+      "content": "# Customer Notes — PageSpeed Performance Regression\n\n## Interview 1: Jun W. (SRE Lead, Enterprise Customer)\nJun's team relies on PageSpeed for real-time production monitoring across 300 services. \"When your dashboard takes 5 seconds to load, I can't use it during an incident — which is exactly when I need it most.\" He described switching to raw Grafana queries during the v3.2 regression period. \"We almost moved to a competitor. The only thing that saved you was the 2-year contract.\" He wants SLA guarantees on dashboard load times and automated regression alerts.\n\n## Interview 2: Maria C. (Product Analyst, Mid-Market Customer)\nMaria uses PageSpeed for daily product analytics reviews. \"The dashboard was my first tool every morning, but now I dread opening it because it takes forever to render my 15-chart dashboard.\" She reported that the WebSocket disconnections cause her real-time conversion funnel to go blank mid-presentation, which is embarrassing in stakeholder meetings. She wants performance baseline guarantees in the SLA.\n\n## Interview 3: Chris B. (DevOps Manager, Startup Customer)\nChris has a small team and noticed the API latency regression immediately because their automated alerts pipeline calls PageSpeed APIs. \"Our alerting latency doubled overnight, which means we're detecting incidents minutes later than before.\" He is evaluating alternatives and will switch if performance isn't restored within 30 days.\n",
+      "doc_type": "note",
+      "tags": []
+    },
+    {
+      "id": "DOC-002",
+      "title": "incident_report.md",
+      "content": "# Incident Report — PageSpeed v3.2 Performance Regression\n\n## Incident Timeline\n- **2025-10-05 09:15 UTC**: v3.2 deployed to production (includes charting library migration + PostgreSQL 16 upgrade)\n- **2025-10-05 09:45 UTC**: First customer report of slow dashboard loads\n- **2025-10-05 10:30 UTC**: Monitoring confirms p95 dashboard load time at 4.2s (baseline: 1.2s)\n- **2025-10-05 11:00 UTC**: API latency alerts fire — p95 at 350ms (baseline: 120ms)\n- **2025-10-05 14:00 UTC**: WebSocket server first OOM crash observed\n- **2025-10-05 16:00 UTC**: Incident declared SEV-1, war room opened\n- **2025-10-06 02:00 UTC**: Root causes identified (charting SVG rendering + PG query planner + memory leak)\n- **2025-10-06 10:00 UTC**: Partial mitigation deployed (increased WebSocket server memory to 8GB, added restart cron)\n- **2025-10-08 present**: Full fixes still in progress\n\n## Root Causes\n1. **Charting Library SVG Regression**: New library renders each data point as individual SVG elements instead of using canvas batching. Dashboards with 10+ series generate 50K+ DOM nodes.\n2. **PostgreSQL 16 Query Planner**: New planner cost model chooses nested loop joins for our partitioned time-series tables instead of hash joins. Requires explicit query hints or planner configuration.\n3. **WebSocket Memory Leak**: Event listeners in the metric aggregation pipeline are not cleaned up when data windows roll forward, causing cumulative allocation.\n\n## Impact\n- 89 support tickets in 7 days (baseline: 12)\n- NPS dropped from 52 to 18\n- 3 enterprise customers escalated to executive team\n- Estimated revenue risk: $180K ARR from at-risk accounts\n",
+      "doc_type": "note",
+      "tags": []
+    },
+    {
+      "id": "DOC-003",
+      "title": "metrics_snapshot.json",
+      "content": "{\n  \"dashboard_p95_load_time_ms\": 4800,\n  \"dashboard_p95_baseline_ms\": 1200,\n  \"api_p95_latency_ms\": 380,\n  \"api_p95_baseline_ms\": 120,\n  \"websocket_crash_rate_per_day\": 3,\n  \"websocket_memory_leak_mb_per_hour\": 2,\n  \"error_rate_pct\": 2.3,\n  \"error_rate_baseline_pct\": 0.4,\n  \"customer_support_tickets_last_7_days\": 89,\n  \"customer_support_tickets_baseline_7_days\": 12,\n  \"nps_current\": 18,\n  \"nps_baseline\": 52,\n  \"uptime_last_30_days\": 0.9934\n}\n",
+      "doc_type": "metrics_snapshot",
+      "tags": []
+    }
+  ],
+  "risk_hotspots": [
+    {
+      "category": "pricing",
+      "description": "Detected pricing risk keywords in 2 source(s): DOC-002, PS-402",
+      "severity": "medium",
+      "source_ids": [
+        "DOC-002",
+        "PS-402"
+      ]
+    },
+    {
+      "category": "platform",
+      "description": "Detected platform risk keywords in 5 source(s): DOC-001, DOC-002, DOC-003, PS-401, PS-402",
+      "severity": "high",
+      "source_ids": [
+        "DOC-001",
+        "DOC-002",
+        "DOC-003",
+        "PS-401",
+        "PS-402"
+      ]
+    },
+    {
+      "category": "accessibility",
+      "description": "Detected accessibility risk keywords in 1 source(s): DOC-001",
+      "severity": "low",
+      "source_ids": [
+        "DOC-001"
+      ]
+    }
+  ],
+  "missing_info": [],
+  "dedup_log": [],
+  "raw_input_type": "bundle",
+  "created_at": "2026-03-09T20:23:32.480256Z"
+}

@@ -1,0 +1,417 @@
+{
+  "evidence_index": {
+    "DOC-002": [
+      "intake-001",
+      "intake-002",
+      "intake-003",
+      "customer-001",
+      "customer-005",
+      "risk-001",
+      "risk-003",
+      "risk-004"
+    ],
+    "DOC-003": [
+      "intake-001",
+      "metrics-001",
+      "metrics-002",
+      "metrics-003"
+    ],
+    "SEARCH-202": [
+      "intake-001",
+      "customer-001",
+      "customer-002",
+      "feasibility-003",
+      "requirements-002",
+      "requirements-009",
+      "risk-002"
+    ],
+    "SEARCH-203": [
+      "intake-001",
+      "customer-003",
+      "feasibility-004",
+      "requirements-003"
+    ],
+    "SEARCH-206": [
+      "intake-001",
+      "metrics-005",
+      "feasibility-006",
+      "requirements-006"
+    ],
+    "DOC-001": [
+      "intake-002",
+      "customer-002",
+      "customer-003",
+      "customer-004"
+    ],
+    "SEARCH-201": [
+      "intake-002",
+      "feasibility-001",
+      "feasibility-002",
+      "requirements-001"
+    ],
+    "SEARCH-204": [
+      "metrics-004",
+      "customer-005",
+      "feasibility-005",
+      "requirements-005"
+    ],
+    "SEARCH-205": [
+      "customer-001",
+      "requirements-010"
+    ],
+    "SEARCH-207": [
+      "customer-004",
+      "feasibility-007",
+      "requirements-004"
+    ],
+    "metrics-001": [
+      "requirements-007"
+    ],
+    "metrics-003": [
+      "requirements-008"
+    ]
+  },
+  "dedup_log": [
+    {
+      "cluster": [
+        "customer-001",
+        "requirements-001"
+      ],
+      "kept": "customer-001",
+      "removed": [
+        "requirements-001"
+      ],
+      "reason": "Both address the drop in search relevance scores for anonymous users due to the new ranking algorithm."
+    },
+    {
+      "cluster": [
+        "customer-002",
+        "requirements-002",
+        "risk-002"
+      ],
+      "kept": "customer-002",
+      "removed": [
+        "requirements-002",
+        "risk-002"
+      ],
+      "reason": "All findings relate to the increase in support ticket volume due to irrelevant search results."
+    },
+    {
+      "cluster": [
+        "customer-003",
+        "requirements-003",
+        "feasibility-004"
+      ],
+      "kept": "customer-003",
+      "removed": [
+        "requirements-003",
+        "feasibility-004"
+      ],
+      "reason": "All findings discuss the issue of increased mobile search latency and its impact on user experience."
+    },
+    {
+      "cluster": [
+        "customer-004",
+        "requirements-004",
+        "feasibility-007"
+      ],
+      "kept": "customer-004",
+      "removed": [
+        "requirements-004",
+        "feasibility-007"
+      ],
+      "reason": "All findings focus on the stale autocomplete suggestions and the need to fix the cache configuration."
+    },
+    {
+      "cluster": [
+        "customer-005",
+        "requirements-005",
+        "feasibility-005"
+      ],
+      "kept": "customer-005",
+      "removed": [
+        "requirements-005",
+        "feasibility-005"
+      ],
+      "reason": "All findings highlight the lack of instrumentation for new search features, specifically image and voice search."
+    },
+    {
+      "cluster": [
+        "intake-001",
+        "feasibility-001"
+      ],
+      "kept": "feasibility-001",
+      "removed": [
+        "intake-001"
+      ],
+      "reason": "Both findings report on the risk of a drop in search relevance scores following the v2.4.1 deployment."
+    }
+  ],
+  "ranked_findings": [
+    {
+      "finding_id": "metrics-001",
+      "title": "North Star Metric: Search Relevance Score",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 5,
+      "priority_score": 3.0
+    },
+    {
+      "finding_id": "metrics-002",
+      "title": "Primary KPI: Search Click-Through Rate (CTR)",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 2.882
+    },
+    {
+      "finding_id": "metrics-005",
+      "title": "Establish Baseline Metrics for Image Search",
+      "user_impact": 6,
+      "business_value": 5,
+      "effort": 4,
+      "risk": 3,
+      "priority_score": 2.88
+    },
+    {
+      "finding_id": "feasibility-002",
+      "title": "Feature Flag Dependency for Rollback",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.742
+    },
+    {
+      "finding_id": "requirements-007",
+      "title": "Monitor Search Relevance Score",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.742
+    },
+    {
+      "finding_id": "requirements-008",
+      "title": "Establish Guardrail Metrics for Session Abandonment",
+      "user_impact": 6,
+      "business_value": 5,
+      "effort": 4,
+      "risk": 4,
+      "priority_score": 2.571
+    },
+    {
+      "finding_id": "feasibility-006",
+      "title": "Establish Baseline Metrics for Image Search",
+      "user_impact": 4,
+      "business_value": 3,
+      "effort": 3,
+      "risk": 2,
+      "priority_score": 2.556
+    },
+    {
+      "finding_id": "requirements-006",
+      "title": "Establish Baseline Metrics for Image Search",
+      "user_impact": 4,
+      "business_value": 3,
+      "effort": 3,
+      "risk": 2,
+      "priority_score": 2.556
+    },
+    {
+      "finding_id": "metrics-003",
+      "title": "Guardrail Metric: Session Abandonment Rate After Search",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 5,
+      "risk": 5,
+      "priority_score": 2.429
+    },
+    {
+      "finding_id": "feasibility-003",
+      "title": "Increased Support Volume",
+      "user_impact": 6,
+      "business_value": 5,
+      "effort": 3,
+      "risk": 6,
+      "priority_score": 2.4
+    },
+    {
+      "finding_id": "intake-002",
+      "title": "Risk hotspot detected: pricing",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 7,
+      "priority_score": 2.366
+    },
+    {
+      "finding_id": "risk-001",
+      "title": "Authentication Weakness Detected",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 5,
+      "risk": 9,
+      "priority_score": 2.34
+    },
+    {
+      "finding_id": "customer-002",
+      "title": "Increased Support Ticket Volume Due to Irrelevant Results",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 7,
+      "priority_score": 2.297
+    },
+    {
+      "finding_id": "customer-001",
+      "title": "Significant Drop in Search Relevance for Anonymous Users",
+      "user_impact": 9,
+      "business_value": 8,
+      "effort": 6,
+      "risk": 9,
+      "priority_score": 2.176
+    },
+    {
+      "finding_id": "risk-004",
+      "title": "Data Handling Compliance Risk",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 6,
+      "risk": 7,
+      "priority_score": 2.156
+    },
+    {
+      "finding_id": "metrics-004",
+      "title": "Instrumentation Gap for New Query Types",
+      "user_impact": 9,
+      "business_value": 8,
+      "effort": 7,
+      "risk": 8,
+      "priority_score": 2.135
+    },
+    {
+      "finding_id": "customer-005",
+      "title": "Lack of Instrumentation for New Search Features",
+      "user_impact": 5,
+      "business_value": 4,
+      "effort": 5,
+      "risk": 3,
+      "priority_score": 2.034
+    },
+    {
+      "finding_id": "requirements-009",
+      "title": "User Feedback Collection on Search Results",
+      "user_impact": 3,
+      "business_value": 2,
+      "effort": 2,
+      "risk": 3,
+      "priority_score": 1.941
+    },
+    {
+      "finding_id": "customer-004",
+      "title": "Stale Autocomplete Suggestions Contributing to User Frustration",
+      "user_impact": 4,
+      "business_value": 3,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 1.917
+    },
+    {
+      "finding_id": "customer-003",
+      "title": "Mobile Search Latency Increased Significantly",
+      "user_impact": 6,
+      "business_value": 5,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 1.895
+    },
+    {
+      "finding_id": "feasibility-001",
+      "title": "Search Relevance Score Drop",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 8,
+      "risk": 10,
+      "priority_score": 1.887
+    },
+    {
+      "finding_id": "intake-003",
+      "title": "Risk hotspot detected: accessibility",
+      "user_impact": 2,
+      "business_value": 3,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 1.333
+    },
+    {
+      "finding_id": "requirements-010",
+      "title": "Conduct A/B Testing for Search Algorithm Changes",
+      "user_impact": 3,
+      "business_value": 2,
+      "effort": 4,
+      "risk": 3,
+      "priority_score": 1.32
+    },
+    {
+      "finding_id": "risk-003",
+      "title": "Accessibility Risk Identified",
+      "user_impact": 2,
+      "business_value": 2,
+      "effort": 3,
+      "risk": 3,
+      "priority_score": 1.238
+    }
+  ],
+  "conflicts": [
+    {
+      "finding_a": "customer-001",
+      "finding_b": "feasibility-001",
+      "description": "The new ranking algorithm has caused a significant drop in search relevance scores, affecting user satisfaction, which is critical.",
+      "resolution": "Prioritize a rollback of the v2.4.1 deployment to restore search relevance scores while addressing the feature flag dependency.",
+      "reasoning": "User satisfaction is paramount; restoring relevance should take precedence over new features until the issue is resolved."
+    },
+    {
+      "finding_a": "feasibility-002",
+      "finding_b": "feasibility-003",
+      "description": "The ability to rollback the v2.4.1 deployment is blocked by a dependent feature flag change, while increased support volume indicates a significant user experience issue.",
+      "resolution": "Resolve the feature flag dependency urgently to enable rollback and address the support volume issue.",
+      "reasoning": "Quick remediation is necessary to prevent further user dissatisfaction and churn."
+    },
+    {
+      "finding_a": "risk-004",
+      "finding_b": "feasibility-001",
+      "description": "Potential violation of data retention policy may lead to critical privacy risks, while the drop in search relevance scores is also critical.",
+      "resolution": "Implement immediate measures to ensure compliance with data retention policies while addressing the search relevance issue.",
+      "reasoning": "Both privacy compliance and user experience are critical; they must be addressed simultaneously to mitigate risks."
+    }
+  ],
+  "consolidated_finding_ids": [
+    "intake-002",
+    "intake-003",
+    "metrics-001",
+    "metrics-002",
+    "metrics-003",
+    "metrics-004",
+    "metrics-005",
+    "customer-001",
+    "customer-002",
+    "customer-003",
+    "customer-004",
+    "customer-005",
+    "feasibility-001",
+    "feasibility-002",
+    "feasibility-003",
+    "feasibility-006",
+    "requirements-006",
+    "requirements-007",
+    "requirements-008",
+    "requirements-009",
+    "requirements-010",
+    "risk-001",
+    "risk-003",
+    "risk-004"
+  ]
+}

@@ -1,0 +1,271 @@
+{
+  "agent_id": "lead_pm",
+  "agent_name": "Lead PM Agent",
+  "run_id": "101d847c-6899-492f-ac2c-d3da82309a9c",
+  "timestamp": "2026-03-09T20:18:06.581603Z",
+  "findings": [
+    {
+      "id": "lead_pm-001",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Pipeline Consolidation Summary",
+      "description": "Consolidated 39 findings from 7 agents into 29 unique findings. Removed 10 duplicates. Identified 6 cross-agent conflicts.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "intake",
+          "source_type": "doc",
+          "excerpt": "Intake & Context Agent: 3 findings",
+          "url": null
+        },
+        {
+          "source_id": "competitive",
+          "source_type": "doc",
+          "excerpt": "Competitive & Positioning Agent: 4 findings",
+          "url": null
+        },
+        {
+          "source_id": "metrics",
+          "source_type": "doc",
+          "excerpt": "Metrics & Analytics Agent: 6 findings",
+          "url": null
+        },
+        {
+          "source_id": "customer",
+          "source_type": "doc",
+          "excerpt": "Customer Insights Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "feasibility",
+          "source_type": "doc",
+          "excerpt": "Tech Feasibility & Delivery Agent: 6 findings",
+          "url": null
+        },
+        {
+          "source_id": "requirements",
+          "source_type": "doc",
+          "excerpt": "UX & Requirements Agent: 10 findings",
+          "url": null
+        },
+        {
+          "source_id": "risk",
+          "source_type": "doc",
+          "excerpt": "Risk/Privacy/Compliance Guardrails Agent: 5 findings",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "consolidation",
+        "meta"
+      ],
+      "metadata": {
+        "original_count": 39,
+        "deduped_count": 29,
+        "duplicates_removed": 10,
+        "conflicts_resolved": 6,
+        "evidence_sources": 11
+      }
+    },
+    {
+      "id": "lead_pm-002",
+      "agent_id": "lead_pm",
+      "type": "recommendation",
+      "title": "Top Priority Findings",
+      "description": "Highest priority items based on weighted scoring (user_impact×0.35 + business_value×0.30) / (effort×0.20 + risk×0.15): Leverage Accessibility as a Differentiator (score=3.548); North Star Metric: Accessibility Compliance Rate (score=3.444); Experiment Opportunity: Accessibility Feature Testing (score=3.129); Documentation of Accessibility Features (score=3.095); Guardrail Metric: WCAG Violations Count (score=3.0)",
+      "impact": "critical",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "competitive-004",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.548",
+          "url": null
+        },
+        {
+          "source_id": "metrics-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.444",
+          "url": null
+        },
+        {
+          "source_id": "metrics-006",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.129",
+          "url": null
+        },
+        {
+          "source_id": "requirements-010",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.095",
+          "url": null
+        },
+        {
+          "source_id": "metrics-004",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.0",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "prioritization",
+        "meta"
+      ],
+      "metadata": {
+        "top_priorities": [
+          {
+            "finding_id": "competitive-004",
+            "title": "Leverage Accessibility as a Differentiator",
+            "user_impact": 8,
+            "business_value": 9,
+            "effort": 4,
+            "risk": 5,
+            "priority_score": 3.548
+          },
+          {
+            "finding_id": "metrics-001",
+            "title": "North Star Metric: Accessibility Compliance Rate",
+            "user_impact": 10,
+            "business_value": 9,
+            "effort": 3,
+            "risk": 8,
+            "priority_score": 3.444
+          },
+          {
+            "finding_id": "metrics-006",
+            "title": "Experiment Opportunity: Accessibility Feature Testing",
+            "user_impact": 7,
+            "business_value": 8,
+            "effort": 4,
+            "risk": 5,
+            "priority_score": 3.129
+          },
+          {
+            "finding_id": "requirements-010",
+            "title": "Documentation of Accessibility Features",
+            "user_impact": 5,
+            "business_value": 5,
+            "effort": 3,
+            "risk": 3,
+            "priority_score": 3.095
+          },
+          {
+            "finding_id": "metrics-004",
+            "title": "Guardrail Metric: WCAG Violations Count",
+            "user_impact": 6,
+            "business_value": 5,
+            "effort": 3,
+            "risk": 4,
+            "priority_score": 3.0
+          }
+        ]
+      }
+    },
+    {
+      "id": "lead_pm-003",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Cross-Agent Conflict Resolution Report",
+      "description": "Resolved 6 conflicts between agent findings. competitive-001 vs feasibility-001: Accessibility compliance gaps identified as a critical weakness, while significant accessibility risks pose a high risk for compliance and user experience.; customer-001 vs requirements-001: Critical accessibility gaps for visually impaired users identified, while the requirement to implement ARIA roles and keyboard support is critical but may not be prioritized due to resource constraints.; customer-002 vs requirements-002: Lack of captions and transcripts in the video player is a high-impact issue, while the requirement to enhance the video player for accessibility may face delays due to competing priorities.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "competitive-001",
+          "source_type": "doc",
+          "excerpt": "Accessibility compliance gaps identified as a critical weakness, while significant accessibility risks pose a high risk for compliance and user experience.",
+          "url": null
+        },
+        {
+          "source_id": "customer-001",
+          "source_type": "doc",
+          "excerpt": "Critical accessibility gaps for visually impaired users identified, while the requirement to implement ARIA roles and keyboard support is critical but may not be prioritized due to resource constraints.",
+          "url": null
+        },
+        {
+          "source_id": "customer-002",
+          "source_type": "doc",
+          "excerpt": "Lack of captions and transcripts in the video player is a high-impact issue, while the requirement to enhance the video player for accessibility may face delays due to competing priorities.",
+          "url": null
+        },
+        {
+          "source_id": "customer-003",
+          "source_type": "doc",
+          "excerpt": "Color contrast failures across UI components are a high-impact issue, while the requirement to revise UI components for compliance may not be addressed promptly.",
+          "url": null
+        },
+        {
+          "source_id": "customer-004",
+          "source_type": "doc",
+          "excerpt": "Inaccessible quiz forms are a high-impact issue, while the requirement to make quiz forms accessible may be deprioritized due to resource allocation.",
+          "url": null
+        },
+        {
+          "source_id": "customer-005",
+          "source_type": "doc",
+          "excerpt": "Need for VPAT to meet compliance requirements is critical, while the implementation of VPAT may be delayed due to other priorities.",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "conflicts",
+        "meta"
+      ],
+      "metadata": {
+        "conflicts": [
+          {
+            "finding_a": "competitive-001",
+            "finding_b": "feasibility-001",
+            "description": "Accessibility compliance gaps identified as a critical weakness, while significant accessibility risks pose a high risk for compliance and user experience.",
+            "resolution": "Prioritize immediate remediation of accessibility gaps to achieve WCAG 2.1 AA compliance, while leveraging the commitment to accessibility as a competitive differentiator.",
+            "reasoning": "Addressing compliance risks is essential to mitigate legal exposure and improve user experience, which can also enhance competitive positioning."
+          },
+          {
+            "finding_a": "customer-001",
+            "finding_b": "requirements-001",
+            "description": "Critical accessibility gaps for visually impaired users identified, while the requirement to implement ARIA roles and keyboard support is critical but may not be prioritized due to resource constraints.",
+            "resolution": "Allocate resources to prioritize the implementation of ARIA roles and keyboard support for the course catalog and enrollment flow as an immediate action.",
+            "reasoning": "Addressing the critical accessibility gaps is essential for compliance and user satisfaction, and should be treated as a top priority."
+          },
+          {
+            "finding_a": "customer-002",
+            "finding_b": "requirements-002",
+            "description": "Lack of captions and transcripts in the video player is a high-impact issue, while the requirement to enhance the video player for accessibility may face delays due to competing priorities.",
+            "resolution": "Fast-track the implementation of closed captions, transcripts, and keyboard controls for the video player to ensure compliance and improve user access.",
+            "reasoning": "Meeting accessibility standards is crucial for user engagement and compliance, thus should be prioritized despite other competing initiatives."
+          },
+          {
+            "finding_a": "customer-003",
+            "finding_b": "requirements-003",
+            "description": "Color contrast failures across UI components are a high-impact issue, while the requirement to revise UI components for compliance may not be addressed promptly.",
+            "resolution": "Implement a phased approach to revise UI components for color contrast compliance, starting with the most critical areas first.",
+            "reasoning": "Addressing color contrast issues is essential for accessibility and user experience, and should be prioritized in a manageable way."
+          },
+          {
+            "finding_a": "customer-004",
+            "finding_b": "requirements-004",
+            "description": "Inaccessible quiz forms are a high-impact issue, while the requirement to make quiz forms accessible may be deprioritized due to resource allocation.",
+            "resolution": "Ensure that making quiz forms accessible is included in the next development cycle to address user needs and compliance.",
+            "reasoning": "Accessibility in assessments is crucial for inclusivity and compliance, and should not be delayed."
+          },
+          {
+            "finding_a": "customer-005",
+            "finding_b": "requirements-005",
+            "description": "Need for VPAT to meet compliance requirements is critical, while the implementation of VPAT may be delayed due to other priorities.",
+            "resolution": "Prioritize the accessibility audit and VPAT creation to ensure compliance with prospective clients' requirements.",
+            "reasoning": "Meeting compliance requirements is essential for securing contracts, especially in government and education sectors."
+          }
+        ]
+      }
+    }
+  ],
+  "summary": "Consolidated 39 findings into 29 unique items. Removed 10 duplicates, resolved 6 conflicts. Top priority: Leverage Accessibility as a Differentiator.",
+  "errors": []
+}

@@ -1,0 +1,232 @@
+{
+  "agent_id": "lead_pm",
+  "agent_name": "Lead PM Agent",
+  "run_id": "c2a65790-9379-424e-a2c0-1eaa67893a29",
+  "timestamp": "2026-03-09T20:04:13.681730Z",
+  "findings": [
+    {
+      "id": "lead_pm-001",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Pipeline Consolidation Summary",
+      "description": "Consolidated 40 findings from 7 agents into 30 unique findings. Removed 10 duplicates. Identified 3 cross-agent conflicts.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "intake",
+          "source_type": "doc",
+          "excerpt": "Intake & Context Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "customer",
+          "source_type": "doc",
+          "excerpt": "Customer Insights Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "metrics",
+          "source_type": "doc",
+          "excerpt": "Metrics & Analytics Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "competitive",
+          "source_type": "doc",
+          "excerpt": "Competitive & Positioning Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "feasibility",
+          "source_type": "doc",
+          "excerpt": "Tech Feasibility & Delivery Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "requirements",
+          "source_type": "doc",
+          "excerpt": "UX & Requirements Agent: 10 findings",
+          "url": null
+        },
+        {
+          "source_id": "risk",
+          "source_type": "doc",
+          "excerpt": "Risk/Privacy/Compliance Guardrails Agent: 5 findings",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "consolidation",
+        "meta"
+      ],
+      "metadata": {
+        "original_count": 40,
+        "deduped_count": 30,
+        "duplicates_removed": 10,
+        "conflicts_resolved": 3,
+        "evidence_sources": 10
+      }
+    },
+    {
+      "id": "lead_pm-002",
+      "agent_id": "lead_pm",
+      "type": "recommendation",
+      "title": "Top Priority Findings",
+      "description": "Highest priority items based on weighted scoring (user_impact×0.35 + business_value×0.30) / (effort×0.20 + risk×0.15): North Star Metric: User Engagement (score=3.444); Primary KPI: Notification Click-Through Rate (CTR) (score=3.059); Pricing Sensitivity in Competitive Landscape (score=2.973); Desire for Digest-Style Summaries (score=2.958); Need for Notification Priority Levels (score=2.882)",
+      "impact": "critical",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "metrics-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.444",
+          "url": null
+        },
+        {
+          "source_id": "metrics-002",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.059",
+          "url": null
+        },
+        {
+          "source_id": "competitive-004",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.973",
+          "url": null
+        },
+        {
+          "source_id": "customer-004",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.958",
+          "url": null
+        },
+        {
+          "source_id": "customer-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.882",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "prioritization",
+        "meta"
+      ],
+      "metadata": {
+        "top_priorities": [
+          {
+            "finding_id": "metrics-001",
+            "title": "North Star Metric: User Engagement",
+            "user_impact": 10,
+            "business_value": 9,
+            "effort": 3,
+            "risk": 8,
+            "priority_score": 3.444
+          },
+          {
+            "finding_id": "metrics-002",
+            "title": "Primary KPI: Notification Click-Through Rate (CTR)",
+            "user_impact": 8,
+            "business_value": 8,
+            "effort": 4,
+            "risk": 6,
+            "priority_score": 3.059
+          },
+          {
+            "finding_id": "competitive-004",
+            "title": "Pricing Sensitivity in Competitive Landscape",
+            "user_impact": 8,
+            "business_value": 9,
+            "effort": 4,
+            "risk": 7,
+            "priority_score": 2.973
+          },
+          {
+            "finding_id": "customer-004",
+            "title": "Desire for Digest-Style Summaries",
+            "user_impact": 5,
+            "business_value": 6,
+            "effort": 3,
+            "risk": 4,
+            "priority_score": 2.958
+          },
+          {
+            "finding_id": "customer-001",
+            "title": "Need for Notification Priority Levels",
+            "user_impact": 8,
+            "business_value": 7,
+            "effort": 4,
+            "risk": 6,
+            "priority_score": 2.882
+          }
+        ]
+      }
+    },
+    {
+      "id": "lead_pm-003",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Cross-Agent Conflict Resolution Report",
+      "description": "Resolved 3 conflicts between agent findings. risk-002 vs requirements-002: Critical push notification delivery issues on Android 14 must be resolved, but existing risks indicate failures in delivery.; risk-004 vs customer-005: Accessibility concerns in the notification center are flagged as a risk, while users report significant accessibility issues.; risk-003 vs competitive-004: Pricing sensitivity is flagged as a critical risk, yet SmartNotify's pricing is lower than competitors, which could lead to sustainability issues.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "risk-002",
+          "source_type": "doc",
+          "excerpt": "Critical push notification delivery issues on Android 14 must be resolved, but existing risks indicate failures in delivery.",
+          "url": null
+        },
+        {
+          "source_id": "risk-004",
+          "source_type": "doc",
+          "excerpt": "Accessibility concerns in the notification center are flagged as a risk, while users report significant accessibility issues.",
+          "url": null
+        },
+        {
+          "source_id": "risk-003",
+          "source_type": "doc",
+          "excerpt": "Pricing sensitivity is flagged as a critical risk, yet SmartNotify's pricing is lower than competitors, which could lead to sustainability issues.",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "conflicts",
+        "meta"
+      ],
+      "metadata": {
+        "conflicts": [
+          {
+            "finding_a": "risk-002",
+            "finding_b": "requirements-002",
+            "description": "Critical push notification delivery issues on Android 14 must be resolved, but existing risks indicate failures in delivery.",
+            "resolution": "Prioritize fixing the push notification delivery issues on Android 14 before implementing new features.",
+            "reasoning": "Addressing critical delivery issues is essential to maintain user trust and engagement, which must take precedence over feature enhancements."
+          },
+          {
+            "finding_a": "risk-004",
+            "finding_b": "customer-005",
+            "description": "Accessibility concerns in the notification center are flagged as a risk, while users report significant accessibility issues.",
+            "resolution": "Implement an accessibility audit and redesign of the notification center to address reported issues immediately.",
+            "reasoning": "Given the critical nature of accessibility for user engagement and compliance, resolving these issues should be prioritized."
+          },
+          {
+            "finding_a": "risk-003",
+            "finding_b": "competitive-004",
+            "description": "Pricing sensitivity is flagged as a critical risk, yet SmartNotify's pricing is lower than competitors, which could lead to sustainability issues.",
+            "resolution": "Conduct a pricing strategy review to ensure competitiveness while maintaining profitability, potentially adjusting pricing based on user feedback.",
+            "reasoning": "Balancing competitive pricing with financial viability is crucial to avoid long-term risks associated with pricing strategies."
+          }
+        ]
+      }
+    }
+  ],
+  "summary": "Consolidated 40 findings into 30 unique items. Removed 10 duplicates, resolved 3 conflicts. Top priority: North Star Metric: User Engagement.",
+  "errors": []
+}

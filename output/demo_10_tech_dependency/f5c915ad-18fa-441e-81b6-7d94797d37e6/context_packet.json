@@ -1,0 +1,132 @@
+{
+  "run_id": "f5c915ad-18fa-441e-81b6-7d94797d37e6",
+  "product_name": "DataPipe",
+  "product_description": "Real-time data pipeline platform facing critical technical dependency risks from deprecated libraries, vendor lock-in, and end-of-life infrastructure",
+  "tickets": [
+    {
+      "id": "DP-601",
+      "title": "Migrate from deprecated Apache Kafka 2.x to Kafka 3.7+",
+      "description": "Core message broker runs Kafka 2.8 which reaches end-of-life in Q1 2026. The Kafka 2.x client libraries have known vulnerabilities (CVE-2023-25194) and are incompatible with the new KRaft consensus protocol needed to eliminate ZooKeeper dependency. Migration requires updating all 14 producer services and 22 consumer services, plus rewriting custom partition assignors.",
+      "status": "open",
+      "priority": "critical",
+      "labels": [
+        "tech-debt",
+        "security",
+        "infrastructure"
+      ],
+      "created_at": "2025-08-10",
+      "source": "jira"
+    },
+    {
+      "id": "DP-602",
+      "title": "Eliminate vendor lock-in on proprietary transformation engine",
+      "description": "The data transformation layer relies on VendorX's proprietary ETL SDK ($180K/year license). VendorX was acquired last quarter and the new parent company announced a 3x price increase effective January 2026. Need to evaluate open-source alternatives (Apache Beam, dbt, custom Flink jobs) and plan migration off the proprietary SDK.",
+      "status": "open",
+      "priority": "critical",
+      "labels": [
+        "tech-debt",
+        "vendor",
+        "cost"
+      ],
+      "created_at": "2025-09-01",
+      "source": "jira"
+    },
+    {
+      "id": "DP-603",
+      "title": "Python 3.9 EOL migration for all pipeline workers",
+      "description": "Pipeline worker services run Python 3.9 which reaches end-of-life October 2025. Need to upgrade to Python 3.12 across 8 services. Key blockers: numpy 1.x dependency incompatible with 3.12, custom C extensions need recompilation, and the internal ML library uses removed asyncio APIs (loop parameter).",
+      "status": "in_progress",
+      "priority": "high",
+      "labels": [
+        "tech-debt",
+        "python",
+        "migration"
+      ],
+      "created_at": "2025-09-15",
+      "source": "jira"
+    },
+    {
+      "id": "DP-604",
+      "title": "Replace single-region Redis cluster with multi-region caching",
+      "description": "The entire caching layer is a single Redis 6 cluster in us-east-1. Redis 6 EOL is March 2026. Additionally, customers in EU and APAC regions experience 200ms+ cache miss latency. Need to migrate to Redis 7+ with multi-region replication or evaluate alternative caching solutions (DragonflyDB, KeyDB).",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "infrastructure",
+        "latency",
+        "tech-debt"
+      ],
+      "created_at": "2025-10-01",
+      "source": "jira"
+    },
+    {
+      "id": "DP-605",
+      "title": "Create dependency health dashboard and automated CVE alerting",
+      "description": "There is no centralized view of dependency health across the platform. Engineers discover EOL and CVE issues reactively. Build a dashboard showing all runtime dependencies with versions, EOL dates, known CVEs, and upgrade paths. Integrate with GitHub Dependabot and Snyk for automated alerting.",
+      "status": "open",
+      "priority": "medium",
+      "labels": [
+        "tooling",
+        "security",
+        "observability"
+      ],
+      "created_at": "2025-10-20",
+      "source": "jira"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-001",
+      "title": "customer_notes.md",
+      "content": "# Customer Notes — DataPipe Technical Dependencies\n\n## Interview 1: Nina V. (Platform Architect, Enterprise Customer)\nNina's team processes 50 billion events per day through DataPipe. \"We've noticed increasing instability in the Kafka layer — consumer rebalances are taking 10x longer than a year ago, and we suspect it's related to the outdated ZooKeeper dependency.\" She also raised concerns about the VendorX transformation SDK: \"If the price triples, we'll need to migrate regardless. Better to start now on our terms than be forced into an emergency migration later.\"\n\n## Interview 2: Sam D. (Security Engineer, Financial Services Customer)\nSam's security team flagged 7 CVEs in DataPipe's dependency tree during their quarterly vendor review. \"The Kafka 2.8 CVE is especially concerning — it allows remote code execution under specific configurations. We need a remediation timeline within 30 days or our CISO will require us to sandbox the integration.\" He also noted that Python 3.9 EOL means no more security patches, which violates their vendor security policy.\n\n## Interview 3: Ayumi T. (Data Engineering Lead, E-Commerce Customer)\nAyumi's team has built 40 custom Flink jobs on top of DataPipe. \"We chose DataPipe because of the transformation SDK, but if VendorX pricing makes it unsustainable, we need to know what the migration path looks like. Rewriting 40 jobs is a 6-month project for us.\" She asked for an open-source-compatible transformation API so they aren't locked into another proprietary dependency.\n",
+      "doc_type": "note",
+      "tags": []
+    },
+    {
+      "id": "DOC-002",
+      "title": "metrics_snapshot.json",
+      "content": "{\n  \"total_services\": 44,\n  \"services_on_eol_dependencies\": 18,\n  \"critical_cves_open\": 7,\n  \"high_cves_open\": 12,\n  \"kafka_version\": \"2.8.1\",\n  \"python_version_workers\": \"3.9.18\",\n  \"redis_version\": \"6.2.14\",\n  \"vendorx_annual_license_usd\": 180000,\n  \"vendorx_projected_license_usd\": 540000,\n  \"avg_consumer_rebalance_time_s\": 45,\n  \"baseline_rebalance_time_s\": 4,\n  \"events_processed_per_day_billions\": 50,\n  \"p99_pipeline_latency_ms\": 850,\n  \"infra_spend_monthly_usd\": 92000\n}\n",
+      "doc_type": "metrics_snapshot",
+      "tags": []
+    },
+    {
+      "id": "DOC-003",
+      "title": "tech_assessment.md",
+      "content": "# Tech Assessment — DataPipe Dependency Risks\n\n## Critical Dependencies at Risk\n\n### 1. Apache Kafka 2.8 (EOL: Q1 2026)\n- **Risk Level:** Critical\n- **Impact:** Core message broker for entire platform; 14 producers, 22 consumers\n- **CVEs:** CVE-2023-25194 (RCE, CVSS 8.8), CVE-2024-31141 (info disclosure, CVSS 6.5)\n- **Migration Path:** Upgrade to Kafka 3.7+ with KRaft mode, eliminating ZooKeeper. Requires client library upgrades across all services. Estimated effort: 8-12 weeks.\n- **Risk:** Breaking changes in consumer group protocol between 2.x and 3.x\n\n### 2. VendorX ETL SDK v4.2 (Price increase: Jan 2026)\n- **Risk Level:** Critical (financial)\n- **Impact:** Transformation layer for all data pipelines; 40+ customer-built jobs depend on SDK APIs\n- **Alternatives Evaluated:**\n  - Apache Beam: Good abstraction, multi-runner support, 70% API compatibility\n  - dbt: SQL-focused, not suitable for streaming workloads\n  - Custom Flink: Maximum flexibility but 6+ month build time\n- **Recommendation:** Apache Beam with custom compatibility shims for VendorX-specific APIs\n\n### 3. Python 3.9 (EOL: October 2025)\n- **Risk Level:** High\n- **Impact:** 8 pipeline worker services, internal ML library\n- **Blockers:** numpy 1.x incompatibility, custom C extensions, removed asyncio APIs\n- **Estimated Effort:** 4-6 weeks with focused sprint\n\n### 4. Redis 6.2 (EOL: March 2026)\n- **Risk Level:** Medium-High\n- **Impact:** Caching layer, single point of failure in us-east-1\n- **Migration Path:** Redis 7.x with Redis Cluster multi-region or DragonflyDB for cost savings\n- **Estimated Effort:** 3-4 weeks\n",
+      "doc_type": "note",
+      "tags": []
+    }
+  ],
+  "risk_hotspots": [
+    {
+      "category": "pricing",
+      "description": "Detected pricing risk keywords in 5 source(s): DOC-001, DOC-003, DP-602, DP-603, DP-605",
+      "severity": "high",
+      "source_ids": [
+        "DOC-001",
+        "DOC-003",
+        "DP-602",
+        "DP-603",
+        "DP-605"
+      ]
+    },
+    {
+      "category": "platform",
+      "description": "Detected platform risk keywords in 5 source(s): DOC-001, DOC-003, DP-601, DP-602, DP-603",
+      "severity": "high",
+      "source_ids": [
+        "DOC-001",
+        "DOC-003",
+        "DP-601",
+        "DP-602",
+        "DP-603"
+      ]
+    }
+  ],
+  "missing_info": [
+    "No competitive analysis or competitor brief"
+  ],
+  "dedup_log": [],
+  "raw_input_type": "bundle",
+  "created_at": "2026-03-06T12:50:44.000982Z"
+}

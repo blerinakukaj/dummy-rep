@@ -1,0 +1,175 @@
+{
+  "agent_id": "risk",
+  "agent_name": "Risk/Privacy/Compliance Guardrails Agent",
+  "run_id": "3a983204-8f45-4f95-8eed-646ce446fa7f",
+  "timestamp": "2026-03-09T20:17:25.141838Z",
+  "findings": [
+    {
+      "id": "risk-001",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Missing Data Handling Justification",
+      "description": "The system lacks justification for data collection, which may lead to non-compliance with data handling policies.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Data collection justifications are required as per policy."
+      ],
+      "evidence": [
+        {
+          "source_id": "intake-001",
+          "source_type": "doc",
+          "excerpt": "The input bundle is missing: No tickets or work items provided.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement a mechanism to justify data collection for all user data."
+      ],
+      "tags": [
+        "privacy",
+        "compliance"
+      ],
+      "metadata": {
+        "category": "privacy",
+        "is_blocker": true,
+        "mitigation": "Implement a mechanism to justify data collection for all user data.",
+        "policy_rule": "Require collection justification: True"
+      }
+    },
+    {
+      "id": "risk-002",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Missing Consent Mechanism for Data Collection",
+      "description": "There is no evidence of a consent mechanism for data collection, which violates privacy policies.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "A consent mechanism is required for data collection."
+      ],
+      "evidence": [
+        {
+          "source_id": "intake-002",
+          "source_type": "doc",
+          "excerpt": "The input bundle is missing: No supporting documents provided.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Develop and implement a clear consent mechanism for data collection."
+      ],
+      "tags": [
+        "privacy",
+        "compliance"
+      ],
+      "metadata": {
+        "category": "privacy",
+        "is_blocker": true,
+        "mitigation": "Develop and implement a clear consent mechanism for data collection.",
+        "policy_rule": "Require consent mechanism: True"
+      }
+    },
+    {
+      "id": "risk-003",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Retention Policy Violation",
+      "description": "The system does not have a defined retention policy for user data, which may lead to data retention beyond the allowed period.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Data retention must be limited to 90 days."
+      ],
+      "evidence": [
+        {
+          "source_id": "intake-003",
+          "source_type": "doc",
+          "excerpt": "The input bundle is missing: No customer notes or interview data.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Establish and enforce a data retention policy that limits data storage to 90 days."
+      ],
+      "tags": [
+        "privacy",
+        "compliance"
+      ],
+      "metadata": {
+        "category": "privacy",
+        "is_blocker": true,
+        "mitigation": "Establish and enforce a data retention policy that limits data storage to 90 days.",
+        "policy_rule": "Retention limit: 90 days"
+      }
+    },
+    {
+      "id": "risk-004",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Potential Data Exposure Risks",
+      "description": "The lack of documentation and metrics may lead to unmonitored data exposure risks.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [
+        "Monitoring and documentation are essential for identifying data exposure risks."
+      ],
+      "evidence": [
+        {
+          "source_id": "intake-004",
+          "source_type": "doc",
+          "excerpt": "The input bundle is missing: No metrics snapshot data.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement monitoring and documentation practices to identify and mitigate data exposure risks."
+      ],
+      "tags": [
+        "security",
+        "compliance"
+      ],
+      "metadata": {
+        "category": "security",
+        "is_blocker": false,
+        "mitigation": "Implement monitoring and documentation practices to identify and mitigate data exposure risks.",
+        "policy_rule": "N/A"
+      }
+    },
+    {
+      "id": "risk-005",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Accessibility Compliance Gaps",
+      "description": "The system may not fully comply with WCAG AA standards, which could hinder accessibility for users with disabilities.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Accessibility is a requirement, and compliance with WCAG AA is necessary."
+      ],
+      "evidence": [
+        {
+          "source_id": "intake-005",
+          "source_type": "doc",
+          "excerpt": "The input bundle is missing: No competitive analysis or competitor brief.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct an accessibility audit to ensure compliance with WCAG AA standards."
+      ],
+      "tags": [
+        "accessibility",
+        "compliance"
+      ],
+      "metadata": {
+        "category": "accessibility",
+        "is_blocker": false,
+        "mitigation": "Conduct an accessibility audit to ensure compliance with WCAG AA standards.",
+        "policy_rule": "Accessibility is a requirement, not an afterthought"
+      }
+    }
+  ],
+  "summary": "Identified 5 risks (1 accessibility, 3 privacy, 1 security). 3 flagged as blockers. Risk gate: FAILED (4 blockers, 3 warnings).",
+  "errors": []
+}

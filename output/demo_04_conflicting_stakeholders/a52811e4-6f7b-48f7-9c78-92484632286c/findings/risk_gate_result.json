@@ -1,0 +1,10 @@
+{
+  "passed": false,
+  "blockers": [
+    "BLOCKED: Risk agent flagged as blocker \u2014 Authentication Weaknesses Detected [risk-001]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 Checkout API Latency Exceeds Limits [risk-002]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 Payment Retry Reliability Issues [risk-003]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 Checkout Crashes on Mobile Devices [risk-004]"
+  ],
+  "warnings": []
+}

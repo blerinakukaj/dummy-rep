@@ -1,0 +1,139 @@
+{
+  "evidence_index": {
+    "customer-insights-001": [
+      "requirements-001",
+      "requirements-003",
+      "requirements-005"
+    ],
+    "metrics-analytics-001": [
+      "requirements-002",
+      "requirements-004"
+    ],
+    "intake-001": [
+      "risk-001"
+    ],
+    "intake-002": [
+      "risk-002"
+    ],
+    "intake-003": [
+      "risk-003"
+    ],
+    "intake-004": [
+      "risk-004"
+    ],
+    "intake-005": [
+      "risk-005"
+    ]
+  },
+  "dedup_log": [
+    {
+      "cluster": [
+        "intake-001",
+        "intake-002",
+        "intake-003",
+        "intake-004",
+        "intake-005"
+      ],
+      "kept": "intake-001",
+      "removed": [
+        "intake-002",
+        "intake-003",
+        "intake-004",
+        "intake-005"
+      ],
+      "reason": "All findings describe missing data issues that may reduce the quality of downstream agent analysis."
+    },
+    {
+      "cluster": [
+        "requirements-001",
+        "requirements-002",
+        "requirements-003",
+        "requirements-004",
+        "requirements-005"
+      ],
+      "kept": "requirements-001",
+      "removed": [
+        "requirements-002",
+        "requirements-003",
+        "requirements-004",
+        "requirements-005"
+      ],
+      "reason": "All findings relate to the development and improvement of notification prioritization systems."
+    },
+    {
+      "cluster": [
+        "risk-001",
+        "risk-002",
+        "risk-003",
+        "risk-004"
+      ],
+      "kept": "risk-001",
+      "removed": [
+        "risk-002",
+        "risk-003",
+        "risk-004"
+      ],
+      "reason": "All findings highlight risks associated with data handling and compliance issues."
+    }
+  ],
+  "ranked_findings": [
+    {
+      "finding_id": "requirements-001",
+      "title": "Define Notification Prioritization Criteria",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 7,
+      "priority_score": 2.444
+    },
+    {
+      "finding_id": "risk-001",
+      "title": "Missing Data Handling Justification",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 8,
+      "priority_score": 2.205
+    },
+    {
+      "finding_id": "intake-001",
+      "title": "Missing data: No tickets or work items provided",
+      "user_impact": 5,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 5,
+      "priority_score": 2.185
+    },
+    {
+      "finding_id": "risk-005",
+      "title": "Accessibility Compliance Gaps",
+      "user_impact": 9,
+      "business_value": 8,
+      "effort": 7,
+      "risk": 9,
+      "priority_score": 2.018
+    }
+  ],
+  "conflicts": [
+    {
+      "finding_a": "intake-001",
+      "finding_b": "risk-001",
+      "description": "Missing data from input bundle may lead to non-compliance with data handling policies due to lack of justification for data collection.",
+      "resolution": "Ensure that all data collection is justified and documented before proceeding with the intake process.",
+      "reasoning": "Compliance with data handling policies is critical; therefore, data collection must be validated to avoid legal repercussions."
+    },
+    {
+      "finding_a": "requirements-001",
+      "finding_b": "risk-005",
+      "description": "Defining notification prioritization criteria using machine learning may lead to accessibility issues if not designed with WCAG AA standards in mind.",
+      "resolution": "Incorporate accessibility considerations into the machine learning model development process to ensure compliance with WCAG AA standards.",
+      "reasoning": "Prioritization criteria must be inclusive to avoid hindering access for users with disabilities while still achieving the intended functionality."
+    }
+  ],
+  "consolidated_finding_ids": [
+    "intake-001",
+    "requirements-001",
+    "risk-001",
+    "risk-005"
+  ]
+}

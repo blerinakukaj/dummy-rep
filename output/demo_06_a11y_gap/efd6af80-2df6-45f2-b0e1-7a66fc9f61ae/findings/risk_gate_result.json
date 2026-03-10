@@ -1,0 +1,11 @@
+{
+  "passed": false,
+  "blockers": [
+    "BLOCKED: Risk agent flagged as blocker \u2014 Critical Accessibility Compliance Gap [risk-001]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 High Risk of Non-Compliance with Accessibility Standards [risk-002]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 High Risk of Non-Compliance with Color Contrast Standards [risk-003]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 Lack of VPAT for Compliance and Procurement [risk-004]",
+    "BLOCKED: 3 unmitigated high risks exceed maximum of 2"
+  ],
+  "warnings": []
+}

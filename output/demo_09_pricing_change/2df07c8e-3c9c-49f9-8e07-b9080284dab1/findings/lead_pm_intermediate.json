@@ -1,0 +1,497 @@
+{
+  "evidence_index": {
+    "CM-301": [
+      "intake-001",
+      "intake-002",
+      "metrics-005",
+      "feasibility-001",
+      "feasibility-003",
+      "feasibility-004",
+      "requirements-001",
+      "requirements-006",
+      "requirements-007",
+      "requirements-008",
+      "requirements-009",
+      "risk-001",
+      "risk-002",
+      "risk-003",
+      "risk-004"
+    ],
+    "CM-302": [
+      "intake-001",
+      "customer-001",
+      "feasibility-003",
+      "requirements-002",
+      "requirements-010",
+      "risk-007"
+    ],
+    "CM-303": [
+      "intake-001",
+      "customer-003",
+      "requirements-003"
+    ],
+    "CM-304": [
+      "intake-001",
+      "intake-003",
+      "customer-004",
+      "feasibility-005",
+      "requirements-004",
+      "risk-006"
+    ],
+    "CM-305": [
+      "intake-001",
+      "intake-002",
+      "metrics-004",
+      "customer-002",
+      "feasibility-002",
+      "requirements-005",
+      "risk-005"
+    ],
+    "DOC-001": [
+      "intake-001",
+      "intake-002",
+      "competitive-001",
+      "competitive-002",
+      "competitive-003",
+      "competitive-004"
+    ],
+    "DOC-002": [
+      "intake-001",
+      "intake-002",
+      "customer-001",
+      "customer-001",
+      "customer-002",
+      "customer-003",
+      "customer-004"
+    ],
+    "DOC-003": [
+      "intake-001",
+      "metrics-001",
+      "metrics-002",
+      "metrics-003"
+    ]
+  },
+  "dedup_log": [
+    {
+      "cluster": [
+        "intake-001",
+        "competitive-003"
+      ],
+      "kept": "competitive-003",
+      "removed": [
+        "intake-001"
+      ],
+      "reason": "Both findings highlight risks associated with pricing strategies and customer concerns related to pricing."
+    },
+    {
+      "cluster": [
+        "customer-001",
+        "customer-003"
+      ],
+      "kept": "customer-001",
+      "removed": [
+        "customer-003"
+      ],
+      "reason": "Both findings emphasize the need for customer awareness and management of costs in a usage-based pricing model to prevent bill shock."
+    },
+    {
+      "cluster": [
+        "customer-002",
+        "customer-004"
+      ],
+      "kept": "customer-002",
+      "removed": [
+        "customer-004"
+      ],
+      "reason": "Both findings address customer concerns regarding price increases and the need for guarantees during the transition to a new pricing model."
+    },
+    {
+      "cluster": [
+        "feasibility-002",
+        "risk-005"
+      ],
+      "kept": "feasibility-002",
+      "removed": [
+        "risk-005"
+      ],
+      "reason": "Both findings discuss risks related to customer churn and data exposure during the pricing transition."
+    },
+    {
+      "cluster": [
+        "requirements-002",
+        "requirements-006"
+      ],
+      "kept": "requirements-002",
+      "removed": [
+        "requirements-006"
+      ],
+      "reason": "Both findings focus on the need for tools to help customers understand and manage their costs under the new pricing model."
+    },
+    {
+      "cluster": [
+        "requirements-004",
+        "requirements-005"
+      ],
+      "kept": "requirements-004",
+      "removed": [
+        "requirements-005"
+      ],
+      "reason": "Both findings relate to managing customer transitions and risks associated with pricing changes."
+    },
+    {
+      "cluster": [
+        "risk-002",
+        "risk-006"
+      ],
+      "kept": "risk-002",
+      "removed": [
+        "risk-006"
+      ],
+      "reason": "Both findings highlight compliance risks associated with new data collection practices under the new pricing model."
+    }
+  ],
+  "ranked_findings": [
+    {
+      "finding_id": "metrics-002",
+      "title": "Primary KPI: Customer Churn Rate",
+      "user_impact": 7,
+      "business_value": 7,
+      "effort": 3,
+      "risk": 5,
+      "priority_score": 3.37
+    },
+    {
+      "finding_id": "metrics-001",
+      "title": "North Star Metric: Monthly Recurring Revenue (MRR)",
+      "user_impact": 9,
+      "business_value": 8,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 3.265
+    },
+    {
+      "finding_id": "metrics-003",
+      "title": "Guardrail Metric: Net Promoter Score (NPS)",
+      "user_impact": 6,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 4,
+      "priority_score": 2.786
+    },
+    {
+      "finding_id": "requirements-003",
+      "title": "Implement Usage Alerts and Spending Caps",
+      "user_impact": 6,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 4,
+      "priority_score": 2.786
+    },
+    {
+      "finding_id": "competitive-001",
+      "title": "Competitor Landscape Overview",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.742
+    },
+    {
+      "finding_id": "requirements-010",
+      "title": "Accessibility Compliance for Pricing Features",
+      "user_impact": 8,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.737
+    },
+    {
+      "finding_id": "competitive-004",
+      "title": "Differentiation Opportunity in Pricing Model",
+      "user_impact": 7,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 5,
+      "priority_score": 2.6
+    },
+    {
+      "finding_id": "metrics-005",
+      "title": "Experiment Opportunity: Pricing Sensitivity Analysis",
+      "user_impact": 5,
+      "business_value": 5,
+      "effort": 4,
+      "risk": 3,
+      "priority_score": 2.6
+    },
+    {
+      "finding_id": "requirements-002",
+      "title": "Build Pricing Calculator and Cost Estimator",
+      "user_impact": 7,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 5,
+      "priority_score": 2.6
+    },
+    {
+      "finding_id": "customer-001",
+      "title": "Need for Cost Transparency in Usage-Based Pricing",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.579
+    },
+    {
+      "finding_id": "competitive-002",
+      "title": "Feature Parity with Competitors",
+      "user_impact": 8,
+      "business_value": 8,
+      "effort": 6,
+      "risk": 6,
+      "priority_score": 2.476
+    },
+    {
+      "finding_id": "feasibility-005",
+      "title": "Compliance Risk with Grandfathering Customers",
+      "user_impact": 4,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 3,
+      "priority_score": 2.476
+    },
+    {
+      "finding_id": "requirements-008",
+      "title": "Create Documentation for Pricing Changes",
+      "user_impact": 4,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 3,
+      "priority_score": 2.476
+    },
+    {
+      "finding_id": "customer-002",
+      "title": "Concerns Over Significant Price Increases",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.437
+    },
+    {
+      "finding_id": "requirements-007",
+      "title": "Implement Monitoring and Alerting for Billing System",
+      "user_impact": 6,
+      "business_value": 6,
+      "effort": 5,
+      "risk": 4,
+      "priority_score": 2.437
+    },
+    {
+      "finding_id": "metrics-004",
+      "title": "Measurement Gap: Customer Segmentation Data",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 5,
+      "risk": 5,
+      "priority_score": 2.429
+    },
+    {
+      "finding_id": "feasibility-002",
+      "title": "Customer Churn Risk During Pricing Migration",
+      "user_impact": 7,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.395
+    },
+    {
+      "finding_id": "risk-003",
+      "title": "Retention Policy Violations",
+      "user_impact": 7,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.395
+    },
+    {
+      "finding_id": "intake-002",
+      "title": "Risk hotspot detected: platform",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 7,
+      "priority_score": 2.39
+    },
+    {
+      "finding_id": "requirements-004",
+      "title": "Grandfather Existing Customers with 12-Month Price Lock",
+      "user_impact": 7,
+      "business_value": 7,
+      "effort": 6,
+      "risk": 5,
+      "priority_score": 2.333
+    },
+    {
+      "finding_id": "feasibility-003",
+      "title": "Phased Delivery Plan for Pricing Migration",
+      "user_impact": 5,
+      "business_value": 5,
+      "effort": 4,
+      "risk": 4,
+      "priority_score": 2.321
+    },
+    {
+      "finding_id": "risk-007",
+      "title": "Accessibility Compliance for New Features",
+      "user_impact": 5,
+      "business_value": 5,
+      "effort": 4,
+      "risk": 4,
+      "priority_score": 2.321
+    },
+    {
+      "finding_id": "feasibility-001",
+      "title": "Integration with Stripe for Invoicing",
+      "user_impact": 8,
+      "business_value": 8,
+      "effort": 6,
+      "risk": 7,
+      "priority_score": 2.311
+    },
+    {
+      "finding_id": "risk-002",
+      "title": "Lack of Consent Mechanism for New Data Collection",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 9,
+      "priority_score": 2.294
+    },
+    {
+      "finding_id": "risk-001",
+      "title": "Potential PII Handling Issues",
+      "user_impact": 6,
+      "business_value": 6,
+      "effort": 5,
+      "risk": 5,
+      "priority_score": 2.229
+    },
+    {
+      "finding_id": "requirements-009",
+      "title": "User Feedback Collection Mechanism",
+      "user_impact": 3,
+      "business_value": 3,
+      "effort": 3,
+      "risk": 2,
+      "priority_score": 2.167
+    },
+    {
+      "finding_id": "competitive-003",
+      "title": "Pricing Risks Identified",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 7,
+      "risk": 9,
+      "priority_score": 2.127
+    },
+    {
+      "finding_id": "feasibility-004",
+      "title": "Real-time Metering Pipeline Requirement",
+      "user_impact": 8,
+      "business_value": 8,
+      "effort": 7,
+      "risk": 7,
+      "priority_score": 2.122
+    },
+    {
+      "finding_id": "risk-004",
+      "title": "Authentication Weaknesses in New Billing System",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 7,
+      "risk": 10,
+      "priority_score": 2.017
+    },
+    {
+      "finding_id": "requirements-001",
+      "title": "Design and Implement Usage-Based Billing Engine",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 8,
+      "risk": 9,
+      "priority_score": 1.983
+    },
+    {
+      "finding_id": "intake-003",
+      "title": "Risk hotspot detected: compliance",
+      "user_impact": 2,
+      "business_value": 3,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 1.333
+    }
+  ],
+  "conflicts": [
+    {
+      "finding_a": "requirements-001",
+      "finding_b": "risk-002",
+      "description": "The implementation of a usage-based billing engine requires additional customer data collection without a clear consent mechanism, violating privacy policies.",
+      "resolution": "Establish a clear consent mechanism for any new data collection related to the usage-based billing engine, ensuring compliance with privacy policies.",
+      "reasoning": "Privacy compliance is critical, and a consent mechanism will allow the feature to proceed while adhering to legal requirements."
+    },
+    {
+      "finding_a": "requirements-004",
+      "finding_b": "risk-003",
+      "description": "The grandfathering system may lead to retention of customer data beyond the 90-day limit if not properly managed.",
+      "resolution": "Implement strict data retention policies and automated processes to ensure customer data is deleted after the 90-day limit, even for grandfathered customers.",
+      "reasoning": "Maintaining compliance with retention policies is essential to avoid legal repercussions while allowing the grandfathering feature to be implemented."
+    },
+    {
+      "finding_a": "requirements-002",
+      "finding_b": "risk-001",
+      "description": "The development of a pricing calculator may lead to the collection of more PII than necessary, violating the data-minimal principle.",
+      "resolution": "Adopt a data minimization approach by only collecting essential information needed for the pricing calculator and ensuring that any PII collected is justified.",
+      "reasoning": "Balancing feature development with privacy principles is crucial to maintain user trust and comply with regulations."
+    },
+    {
+      "finding_a": "requirements-010",
+      "finding_b": "risk-007",
+      "description": "New pricing features may not comply with WCAG standards, potentially excluding users with disabilities, which contradicts the requirement for accessibility compliance.",
+      "resolution": "Conduct an accessibility audit during the development of new pricing features to ensure full compliance with WCAG standards.",
+      "reasoning": "Ensuring accessibility is a legal and ethical obligation that must be integrated into the development process of new features."
+    }
+  ],
+  "consolidated_finding_ids": [
+    "intake-002",
+    "intake-003",
+    "competitive-001",
+    "competitive-002",
+    "competitive-003",
+    "competitive-004",
+    "metrics-001",
+    "metrics-002",
+    "metrics-003",
+    "metrics-004",
+    "metrics-005",
+    "customer-001",
+    "customer-002",
+    "feasibility-001",
+    "feasibility-002",
+    "feasibility-003",
+    "feasibility-004",
+    "feasibility-005",
+    "requirements-001",
+    "requirements-002",
+    "requirements-003",
+    "requirements-004",
+    "requirements-007",
+    "requirements-008",
+    "requirements-009",
+    "requirements-010",
+    "risk-001",
+    "risk-002",
+    "risk-003",
+    "risk-004",
+    "risk-007"
+  ]
+}

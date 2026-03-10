@@ -1,0 +1,142 @@
+{
+  "agent_id": "risk",
+  "agent_name": "Risk/Privacy/Compliance Guardrails Agent",
+  "run_id": "efd6af80-2df6-45f2-b0e1-7a66fc9f61ae",
+  "timestamp": "2026-03-06T12:38:52.114219Z",
+  "findings": [
+    {
+      "id": "risk-001",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Critical Accessibility Compliance Gap",
+      "description": "LearnPath has significant WCAG 2.1 AA accessibility gaps affecting visually impaired and motor-disabled users, which poses a high risk of non-compliance with accessibility standards. This could lead to legal repercussions and loss of user trust.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Accessibility compliance is essential for user trust and legal adherence."
+      ],
+      "evidence": [
+        {
+          "source_id": "LP-501",
+          "source_type": "doc",
+          "excerpt": "Implement ARIA roles and keyboard support for the course catalog and enrollment flow to enable navigation for visually impaired users.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct a full accessibility audit and implement necessary changes to meet WCAG 2.1 AA standards."
+      ],
+      "tags": [
+        "accessibility",
+        "compliance"
+      ],
+      "metadata": {
+        "category": "accessibility",
+        "is_blocker": true,
+        "mitigation": "Implement ARIA roles and keyboard support across the platform.",
+        "policy_rule": "Block on critical privacy: True"
+      }
+    },
+    {
+      "id": "risk-002",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "High Risk of Non-Compliance with Accessibility Standards",
+      "description": "The current system has significant accessibility gaps that affect visually impaired and motor-disabled users, which poses a high risk of non-compliance with WCAG 2.1 AA standards. This could lead to legal repercussions and loss of user trust.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Non-compliance with accessibility standards can lead to legal issues."
+      ],
+      "evidence": [
+        {
+          "source_id": "LP-502",
+          "source_type": "doc",
+          "excerpt": "Add closed captions, transcripts, and keyboard controls to the video player to enhance accessibility for deaf, hard-of-hearing, and motor-impaired users.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Update the video player to include captions, transcripts, and keyboard controls."
+      ],
+      "tags": [
+        "accessibility",
+        "compliance"
+      ],
+      "metadata": {
+        "category": "accessibility",
+        "is_blocker": true,
+        "mitigation": "Update the video player to include necessary accessibility features.",
+        "policy_rule": "Block on critical privacy: True"
+      }
+    },
+    {
+      "id": "risk-003",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "High Risk of Non-Compliance with Color Contrast Standards",
+      "description": "60% of UI components fail to meet WCAG AA contrast ratios, making it difficult for users with visual impairments to read content effectively, which poses a high risk of non-compliance.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Color contrast compliance is essential for accessibility."
+      ],
+      "evidence": [
+        {
+          "source_id": "LP-503",
+          "source_type": "doc",
+          "excerpt": "Revise UI components to meet WCAG AA contrast ratios across all text elements.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Revise UI components to ensure compliance with WCAG AA contrast ratios."
+      ],
+      "tags": [
+        "accessibility",
+        "color contrast"
+      ],
+      "metadata": {
+        "category": "accessibility",
+        "is_blocker": true,
+        "mitigation": "Revise UI components to meet contrast standards.",
+        "policy_rule": "Block on critical privacy: True"
+      }
+    },
+    {
+      "id": "risk-004",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Lack of VPAT for Compliance and Procurement",
+      "description": "The absence of a Voluntary Product Accessibility Template (VPAT) is a significant barrier for potential clients in government and education sectors, impacting purchasing decisions and compliance.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "A VPAT is essential for compliance and attracting government clients."
+      ],
+      "evidence": [
+        {
+          "source_id": "LP-505",
+          "source_type": "doc",
+          "excerpt": "Conduct a full accessibility audit, create a Voluntary Product Accessibility Template (VPAT), and publish an accessibility statement.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Create and publish a VPAT to meet compliance requirements."
+      ],
+      "tags": [
+        "compliance",
+        "VPAT"
+      ],
+      "metadata": {
+        "category": "compliance",
+        "is_blocker": true,
+        "mitigation": "Conduct a full accessibility audit and create a VPAT.",
+        "policy_rule": "Legal review for PII: True"
+      }
+    }
+  ],
+  "summary": "Identified 4 risks (3 accessibility, 1 compliance). 4 flagged as blockers. Risk gate: FAILED (5 blockers, 0 warnings).",
+  "errors": []
+}

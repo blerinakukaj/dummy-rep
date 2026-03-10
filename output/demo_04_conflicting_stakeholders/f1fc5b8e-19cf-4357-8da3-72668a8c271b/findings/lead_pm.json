@@ -1,0 +1,245 @@
+{
+  "agent_id": "lead_pm",
+  "agent_name": "Lead PM Agent",
+  "run_id": "f1fc5b8e-19cf-4357-8da3-72668a8c271b",
+  "timestamp": "2026-03-06T12:31:27.523874Z",
+  "findings": [
+    {
+      "id": "lead_pm-001",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Pipeline Consolidation Summary",
+      "description": "Consolidated 41 findings from 7 agents into 32 unique findings. Removed 9 duplicates. Identified 4 cross-agent conflicts.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "intake",
+          "source_type": "doc",
+          "excerpt": "Intake & Context Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "competitive",
+          "source_type": "doc",
+          "excerpt": "Competitive & Positioning Agent: 4 findings",
+          "url": null
+        },
+        {
+          "source_id": "customer",
+          "source_type": "doc",
+          "excerpt": "Customer Insights Agent: 4 findings",
+          "url": null
+        },
+        {
+          "source_id": "metrics",
+          "source_type": "doc",
+          "excerpt": "Metrics & Analytics Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "feasibility",
+          "source_type": "doc",
+          "excerpt": "Tech Feasibility & Delivery Agent: 7 findings",
+          "url": null
+        },
+        {
+          "source_id": "requirements",
+          "source_type": "doc",
+          "excerpt": "UX & Requirements Agent: 10 findings",
+          "url": null
+        },
+        {
+          "source_id": "risk",
+          "source_type": "doc",
+          "excerpt": "Risk/Privacy/Compliance Guardrails Agent: 6 findings",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "consolidation",
+        "meta"
+      ],
+      "metadata": {
+        "original_count": 41,
+        "deduped_count": 32,
+        "duplicates_removed": 9,
+        "conflicts_resolved": 4,
+        "evidence_sources": 19
+      }
+    },
+    {
+      "id": "lead_pm-002",
+      "agent_id": "lead_pm",
+      "type": "recommendation",
+      "title": "Top Priority Findings",
+      "description": "Highest priority items based on weighted scoring (user_impact×0.35 + business_value×0.30) / (effort×0.20 + risk×0.15): Primary KPI: Cart Abandonment Rate (score=4.042); Experiment Opportunity: One-Click Purchase Flow (score=4.042); North Star Metric: Checkout Conversion Rate (score=3.548); B2B Buyers Prioritize Reliability Over Features (score=3.5); Auto-apply best coupon feature for V1 (score=3.5)",
+      "impact": "critical",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "metrics-002",
+          "source_type": "doc",
+          "excerpt": "Priority score: 4.042",
+          "url": null
+        },
+        {
+          "source_id": "metrics-005",
+          "source_type": "doc",
+          "excerpt": "Priority score: 4.042",
+          "url": null
+        },
+        {
+          "source_id": "metrics-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.548",
+          "url": null
+        },
+        {
+          "source_id": "customer-004",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.5",
+          "url": null
+        },
+        {
+          "source_id": "feasibility-006",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.5",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "prioritization",
+        "meta"
+      ],
+      "metadata": {
+        "top_priorities": [
+          {
+            "finding_id": "metrics-002",
+            "title": "Primary KPI: Cart Abandonment Rate",
+            "user_impact": 7,
+            "business_value": 8,
+            "effort": 3,
+            "risk": 4,
+            "priority_score": 4.042
+          },
+          {
+            "finding_id": "metrics-005",
+            "title": "Experiment Opportunity: One-Click Purchase Flow",
+            "user_impact": 7,
+            "business_value": 8,
+            "effort": 3,
+            "risk": 4,
+            "priority_score": 4.042
+          },
+          {
+            "finding_id": "metrics-001",
+            "title": "North Star Metric: Checkout Conversion Rate",
+            "user_impact": 8,
+            "business_value": 9,
+            "effort": 4,
+            "risk": 5,
+            "priority_score": 3.548
+          },
+          {
+            "finding_id": "customer-004",
+            "title": "B2B Buyers Prioritize Reliability Over Features",
+            "user_impact": 6,
+            "business_value": 7,
+            "effort": 3,
+            "risk": 4,
+            "priority_score": 3.5
+          },
+          {
+            "finding_id": "feasibility-006",
+            "title": "Auto-apply best coupon feature for V1",
+            "user_impact": 6,
+            "business_value": 7,
+            "effort": 3,
+            "risk": 4,
+            "priority_score": 3.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "lead_pm-003",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Cross-Agent Conflict Resolution Report",
+      "description": "Resolved 4 conflicts between agent findings. competitive-001 vs feasibility-005: The implementation of the one-click checkout feature is hindered by critical mobile checkout crashes that need urgent attention.; feasibility-003 vs requirements-004: The recommendation to fix payment retry reliability is in conflict with the requirement to implement auto-apply best coupon, as both are critical and cannot be addressed simultaneously.; feasibility-004 vs requirements-007: The migration to a new payment gateway is a prerequisite that will block feature development, including the implementation of the one-click purchase feature.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "competitive-001",
+          "source_type": "doc",
+          "excerpt": "The implementation of the one-click checkout feature is hindered by critical mobile checkout crashes that need urgent attention.",
+          "url": null
+        },
+        {
+          "source_id": "feasibility-003",
+          "source_type": "doc",
+          "excerpt": "The recommendation to fix payment retry reliability is in conflict with the requirement to implement auto-apply best coupon, as both are critical and cannot be addressed simultaneously.",
+          "url": null
+        },
+        {
+          "source_id": "feasibility-004",
+          "source_type": "doc",
+          "excerpt": "The migration to a new payment gateway is a prerequisite that will block feature development, including the implementation of the one-click purchase feature.",
+          "url": null
+        },
+        {
+          "source_id": "risk-006",
+          "source_type": "doc",
+          "excerpt": "Potential compliance issues with data handling practices may hinder the implementation of the one-click checkout feature, which requires secure handling of user data.",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "conflicts",
+        "meta"
+      ],
+      "metadata": {
+        "conflicts": [
+          {
+            "finding_a": "competitive-001",
+            "finding_b": "feasibility-005",
+            "description": "The implementation of the one-click checkout feature is hindered by critical mobile checkout crashes that need urgent attention.",
+            "resolution": "Prioritize fixing mobile checkout crashes before proceeding with the one-click checkout feature implementation.",
+            "reasoning": "User trust and functionality must be ensured before introducing new features that could exacerbate existing issues."
+          },
+          {
+            "finding_a": "feasibility-003",
+            "finding_b": "requirements-004",
+            "description": "The recommendation to fix payment retry reliability is in conflict with the requirement to implement auto-apply best coupon, as both are critical and cannot be addressed simultaneously.",
+            "resolution": "Address payment retry reliability first, then proceed with implementing the auto-apply best coupon feature.",
+            "reasoning": "Ensuring payment reliability is paramount to maintaining user trust, which must be prioritized over enhancing user experience with coupons."
+          },
+          {
+            "finding_a": "feasibility-004",
+            "finding_b": "requirements-007",
+            "description": "The migration to a new payment gateway is a prerequisite that will block feature development, including the implementation of the one-click purchase feature.",
+            "resolution": "Plan the migration to the new payment gateway first, ensuring that it is completed before starting on the one-click purchase feature.",
+            "reasoning": "The migration is critical for reducing transaction fees and improving support, which will ultimately benefit the one-click feature's performance."
+          },
+          {
+            "finding_a": "risk-006",
+            "finding_b": "competitive-001",
+            "description": "Potential compliance issues with data handling practices may hinder the implementation of the one-click checkout feature, which requires secure handling of user data.",
+            "resolution": "Conduct a compliance audit and address any identified issues before implementing the one-click checkout feature.",
+            "reasoning": "Compliance with data protection regulations is critical and must be ensured to avoid legal repercussions and maintain user trust."
+          }
+        ]
+      }
+    }
+  ],
+  "summary": "Consolidated 41 findings into 32 unique items. Removed 9 duplicates, resolved 4 conflicts. Top priority: Primary KPI: Cart Abandonment Rate.",
+  "errors": []
+}

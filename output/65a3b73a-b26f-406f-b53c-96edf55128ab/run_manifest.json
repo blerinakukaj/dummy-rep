@@ -1,0 +1,164 @@
+{
+  "run_id": "65a3b73a-b26f-406f-b53c-96edf55128ab",
+  "timestamp": "2026-03-09T20:13:34.714185+00:00",
+  "input_path": "input_bundles/sample_bundle/",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "duration_seconds": 195.7,
+  "agents_run": [
+    "intake",
+    "customer",
+    "competitive",
+    "metrics",
+    "feasibility",
+    "requirements",
+    "risk",
+    "lead_pm"
+  ],
+  "agents_failed": [],
+  "total_findings": 44,
+  "findings_by_type": {
+    "risk": 11,
+    "insight": 9,
+    "gap": 2,
+    "recommendation": 5,
+    "metric": 5,
+    "dependency": 2,
+    "requirement": 10
+  },
+  "recommendation": "validate_first",
+  "artifacts": {
+    "prd": "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\artifacts\\prd.md",
+    "roadmap": "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\artifacts\\roadmap.json",
+    "experiment_plan": "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\artifacts\\experiment_plan.md",
+    "decision_log": "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\artifacts\\decision_log.md",
+    "backlog": "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\artifacts\\backlog.csv",
+    "final_plan": "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\artifacts\\final_plan.json"
+  },
+  "token_usage": {
+    "per_agent": {
+      "intake": {
+        "prompt_tokens": 491,
+        "completion_tokens": 85,
+        "total_tokens": 576
+      },
+      "customer": {
+        "prompt_tokens": 1460,
+        "completion_tokens": 1148,
+        "total_tokens": 2608
+      },
+      "competitive": {
+        "prompt_tokens": 1053,
+        "completion_tokens": 1118,
+        "total_tokens": 2171
+      },
+      "metrics": {
+        "prompt_tokens": 1043,
+        "completion_tokens": 1575,
+        "total_tokens": 2618
+      },
+      "feasibility": {
+        "prompt_tokens": 1133,
+        "completion_tokens": 1218,
+        "total_tokens": 2351
+      },
+      "requirements": {
+        "prompt_tokens": 2597,
+        "completion_tokens": 2686,
+        "total_tokens": 5283
+      },
+      "risk": {
+        "prompt_tokens": 3570,
+        "completion_tokens": 956,
+        "total_tokens": 4526
+      },
+      "lead_pm": {
+        "prompt_tokens": 6017,
+        "completion_tokens": 2081,
+        "total_tokens": 8098
+      }
+    },
+    "total": {
+      "prompt_tokens": 17364,
+      "completion_tokens": 10867,
+      "total_tokens": 28231
+    }
+  },
+  "estimated_cost": 0.009125,
+  "agent_details": [
+    {
+      "agent_id": "customer",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 19.6,
+      "error": null
+    },
+    {
+      "agent_id": "competitive",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 20.24,
+      "error": null
+    },
+    {
+      "agent_id": "metrics",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 28.25,
+      "error": null
+    },
+    {
+      "agent_id": "feasibility",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 24.7,
+      "error": null
+    },
+    {
+      "agent_id": "requirements",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 45.16,
+      "error": null
+    },
+    {
+      "agent_id": "risk",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 14.79,
+      "error": null
+    },
+    {
+      "agent_id": "lead_pm",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 104.54,
+      "error": null
+    }
+  ],
+  "bundle_warnings": [],
+  "output_files": {
+    "context_packet": "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\context_packet.json",
+    "findings": [
+      "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\findings\\competitive.json",
+      "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\findings\\customer.json",
+      "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\findings\\feasibility.json",
+      "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\findings\\intake.json",
+      "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\findings\\lead_pm.json",
+      "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\findings\\lead_pm_intermediate.json",
+      "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\findings\\metrics.json",
+      "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\findings\\requirements.json",
+      "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\findings\\risk.json",
+      "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\findings\\risk_gate_result.json"
+    ],
+    "artifacts": [
+      "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\artifacts\\backlog.csv",
+      "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\artifacts\\decision_log.md",
+      "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\artifacts\\experiment_plan.md",
+      "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\artifacts\\final_plan.json",
+      "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\artifacts\\prd.md",
+      "output\\65a3b73a-b26f-406f-b53c-96edf55128ab\\artifacts\\roadmap.json"
+    ]
+  },
+  "errors": {}
+}

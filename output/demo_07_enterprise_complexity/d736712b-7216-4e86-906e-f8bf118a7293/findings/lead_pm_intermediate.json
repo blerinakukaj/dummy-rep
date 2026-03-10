@@ -1,0 +1,541 @@
+{
+  "evidence_index": {
+    "DOC-002": [
+      "intake-001",
+      "intake-002",
+      "intake-003",
+      "intake-004",
+      "intake-005",
+      "customer-001",
+      "customer-002",
+      "customer-003",
+      "customer-004",
+      "risk-001"
+    ],
+    "ENT-204": [
+      "intake-001",
+      "customer-004",
+      "feasibility-004",
+      "requirements-004",
+      "risk-004"
+    ],
+    "DOC-001": [
+      "intake-002",
+      "intake-003",
+      "intake-004",
+      "intake-005",
+      "competitive-001",
+      "competitive-002",
+      "competitive-003",
+      "competitive-004",
+      "risk-002"
+    ],
+    "ENT-201": [
+      "intake-002",
+      "intake-004",
+      "customer-001",
+      "metrics-004",
+      "feasibility-001",
+      "requirements-001"
+    ],
+    "DOC-003": [
+      "intake-003",
+      "intake-004",
+      "metrics-001",
+      "metrics-002",
+      "metrics-003",
+      "metrics-005"
+    ],
+    "ENT-202": [
+      "intake-005",
+      "customer-002",
+      "feasibility-002",
+      "requirements-002",
+      "risk-003"
+    ],
+    "ENT-203": [
+      "intake-005",
+      "customer-003",
+      "feasibility-003",
+      "requirements-003",
+      "requirements-010",
+      "requirements-011",
+      "requirements-012",
+      "risk-005"
+    ],
+    "ENT-205": [
+      "customer-005",
+      "feasibility-005",
+      "requirements-005"
+    ],
+    "metrics-004": [
+      "requirements-006",
+      "requirements-009"
+    ],
+    "metrics-003": [
+      "requirements-007"
+    ],
+    "metrics-005": [
+      "requirements-008"
+    ]
+  },
+  "dedup_log": [
+    {
+      "cluster": [
+        "intake-001",
+        "risk-001"
+      ],
+      "kept": "intake-001",
+      "removed": [
+        "risk-001"
+      ],
+      "reason": "Both describe privacy risks related to data handling and consent mechanisms."
+    },
+    {
+      "cluster": [
+        "intake-003",
+        "risk-003"
+      ],
+      "kept": "risk-003",
+      "removed": [
+        "intake-003"
+      ],
+      "reason": "Both highlight compliance risks associated with data isolation practices."
+    },
+    {
+      "cluster": [
+        "intake-004",
+        "risk-004"
+      ],
+      "kept": "risk-004",
+      "removed": [
+        "intake-004"
+      ],
+      "reason": "Both emphasize the need for data residency controls to comply with local laws."
+    },
+    {
+      "cluster": [
+        "intake-005",
+        "risk-005"
+      ],
+      "kept": "risk-005",
+      "removed": [
+        "intake-005"
+      ],
+      "reason": "Both address compliance and security concerns related to role-based access control."
+    },
+    {
+      "cluster": [
+        "customer-002",
+        "requirements-002"
+      ],
+      "kept": "customer-002",
+      "removed": [
+        "requirements-002"
+      ],
+      "reason": "Both focus on the need for enhanced data isolation to meet compliance requirements."
+    },
+    {
+      "cluster": [
+        "customer-004",
+        "requirements-004"
+      ],
+      "kept": "customer-004",
+      "removed": [
+        "requirements-004"
+      ],
+      "reason": "Both stress the importance of implementing data residency controls for compliance."
+    },
+    {
+      "cluster": [
+        "customer-003",
+        "requirements-003"
+      ],
+      "kept": "customer-003",
+      "removed": [
+        "requirements-003"
+      ],
+      "reason": "Both discuss the need for fine-grained role-based access control features."
+    },
+    {
+      "cluster": [
+        "feasibility-002",
+        "risk-003"
+      ],
+      "kept": "feasibility-002",
+      "removed": [
+        "risk-003"
+      ],
+      "reason": "Both highlight the compliance risk associated with application-level row filtering for data isolation."
+    },
+    {
+      "cluster": [
+        "feasibility-004",
+        "requirements-004"
+      ],
+      "kept": "feasibility-004",
+      "removed": [
+        "requirements-004"
+      ],
+      "reason": "Both emphasize the implementation of data residency controls for compliance."
+    },
+    {
+      "cluster": [
+        "competitive-003",
+        "requirements-002"
+      ],
+      "kept": "requirements-002",
+      "removed": [
+        "competitive-003"
+      ],
+      "reason": "Both suggest enhancing compliance offerings to address identified risks."
+    }
+  ],
+  "ranked_findings": [
+    {
+      "finding_id": "metrics-001",
+      "title": "North Star Metric: Monthly Active Users",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 2,
+      "risk": 6,
+      "priority_score": 4.731
+    },
+    {
+      "finding_id": "metrics-002",
+      "title": "Primary KPI: Churn Rate for Enterprise Customers",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 3,
+      "risk": 5,
+      "priority_score": 3.593
+    },
+    {
+      "finding_id": "customer-003",
+      "title": "Demand for Fine-Grained Role-Based Access Control",
+      "user_impact": 6,
+      "business_value": 7,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 3.5
+    },
+    {
+      "finding_id": "metrics-004",
+      "title": "Measurement Gap: Customer Feedback on Features",
+      "user_impact": 6,
+      "business_value": 7,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 3.5
+    },
+    {
+      "finding_id": "competitive-001",
+      "title": "Competitive Landscape Overview",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 4,
+      "risk": 4,
+      "priority_score": 3.464
+    },
+    {
+      "finding_id": "metrics-003",
+      "title": "Guardrail Metric: Uptime",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 3.235
+    },
+    {
+      "finding_id": "requirements-009",
+      "title": "Implement User Feedback Collection Mechanism",
+      "user_impact": 3,
+      "business_value": 4,
+      "effort": 2,
+      "risk": 2,
+      "priority_score": 3.214
+    },
+    {
+      "finding_id": "customer-002",
+      "title": "Need for Enhanced Data Isolation for Compliance",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 3.129
+    },
+    {
+      "finding_id": "requirements-006",
+      "title": "Collect Customer Feedback on Features",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 3.129
+    },
+    {
+      "finding_id": "requirements-007",
+      "title": "Monitor and Alert on Uptime Metrics",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 3.129
+    },
+    {
+      "finding_id": "requirements-008",
+      "title": "Conduct Churn Reduction Experiments",
+      "user_impact": 6,
+      "business_value": 7,
+      "effort": 4,
+      "risk": 4,
+      "priority_score": 3.0
+    },
+    {
+      "finding_id": "competitive-004",
+      "title": "Pricing Sensitivity in the Market",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 2.853
+    },
+    {
+      "finding_id": "risk-005",
+      "title": "High Security Risk: Role-Based Access Control Gaps",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 2.853
+    },
+    {
+      "finding_id": "metrics-005",
+      "title": "Experiment Opportunity: Churn Reduction Strategies",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 3,
+      "priority_score": 2.84
+    },
+    {
+      "finding_id": "customer-001",
+      "title": "SSO Integration is Critical for Enterprise Onboarding",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 5,
+      "risk": 8,
+      "priority_score": 2.795
+    },
+    {
+      "finding_id": "requirements-010",
+      "title": "Implement Security Audit Logging",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 5,
+      "priority_score": 2.771
+    },
+    {
+      "finding_id": "customer-005",
+      "title": "Unmet Need for White-Labeling Features",
+      "user_impact": 4,
+      "business_value": 5,
+      "effort": 3,
+      "risk": 3,
+      "priority_score": 2.762
+    },
+    {
+      "finding_id": "requirements-005",
+      "title": "Implement White-Label Theming and Custom Domain Support",
+      "user_impact": 4,
+      "business_value": 5,
+      "effort": 3,
+      "risk": 3,
+      "priority_score": 2.762
+    },
+    {
+      "finding_id": "intake-002",
+      "title": "Risk hotspot detected: auth",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 5,
+      "risk": 7,
+      "priority_score": 2.683
+    },
+    {
+      "finding_id": "feasibility-001",
+      "title": "SSO/SAML Integration Dependencies",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 5,
+      "risk": 7,
+      "priority_score": 2.683
+    },
+    {
+      "finding_id": "risk-004",
+      "title": "High Compliance Risk: Data Residency Controls",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 5,
+      "risk": 7,
+      "priority_score": 2.683
+    },
+    {
+      "finding_id": "intake-001",
+      "title": "Risk hotspot detected: privacy",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 3,
+      "risk": 5,
+      "priority_score": 2.63
+    },
+    {
+      "finding_id": "requirements-011",
+      "title": "Implement Custom Role Definitions",
+      "user_impact": 6,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 4,
+      "priority_score": 2.625
+    },
+    {
+      "finding_id": "requirements-012",
+      "title": "Implement Permission Inheritance",
+      "user_impact": 6,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 4,
+      "priority_score": 2.625
+    },
+    {
+      "finding_id": "competitive-002",
+      "title": "Feature Parity Gaps Identified",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.562
+    },
+    {
+      "finding_id": "requirements-001",
+      "title": "Implement SSO/SAML Integration",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.562
+    },
+    {
+      "finding_id": "feasibility-003",
+      "title": "Implement Role-Based Access Control",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.553
+    },
+    {
+      "finding_id": "customer-004",
+      "title": "Critical Need for Data Residency Controls",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 7,
+      "priority_score": 2.444
+    },
+    {
+      "finding_id": "feasibility-005",
+      "title": "White-Label Theming and Custom Domain Support",
+      "user_impact": 4,
+      "business_value": 5,
+      "effort": 4,
+      "risk": 3,
+      "priority_score": 2.32
+    },
+    {
+      "finding_id": "risk-002",
+      "title": "Critical Security Risk: Authentication Weaknesses",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.292
+    },
+    {
+      "finding_id": "feasibility-002",
+      "title": "Data Isolation Compliance Risk",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 7,
+      "risk": 9,
+      "priority_score": 2.236
+    },
+    {
+      "finding_id": "feasibility-004",
+      "title": "Data Residency Controls Implementation",
+      "user_impact": 8,
+      "business_value": 9,
+      "effort": 8,
+      "risk": 7,
+      "priority_score": 2.075
+    }
+  ],
+  "conflicts": [
+    {
+      "finding_a": "intake-001",
+      "finding_b": "risk-004",
+      "description": "Privacy risk detected in the platform while lacking necessary data residency controls for compliance.",
+      "resolution": "Implement data residency controls as a priority to ensure compliance with local laws and mitigate privacy risks.",
+      "reasoning": "Compliance with data residency laws is critical to avoid legal repercussions and enhance customer trust."
+    },
+    {
+      "finding_a": "risk-002",
+      "finding_b": "requirements-010",
+      "description": "Authentication weaknesses pose a critical security risk, yet implementing security audit logging is a high requirement.",
+      "resolution": "Prioritize addressing authentication weaknesses before implementing audit logging to ensure foundational security is established.",
+      "reasoning": "Addressing critical security risks must take precedence to prevent unauthorized access before enhancing logging capabilities."
+    },
+    {
+      "finding_a": "risk-005",
+      "finding_b": "requirements-011",
+      "description": "Gaps in role-based access control (RBAC) present a high security risk while implementing custom role definitions is a high requirement.",
+      "resolution": "Develop a robust RBAC system that includes custom role definitions to address security gaps simultaneously with the requirement.",
+      "reasoning": "Improving RBAC is essential for security and should be integrated into the development of custom roles to ensure both security and customer needs are met."
+    }
+  ],
+  "consolidated_finding_ids": [
+    "intake-001",
+    "intake-002",
+    "competitive-001",
+    "competitive-002",
+    "competitive-004",
+    "customer-001",
+    "customer-002",
+    "customer-003",
+    "customer-004",
+    "customer-005",
+    "metrics-001",
+    "metrics-002",
+    "metrics-003",
+    "metrics-004",
+    "metrics-005",
+    "feasibility-001",
+    "feasibility-002",
+    "feasibility-003",
+    "feasibility-004",
+    "feasibility-005",
+    "requirements-001",
+    "requirements-005",
+    "requirements-006",
+    "requirements-007",
+    "requirements-008",
+    "requirements-009",
+    "requirements-010",
+    "requirements-011",
+    "requirements-012",
+    "risk-002",
+    "risk-004",
+    "risk-005"
+  ]
+}

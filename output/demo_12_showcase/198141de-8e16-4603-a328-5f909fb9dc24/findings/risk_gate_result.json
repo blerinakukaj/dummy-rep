@@ -1,0 +1,10 @@
+{
+  "passed": false,
+  "blockers": [
+    "BLOCKED: Risk agent flagged as blocker \u2014 Critical Mobile Notification Delivery Issues [risk-002]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 Compliance Documentation Gaps [risk-005]"
+  ],
+  "warnings": [
+    "Legal review required for PII/privacy \u2014 Potential Privacy Risk Identified [risk-001]"
+  ]
+}

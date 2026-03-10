@@ -1,0 +1,480 @@
+{
+  "evidence_index": {
+    "CM-301": [
+      "intake-001",
+      "intake-002",
+      "feasibility-001",
+      "feasibility-004",
+      "requirements-001",
+      "risk-001",
+      "risk-002"
+    ],
+    "CM-302": [
+      "intake-001",
+      "customer-001",
+      "metrics-005",
+      "requirements-002",
+      "requirements-007",
+      "requirements-009",
+      "risk-004"
+    ],
+    "CM-303": [
+      "intake-001",
+      "customer-003",
+      "feasibility-003",
+      "requirements-003"
+    ],
+    "CM-304": [
+      "intake-001",
+      "intake-003",
+      "customer-004",
+      "feasibility-005",
+      "requirements-004",
+      "requirements-008",
+      "risk-003"
+    ],
+    "CM-305": [
+      "intake-001",
+      "intake-002",
+      "customer-002",
+      "metrics-004",
+      "feasibility-002",
+      "requirements-005",
+      "requirements-006"
+    ],
+    "DOC-001": [
+      "intake-001",
+      "intake-002",
+      "competitive-001",
+      "competitive-002",
+      "competitive-003",
+      "competitive-004"
+    ],
+    "DOC-002": [
+      "intake-001",
+      "intake-002",
+      "customer-001",
+      "customer-002",
+      "customer-003",
+      "customer-004"
+    ],
+    "DOC-003": [
+      "intake-001",
+      "metrics-001",
+      "metrics-002",
+      "metrics-003"
+    ],
+    "metrics-003": [
+      "requirements-010"
+    ],
+    "metrics-004": [
+      "requirements-011"
+    ]
+  },
+  "dedup_log": [
+    {
+      "cluster": [
+        "customer-001",
+        "requirements-002"
+      ],
+      "kept": "customer-001",
+      "removed": [
+        "requirements-002"
+      ],
+      "reason": "Both emphasize the need for tools that provide clear visibility into expected costs, including a pricing calculator."
+    },
+    {
+      "cluster": [
+        "customer-003",
+        "requirements-003"
+      ],
+      "kept": "customer-003",
+      "removed": [
+        "requirements-003"
+      ],
+      "reason": "Both discuss the implementation of configurable spending alerts and caps to manage budgets effectively."
+    },
+    {
+      "cluster": [
+        "customer-004",
+        "requirements-005"
+      ],
+      "kept": "customer-004",
+      "removed": [
+        "requirements-005"
+      ],
+      "reason": "Both highlight the need for clear communication and support during the transition to usage-based pricing, including a grandfathering system."
+    },
+    {
+      "cluster": [
+        "feasibility-002",
+        "risk-002"
+      ],
+      "kept": "feasibility-002",
+      "removed": [
+        "risk-002"
+      ],
+      "reason": "Both address the risk of customer churn due to potential cost increases and the need for proactive outreach strategies."
+    },
+    {
+      "cluster": [
+        "feasibility-003",
+        "requirements-003"
+      ],
+      "kept": "feasibility-003",
+      "removed": [
+        "requirements-003"
+      ],
+      "reason": "Both recommend implementing usage alerts and spending caps to prevent bill shock."
+    },
+    {
+      "cluster": [
+        "requirements-004",
+        "customer-004"
+      ],
+      "kept": "requirements-004",
+      "removed": [
+        "customer-004"
+      ],
+      "reason": "Both focus on the need for a grandfathering system to ensure a smooth transition for existing customers."
+    },
+    {
+      "cluster": [
+        "risk-003",
+        "risk-001"
+      ],
+      "kept": "risk-003",
+      "removed": [
+        "risk-001"
+      ],
+      "reason": "Both findings discuss compliance risks related to the collection of personally identifiable information (PII) under the new pricing model."
+    }
+  ],
+  "ranked_findings": [
+    {
+      "finding_id": "metrics-001",
+      "title": "North Star Metric: Monthly Recurring Revenue (MRR)",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 4,
+      "risk": 7,
+      "priority_score": 3.162
+    },
+    {
+      "finding_id": "metrics-002",
+      "title": "Primary KPI: Average Revenue Per Account (ARPA)",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 3,
+      "risk": 5,
+      "priority_score": 3.148
+    },
+    {
+      "finding_id": "competitive-001",
+      "title": "Competitor Landscape Overview",
+      "user_impact": 6,
+      "business_value": 5,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 3.0
+    },
+    {
+      "finding_id": "customer-003",
+      "title": "Desire for Spending Controls",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 2.882
+    },
+    {
+      "finding_id": "competitive-004",
+      "title": "Explore Differentiation Opportunities",
+      "user_impact": 5,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 3,
+      "priority_score": 2.81
+    },
+    {
+      "finding_id": "requirements-006",
+      "title": "Conduct Pricing Sensitivity Testing",
+      "user_impact": 5,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 3,
+      "priority_score": 2.81
+    },
+    {
+      "finding_id": "customer-001",
+      "title": "Need for Transparent Cost Estimation Tools",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.742
+    },
+    {
+      "finding_id": "feasibility-003",
+      "title": "Implement Usage Alerts and Spending Caps",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.742
+    },
+    {
+      "finding_id": "feasibility-005",
+      "title": "Grandfather Existing Customers",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.742
+    },
+    {
+      "finding_id": "requirements-007",
+      "title": "Develop Predictive Cost Dashboard",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.742
+    },
+    {
+      "finding_id": "requirements-010",
+      "title": "Monitor Projected Churn Increase Percentage",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.742
+    },
+    {
+      "finding_id": "customer-002",
+      "title": "Concerns Over Price Increases",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 5,
+      "risk": 8,
+      "priority_score": 2.659
+    },
+    {
+      "finding_id": "requirements-004",
+      "title": "Grandfather Existing Customers with 12-Month Price Lock",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.579
+    },
+    {
+      "finding_id": "metrics-003",
+      "title": "Guardrail Metric: Projected Churn Increase Percentage",
+      "user_impact": 6,
+      "business_value": 5,
+      "effort": 4,
+      "risk": 4,
+      "priority_score": 2.571
+    },
+    {
+      "finding_id": "requirements-011",
+      "title": "Enhance Customer Segmentation Data",
+      "user_impact": 6,
+      "business_value": 5,
+      "effort": 4,
+      "risk": 4,
+      "priority_score": 2.571
+    },
+    {
+      "finding_id": "requirements-008",
+      "title": "Implement Customer Communication Plan for Migration",
+      "user_impact": 4,
+      "business_value": 3,
+      "effort": 3,
+      "risk": 2,
+      "priority_score": 2.556
+    },
+    {
+      "finding_id": "competitive-002",
+      "title": "Feature Parity Gap with DataDogLite",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.553
+    },
+    {
+      "finding_id": "intake-001",
+      "title": "Risk hotspot detected: pricing",
+      "user_impact": 8,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 7,
+      "priority_score": 2.537
+    },
+    {
+      "finding_id": "metrics-005",
+      "title": "Experiment Opportunity: Pricing Sensitivity Testing",
+      "user_impact": 4,
+      "business_value": 4,
+      "effort": 3,
+      "risk": 3,
+      "priority_score": 2.476
+    },
+    {
+      "finding_id": "metrics-004",
+      "title": "Measurement Gap: Customer Segmentation Data",
+      "user_impact": 7,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.395
+    },
+    {
+      "finding_id": "requirements-009",
+      "title": "Create User Feedback Mechanism",
+      "user_impact": 3,
+      "business_value": 2,
+      "effort": 2,
+      "risk": 2,
+      "priority_score": 2.357
+    },
+    {
+      "finding_id": "competitive-003",
+      "title": "Pricing Risk from Competitors",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 9,
+      "priority_score": 2.294
+    },
+    {
+      "finding_id": "feasibility-004",
+      "title": "Integration with Stripe for Invoicing",
+      "user_impact": 9,
+      "business_value": 9,
+      "effort": 7,
+      "risk": 8,
+      "priority_score": 2.25
+    },
+    {
+      "finding_id": "feasibility-002",
+      "title": "Risk of Customer Churn During Pricing Migration",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 8,
+      "priority_score": 2.227
+    },
+    {
+      "finding_id": "risk-004",
+      "title": "Accessibility Compliance Gaps",
+      "user_impact": 4,
+      "business_value": 3,
+      "effort": 3,
+      "risk": 3,
+      "priority_score": 2.19
+    },
+    {
+      "finding_id": "intake-002",
+      "title": "Risk hotspot detected: platform",
+      "user_impact": 7,
+      "business_value": 7,
+      "effort": 6,
+      "risk": 6,
+      "priority_score": 2.167
+    },
+    {
+      "finding_id": "feasibility-001",
+      "title": "Dependency on Real-Time Metering Pipeline",
+      "user_impact": 9,
+      "business_value": 10,
+      "effort": 8,
+      "risk": 9,
+      "priority_score": 2.085
+    },
+    {
+      "finding_id": "risk-003",
+      "title": "Compliance Risk with GDPR and CCPA",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 9,
+      "priority_score": 2.085
+    },
+    {
+      "finding_id": "requirements-001",
+      "title": "Design and Implement Usage-Based Billing Engine",
+      "user_impact": 10,
+      "business_value": 10,
+      "effort": 9,
+      "risk": 10,
+      "priority_score": 1.97
+    },
+    {
+      "finding_id": "intake-003",
+      "title": "Risk hotspot detected: compliance",
+      "user_impact": 2,
+      "business_value": 3,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 1.333
+    }
+  ],
+  "conflicts": [
+    {
+      "finding_a": "requirements-001",
+      "finding_b": "risk-003",
+      "description": "The implementation of a usage-based billing engine requires the collection of PII, which poses compliance risks under GDPR and CCPA.",
+      "resolution": "Ensure that PII collection is minimized and that explicit consent is obtained from users, along with implementing robust data retention policies.",
+      "reasoning": "Compliance with privacy regulations is critical, and the feature can proceed if it adheres to data protection laws."
+    },
+    {
+      "finding_a": "customer-002",
+      "finding_b": "feasibility-002",
+      "description": "Concerns over price increases may lead to customer churn, which is already identified as a high risk during the pricing migration.",
+      "resolution": "Develop a proactive communication strategy to address customer concerns about potential price increases and provide reassurance through grandfathering existing customers.",
+      "reasoning": "Addressing customer concerns directly can mitigate churn risks while transitioning to the new pricing model."
+    },
+    {
+      "finding_a": "competitive-003",
+      "finding_b": "feasibility-003",
+      "description": "The pricing risk from competitors highlights the potential for 'bill shock,' while the recommendation to implement spending alerts aims to prevent this issue.",
+      "resolution": "Integrate spending alerts and caps as a core feature of the new pricing model to enhance customer trust and reduce the risk of bill shock.",
+      "reasoning": "By implementing these features, CloudMetrics can differentiate itself from competitors and alleviate customer concerns about unexpected charges."
+    }
+  ],
+  "consolidated_finding_ids": [
+    "intake-001",
+    "intake-002",
+    "intake-003",
+    "customer-001",
+    "customer-002",
+    "customer-003",
+    "competitive-001",
+    "competitive-002",
+    "competitive-003",
+    "competitive-004",
+    "metrics-001",
+    "metrics-002",
+    "metrics-003",
+    "metrics-004",
+    "metrics-005",
+    "feasibility-001",
+    "feasibility-002",
+    "feasibility-003",
+    "feasibility-004",
+    "feasibility-005",
+    "requirements-001",
+    "requirements-004",
+    "requirements-006",
+    "requirements-007",
+    "requirements-008",
+    "requirements-009",
+    "requirements-010",
+    "requirements-011",
+    "risk-003",
+    "risk-004"
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "run_id": "28e10f34-75e2-41f0-8d83-5673f7e9197e",
+  "timestamp": "2026-03-09T20:33:47.086725+00:00",
+  "input_path": "input_bundles/tech_dependency/",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "duration_seconds": 151.66,
+  "agents_run": [
+    "intake",
+    "competitive",
+    "customer",
+    "metrics",
+    "feasibility",
+    "requirements"
+  ],
+  "agents_failed": [
+    "risk",
+    "lead_pm"
+  ],
+  "total_findings": 30,
+  "findings_by_type": {
+    "gap": 3,
+    "risk": 5,
+    "insight": 5,
+    "metric": 3,
+    "recommendation": 2,
+    "dependency": 2,
+    "requirement": 10
+  },
+  "recommendation": "",
+  "artifacts": {},
+  "token_usage": {
+    "per_agent": {
+      "intake": {
+        "prompt_tokens": 545,
+        "completion_tokens": 105,
+        "total_tokens": 650
+      },
+      "competitive": {
+        "prompt_tokens": 825,
+        "completion_tokens": 748,
+        "total_tokens": 1573
+      },
+      "customer": {
+        "prompt_tokens": 1970,
+        "completion_tokens": 1176,
+        "total_tokens": 3146
+      },
+      "metrics": {
+        "prompt_tokens": 1059,
+        "completion_tokens": 1101,
+        "total_tokens": 2160
+      },
+      "feasibility": {
+        "prompt_tokens": 1201,
+        "completion_tokens": 1235,
+        "total_tokens": 2436
+      },
+      "requirements": {
+        "prompt_tokens": 2500,
+        "completion_tokens": 2923,
+        "total_tokens": 5423
+      }
+    },
+    "total": {
+      "prompt_tokens": 8100,
+      "completion_tokens": 7288,
+      "total_tokens": 15388
+    }
+  },
+  "estimated_cost": 0.005588,
+  "agent_details": [
+    {
+      "agent_id": "competitive",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 17.86,
+      "error": null
+    },
+    {
+      "agent_id": "customer",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 23.96,
+      "error": null
+    },
+    {
+      "agent_id": "metrics",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 27.65,
+      "error": null
+    },
+    {
+      "agent_id": "feasibility",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 26.53,
+      "error": null
+    },
+    {
+      "agent_id": "requirements",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 72.1,
+      "error": null
+    },
+    {
+      "agent_id": "risk",
+      "status": "failed",
+      "output_path": "",
+      "duration_seconds": 0.0,
+      "error": "[risk] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+    },
+    {
+      "agent_id": "lead_pm",
+      "status": "failed",
+      "output_path": "",
+      "duration_seconds": 0.0,
+      "error": "[lead_pm] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+    }
+  ],
+  "bundle_warnings": [
+    "No competitor brief \u2014 Competitive Agent will have limited input"
+  ],
+  "output_files": {
+    "context_packet": "output\\demo_10_tech_dependency\\28e10f34-75e2-41f0-8d83-5673f7e9197e\\context_packet.json",
+    "findings": [
+      "output\\demo_10_tech_dependency\\28e10f34-75e2-41f0-8d83-5673f7e9197e\\findings\\competitive.json",
+      "output\\demo_10_tech_dependency\\28e10f34-75e2-41f0-8d83-5673f7e9197e\\findings\\customer.json",
+      "output\\demo_10_tech_dependency\\28e10f34-75e2-41f0-8d83-5673f7e9197e\\findings\\feasibility.json",
+      "output\\demo_10_tech_dependency\\28e10f34-75e2-41f0-8d83-5673f7e9197e\\findings\\intake.json",
+      "output\\demo_10_tech_dependency\\28e10f34-75e2-41f0-8d83-5673f7e9197e\\findings\\metrics.json",
+      "output\\demo_10_tech_dependency\\28e10f34-75e2-41f0-8d83-5673f7e9197e\\findings\\requirements.json"
+    ],
+    "artifacts": []
+  },
+  "errors": {
+    "risk": "[risk] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "lead_pm": "[lead_pm] LLM call failed: LLM call failed after 3 retries: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+  }
+}

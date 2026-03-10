@@ -1,0 +1,204 @@
+{
+  "agent_id": "lead_pm",
+  "agent_name": "Lead PM Agent",
+  "run_id": "3a983204-8f45-4f95-8eed-646ce446fa7f",
+  "timestamp": "2026-03-09T20:17:37.633552Z",
+  "findings": [
+    {
+      "id": "lead_pm-001",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Pipeline Consolidation Summary",
+      "description": "Consolidated 15 findings from 7 agents into 4 unique findings. Removed 11 duplicates. Identified 2 cross-agent conflicts.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "intake",
+          "source_type": "doc",
+          "excerpt": "Intake & Context Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "customer",
+          "source_type": "doc",
+          "excerpt": "Customer Insights Agent: 0 findings",
+          "url": null
+        },
+        {
+          "source_id": "competitive",
+          "source_type": "doc",
+          "excerpt": "Competitive & Positioning Agent: 0 findings",
+          "url": null
+        },
+        {
+          "source_id": "metrics",
+          "source_type": "doc",
+          "excerpt": "Metrics & Analytics Agent: 0 findings",
+          "url": null
+        },
+        {
+          "source_id": "feasibility",
+          "source_type": "doc",
+          "excerpt": "Tech Feasibility & Delivery Agent: 0 findings",
+          "url": null
+        },
+        {
+          "source_id": "requirements",
+          "source_type": "doc",
+          "excerpt": "UX & Requirements Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "risk",
+          "source_type": "doc",
+          "excerpt": "Risk/Privacy/Compliance Guardrails Agent: 5 findings",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "consolidation",
+        "meta"
+      ],
+      "metadata": {
+        "original_count": 15,
+        "deduped_count": 4,
+        "duplicates_removed": 11,
+        "conflicts_resolved": 2,
+        "evidence_sources": 7
+      }
+    },
+    {
+      "id": "lead_pm-002",
+      "agent_id": "lead_pm",
+      "type": "recommendation",
+      "title": "Top Priority Findings",
+      "description": "Highest priority items based on weighted scoring (user_impact×0.35 + business_value×0.30) / (effort×0.20 + risk×0.15): Define Notification Prioritization Criteria (score=2.444); Missing Data Handling Justification (score=2.205); Missing data: No tickets or work items provided (score=2.185); Accessibility Compliance Gaps (score=2.018)",
+      "impact": "critical",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "requirements-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.444",
+          "url": null
+        },
+        {
+          "source_id": "risk-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.205",
+          "url": null
+        },
+        {
+          "source_id": "intake-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.185",
+          "url": null
+        },
+        {
+          "source_id": "risk-005",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.018",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "prioritization",
+        "meta"
+      ],
+      "metadata": {
+        "top_priorities": [
+          {
+            "finding_id": "requirements-001",
+            "title": "Define Notification Prioritization Criteria",
+            "user_impact": 8,
+            "business_value": 9,
+            "effort": 6,
+            "risk": 7,
+            "priority_score": 2.444
+          },
+          {
+            "finding_id": "risk-001",
+            "title": "Missing Data Handling Justification",
+            "user_impact": 7,
+            "business_value": 8,
+            "effort": 5,
+            "risk": 8,
+            "priority_score": 2.205
+          },
+          {
+            "finding_id": "intake-001",
+            "title": "Missing data: No tickets or work items provided",
+            "user_impact": 5,
+            "business_value": 4,
+            "effort": 3,
+            "risk": 5,
+            "priority_score": 2.185
+          },
+          {
+            "finding_id": "risk-005",
+            "title": "Accessibility Compliance Gaps",
+            "user_impact": 9,
+            "business_value": 8,
+            "effort": 7,
+            "risk": 9,
+            "priority_score": 2.018
+          }
+        ]
+      }
+    },
+    {
+      "id": "lead_pm-003",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Cross-Agent Conflict Resolution Report",
+      "description": "Resolved 2 conflicts between agent findings. intake-001 vs risk-001: Missing data from input bundle may lead to non-compliance with data handling policies due to lack of justification for data collection.; requirements-001 vs risk-005: Defining notification prioritization criteria using machine learning may lead to accessibility issues if not designed with WCAG AA standards in mind.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "intake-001",
+          "source_type": "doc",
+          "excerpt": "Missing data from input bundle may lead to non-compliance with data handling policies due to lack of justification for data collection.",
+          "url": null
+        },
+        {
+          "source_id": "requirements-001",
+          "source_type": "doc",
+          "excerpt": "Defining notification prioritization criteria using machine learning may lead to accessibility issues if not designed with WCAG AA standards in mind.",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "conflicts",
+        "meta"
+      ],
+      "metadata": {
+        "conflicts": [
+          {
+            "finding_a": "intake-001",
+            "finding_b": "risk-001",
+            "description": "Missing data from input bundle may lead to non-compliance with data handling policies due to lack of justification for data collection.",
+            "resolution": "Ensure that all data collection is justified and documented before proceeding with the intake process.",
+            "reasoning": "Compliance with data handling policies is critical; therefore, data collection must be validated to avoid legal repercussions."
+          },
+          {
+            "finding_a": "requirements-001",
+            "finding_b": "risk-005",
+            "description": "Defining notification prioritization criteria using machine learning may lead to accessibility issues if not designed with WCAG AA standards in mind.",
+            "resolution": "Incorporate accessibility considerations into the machine learning model development process to ensure compliance with WCAG AA standards.",
+            "reasoning": "Prioritization criteria must be inclusive to avoid hindering access for users with disabilities while still achieving the intended functionality."
+          }
+        ]
+      }
+    }
+  ],
+  "summary": "Consolidated 15 findings into 4 unique items. Removed 11 duplicates, resolved 2 conflicts. Top priority: Define Notification Prioritization Criteria.",
+  "errors": []
+}

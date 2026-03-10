@@ -1,0 +1,232 @@
+{
+  "agent_id": "lead_pm",
+  "agent_name": "Lead PM Agent",
+  "run_id": "b0a49ea8-63eb-4eb1-93f0-eebd0a2695f8",
+  "timestamp": "2026-03-09T20:03:51.280920Z",
+  "findings": [
+    {
+      "id": "lead_pm-001",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Pipeline Consolidation Summary",
+      "description": "Consolidated 34 findings from 7 agents into 24 unique findings. Removed 10 duplicates. Identified 3 cross-agent conflicts.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "intake",
+          "source_type": "doc",
+          "excerpt": "Intake & Context Agent: 3 findings",
+          "url": null
+        },
+        {
+          "source_id": "competitive",
+          "source_type": "doc",
+          "excerpt": "Competitive & Positioning Agent: 0 findings",
+          "url": null
+        },
+        {
+          "source_id": "metrics",
+          "source_type": "doc",
+          "excerpt": "Metrics & Analytics Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "customer",
+          "source_type": "doc",
+          "excerpt": "Customer Insights Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "feasibility",
+          "source_type": "doc",
+          "excerpt": "Tech Feasibility & Delivery Agent: 7 findings",
+          "url": null
+        },
+        {
+          "source_id": "requirements",
+          "source_type": "doc",
+          "excerpt": "UX & Requirements Agent: 10 findings",
+          "url": null
+        },
+        {
+          "source_id": "risk",
+          "source_type": "doc",
+          "excerpt": "Risk/Privacy/Compliance Guardrails Agent: 4 findings",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "consolidation",
+        "meta"
+      ],
+      "metadata": {
+        "original_count": 34,
+        "deduped_count": 24,
+        "duplicates_removed": 10,
+        "conflicts_resolved": 3,
+        "evidence_sources": 12
+      }
+    },
+    {
+      "id": "lead_pm-002",
+      "agent_id": "lead_pm",
+      "type": "recommendation",
+      "title": "Top Priority Findings",
+      "description": "Highest priority items based on weighted scoring (user_impact×0.35 + business_value×0.30) / (effort×0.20 + risk×0.15): North Star Metric: Search Relevance Score (score=3.0); Primary KPI: Search Click-Through Rate (CTR) (score=2.882); Establish Baseline Metrics for Image Search (score=2.88); Feature Flag Dependency for Rollback (score=2.742); Monitor Search Relevance Score (score=2.742)",
+      "impact": "critical",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "metrics-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.0",
+          "url": null
+        },
+        {
+          "source_id": "metrics-002",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.882",
+          "url": null
+        },
+        {
+          "source_id": "metrics-005",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.88",
+          "url": null
+        },
+        {
+          "source_id": "feasibility-002",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.742",
+          "url": null
+        },
+        {
+          "source_id": "requirements-007",
+          "source_type": "doc",
+          "excerpt": "Priority score: 2.742",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "prioritization",
+        "meta"
+      ],
+      "metadata": {
+        "top_priorities": [
+          {
+            "finding_id": "metrics-001",
+            "title": "North Star Metric: Search Relevance Score",
+            "user_impact": 9,
+            "business_value": 9,
+            "effort": 6,
+            "risk": 5,
+            "priority_score": 3.0
+          },
+          {
+            "finding_id": "metrics-002",
+            "title": "Primary KPI: Search Click-Through Rate (CTR)",
+            "user_impact": 8,
+            "business_value": 7,
+            "effort": 4,
+            "risk": 6,
+            "priority_score": 2.882
+          },
+          {
+            "finding_id": "metrics-005",
+            "title": "Establish Baseline Metrics for Image Search",
+            "user_impact": 6,
+            "business_value": 5,
+            "effort": 4,
+            "risk": 3,
+            "priority_score": 2.88
+          },
+          {
+            "finding_id": "feasibility-002",
+            "title": "Feature Flag Dependency for Rollback",
+            "user_impact": 7,
+            "business_value": 6,
+            "effort": 4,
+            "risk": 5,
+            "priority_score": 2.742
+          },
+          {
+            "finding_id": "requirements-007",
+            "title": "Monitor Search Relevance Score",
+            "user_impact": 7,
+            "business_value": 6,
+            "effort": 4,
+            "risk": 5,
+            "priority_score": 2.742
+          }
+        ]
+      }
+    },
+    {
+      "id": "lead_pm-003",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Cross-Agent Conflict Resolution Report",
+      "description": "Resolved 3 conflicts between agent findings. customer-001 vs feasibility-001: The new ranking algorithm has caused a significant drop in search relevance scores, affecting user satisfaction, which is critical.; feasibility-002 vs feasibility-003: The ability to rollback the v2.4.1 deployment is blocked by a dependent feature flag change, while increased support volume indicates a significant user experience issue.; risk-004 vs feasibility-001: Potential violation of data retention policy may lead to critical privacy risks, while the drop in search relevance scores is also critical.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "customer-001",
+          "source_type": "doc",
+          "excerpt": "The new ranking algorithm has caused a significant drop in search relevance scores, affecting user satisfaction, which is critical.",
+          "url": null
+        },
+        {
+          "source_id": "feasibility-002",
+          "source_type": "doc",
+          "excerpt": "The ability to rollback the v2.4.1 deployment is blocked by a dependent feature flag change, while increased support volume indicates a significant user experience issue.",
+          "url": null
+        },
+        {
+          "source_id": "risk-004",
+          "source_type": "doc",
+          "excerpt": "Potential violation of data retention policy may lead to critical privacy risks, while the drop in search relevance scores is also critical.",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "conflicts",
+        "meta"
+      ],
+      "metadata": {
+        "conflicts": [
+          {
+            "finding_a": "customer-001",
+            "finding_b": "feasibility-001",
+            "description": "The new ranking algorithm has caused a significant drop in search relevance scores, affecting user satisfaction, which is critical.",
+            "resolution": "Prioritize a rollback of the v2.4.1 deployment to restore search relevance scores while addressing the feature flag dependency.",
+            "reasoning": "User satisfaction is paramount; restoring relevance should take precedence over new features until the issue is resolved."
+          },
+          {
+            "finding_a": "feasibility-002",
+            "finding_b": "feasibility-003",
+            "description": "The ability to rollback the v2.4.1 deployment is blocked by a dependent feature flag change, while increased support volume indicates a significant user experience issue.",
+            "resolution": "Resolve the feature flag dependency urgently to enable rollback and address the support volume issue.",
+            "reasoning": "Quick remediation is necessary to prevent further user dissatisfaction and churn."
+          },
+          {
+            "finding_a": "risk-004",
+            "finding_b": "feasibility-001",
+            "description": "Potential violation of data retention policy may lead to critical privacy risks, while the drop in search relevance scores is also critical.",
+            "resolution": "Implement immediate measures to ensure compliance with data retention policies while addressing the search relevance issue.",
+            "reasoning": "Both privacy compliance and user experience are critical; they must be addressed simultaneously to mitigate risks."
+          }
+        ]
+      }
+    }
+  ],
+  "summary": "Consolidated 34 findings into 24 unique items. Removed 10 duplicates, resolved 3 conflicts. Top priority: North Star Metric: Search Relevance Score.",
+  "errors": []
+}

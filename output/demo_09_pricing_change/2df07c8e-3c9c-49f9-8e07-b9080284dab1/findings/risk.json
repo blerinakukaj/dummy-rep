@@ -1,0 +1,242 @@
+{
+  "agent_id": "risk",
+  "agent_name": "Risk/Privacy/Compliance Guardrails Agent",
+  "run_id": "2df07c8e-3c9c-49f9-8e07-b9080284dab1",
+  "timestamp": "2026-03-09T20:29:02.489573Z",
+  "findings": [
+    {
+      "id": "risk-001",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Potential PII Handling Issues",
+      "description": "The transition to a consumption-based pricing model may lead to the collection of more PII than necessary, violating the data-minimal principle.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "The new pricing model will require more detailed usage data from customers."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-301",
+          "source_type": "doc",
+          "excerpt": "Migrate from flat monthly pricing to a consumption-based pricing model where customers pay per metric ingested.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement strict data minimization practices to ensure only necessary PII is collected."
+      ],
+      "tags": [
+        "privacy",
+        "PII"
+      ],
+      "metadata": {
+        "category": "privacy",
+        "is_blocker": true,
+        "mitigation": "Implement strict data minimization practices to ensure only necessary PII is collected.",
+        "policy_rule": "Data-minimal by default"
+      }
+    },
+    {
+      "id": "risk-002",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Lack of Consent Mechanism for New Data Collection",
+      "description": "The new pricing model may require additional customer data collection without a clear consent mechanism, violating privacy policies.",
+      "impact": "critical",
+      "confidence": "directional",
+      "assumptions": [
+        "Customers may not be informed about the new data collection practices."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-301",
+          "source_type": "doc",
+          "excerpt": "Migrate from flat monthly pricing to a consumption-based pricing model.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Establish a clear consent mechanism for any new data collection related to the pricing model."
+      ],
+      "tags": [
+        "privacy",
+        "consent"
+      ],
+      "metadata": {
+        "category": "privacy",
+        "is_blocker": true,
+        "mitigation": "Establish a clear consent mechanism for any new data collection related to the pricing model.",
+        "policy_rule": "Require consent mechanism"
+      }
+    },
+    {
+      "id": "risk-003",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Retention Policy Violations",
+      "description": "The new pricing model may lead to retention of customer data beyond the 90-day limit if not properly managed.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Data retention policies may not be enforced during the transition."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-301",
+          "source_type": "doc",
+          "excerpt": "Migrate from flat monthly pricing to a consumption-based pricing model.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Ensure that data retention policies are strictly enforced during the transition."
+      ],
+      "tags": [
+        "privacy",
+        "retention"
+      ],
+      "metadata": {
+        "category": "privacy",
+        "is_blocker": true,
+        "mitigation": "Ensure that data retention policies are strictly enforced during the transition.",
+        "policy_rule": "Retention limit: 90 days"
+      }
+    },
+    {
+      "id": "risk-004",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Authentication Weaknesses in New Billing System",
+      "description": "The new billing engine may introduce authentication weaknesses if not properly secured, leading to unauthorized access to sensitive customer data.",
+      "impact": "critical",
+      "confidence": "directional",
+      "assumptions": [
+        "The new billing system will have the same authentication mechanisms as the previous system."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-301",
+          "source_type": "doc",
+          "excerpt": "Migrate from flat monthly pricing to a consumption-based pricing model.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement strong authentication mechanisms for the new billing system."
+      ],
+      "tags": [
+        "security",
+        "authentication"
+      ],
+      "metadata": {
+        "category": "security",
+        "is_blocker": true,
+        "mitigation": "Implement strong authentication mechanisms for the new billing system.",
+        "policy_rule": "Block on critical security"
+      }
+    },
+    {
+      "id": "risk-005",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Data Exposure Risks During Pricing Transition",
+      "description": "The transition to a consumption-based pricing model may expose customer data if proper security measures are not implemented.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Existing security measures may not be sufficient for the new model."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-305",
+          "source_type": "doc",
+          "excerpt": "Create a model that identifies which customer segments will see cost increases.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct a security review to identify and mitigate data exposure risks."
+      ],
+      "tags": [
+        "security",
+        "data exposure"
+      ],
+      "metadata": {
+        "category": "security",
+        "is_blocker": false,
+        "mitigation": "Conduct a security review to identify and mitigate data exposure risks.",
+        "policy_rule": "N/A"
+      }
+    },
+    {
+      "id": "risk-006",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Compliance Risks with New Pricing Model",
+      "description": "The new pricing model may not comply with GDPR and CCPA regulations if customer data is not handled properly.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "The new pricing model will require additional customer data."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-304",
+          "source_type": "doc",
+          "excerpt": "Develop a grandfathering system that tracks customer cohorts.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct a legal review to ensure compliance with GDPR and CCPA."
+      ],
+      "tags": [
+        "compliance",
+        "GDPR",
+        "CCPA"
+      ],
+      "metadata": {
+        "category": "compliance",
+        "is_blocker": true,
+        "mitigation": "Conduct a legal review to ensure compliance with GDPR and CCPA.",
+        "policy_rule": "Legal review for PII"
+      }
+    },
+    {
+      "id": "risk-007",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Accessibility Compliance for New Features",
+      "description": "New pricing features may not comply with WCAG standards, potentially excluding users with disabilities.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Accessibility considerations may be overlooked during development."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-302",
+          "source_type": "doc",
+          "excerpt": "Develop an in-app pricing calculator that estimates monthly costs.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Ensure all new features comply with WCAG standards."
+      ],
+      "tags": [
+        "accessibility",
+        "WCAG"
+      ],
+      "metadata": {
+        "category": "accessibility",
+        "is_blocker": true,
+        "mitigation": "Ensure all new features comply with WCAG standards.",
+        "policy_rule": "Accessibility is a requirement, not an afterthought"
+      }
+    }
+  ],
+  "summary": "Identified 7 risks (1 accessibility, 1 compliance, 3 privacy, 2 security). 6 flagged as blockers. Risk gate: FAILED (7 blockers, 3 warnings).",
+  "errors": []
+}

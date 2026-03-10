@@ -1,0 +1,153 @@
+{
+  "agent_id": "competitive",
+  "agent_name": "Competitive & Positioning Agent",
+  "run_id": "57c812f2-883d-4582-8e51-b74e62e04b23",
+  "timestamp": "2026-03-06T12:41:05.700827Z",
+  "findings": [
+    {
+      "id": "competitive-001",
+      "agent_id": "competitive",
+      "type": "insight",
+      "title": "PlatformOne's Compliance Strengths",
+      "description": "PlatformOne has a strong compliance posture with SOC 2 Type II and ISO 27001 certifications, which are critical for enterprise customers. This positions them favorably against EnterpriseSuite, which may need to enhance its compliance features to compete effectively.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Enterprise customers prioritize compliance certifications."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "PlatformOne... SOC 2 Type II and ISO 27001 certified.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Pursue SOC 2 Type II and ISO 27001 certifications for EnterpriseSuite."
+      ],
+      "tags": [
+        "compliance",
+        "certifications"
+      ],
+      "metadata": {
+        "competitor": "PlatformOne",
+        "feature": "compliance certifications"
+      }
+    },
+    {
+      "id": "competitive-002",
+      "agent_id": "competitive",
+      "type": "gap",
+      "title": "Feature Gaps in Data Residency and RBAC",
+      "description": "EnterpriseSuite currently lacks advanced data residency controls and custom RBAC features that competitors like PlatformOne offer. This gap could hinder its appeal to enterprise clients with strict data governance needs.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Enterprise clients require robust data governance and access control."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "PlatformOne... custom RBAC, audit logging, data residency.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "WorkLayer... no data residency controls, basic RBAC only.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Develop and implement advanced data residency and RBAC features."
+      ],
+      "tags": [
+        "feature gap",
+        "data residency",
+        "RBAC"
+      ],
+      "metadata": {
+        "competitors": [
+          "PlatformOne",
+          "WorkLayer"
+        ],
+        "features": [
+          "data residency",
+          "RBAC"
+        ]
+      }
+    },
+    {
+      "id": "competitive-003",
+      "agent_id": "competitive",
+      "type": "recommendation",
+      "title": "Enhance UI and Onboarding Experience",
+      "description": "To differentiate from competitors, particularly PlatformOne's dated UI and WorkLayer's fast onboarding, EnterpriseSuite should invest in a modern user interface and streamline the onboarding process to improve user experience.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "A modern UI and quick onboarding will attract more users."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "PlatformOne... UI is functional but dated.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "WorkLayer... fast onboarding (average 5 days).",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Invest in UI redesign and optimize onboarding processes."
+      ],
+      "tags": [
+        "UI",
+        "onboarding"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "competitive-004",
+      "agent_id": "competitive",
+      "type": "risk",
+      "title": "Pricing Risks Compared to Competitors",
+      "description": "EnterpriseSuite's pricing strategy may be at risk as it is not mentioned in the competitive data. Competitors like WorkLayer offer competitive pricing at $25/seat/month, while PlatformOne is significantly higher at $85/seat/month. Without a clear pricing strategy, EnterpriseSuite may struggle to attract mid-market clients.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Pricing is a key factor for mid-market clients."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "WorkLayer... competitive pricing ($25/seat/month).",
+          "url": null
+        },
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "PlatformOne... very expensive ($85/seat/month).",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Clarify and potentially adjust pricing strategy for EnterpriseSuite."
+      ],
+      "tags": [
+        "pricing",
+        "strategy"
+      ],
+      "metadata": {}
+    }
+  ],
+  "summary": "The competitive landscape for EnterpriseSuite reveals significant strengths and weaknesses among competitors, particularly in compliance and feature offerings. There are notable gaps in data residency and RBAC features, as well as opportunities for differentiation through UI improvements and pricing strategies. Addressing these areas will be crucial for positioning EnterpriseSuite effectively in the market.",
+  "errors": []
+}

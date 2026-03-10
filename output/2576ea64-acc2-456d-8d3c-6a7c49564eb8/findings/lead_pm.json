@@ -1,0 +1,245 @@
+{
+  "agent_id": "lead_pm",
+  "agent_name": "Lead PM Agent",
+  "run_id": "2576ea64-acc2-456d-8d3c-6a7c49564eb8",
+  "timestamp": "2026-03-09T20:24:55.896790Z",
+  "findings": [
+    {
+      "id": "lead_pm-001",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Pipeline Consolidation Summary",
+      "description": "Consolidated 41 findings from 7 agents into 28 unique findings. Removed 13 duplicates. Identified 4 cross-agent conflicts.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "intake",
+          "source_type": "doc",
+          "excerpt": "Intake & Context Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "customer",
+          "source_type": "doc",
+          "excerpt": "Customer Insights Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "competitive",
+          "source_type": "doc",
+          "excerpt": "Competitive & Positioning Agent: 4 findings",
+          "url": null
+        },
+        {
+          "source_id": "metrics",
+          "source_type": "doc",
+          "excerpt": "Metrics & Analytics Agent: 6 findings",
+          "url": null
+        },
+        {
+          "source_id": "feasibility",
+          "source_type": "doc",
+          "excerpt": "Tech Feasibility & Delivery Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "requirements",
+          "source_type": "doc",
+          "excerpt": "UX & Requirements Agent: 11 findings",
+          "url": null
+        },
+        {
+          "source_id": "risk",
+          "source_type": "doc",
+          "excerpt": "Risk/Privacy/Compliance Guardrails Agent: 5 findings",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "consolidation",
+        "meta"
+      ],
+      "metadata": {
+        "original_count": 41,
+        "deduped_count": 28,
+        "duplicates_removed": 13,
+        "conflicts_resolved": 4,
+        "evidence_sources": 11
+      }
+    },
+    {
+      "id": "lead_pm-002",
+      "agent_id": "lead_pm",
+      "type": "recommendation",
+      "title": "Top Priority Findings",
+      "description": "Highest priority items based on weighted scoring (user_impact×0.35 + business_value×0.30) / (effort×0.20 + risk×0.15): Conduct User Feedback Collection on Notification Features (score=3.381); North Star Metric: User Engagement (score=3.154); Strong Competitor Landscape Identified (score=3.129); Primary KPI: Notification Click-Through Rate (CTR) (score=3.129); Monitor Notification Click-Through Rate (CTR) (score=3.129)",
+      "impact": "critical",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "requirements-007",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.381",
+          "url": null
+        },
+        {
+          "source_id": "metrics-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.154",
+          "url": null
+        },
+        {
+          "source_id": "competitive-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.129",
+          "url": null
+        },
+        {
+          "source_id": "metrics-002",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.129",
+          "url": null
+        },
+        {
+          "source_id": "requirements-008",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.129",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "prioritization",
+        "meta"
+      ],
+      "metadata": {
+        "top_priorities": [
+          {
+            "finding_id": "requirements-007",
+            "title": "Conduct User Feedback Collection on Notification Features",
+            "user_impact": 5,
+            "business_value": 6,
+            "effort": 3,
+            "risk": 3,
+            "priority_score": 3.381
+          },
+          {
+            "finding_id": "metrics-001",
+            "title": "North Star Metric: User Engagement",
+            "user_impact": 9,
+            "business_value": 10,
+            "effort": 3,
+            "risk": 9,
+            "priority_score": 3.154
+          },
+          {
+            "finding_id": "competitive-001",
+            "title": "Strong Competitor Landscape Identified",
+            "user_impact": 7,
+            "business_value": 8,
+            "effort": 4,
+            "risk": 5,
+            "priority_score": 3.129
+          },
+          {
+            "finding_id": "metrics-002",
+            "title": "Primary KPI: Notification Click-Through Rate (CTR)",
+            "user_impact": 7,
+            "business_value": 8,
+            "effort": 4,
+            "risk": 5,
+            "priority_score": 3.129
+          },
+          {
+            "finding_id": "requirements-008",
+            "title": "Monitor Notification Click-Through Rate (CTR)",
+            "user_impact": 7,
+            "business_value": 8,
+            "effort": 4,
+            "risk": 5,
+            "priority_score": 3.129
+          }
+        ]
+      }
+    },
+    {
+      "id": "lead_pm-003",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Cross-Agent Conflict Resolution Report",
+      "description": "Resolved 4 conflicts between agent findings. intake-001 vs feasibility-002: Privacy risks detected may hinder the implementation of notification features that rely on user data.; intake-002 vs competitive-003: Pricing risk identified could conflict with the recommendation to leverage pricing strategy to compete effectively.; metrics-004 vs metrics-006: A rising unsubscribe rate may indicate notification fatigue, conflicting with the recommendation to optimize notification timing.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "intake-001",
+          "source_type": "doc",
+          "excerpt": "Privacy risks detected may hinder the implementation of notification features that rely on user data.",
+          "url": null
+        },
+        {
+          "source_id": "intake-002",
+          "source_type": "doc",
+          "excerpt": "Pricing risk identified could conflict with the recommendation to leverage pricing strategy to compete effectively.",
+          "url": null
+        },
+        {
+          "source_id": "metrics-004",
+          "source_type": "doc",
+          "excerpt": "A rising unsubscribe rate may indicate notification fatigue, conflicting with the recommendation to optimize notification timing.",
+          "url": null
+        },
+        {
+          "source_id": "feasibility-005",
+          "source_type": "doc",
+          "excerpt": "The notification delivery latency issue conflicts with the requirement to reduce latency below the SLO of 200ms.",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "conflicts",
+        "meta"
+      ],
+      "metadata": {
+        "conflicts": [
+          {
+            "finding_a": "intake-001",
+            "finding_b": "feasibility-002",
+            "description": "Privacy risks detected may hinder the implementation of notification features that rely on user data.",
+            "resolution": "Conduct a privacy impact assessment and ensure compliance with data protection regulations before proceeding with feature development.",
+            "reasoning": "Addressing privacy concerns is essential to maintain user trust and comply with regulations, which may require adjustments to feature implementation."
+          },
+          {
+            "finding_a": "intake-002",
+            "finding_b": "competitive-003",
+            "description": "Pricing risk identified could conflict with the recommendation to leverage pricing strategy to compete effectively.",
+            "resolution": "Reassess pricing strategy to ensure it aligns with risk management while enhancing features to remain competitive.",
+            "reasoning": "Balancing competitive pricing with risk management is crucial to avoid undermining the product's market position."
+          },
+          {
+            "finding_a": "metrics-004",
+            "finding_b": "metrics-006",
+            "description": "A rising unsubscribe rate may indicate notification fatigue, conflicting with the recommendation to optimize notification timing.",
+            "resolution": "Implement user segmentation to tailor notification strategies based on engagement levels and preferences to reduce unsubscribe rates.",
+            "reasoning": "Addressing user fatigue through targeted strategies can improve engagement metrics while minimizing unsubscribe rates."
+          },
+          {
+            "finding_a": "feasibility-005",
+            "finding_b": "requirements-005",
+            "description": "The notification delivery latency issue conflicts with the requirement to reduce latency below the SLO of 200ms.",
+            "resolution": "Prioritize architectural changes to address delivery latency issues before implementing new features that may exacerbate the problem.",
+            "reasoning": "Ensuring compliance with latency requirements is critical for user satisfaction and overall system performance."
+          }
+        ]
+      }
+    }
+  ],
+  "summary": "Consolidated 41 findings into 28 unique items. Removed 13 duplicates, resolved 4 conflicts. Top priority: Conduct User Feedback Collection on Notification Features.",
+  "errors": []
+}

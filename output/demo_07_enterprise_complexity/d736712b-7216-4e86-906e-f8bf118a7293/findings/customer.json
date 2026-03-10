@@ -1,0 +1,179 @@
+{
+  "agent_id": "customer",
+  "agent_name": "Customer Insights Agent",
+  "run_id": "d736712b-7216-4e86-906e-f8bf118a7293",
+  "timestamp": "2026-03-09T20:19:56.702984Z",
+  "findings": [
+    {
+      "id": "customer-001",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "SSO Integration is Critical for Enterprise Onboarding",
+      "description": "Enterprise prospects require SSO via SAML 2.0 and OIDC for onboarding, as highlighted by multiple sources. Without this feature, procurement is blocked, indicating a critical need for integration with identity providers like Okta and Azure AD.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Enterprise customers prioritize security and compliance in their procurement process."
+      ],
+      "evidence": [
+        {
+          "source_id": "ENT-201",
+          "source_type": "ticket",
+          "excerpt": "Enterprise prospects require SSO via SAML 2.0 and OIDC before signing contracts.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "interview",
+          "excerpt": "\"We can't deploy a SaaS tool that doesn't support SAML — it's a non-starter for our security team.\"",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Prioritize the development of SSO/SAML integration to facilitate enterprise onboarding."
+      ],
+      "tags": [
+        "SSO",
+        "enterprise",
+        "onboarding"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-002",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Need for Enhanced Data Isolation for Compliance",
+      "description": "Enterprise customers are concerned about data isolation and compliance, particularly regarding SOC 2 Type II requirements. Current reliance on application-level row filtering is insufficient, necessitating a review of data isolation methods.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Enterprise customers will not proceed without adequate data isolation measures."
+      ],
+      "evidence": [
+        {
+          "source_id": "ENT-202",
+          "source_type": "ticket",
+          "excerpt": "Security audit flagged that tenant data isolation relies on application-level row filtering.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "interview",
+          "excerpt": "Kenji requires data residency in the Tokyo region for regulatory compliance.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement proper data isolation boundaries to meet compliance requirements."
+      ],
+      "tags": [
+        "data isolation",
+        "compliance",
+        "security"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-003",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Demand for Fine-Grained Role-Based Access Control",
+      "description": "Mid-market customers express a need for more granular role-based access control (RBAC) features. The current model is too simplistic, leading to inefficiencies and security concerns.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Customers require customizable access controls to manage user permissions effectively."
+      ],
+      "evidence": [
+        {
+          "source_id": "ENT-203",
+          "source_type": "ticket",
+          "excerpt": "Enterprise customers need fine-grained RBAC beyond our current admin/member/viewer model.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "interview",
+          "excerpt": "\"The permissions model is too simple — I have to give everyone admin just to let them manage their own projects.\"",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Develop and implement a more flexible RBAC system with custom roles and permissions."
+      ],
+      "tags": [
+        "RBAC",
+        "permissions",
+        "enterprise"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-004",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Critical Need for Data Residency Controls",
+      "description": "Enterprise customers, particularly in regulated markets, require data residency controls to comply with local laws. This is a significant barrier to adoption for prospects in regions like the EU and APAC.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Compliance with local data residency laws is essential for enterprise customers."
+      ],
+      "evidence": [
+        {
+          "source_id": "ENT-204",
+          "source_type": "ticket",
+          "excerpt": "GDPR and data sovereignty requirements mean enterprise customers must choose where their data is stored.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "interview",
+          "excerpt": "\"Japanese financial services regulations require all customer data to remain within Japan.\"",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement region-pinned storage options to meet data residency requirements."
+      ],
+      "tags": [
+        "data residency",
+        "compliance",
+        "enterprise"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-005",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Unmet Need for White-Labeling Features",
+      "description": "Several enterprise prospects have expressed a need for white-label branding capabilities, indicating a gap in the current offering that could hinder customer acquisition.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Enterprise customers prefer customizable branding options to align with their corporate identity."
+      ],
+      "evidence": [
+        {
+          "source_id": "ENT-205",
+          "source_type": "ticket",
+          "excerpt": "Three enterprise prospects require white-label branding with custom logos, color schemes, and domain names.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Explore the feasibility of adding white-label theming and custom domain support."
+      ],
+      "tags": [
+        "white-label",
+        "branding",
+        "enterprise"
+      ],
+      "metadata": {}
+    }
+  ],
+  "summary": "The analysis reveals critical insights into enterprise customer needs, particularly around SSO integration, data isolation, and role-based access control. There is a strong demand for compliance with local regulations and customization options, indicating significant opportunity areas for product development.",
+  "errors": []
+}

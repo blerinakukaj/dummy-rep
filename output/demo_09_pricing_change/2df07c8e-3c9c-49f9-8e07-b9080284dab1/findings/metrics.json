@@ -1,0 +1,163 @@
+{
+  "agent_id": "metrics",
+  "agent_name": "Metrics & Analytics Agent",
+  "run_id": "2df07c8e-3c9c-49f9-8e07-b9080284dab1",
+  "timestamp": "2026-03-09T20:27:29.743161Z",
+  "findings": [
+    {
+      "id": "metrics-001",
+      "agent_id": "metrics",
+      "type": "metric",
+      "title": "North Star Metric: Monthly Recurring Revenue (MRR)",
+      "description": "The North Star metric for CloudMetrics is Monthly Recurring Revenue (MRR), which reflects the total revenue generated from all active subscriptions on a monthly basis. This metric will guide the overall health and growth of the business as it transitions to a consumption-based pricing model.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Transitioning to consumption-based pricing will stabilize or increase MRR."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-003",
+          "source_type": "doc",
+          "excerpt": "mrr_usd: 312000",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Monitor MRR closely during the transition to ensure it meets targets."
+      ],
+      "tags": [
+        "north_star"
+      ],
+      "metadata": {
+        "baseline": 312000,
+        "target": 350000,
+        "measurement_method": "Monthly financial reporting"
+      }
+    },
+    {
+      "id": "metrics-002",
+      "agent_id": "metrics",
+      "type": "metric",
+      "title": "Primary KPI: Customer Churn Rate",
+      "description": "The customer churn rate measures the percentage of customers who cancel their subscriptions within a given period. This is critical to monitor during the pricing transition to understand customer retention.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Churn rate will increase due to pricing changes."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-003",
+          "source_type": "doc",
+          "excerpt": "projected_churn_increase_pct: 8.5",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement proactive customer outreach for high-risk segments."
+      ],
+      "tags": [
+        "input_metric"
+      ],
+      "metadata": {
+        "baseline": 8.5,
+        "target": 5,
+        "measurement_method": "Customer database analysis"
+      }
+    },
+    {
+      "id": "metrics-003",
+      "agent_id": "metrics",
+      "type": "metric",
+      "title": "Guardrail Metric: Net Promoter Score (NPS)",
+      "description": "NPS measures customer satisfaction and loyalty by asking customers how likely they are to recommend the service. Maintaining or improving NPS is essential during the pricing transition.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "NPS will remain stable or improve with better customer communication."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-003",
+          "source_type": "doc",
+          "excerpt": "nps_score: 42",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct regular NPS surveys to gauge customer sentiment."
+      ],
+      "tags": [
+        "guardrail"
+      ],
+      "metadata": {
+        "baseline": 42,
+        "target": 50,
+        "measurement_method": "Quarterly customer surveys"
+      }
+    },
+    {
+      "id": "metrics-004",
+      "agent_id": "metrics",
+      "type": "gap",
+      "title": "Measurement Gap: Customer Segmentation Data",
+      "description": "There is insufficient data on customer segments that will be most affected by the pricing changes. This gap could hinder targeted communication and risk management efforts.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Customer segmentation data is critical for understanding churn risk."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-305",
+          "source_type": "ticket",
+          "excerpt": "Finance and product need a model that identifies which customer segments will see cost increases vs. decreases.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Develop a detailed customer segmentation analysis to inform pricing strategy."
+      ],
+      "tags": [
+        "gap"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "metrics-005",
+      "agent_id": "metrics",
+      "type": "recommendation",
+      "title": "Experiment Opportunity: Pricing Sensitivity Analysis",
+      "description": "Conduct an experiment to analyze customer sensitivity to pricing changes by offering different pricing tiers to select customer segments and measuring churn and engagement.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Different pricing tiers will yield varying levels of customer retention."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-301",
+          "source_type": "ticket",
+          "excerpt": "Migrate from flat monthly pricing to consumption-based pricing.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Run A/B tests with different pricing models to gauge customer response."
+      ],
+      "tags": [
+        "experiment"
+      ],
+      "metadata": {
+        "statistical_parameters": {
+          "sample_size": 200,
+          "confidence_level": 95,
+          "margin_of_error": 5
+        }
+      }
+    }
+  ],
+  "summary": "The analysis identifies the Monthly Recurring Revenue (MRR) as the North Star metric, with Customer Churn Rate as a primary KPI and Net Promoter Score (NPS) as a guardrail metric. A measurement gap in customer segmentation data was noted, alongside a recommendation for a pricing sensitivity analysis experiment to better understand customer reactions to the new pricing model.",
+  "errors": []
+}

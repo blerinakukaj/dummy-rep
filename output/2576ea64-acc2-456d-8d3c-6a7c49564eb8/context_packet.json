@@ -1,0 +1,151 @@
+{
+  "run_id": "2576ea64-acc2-456d-8d3c-6a7c49564eb8",
+  "product_name": "SmartNotify",
+  "product_description": "Intelligent notification prioritization system that uses ML to reduce notification fatigue",
+  "tickets": [
+    {
+      "id": "NOTIFY-101",
+      "title": "Add notification priority levels (urgent, normal, low)",
+      "description": "Users need a way to distinguish between critical alerts and routine updates. Currently all notifications appear with the same weight, causing important messages to be missed in the noise. Propose a three-tier priority system that visually differentiates urgency.",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "feature",
+        "ux",
+        "ml"
+      ],
+      "created_at": "2025-09-12",
+      "source": "jira"
+    },
+    {
+      "id": "NOTIFY-102",
+      "title": "Notifications not delivered on Android 14 devices",
+      "description": "Several users on Android 14 report that push notifications silently fail. Logcat shows the FCM token is refreshed but the delivery callback never fires. Affects approximately 8% of our Android user base. Workaround: users must manually re-enable notification permissions after OS update.",
+      "status": "open",
+      "priority": "critical",
+      "labels": [
+        "bug",
+        "android",
+        "push"
+      ],
+      "created_at": "2025-10-03",
+      "source": "jira"
+    },
+    {
+      "id": "NOTIFY-103",
+      "title": "Implement ML-based notification batching",
+      "description": "Instead of sending notifications individually, batch low-priority notifications into a digest delivered at optimal times based on user engagement patterns. The ML model should learn per-user preferences for delivery timing and grouping thresholds.",
+      "status": "open",
+      "priority": "medium",
+      "labels": [
+        "feature",
+        "ml",
+        "engagement"
+      ],
+      "created_at": "2025-10-18",
+      "source": "jira"
+    },
+    {
+      "id": "NOTIFY-104",
+      "title": "Add user preference page for notification categories",
+      "description": "Users should be able to opt in/out of specific notification categories (marketing, product updates, social, transactional) from a settings page. This requires a new preferences API endpoint and a React settings component. Should respect existing global mute settings.",
+      "status": "in_progress",
+      "priority": "high",
+      "labels": [
+        "feature",
+        "ux",
+        "settings"
+      ],
+      "created_at": "2025-11-01",
+      "source": "jira"
+    },
+    {
+      "id": "NOTIFY-105",
+      "title": "Reduce notification delivery latency from p95 340ms to under 200ms",
+      "description": "Performance monitoring shows p95 notification delivery latency at 340ms, well above our 200ms SLO. Root cause appears to be synchronous database writes in the delivery pipeline. Proposed fix: move to async writes with a write-behind cache and switch to batch inserts for analytics events.",
+      "status": "open",
+      "priority": "high",
+      "labels": [
+        "improvement",
+        "performance",
+        "backend"
+      ],
+      "created_at": "2025-11-15",
+      "source": "jira"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-001",
+      "title": "competitor_brief.md",
+      "content": "# Competitive Brief — SmartNotify\n\n## Competitor A: PushFlow\n- **Strengths:** Excellent mobile reliability (99.7% delivery rate), real-time delivery analytics dashboard, built-in A/B testing for notification copy. Recently launched AI-powered send-time optimization.\n- **Weaknesses:** No notification batching/digest feature, limited customization for enterprise, pricing is 40% higher than SmartNotify at scale.\n- **Recent moves:** Launched \"Smart Timing\" feature in Q3 2025 that uses ML to pick optimal delivery windows per user. Early reviews are positive — 18% improvement in click-through rates reported.\n\n## Competitor B: AlertHub\n- **Strengths:** Strong enterprise feature set with granular role-based notification policies, SOC 2 certified, WCAG AA compliant notification center. Supports 12 languages out of the box.\n- **Weaknesses:** Slow to innovate — no ML features, clunky UI that feels dated, onboarding takes 2-3 weeks for mid-market accounts.\n- **Recent moves:** Acquired a small analytics startup in Q4 2025, signaling intent to build metrics/instrumentation features. Enterprise customers report high satisfaction but startup/SMB churn is increasing.\n\n## Competitor C: Notifai\n- **Strengths:** AI-native product built from scratch with ML prioritization at the core. Impressive demo showing automatic categorization and priority scoring.\n- **Weaknesses:** Very early stage (launched 6 months ago), limited integrations, no enterprise features, reliability concerns (reported 3 outages in the last quarter).\n- **Recent moves:** Raised Series A, aggressively hiring ML engineers. Positioning as \"the AI-first notification platform.\" Could become a serious threat in 12-18 months if they solve reliability.\n",
+      "doc_type": "competitor_brief",
+      "tags": []
+    },
+    {
+      "id": "DOC-002",
+      "title": "customer_notes.md",
+      "content": "# Customer Interview Notes — SmartNotify\n\n## Interview 1: Sarah K. (Power User, Enterprise Account)\nSarah uses SmartNotify across three teams and receives an average of 45 notifications per day. She described the experience as \"drowning in noise\" and said she has resorted to muting entire channels just to stay focused. Her biggest frustration is that transactional alerts (e.g., deployment completions) carry the same visual weight as critical incidents. She would pay more for a tier that offers intelligent filtering. When asked about privacy, she stated she would be comfortable sharing engagement data if it meant fewer irrelevant notifications, but would want to see exactly what data is collected.\n\n## Interview 2: Marcus T. (Casual User, Startup Plan)\nMarcus only uses SmartNotify for his 5-person team and checks it a few times a day. He finds the notification volume manageable but says the mobile experience is \"broken\" — he frequently misses push notifications on his Pixel 8 (Android 14). He mentioned he almost switched to Competitor A's product last month because their mobile reliability is better. He likes the simplicity of SmartNotify but wants digest-style summaries instead of individual pings for non-urgent updates.\n\n## Interview 3: Priya R. (Admin, Mid-Market Account)\nPriya manages SmartNotify for a 200-person organization. Her top request is granular notification preferences — she needs to configure defaults per team and let individuals override. She mentioned compliance concerns around notification data retention, asking \"how long do you store read receipts and click data?\" She also raised accessibility issues: several team members using screen readers have difficulty navigating the notification center, and the color-only priority indicators are problematic for colorblind users.\n",
+      "doc_type": "note",
+      "tags": []
+    },
+    {
+      "id": "DOC-003",
+      "title": "metrics_snapshot.json",
+      "content": "{\n  \"dau\": 45000,\n  \"notification_ctr\": 0.12,\n  \"unsubscribe_rate\": 0.08,\n  \"avg_notifications_per_user\": 23,\n  \"p95_delivery_latency_ms\": 340\n}\n",
+      "doc_type": "metrics_snapshot",
+      "tags": []
+    }
+  ],
+  "risk_hotspots": [
+    {
+      "category": "privacy",
+      "description": "Detected privacy risk keywords in 1 source(s): DOC-002",
+      "severity": "low",
+      "source_ids": [
+        "DOC-002"
+      ]
+    },
+    {
+      "category": "pricing",
+      "description": "Detected pricing risk keywords in 3 source(s): DOC-001, DOC-002, NOTIFY-101",
+      "severity": "high",
+      "source_ids": [
+        "DOC-001",
+        "DOC-002",
+        "NOTIFY-101"
+      ]
+    },
+    {
+      "category": "platform",
+      "description": "Detected platform risk keywords in 2 source(s): DOC-001, NOTIFY-104",
+      "severity": "medium",
+      "source_ids": [
+        "DOC-001",
+        "NOTIFY-104"
+      ]
+    },
+    {
+      "category": "accessibility",
+      "description": "Detected accessibility risk keywords in 2 source(s): DOC-001, DOC-002",
+      "severity": "medium",
+      "source_ids": [
+        "DOC-001",
+        "DOC-002"
+      ]
+    },
+    {
+      "category": "compliance",
+      "description": "Detected compliance risk keywords in 2 source(s): DOC-001, DOC-002",
+      "severity": "medium",
+      "source_ids": [
+        "DOC-001",
+        "DOC-002"
+      ]
+    }
+  ],
+  "missing_info": [],
+  "dedup_log": [],
+  "raw_input_type": "bundle",
+  "created_at": "2026-03-09T20:22:05.456793Z"
+}

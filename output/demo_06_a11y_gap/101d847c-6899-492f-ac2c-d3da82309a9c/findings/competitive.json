@@ -1,0 +1,131 @@
+{
+  "agent_id": "competitive",
+  "agent_name": "Competitive & Positioning Agent",
+  "run_id": "101d847c-6899-492f-ac2c-d3da82309a9c",
+  "timestamp": "2026-03-09T20:15:58.146119Z",
+  "findings": [
+    {
+      "id": "competitive-001",
+      "agent_id": "competitive",
+      "type": "gap",
+      "title": "Accessibility Compliance Gap",
+      "description": "LearnPath has significant WCAG 2.1 AA accessibility gaps, which is a critical weakness compared to EduAccess LMS, which is fully compliant and has achieved WCAG 2.2 AA conformance. This compliance is increasingly becoming a deciding factor for government contracts and institutional adoption.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Accessibility compliance is a key factor for customers, especially in government contracts."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "EduAccess LMS... WCAG 2.1 AA fully conformant... achieved WCAG 2.2 AA conformance in Q3 2025.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Prioritize accessibility improvements to meet WCAG 2.1 AA standards."
+      ],
+      "tags": [
+        "accessibility",
+        "compliance"
+      ],
+      "metadata": {
+        "competitor": "EduAccess LMS",
+        "feature_comparison": "WCAG 2.1 AA compliance"
+      }
+    },
+    {
+      "id": "competitive-002",
+      "agent_id": "competitive",
+      "type": "insight",
+      "title": "Competitive Pricing Strategy",
+      "description": "LearnPath's pricing at $8/user/month is competitive compared to EduAccess LMS at $12/user/month. However, the pricing strategy may be perceived as low, which could impact perceived value and investment in product development.",
+      "impact": "medium",
+      "confidence": "directional",
+      "assumptions": [
+        "Lower pricing may lead to perceptions of lower quality or fewer features."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Higher pricing ($12/user/month vs LearnPath's $8).",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Consider a value-based pricing strategy that reflects the quality and features offered."
+      ],
+      "tags": [
+        "pricing",
+        "strategy"
+      ],
+      "metadata": {
+        "competitor": "EduAccess LMS",
+        "pricing_comparison": "$8 vs $12"
+      }
+    },
+    {
+      "id": "competitive-003",
+      "agent_id": "competitive",
+      "type": "risk",
+      "title": "Emerging Accessibility Threats",
+      "description": "Competitor B, SkillForge, is facing backlash due to similar accessibility gaps and has lost a significant government deal. This indicates a market trend where accessibility compliance is becoming a critical factor for success, posing a risk to LearnPath if improvements are not made.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Accessibility compliance will continue to be a decisive factor in contract awards."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Lost a $600K government deal last quarter due to accessibility non-compliance.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Accelerate the development of accessibility features to avoid losing market share."
+      ],
+      "tags": [
+        "accessibility",
+        "risk"
+      ],
+      "metadata": {
+        "competitor": "SkillForge",
+        "market_trend": "accessibility compliance"
+      }
+    },
+    {
+      "id": "competitive-004",
+      "agent_id": "competitive",
+      "type": "recommendation",
+      "title": "Leverage Accessibility as a Differentiator",
+      "description": "Given the significant accessibility gaps in LearnPath, there is an opportunity to position the product as a leader in accessibility by committing to WCAG 2.1 AA compliance and promoting this commitment in marketing efforts.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "There is a growing market demand for accessible learning solutions."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Achieved WCAG 2.2 AA conformance... won 3 major government contracts citing accessibility.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Develop a marketing strategy that highlights accessibility improvements and compliance."
+      ],
+      "tags": [
+        "differentiation",
+        "marketing"
+      ],
+      "metadata": {}
+    }
+  ],
+  "summary": "LearnPath faces critical accessibility compliance gaps compared to competitors, particularly EduAccess LMS, which poses a significant risk in a market increasingly valuing accessibility. There are opportunities to leverage accessibility improvements as a key differentiator while addressing pricing perceptions to enhance market positioning.",
+  "errors": []
+}

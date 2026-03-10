@@ -1,0 +1,12 @@
+{
+  "passed": false,
+  "blockers": [
+    "BLOCKED: Risk agent flagged as blocker \u2014 Critical Accessibility Gaps for Visually Impaired Users [risk-001]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 Video Player Accessibility Enhancements Needed [risk-002]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 Color Contrast Failures Across UI Components [risk-003]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 Inaccessible Quiz and Assessment Forms [risk-004]",
+    "BLOCKED: Risk agent flagged as blocker \u2014 Accessibility Compliance Risk [risk-005]",
+    "BLOCKED: 4 unmitigated high risks exceed maximum of 2"
+  ],
+  "warnings": []
+}

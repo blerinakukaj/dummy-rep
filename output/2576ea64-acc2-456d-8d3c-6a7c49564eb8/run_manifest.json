@@ -1,0 +1,164 @@
+{
+  "run_id": "2576ea64-acc2-456d-8d3c-6a7c49564eb8",
+  "timestamp": "2026-03-09T20:26:00.891090+00:00",
+  "input_path": "input_bundles/sample_bundle/",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "duration_seconds": 237.15,
+  "agents_run": [
+    "intake",
+    "customer",
+    "competitive",
+    "metrics",
+    "feasibility",
+    "requirements",
+    "risk",
+    "lead_pm"
+  ],
+  "agents_failed": [],
+  "total_findings": 44,
+  "findings_by_type": {
+    "risk": 13,
+    "insight": 8,
+    "gap": 2,
+    "recommendation": 4,
+    "metric": 4,
+    "dependency": 2,
+    "requirement": 11
+  },
+  "recommendation": "do_not_pursue",
+  "artifacts": {
+    "prd": "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\artifacts\\prd.md",
+    "roadmap": "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\artifacts\\roadmap.json",
+    "experiment_plan": "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\artifacts\\experiment_plan.md",
+    "decision_log": "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\artifacts\\decision_log.md",
+    "backlog": "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\artifacts\\backlog.csv",
+    "final_plan": "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\artifacts\\final_plan.json"
+  },
+  "token_usage": {
+    "per_agent": {
+      "intake": {
+        "prompt_tokens": 491,
+        "completion_tokens": 85,
+        "total_tokens": 576
+      },
+      "customer": {
+        "prompt_tokens": 1460,
+        "completion_tokens": 1158,
+        "total_tokens": 2618
+      },
+      "competitive": {
+        "prompt_tokens": 1053,
+        "completion_tokens": 976,
+        "total_tokens": 2029
+      },
+      "metrics": {
+        "prompt_tokens": 1043,
+        "completion_tokens": 1326,
+        "total_tokens": 2369
+      },
+      "feasibility": {
+        "prompt_tokens": 1133,
+        "completion_tokens": 1188,
+        "total_tokens": 2321
+      },
+      "requirements": {
+        "prompt_tokens": 2520,
+        "completion_tokens": 3123,
+        "total_tokens": 5643
+      },
+      "risk": {
+        "prompt_tokens": 3521,
+        "completion_tokens": 1196,
+        "total_tokens": 4717
+      },
+      "lead_pm": {
+        "prompt_tokens": 5643,
+        "completion_tokens": 2226,
+        "total_tokens": 7869
+      }
+    },
+    "total": {
+      "prompt_tokens": 16864,
+      "completion_tokens": 11278,
+      "total_tokens": 28142
+    }
+  },
+  "estimated_cost": 0.009296,
+  "agent_details": [
+    {
+      "agent_id": "customer",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 20.84,
+      "error": null
+    },
+    {
+      "agent_id": "competitive",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 21.51,
+      "error": null
+    },
+    {
+      "agent_id": "metrics",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 32.38,
+      "error": null
+    },
+    {
+      "agent_id": "feasibility",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 28.44,
+      "error": null
+    },
+    {
+      "agent_id": "requirements",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 64.64,
+      "error": null
+    },
+    {
+      "agent_id": "risk",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 26.32,
+      "error": null
+    },
+    {
+      "agent_id": "lead_pm",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 110.21,
+      "error": null
+    }
+  ],
+  "bundle_warnings": [],
+  "output_files": {
+    "context_packet": "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\context_packet.json",
+    "findings": [
+      "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\findings\\competitive.json",
+      "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\findings\\customer.json",
+      "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\findings\\feasibility.json",
+      "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\findings\\intake.json",
+      "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\findings\\lead_pm.json",
+      "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\findings\\lead_pm_intermediate.json",
+      "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\findings\\metrics.json",
+      "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\findings\\requirements.json",
+      "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\findings\\risk.json",
+      "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\findings\\risk_gate_result.json"
+    ],
+    "artifacts": [
+      "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\artifacts\\backlog.csv",
+      "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\artifacts\\decision_log.md",
+      "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\artifacts\\experiment_plan.md",
+      "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\artifacts\\final_plan.json",
+      "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\artifacts\\prd.md",
+      "output\\2576ea64-acc2-456d-8d3c-6a7c49564eb8\\artifacts\\roadmap.json"
+    ]
+  },
+  "errors": {}
+}

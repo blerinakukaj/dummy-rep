@@ -1,0 +1,164 @@
+{
+  "run_id": "a45219c3-a78f-4408-8808-01aa19a18ca3",
+  "timestamp": "2026-03-06T12:50:41.513600+00:00",
+  "input_path": "input_bundles/pricing_change/",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "duration_seconds": 213.09,
+  "agents_run": [
+    "intake",
+    "customer",
+    "competitive",
+    "metrics",
+    "feasibility",
+    "requirements",
+    "risk",
+    "lead_pm"
+  ],
+  "agents_failed": [],
+  "total_findings": 39,
+  "findings_by_type": {
+    "risk": 9,
+    "insight": 7,
+    "gap": 2,
+    "recommendation": 5,
+    "metric": 3,
+    "dependency": 2,
+    "requirement": 11
+  },
+  "recommendation": "validate_first",
+  "artifacts": {
+    "prd": "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\artifacts\\prd.md",
+    "roadmap": "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\artifacts\\roadmap.json",
+    "experiment_plan": "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\artifacts\\experiment_plan.md",
+    "decision_log": "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\artifacts\\decision_log.md",
+    "backlog": "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\artifacts\\backlog.csv",
+    "final_plan": "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\artifacts\\final_plan.json"
+  },
+  "token_usage": {
+    "per_agent": {
+      "intake": {
+        "prompt_tokens": 472,
+        "completion_tokens": 83,
+        "total_tokens": 555
+      },
+      "customer": {
+        "prompt_tokens": 1381,
+        "completion_tokens": 1024,
+        "total_tokens": 2405
+      },
+      "competitive": {
+        "prompt_tokens": 874,
+        "completion_tokens": 858,
+        "total_tokens": 1732
+      },
+      "metrics": {
+        "prompt_tokens": 1259,
+        "completion_tokens": 1190,
+        "total_tokens": 2449
+      },
+      "feasibility": {
+        "prompt_tokens": 1106,
+        "completion_tokens": 1245,
+        "total_tokens": 2351
+      },
+      "requirements": {
+        "prompt_tokens": 2439,
+        "completion_tokens": 3375,
+        "total_tokens": 5814
+      },
+      "risk": {
+        "prompt_tokens": 3412,
+        "completion_tokens": 1038,
+        "total_tokens": 4450
+      },
+      "lead_pm": {
+        "prompt_tokens": 5953,
+        "completion_tokens": 2055,
+        "total_tokens": 8008
+      }
+    },
+    "total": {
+      "prompt_tokens": 16896,
+      "completion_tokens": 10868,
+      "total_tokens": 27764
+    }
+  },
+  "estimated_cost": 0.009055,
+  "agent_details": [
+    {
+      "agent_id": "customer",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 16.74,
+      "error": null
+    },
+    {
+      "agent_id": "competitive",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 18.46,
+      "error": null
+    },
+    {
+      "agent_id": "metrics",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 22.08,
+      "error": null
+    },
+    {
+      "agent_id": "feasibility",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 23.46,
+      "error": null
+    },
+    {
+      "agent_id": "requirements",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 61.4,
+      "error": null
+    },
+    {
+      "agent_id": "risk",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 19.68,
+      "error": null
+    },
+    {
+      "agent_id": "lead_pm",
+      "status": "success",
+      "output_path": "",
+      "duration_seconds": 107.13,
+      "error": null
+    }
+  ],
+  "bundle_warnings": [],
+  "output_files": {
+    "context_packet": "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\context_packet.json",
+    "findings": [
+      "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\findings\\competitive.json",
+      "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\findings\\customer.json",
+      "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\findings\\feasibility.json",
+      "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\findings\\intake.json",
+      "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\findings\\lead_pm.json",
+      "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\findings\\lead_pm_intermediate.json",
+      "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\findings\\metrics.json",
+      "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\findings\\requirements.json",
+      "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\findings\\risk.json",
+      "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\findings\\risk_gate_result.json"
+    ],
+    "artifacts": [
+      "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\artifacts\\backlog.csv",
+      "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\artifacts\\decision_log.md",
+      "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\artifacts\\experiment_plan.md",
+      "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\artifacts\\final_plan.json",
+      "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\artifacts\\prd.md",
+      "output\\demo_09_pricing_change\\a45219c3-a78f-4408-8808-01aa19a18ca3\\artifacts\\roadmap.json"
+    ]
+  },
+  "errors": {}
+}

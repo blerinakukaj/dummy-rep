@@ -1,0 +1,150 @@
+{
+  "agent_id": "customer",
+  "agent_name": "Customer Insights Agent",
+  "run_id": "a45219c3-a78f-4408-8808-01aa19a18ca3",
+  "timestamp": "2026-03-06T12:47:27.953538Z",
+  "findings": [
+    {
+      "id": "customer-001",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Need for Transparent Cost Estimation Tools",
+      "description": "Customers transitioning to usage-based pricing express a strong need for tools that provide clear visibility into their expected costs. This includes a pricing calculator and a predictive cost dashboard to avoid bill shock.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Customers are concerned about unexpected costs under the new pricing model."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-302",
+          "source_type": "ticket",
+          "excerpt": "Customers migrating to usage-based pricing need transparency on expected costs.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "note",
+          "excerpt": "Linda wants spending caps and a cost simulator before committing.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Develop and implement a pricing calculator and predictive cost dashboard."
+      ],
+      "tags": [
+        "pricing",
+        "transparency",
+        "customer needs"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-002",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Concerns Over Price Increases",
+      "description": "Certain customer segments, particularly those on higher flat-rate plans, are at risk of significant price increases under the new model. This could lead to dissatisfaction and potential churn if not managed properly.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "Higher usage customers will face increased costs, leading to dissatisfaction."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-305",
+          "source_type": "ticket",
+          "excerpt": "Flag accounts where projected spend increases >30% for proactive account management outreach.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "note",
+          "excerpt": "Linda's estimated cost would jump to approximately $480/month.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Identify high-risk accounts and develop a proactive communication strategy."
+      ],
+      "tags": [
+        "pricing",
+        "churn risk",
+        "customer segments"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-003",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Desire for Spending Controls",
+      "description": "Customers are requesting configurable spending alerts and caps to manage their budgets effectively under the new pricing model. This feature is crucial for preventing unexpected charges.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Customers want to control their spending to avoid bill shock."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-303",
+          "source_type": "ticket",
+          "excerpt": "Customers need configurable spending alerts and optional hard spending caps.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "note",
+          "excerpt": "Tom asked for detailed usage reporting and the ability to set per-team budgets.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement spending alerts and caps as part of the billing system."
+      ],
+      "tags": [
+        "billing",
+        "customer control",
+        "alerts"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "customer-004",
+      "agent_id": "customer",
+      "type": "insight",
+      "title": "Need for Migration Support",
+      "description": "Customers require clear communication and support during the transition to usage-based pricing, including a grandfathering system for existing customers and a migration path to the new model.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [
+        "Customers need assurance and support during pricing transitions."
+      ],
+      "evidence": [
+        {
+          "source_id": "CM-304",
+          "source_type": "ticket",
+          "excerpt": "Need a grandfathering system that tracks customer cohorts.",
+          "url": null
+        },
+        {
+          "source_id": "DOC-002",
+          "source_type": "note",
+          "excerpt": "Linda needs at least 6 months notice and a migration path.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Create a detailed migration plan and communicate it to customers."
+      ],
+      "tags": [
+        "migration",
+        "customer support",
+        "communication"
+      ],
+      "metadata": {}
+    }
+  ],
+  "summary": "The analysis reveals critical insights regarding customer needs during the transition to usage-based pricing. Key areas of focus include the necessity for transparent cost estimation tools, concerns over potential price increases, the desire for spending controls, and the need for robust migration support. Addressing these insights will be essential to mitigate churn and enhance customer satisfaction.",
+  "errors": []
+}

@@ -1,0 +1,219 @@
+{
+  "agent_id": "lead_pm",
+  "agent_name": "Lead PM Agent",
+  "run_id": "65a3b73a-b26f-406f-b53c-96edf55128ab",
+  "timestamp": "2026-03-09T20:12:28.989778Z",
+  "findings": [
+    {
+      "id": "lead_pm-001",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Pipeline Consolidation Summary",
+      "description": "Consolidated 41 findings from 7 agents into 32 unique findings. Removed 9 duplicates. Identified 2 cross-agent conflicts.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "intake",
+          "source_type": "doc",
+          "excerpt": "Intake & Context Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "customer",
+          "source_type": "doc",
+          "excerpt": "Customer Insights Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "competitive",
+          "source_type": "doc",
+          "excerpt": "Competitive & Positioning Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "metrics",
+          "source_type": "doc",
+          "excerpt": "Metrics & Analytics Agent: 7 findings",
+          "url": null
+        },
+        {
+          "source_id": "feasibility",
+          "source_type": "doc",
+          "excerpt": "Tech Feasibility & Delivery Agent: 5 findings",
+          "url": null
+        },
+        {
+          "source_id": "requirements",
+          "source_type": "doc",
+          "excerpt": "UX & Requirements Agent: 10 findings",
+          "url": null
+        },
+        {
+          "source_id": "risk",
+          "source_type": "doc",
+          "excerpt": "Risk/Privacy/Compliance Guardrails Agent: 4 findings",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "consolidation",
+        "meta"
+      ],
+      "metadata": {
+        "original_count": 41,
+        "deduped_count": 32,
+        "duplicates_removed": 9,
+        "conflicts_resolved": 2,
+        "evidence_sources": 12
+      }
+    },
+    {
+      "id": "lead_pm-002",
+      "agent_id": "lead_pm",
+      "type": "recommendation",
+      "title": "Top Priority Findings",
+      "description": "Highest priority items based on weighted scoring (user_impact×0.35 + business_value×0.30) / (effort×0.20 + risk×0.15): Primary KPI: Unsubscribe Rate (score=3.37); North Star Metric: User Engagement (score=3.162); PushFlow's Strong Delivery Metrics (score=3.129); Monitor Notification Delivery Performance (score=3.129); Primary KPI: Notification Click-Through Rate (CTR) (score=3.059)",
+      "impact": "critical",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "metrics-003",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.37",
+          "url": null
+        },
+        {
+          "source_id": "metrics-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.162",
+          "url": null
+        },
+        {
+          "source_id": "competitive-001",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.129",
+          "url": null
+        },
+        {
+          "source_id": "requirements-009",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.129",
+          "url": null
+        },
+        {
+          "source_id": "metrics-002",
+          "source_type": "doc",
+          "excerpt": "Priority score: 3.059",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "prioritization",
+        "meta"
+      ],
+      "metadata": {
+        "top_priorities": [
+          {
+            "finding_id": "metrics-003",
+            "title": "Primary KPI: Unsubscribe Rate",
+            "user_impact": 7,
+            "business_value": 7,
+            "effort": 3,
+            "risk": 5,
+            "priority_score": 3.37
+          },
+          {
+            "finding_id": "metrics-001",
+            "title": "North Star Metric: User Engagement",
+            "user_impact": 9,
+            "business_value": 9,
+            "effort": 4,
+            "risk": 7,
+            "priority_score": 3.162
+          },
+          {
+            "finding_id": "competitive-001",
+            "title": "PushFlow's Strong Delivery Metrics",
+            "user_impact": 7,
+            "business_value": 8,
+            "effort": 4,
+            "risk": 5,
+            "priority_score": 3.129
+          },
+          {
+            "finding_id": "requirements-009",
+            "title": "Monitor Notification Delivery Performance",
+            "user_impact": 7,
+            "business_value": 8,
+            "effort": 4,
+            "risk": 5,
+            "priority_score": 3.129
+          },
+          {
+            "finding_id": "metrics-002",
+            "title": "Primary KPI: Notification Click-Through Rate (CTR)",
+            "user_impact": 8,
+            "business_value": 8,
+            "effort": 4,
+            "risk": 6,
+            "priority_score": 3.059
+          }
+        ]
+      }
+    },
+    {
+      "id": "lead_pm-003",
+      "agent_id": "lead_pm",
+      "type": "insight",
+      "title": "Cross-Agent Conflict Resolution Report",
+      "description": "Resolved 2 conflicts between agent findings. requirements-002 vs risk-002: Fixing silent notification failures on Android 14 is critical, but the current delivery failure poses a critical risk to user engagement.; requirements-010 vs risk-003: Documenting compliance for the notification system includes accessibility considerations, but users are currently facing accessibility challenges.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [],
+      "evidence": [
+        {
+          "source_id": "requirements-002",
+          "source_type": "doc",
+          "excerpt": "Fixing silent notification failures on Android 14 is critical, but the current delivery failure poses a critical risk to user engagement.",
+          "url": null
+        },
+        {
+          "source_id": "requirements-010",
+          "source_type": "doc",
+          "excerpt": "Documenting compliance for the notification system includes accessibility considerations, but users are currently facing accessibility challenges.",
+          "url": null
+        }
+      ],
+      "recommendations": [],
+      "tags": [
+        "conflicts",
+        "meta"
+      ],
+      "metadata": {
+        "conflicts": [
+          {
+            "finding_a": "requirements-002",
+            "finding_b": "risk-002",
+            "description": "Fixing silent notification failures on Android 14 is critical, but the current delivery failure poses a critical risk to user engagement.",
+            "resolution": "Prioritize the resolution of silent notification failures on Android 14 as an immediate action to mitigate the critical risk.",
+            "reasoning": "Addressing the delivery failure is essential for user retention and engagement, and it must be prioritized to comply with the critical risk policy."
+          },
+          {
+            "finding_a": "requirements-010",
+            "finding_b": "risk-003",
+            "description": "Documenting compliance for the notification system includes accessibility considerations, but users are currently facing accessibility challenges.",
+            "resolution": "Simultaneously document compliance and implement immediate accessibility improvements to address user challenges.",
+            "reasoning": "While compliance documentation is necessary, it should not delay the implementation of accessibility improvements that directly affect user experience."
+          }
+        ]
+      }
+    }
+  ],
+  "summary": "Consolidated 41 findings into 32 unique items. Removed 9 duplicates, resolved 2 conflicts. Top priority: Primary KPI: Unsubscribe Rate.",
+  "errors": []
+}

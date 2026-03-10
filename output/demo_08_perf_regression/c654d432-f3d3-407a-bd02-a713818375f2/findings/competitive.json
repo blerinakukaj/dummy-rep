@@ -1,0 +1,122 @@
+{
+  "agent_id": "competitive",
+  "agent_name": "Competitive & Positioning Agent",
+  "run_id": "c654d432-f3d3-407a-bd02-a713818375f2",
+  "timestamp": "2026-03-09T20:23:52.731465Z",
+  "findings": [
+    {
+      "id": "competitive-001",
+      "agent_id": "competitive",
+      "type": "risk",
+      "title": "Critical Regression in Core Metrics",
+      "description": "The recent regression in core page load metrics indicates a significant risk to PageSpeed's performance reputation. This could lead to customer dissatisfaction and attrition if not addressed promptly.",
+      "impact": "critical",
+      "confidence": "validated",
+      "assumptions": [
+        "The regression directly affects user experience and customer retention."
+      ],
+      "evidence": [
+        {
+          "source_id": "PS-404",
+          "source_type": "ticket",
+          "excerpt": "The v3.2 regression could have been caught with automated performance benchmarking in CI.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Implement automated performance benchmarking in CI to catch regressions early."
+      ],
+      "tags": [
+        "performance",
+        "risk"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "competitive-002",
+      "agent_id": "competitive",
+      "type": "gap",
+      "title": "Lack of Automated Performance Benchmarking",
+      "description": "Competitors may offer automated performance benchmarking tools that PageSpeed currently lacks, which could lead to undetected performance regressions and customer dissatisfaction.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Competitors have established automated benchmarking processes."
+      ],
+      "evidence": [
+        {
+          "source_id": "PS-404",
+          "source_type": "ticket",
+          "excerpt": "Implement a benchmark suite that runs on every PR, compares against baseline.",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Develop and integrate an automated performance benchmarking suite."
+      ],
+      "tags": [
+        "benchmarking",
+        "feature gap"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "competitive-003",
+      "agent_id": "competitive",
+      "type": "insight",
+      "title": "Emerging Pricing Risks",
+      "description": "Pricing risks have been identified, suggesting that PageSpeed may need to reevaluate its pricing strategy to remain competitive in the market.",
+      "impact": "medium",
+      "confidence": "validated",
+      "assumptions": [
+        "Pricing strategies of competitors may be more attractive to potential customers."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Detected pricing risk keywords in 2 source(s).",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct a competitive pricing analysis to adjust pricing strategy."
+      ],
+      "tags": [
+        "pricing",
+        "market analysis"
+      ],
+      "metadata": {}
+    },
+    {
+      "id": "competitive-004",
+      "agent_id": "competitive",
+      "type": "recommendation",
+      "title": "Enhance Platform Features",
+      "description": "The platform has been flagged for high-risk keywords, indicating potential weaknesses in feature offerings compared to competitors. Enhancing features could improve market positioning.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Competitors are offering more robust platform features."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-001",
+          "source_type": "doc",
+          "excerpt": "Detected platform risk keywords in 5 source(s).",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Identify and implement key features that competitors offer but PageSpeed currently lacks."
+      ],
+      "tags": [
+        "platform",
+        "feature enhancement"
+      ],
+      "metadata": {}
+    }
+  ],
+  "summary": "PageSpeed is facing critical risks due to recent performance regressions and potential gaps in automated benchmarking and platform features. Additionally, pricing strategies may need reevaluation to remain competitive. Immediate actions are recommended to enhance performance monitoring capabilities and address identified gaps.",
+  "errors": []
+}

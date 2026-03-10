@@ -1,0 +1,142 @@
+{
+  "agent_id": "risk",
+  "agent_name": "Risk/Privacy/Compliance Guardrails Agent",
+  "run_id": "dd2d9204-3a5d-4b68-b763-744acc2abb70",
+  "timestamp": "2026-03-06T12:24:50.417343Z",
+  "findings": [
+    {
+      "id": "risk-001",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Authentication Weakness Detected",
+      "description": "High-risk keywords related to authentication have been detected, indicating potential weaknesses in the authentication flow that could lead to unauthorized access.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Authentication mechanisms are not fully secure."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Detected auth risk keywords in 5 source(s)",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct a thorough security review of the authentication flow."
+      ],
+      "tags": [
+        "auth",
+        "security"
+      ],
+      "metadata": {
+        "category": "security",
+        "is_blocker": true,
+        "mitigation": "Enhance authentication mechanisms and perform security testing.",
+        "policy_rule": "Block on critical security"
+      }
+    },
+    {
+      "id": "risk-002",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Potential PII Handling Issues",
+      "description": "The recent deployment may have altered how PII is handled, especially for anonymous users, raising concerns about compliance with data handling policies.",
+      "impact": "high",
+      "confidence": "directional",
+      "assumptions": [
+        "Changes in the ranking algorithm may affect data collection."
+      ],
+      "evidence": [
+        {
+          "source_id": "SEARCH-201",
+          "source_type": "doc",
+          "excerpt": "Significant Drop in Search Relevance for Anonymous Users",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Review data handling practices to ensure compliance with PII policies."
+      ],
+      "tags": [
+        "privacy",
+        "PII"
+      ],
+      "metadata": {
+        "category": "privacy",
+        "is_blocker": true,
+        "mitigation": "Conduct a legal review of PII handling practices.",
+        "policy_rule": "Legal review for PII"
+      }
+    },
+    {
+      "id": "risk-003",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Accessibility Compliance Gaps",
+      "description": "Accessibility risk keywords detected indicate potential non-compliance with WCAG standards, which could hinder usability for users with disabilities.",
+      "impact": "low",
+      "confidence": "directional",
+      "assumptions": [
+        "Accessibility features may not be fully implemented."
+      ],
+      "evidence": [
+        {
+          "source_id": "DOC-002",
+          "source_type": "doc",
+          "excerpt": "Detected accessibility risk keywords in 1 source(s)",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Conduct an accessibility audit to identify and remediate gaps."
+      ],
+      "tags": [
+        "accessibility",
+        "WCAG"
+      ],
+      "metadata": {
+        "category": "accessibility",
+        "is_blocker": false,
+        "mitigation": "Implement necessary changes to meet WCAG standards.",
+        "policy_rule": "Accessibility is a requirement"
+      }
+    },
+    {
+      "id": "risk-004",
+      "agent_id": "risk",
+      "type": "risk",
+      "title": "Increased Support Volume Due to Irrelevant Results",
+      "description": "The spike in support tickets indicates a critical pain point where users are unable to find relevant information efficiently, leading to frustration and potential churn.",
+      "impact": "high",
+      "confidence": "validated",
+      "assumptions": [
+        "Irrelevant search results are causing user dissatisfaction."
+      ],
+      "evidence": [
+        {
+          "source_id": "SEARCH-202",
+          "source_type": "doc",
+          "excerpt": "Support ticket volume has increased threefold since the v2.4.1 deployment",
+          "url": null
+        }
+      ],
+      "recommendations": [
+        "Prioritize resolution of search relevance issues to reduce support volume."
+      ],
+      "tags": [
+        "support",
+        "user experience"
+      ],
+      "metadata": {
+        "category": "user experience",
+        "is_blocker": false,
+        "mitigation": "Enhance search algorithms to improve relevance.",
+        "policy_rule": "User value over feature count"
+      }
+    }
+  ],
+  "summary": "Identified 4 risks (1 accessibility, 1 privacy, 1 security, 1 user experience). 2 flagged as blockers. Risk gate: FAILED (3 blockers, 1 warnings).",
+  "errors": []
+}

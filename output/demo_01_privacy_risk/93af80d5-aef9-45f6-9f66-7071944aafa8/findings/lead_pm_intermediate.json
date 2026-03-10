@@ -1,0 +1,560 @@
+{
+  "evidence_index": {
+    "DOC-001": [
+      "intake-001",
+      "intake-002",
+      "intake-003",
+      "intake-004",
+      "intake-005",
+      "competitive-001",
+      "competitive-002",
+      "competitive-003",
+      "competitive-004",
+      "competitive-005",
+      "risk-003",
+      "risk-004",
+      "risk-005"
+    ],
+    "DOC-002": [
+      "intake-001",
+      "intake-004",
+      "intake-005",
+      "customer-001",
+      "customer-002",
+      "customer-004"
+    ],
+    "DOC-003": [
+      "intake-001",
+      "intake-003",
+      "intake-004",
+      "intake-005",
+      "customer-001",
+      "customer-002",
+      "customer-003"
+    ],
+    "DOC-004": [
+      "intake-001",
+      "intake-002",
+      "metrics-001",
+      "metrics-002",
+      "metrics-003"
+    ],
+    "PROF-101": [
+      "intake-001",
+      "metrics-004",
+      "feasibility-003",
+      "requirements-001"
+    ],
+    "PROF-103": [
+      "intake-001",
+      "customer-001",
+      "feasibility-005",
+      "requirements-003",
+      "requirements-007"
+    ],
+    "PROF-104": [
+      "intake-001",
+      "intake-002",
+      "customer-002",
+      "feasibility-004",
+      "requirements-004",
+      "risk-002"
+    ],
+    "PROF-106": [
+      "intake-001",
+      "intake-005",
+      "customer-003",
+      "feasibility-001",
+      "requirements-006",
+      "requirements-010",
+      "requirements-011",
+      "requirements-012",
+      "risk-001"
+    ],
+    "PROF-105": [
+      "intake-004",
+      "intake-005",
+      "customer-003",
+      "requirements-005"
+    ],
+    "PROF-102": [
+      "metrics-005",
+      "feasibility-002",
+      "requirements-002"
+    ],
+    "metrics-003": [
+      "requirements-008"
+    ],
+    "metrics-005": [
+      "requirements-009"
+    ]
+  },
+  "dedup_log": [
+    {
+      "cluster": [
+        "feasibility-001",
+        "risk-001"
+      ],
+      "kept": "feasibility-001",
+      "removed": [
+        "risk-001"
+      ],
+      "reason": "Both highlight the need for a GDPR compliance audit before launch, indicating it as a critical blocker."
+    },
+    {
+      "cluster": [
+        "feasibility-004",
+        "risk-002"
+      ],
+      "kept": "feasibility-004",
+      "removed": [
+        "risk-002"
+      ],
+      "reason": "Both findings address significant privacy risks associated with user behavior tracking and cross-device tracking."
+    },
+    {
+      "cluster": [
+        "competitive-003",
+        "risk-004"
+      ],
+      "kept": "competitive-003",
+      "removed": [
+        "risk-004"
+      ],
+      "reason": "Both findings emphasize the importance of ensuring compliance with GDPR regulations to avoid potential fines."
+    },
+    {
+      "cluster": [
+        "competitive-001",
+        "risk-003"
+      ],
+      "kept": "competitive-001",
+      "removed": [
+        "risk-003"
+      ],
+      "reason": "Both findings discuss the lack of a tiered consent mechanism, which could hinder user trust and adoption."
+    },
+    {
+      "cluster": [
+        "requirements-006",
+        "risk-001"
+      ],
+      "kept": "requirements-006",
+      "removed": [
+        "risk-001"
+      ],
+      "reason": "Both findings stress the necessity of conducting a GDPR compliance audit due to concerns about lawful processing and consent."
+    }
+  ],
+  "ranked_findings": [
+    {
+      "finding_id": "metrics-003",
+      "title": "Guardrail Metric: Privacy Opt-Out Rate",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 3,
+      "risk": 6,
+      "priority_score": 3.267
+    },
+    {
+      "finding_id": "metrics-005",
+      "title": "Experiment Opportunity: A/B Testing for Recommendation Engine",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.958
+    },
+    {
+      "finding_id": "requirements-007",
+      "title": "User Feedback Collection Mechanism",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.958
+    },
+    {
+      "finding_id": "requirements-009",
+      "title": "A/B Testing for Recommendation Engine",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.958
+    },
+    {
+      "finding_id": "requirements-008",
+      "title": "Monitor Privacy Opt-Out Rate",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 2.882
+    },
+    {
+      "finding_id": "competitive-005",
+      "title": "Implement Transparency Dashboard",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 3,
+      "risk": 6,
+      "priority_score": 2.833
+    },
+    {
+      "finding_id": "requirements-010",
+      "title": "Implement User Data Export Feature",
+      "user_impact": 9,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 7,
+      "priority_score": 2.707
+    },
+    {
+      "finding_id": "metrics-002",
+      "title": "Primary KPI: Content Click-Through Rate (CTR)",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 4,
+      "risk": 7,
+      "priority_score": 2.649
+    },
+    {
+      "finding_id": "intake-003",
+      "title": "Risk hotspot detected: pricing",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 3,
+      "risk": 5,
+      "priority_score": 2.63
+    },
+    {
+      "finding_id": "feasibility-002",
+      "title": "User Behavior Tracking Pipeline Dependency",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.579
+    },
+    {
+      "finding_id": "requirements-005",
+      "title": "Implement Data Export for Advertisers",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 6,
+      "priority_score": 2.579
+    },
+    {
+      "finding_id": "customer-001",
+      "title": "Need for Transparency in Data Tracking",
+      "user_impact": 7,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 6,
+      "priority_score": 2.5
+    },
+    {
+      "finding_id": "intake-002",
+      "title": "Risk hotspot detected: auth",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 4,
+      "risk": 8,
+      "priority_score": 2.45
+    },
+    {
+      "finding_id": "customer-004",
+      "title": "User Preference for Random Discovery",
+      "user_impact": 4,
+      "business_value": 5,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.417
+    },
+    {
+      "finding_id": "feasibility-005",
+      "title": "Cross-Device Tracking Dependency",
+      "user_impact": 4,
+      "business_value": 5,
+      "effort": 3,
+      "risk": 4,
+      "priority_score": 2.417
+    },
+    {
+      "finding_id": "customer-002",
+      "title": "Concerns Over Cross-Device Tracking",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 7,
+      "priority_score": 2.39
+    },
+    {
+      "finding_id": "competitive-001",
+      "title": "Lack of Tiered Consent Mechanism",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 7,
+      "priority_score": 2.366
+    },
+    {
+      "finding_id": "metrics-004",
+      "title": "Instrumentation Gap: User Behavior Tracking",
+      "user_impact": 7,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 7,
+      "priority_score": 2.366
+    },
+    {
+      "finding_id": "intake-001",
+      "title": "Risk hotspot detected: privacy",
+      "user_impact": 9,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 9,
+      "priority_score": 2.362
+    },
+    {
+      "finding_id": "intake-005",
+      "title": "Risk hotspot detected: compliance",
+      "user_impact": 9,
+      "business_value": 8,
+      "effort": 5,
+      "risk": 9,
+      "priority_score": 2.362
+    },
+    {
+      "finding_id": "metrics-001",
+      "title": "North Star Metric: User Engagement Score",
+      "user_impact": 10,
+      "business_value": 9,
+      "effort": 6,
+      "risk": 10,
+      "priority_score": 2.296
+    },
+    {
+      "finding_id": "competitive-004",
+      "title": "Absence of Differential Privacy Features",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.29
+    },
+    {
+      "finding_id": "feasibility-003",
+      "title": "Phased Delivery Plan",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.29
+    },
+    {
+      "finding_id": "requirements-003",
+      "title": "Create User Preference Dashboard",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.29
+    },
+    {
+      "finding_id": "requirements-004",
+      "title": "Add Cross-Device Tracking",
+      "user_impact": 5,
+      "business_value": 6,
+      "effort": 4,
+      "risk": 5,
+      "priority_score": 2.29
+    },
+    {
+      "finding_id": "risk-005",
+      "title": "Authentication Weaknesses",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 5,
+      "risk": 8,
+      "priority_score": 2.227
+    },
+    {
+      "finding_id": "requirements-001",
+      "title": "Build User Behavior Tracking Pipeline",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 6,
+      "risk": 7,
+      "priority_score": 2.178
+    },
+    {
+      "finding_id": "competitive-003",
+      "title": "Regulatory Compliance Risks",
+      "user_impact": 9,
+      "business_value": 8,
+      "effort": 6,
+      "risk": 9,
+      "priority_score": 2.176
+    },
+    {
+      "finding_id": "feasibility-004",
+      "title": "Privacy Risks in User Tracking",
+      "user_impact": 9,
+      "business_value": 8,
+      "effort": 6,
+      "risk": 9,
+      "priority_score": 2.176
+    },
+    {
+      "finding_id": "competitive-002",
+      "title": "Market Shift Towards Privacy-First Solutions",
+      "user_impact": 10,
+      "business_value": 9,
+      "effort": 7,
+      "risk": 10,
+      "priority_score": 2.138
+    },
+    {
+      "finding_id": "requirements-011",
+      "title": "Implement User Consent Management",
+      "user_impact": 10,
+      "business_value": 9,
+      "effort": 7,
+      "risk": 10,
+      "priority_score": 2.138
+    },
+    {
+      "finding_id": "requirements-002",
+      "title": "Implement ML Recommendation Engine",
+      "user_impact": 9,
+      "business_value": 8,
+      "effort": 7,
+      "risk": 8,
+      "priority_score": 2.135
+    },
+    {
+      "finding_id": "intake-004",
+      "title": "Risk hotspot detected: platform",
+      "user_impact": 8,
+      "business_value": 7,
+      "effort": 6,
+      "risk": 8,
+      "priority_score": 2.042
+    },
+    {
+      "finding_id": "customer-003",
+      "title": "GDPR Compliance Risks",
+      "user_impact": 10,
+      "business_value": 9,
+      "effort": 8,
+      "risk": 10,
+      "priority_score": 2.0
+    },
+    {
+      "finding_id": "feasibility-001",
+      "title": "GDPR Compliance Audit Blocker",
+      "user_impact": 10,
+      "business_value": 9,
+      "effort": 8,
+      "risk": 10,
+      "priority_score": 2.0
+    },
+    {
+      "finding_id": "requirements-006",
+      "title": "Conduct GDPR Compliance Audit",
+      "user_impact": 10,
+      "business_value": 9,
+      "effort": 8,
+      "risk": 10,
+      "priority_score": 2.0
+    },
+    {
+      "finding_id": "requirements-012",
+      "title": "Implement Data Retention Policies",
+      "user_impact": 10,
+      "business_value": 9,
+      "effort": 8,
+      "risk": 10,
+      "priority_score": 2.0
+    }
+  ],
+  "conflicts": [
+    {
+      "finding_a": "intake-001",
+      "finding_b": "requirements-011",
+      "description": "Privacy risk hotspots detected, but requirement to implement user consent management for data collection is critical.",
+      "resolution": "Prioritize the implementation of user consent management before any data collection features are rolled out.",
+      "reasoning": "Ensuring user consent is fundamental to mitigating privacy risks and complying with GDPR."
+    },
+    {
+      "finding_a": "intake-002",
+      "finding_b": "requirements-006",
+      "description": "Authentication risks identified, yet a full GDPR compliance audit is required before launch.",
+      "resolution": "Conduct a comprehensive security review alongside the GDPR compliance audit to address authentication weaknesses.",
+      "reasoning": "Addressing authentication weaknesses is essential to prevent unauthorized access while ensuring compliance with GDPR."
+    },
+    {
+      "finding_a": "intake-004",
+      "finding_b": "feasibility-004",
+      "description": "Platform risks detected, but significant privacy risks associated with user tracking have been flagged.",
+      "resolution": "Implement robust privacy safeguards in the user tracking pipeline to mitigate platform risks.",
+      "reasoning": "Balancing platform functionality with privacy compliance is crucial to maintain user trust and avoid regulatory penalties."
+    },
+    {
+      "finding_a": "customer-003",
+      "finding_b": "requirements-012",
+      "description": "Significant GDPR compliance risks identified, yet a requirement to establish data retention policies is critical.",
+      "resolution": "Develop data retention policies that align with GDPR requirements as a priority to mitigate compliance risks.",
+      "reasoning": "Addressing data retention is essential for compliance and to reduce the risk of potential fines."
+    },
+    {
+      "finding_a": "competitive-001",
+      "finding_b": "requirements-011",
+      "description": "Lack of tiered consent mechanism could hinder user trust, while implementing user consent management is critical.",
+      "resolution": "Integrate a tiered consent mechanism within the user consent management system to enhance user trust.",
+      "reasoning": "A tiered consent approach will improve user engagement and trust while ensuring compliance with GDPR."
+    }
+  ],
+  "consolidated_finding_ids": [
+    "intake-001",
+    "intake-002",
+    "intake-003",
+    "intake-004",
+    "intake-005",
+    "customer-001",
+    "customer-002",
+    "customer-003",
+    "customer-004",
+    "competitive-001",
+    "competitive-002",
+    "competitive-003",
+    "competitive-004",
+    "competitive-005",
+    "metrics-001",
+    "metrics-002",
+    "metrics-003",
+    "metrics-004",
+    "metrics-005",
+    "feasibility-001",
+    "feasibility-002",
+    "feasibility-003",
+    "feasibility-004",
+    "feasibility-005",
+    "requirements-001",
+    "requirements-002",
+    "requirements-003",
+    "requirements-004",
+    "requirements-005",
+    "requirements-006",
+    "requirements-007",
+    "requirements-008",
+    "requirements-009",
+    "requirements-010",
+    "requirements-011",
+    "requirements-012",
+    "risk-005"
+  ]
+}
